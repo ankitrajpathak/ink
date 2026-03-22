@@ -1,0 +1,1917 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>INK — SERP Content Engine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+[data-theme="dark"]{--bg:#0F0F0E;--s1:#181817;--s2:#1F1F1E;--s3:#272726;--s4:#313130;--b1:rgba(255,255,255,.07);--b2:rgba(255,255,255,.12);--b3:rgba(255,255,255,.18);--t1:#EDECEA;--t2:rgba(237,236,234,.55);--t3:rgba(237,236,234,.3);--t4:rgba(237,236,234,.16);--sh1:none;--sh2:none;--sh3:0 8px 28px rgba(0,0,0,.55);--sh4:0 22px 60px rgba(0,0,0,.7);--ab:rgba(30,94,243,.18);--ab2:rgba(30,94,243,.3)}
+[data-theme="light"]{--bg:#F2F1ED;--s1:#FFFFFF;--s2:#F7F6F2;--s3:#EDECE8;--s4:#E2E1DC;--b1:rgba(0,0,0,.07);--b2:rgba(0,0,0,.12);--b3:rgba(0,0,0,.18);--t1:#111110;--t2:rgba(17,17,16,.55);--t3:rgba(17,17,16,.33);--t4:rgba(17,17,16,.16);--sh1:0 1px 2px rgba(0,0,0,.04);--sh2:0 2px 8px rgba(0,0,0,.06);--sh3:0 8px 28px rgba(0,0,0,.1);--sh4:0 22px 60px rgba(0,0,0,.13);--ab:rgba(30,94,243,.09);--ab2:rgba(30,94,243,.16)}
+:root{--A:#1E5EF3;--AH:#1850D6;--G:#14A047;--R:#D12B22;--Y:#C8710A;--V:#7430D4;--GB:rgba(20,160,71,.12);--RB:rgba(209,43,34,.1);--YB:rgba(200,113,10,.12);--VB:rgba(116,48,212,.1);--F:'Plus Jakarta Sans',system-ui,sans-serif;--M:'JetBrains Mono',monospace;--r3:5px;--r6:9px;--r10:13px;--r16:18px;--r24:24px;--SB:256px;--TB:52px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:13.5px;-webkit-font-smoothing:antialiased}
+body{font-family:var(--F);background:var(--bg);color:var(--t1);overflow-x:hidden;transition:background .22s,color .22s}
+::-webkit-scrollbar{width:4px;height:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--s4);border-radius:2px}
+::selection{background:var(--ab);color:var(--A)}
+button,input,textarea{font-family:var(--F)}svg{display:block;flex-shrink:0}
+
+/* ══ SPLASH ══ */
+#splash{position:fixed;inset:0;z-index:9999;background:#09090A;display:flex;flex-direction:column;align-items:center;justify-content:center}
+#splash.exit{animation:splExit .55s ease forwards}
+@keyframes splExit{to{opacity:0;transform:scale(1.03)}}
+.spl-logo{display:flex;align-items:center;gap:14px;animation:rise .7s cubic-bezier(.16,1,.3,1) .2s both}
+.spl-ico{width:52px;height:52px;border-radius:14px;background:var(--A);display:flex;align-items:center;justify-content:center;box-shadow:0 0 48px rgba(30,94,243,.55),inset 0 1px 0 rgba(255,255,255,.15)}
+.spl-nm{font-size:40px;font-weight:800;color:#fff;letter-spacing:-2.5px}
+.spl-tag{margin-top:14px;font-size:11px;font-family:var(--M);color:rgba(255,255,255,.28);letter-spacing:1.4px;text-transform:uppercase;animation:rise .5s ease .55s both}
+.spl-bar{margin-top:44px;width:160px;height:2px;background:rgba(255,255,255,.07);border-radius:1px;overflow:hidden;animation:rise .4s ease .65s both}
+.spl-fill{height:100%;width:0%;background:var(--A);border-radius:1px}
+.spl-ver{position:absolute;bottom:22px;font-size:10px;font-family:var(--M);color:rgba(255,255,255,.13);letter-spacing:1px}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* ══ ONBOARDING ══ */
+#onboard{position:fixed;inset:0;z-index:800;display:none;flex-direction:column}
+#onboard.show{display:flex}
+.ob-layout{display:grid;grid-template-columns:1fr 1fr;min-height:100vh}
+.ob-left{background:#09090A;padding:48px 52px;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.ob-left::before{content:'';position:absolute;width:400px;height:400px;border-radius:50%;top:-120px;left:-80px;background:radial-gradient(circle,rgba(30,94,243,.28) 0%,transparent 65%);pointer-events:none}
+.ob-left::after{content:'';position:absolute;width:300px;height:300px;border-radius:50%;bottom:-80px;right:-60px;background:radial-gradient(circle,rgba(116,48,212,.18) 0%,transparent 65%);pointer-events:none}
+.ob-brand{display:flex;align-items:center;gap:10px}
+/* Zeron logo in onboard */
+.ob-brand-logo{display:flex;align-items:center;gap:8px}
+.ob-z-ico{width:32px;height:32px;border-radius:9px;background:var(--A);display:flex;align-items:center;justify-content:center;box-shadow:0 0 20px rgba(30,94,243,.5)}
+.ob-z-nm{font-size:18px;font-weight:800;color:#fff;letter-spacing:-.5px}
+.ob-sep{width:1px;height:18px;background:rgba(255,255,255,.15);margin:0 8px}
+.ob-ink-nm{font-size:18px;font-weight:300;color:rgba(255,255,255,.5);letter-spacing:-.3px;font-style:italic}
+.ob-prg{display:flex;gap:5px;margin-bottom:18px}
+.ob-bar{height:2px;flex:1;border-radius:1px;background:rgba(255,255,255,.1);transition:background .35s}
+.ob-bar.done{background:rgba(255,255,255,.55)}.ob-bar.cur{background:#60A5FA}
+.ob-lbl{font-size:10px;font-weight:700;letter-spacing:1.1px;text-transform:uppercase;color:rgba(255,255,255,.35);font-family:var(--M);margin-bottom:8px}
+.ob-ttl{font-size:34px;font-weight:800;color:#fff;letter-spacing:-.8px;line-height:1.15;margin-bottom:12px;position:relative;z-index:1}
+.ob-sub{font-size:13.5px;color:rgba(255,255,255,.4);line-height:1.7;position:relative;z-index:1}
+.ob-feats{margin-top:auto;padding-top:40px;position:relative;z-index:1}
+.ob-fi{display:flex;align-items:flex-start;gap:10px;margin-bottom:16px}
+.ob-fd{width:6px;height:6px;border-radius:50%;background:var(--A);flex-shrink:0;margin-top:5px}
+.ob-ft2{font-size:12.5px;color:rgba(255,255,255,.5);line-height:1.6}
+.ob-ft2 b{color:rgba(255,255,255,.8);font-weight:600}
+.ob-right{background:var(--bg);padding:48px 52px;display:flex;flex-direction:column;overflow-y:auto;transition:background .22s}
+.ob-ri{max-width:440px;width:100%;margin:0 auto;flex:1;display:flex;flex-direction:column;justify-content:center}
+.ob-pn{display:none;animation:panIn .25s ease}.ob-pn.on{display:block}
+@keyframes panIn{from{opacity:0;transform:translateX(8px)}to{opacity:1;transform:translateX(0)}}
+.ob-footer{display:flex;align-items:center;justify-content:space-between;margin-top:22px}
+.ob-pg{font-size:10.5px;font-family:var(--M);font-weight:500;color:var(--t3)}
+
+/* ══ FORMS ══ */
+.fl{font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--t2);margin-bottom:5px;display:block;font-family:var(--M)}
+.inp{width:100%;padding:9px 12px;border:1.5px solid var(--b2);border-radius:var(--r6);font-size:13px;color:var(--t1);background:var(--s2);outline:none;transition:border-color .15s,box-shadow .15s;font-family:var(--F)}
+.inp:focus{border-color:var(--A);box-shadow:0 0 0 3px var(--ab)}
+.inp::placeholder{color:var(--t3)}
+.inp-hint{font-size:10px;font-family:var(--M);color:var(--t3);margin-top:4px}
+.fld{margin-bottom:15px}.fld:last-of-type{margin-bottom:0}
+.opts-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.opt{padding:10px 12px;border:1.5px solid var(--b2);border-radius:var(--r6);cursor:pointer;background:var(--s2);transition:all .12s;position:relative;user-select:none}
+.opt:hover{border-color:var(--b3);background:var(--s3)}.opt.sel{border-color:var(--A);background:var(--ab)}
+.opt.sel::after{content:'\2713';position:absolute;top:8px;right:9px;font-size:10.5px;color:var(--A);font-weight:700}
+.opt-t{font-size:12px;font-weight:700;margin-bottom:2px;letter-spacing:-.1px}
+.opt-s{font-size:11px;color:var(--t2)}.opt.sel .opt-s{color:var(--A)}
+.opts-add{display:flex;gap:6px;margin-top:7px}
+.opts-add .inp{flex:1}
+.add-btn{padding:9px 12px;background:var(--s3);border:1.5px solid var(--b2);border-radius:var(--r6);font-size:12px;font-weight:600;color:var(--t2);cursor:pointer;transition:all .12s}
+.add-btn:hover{background:var(--s4);color:var(--t1)}
+.ctags{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.ctag{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:100px;background:var(--ab);border:1px solid rgba(30,94,243,.25);font-size:11px;font-weight:600;color:var(--A);font-family:var(--M);cursor:pointer}
+.ctag:hover{opacity:.7}
+
+/* ══ ANALYZING ══ */
+#analyzing{position:fixed;inset:0;z-index:800;background:var(--bg);display:none;align-items:center;justify-content:center;padding:20px;transition:background .22s}
+#analyzing.show{display:flex}
+.an-card{width:100%;max-width:400px;background:var(--s1);border:1px solid var(--b1);border-radius:var(--r16);padding:36px 32px;box-shadow:var(--sh4);text-align:center}
+.an-sp{width:48px;height:48px;margin:0 auto 18px}.an-sp svg{animation:spin 1.8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.an-ttl{font-size:18px;font-weight:800;letter-spacing:-.5px;margin-bottom:4px}
+.an-sub{font-size:12px;color:var(--t2);line-height:1.65;margin-bottom:22px}
+.an-steps{display:flex;flex-direction:column;gap:5px;text-align:left}
+.an-step{display:flex;align-items:center;gap:9px;padding:8px 11px;border-radius:var(--r3);font-size:12px;font-weight:500;color:var(--t2);background:var(--s2);border:1px solid transparent;transition:all .28s}
+.an-step.run{background:var(--ab);border-color:rgba(30,94,243,.18);color:var(--A)}
+.an-step.done{background:var(--GB);border-color:rgba(20,160,71,.15);color:var(--G)}
+.a-ico{width:15px;height:15px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.iw{width:5px;height:5px;border-radius:50%;background:var(--s4)}
+.is{width:11px;height:11px;border:2px solid rgba(30,94,243,.22);border-top-color:var(--A);border-radius:50%;animation:spin .75s linear infinite}
+.id{font-size:11px;color:var(--G);font-weight:700}
+.an-dom{margin-top:14px;padding:6px 12px;background:var(--s2);border-radius:var(--r3);font-size:10px;font-family:var(--M);color:var(--t3);display:flex;align-items:center;justify-content:center;gap:5px}
+
+/* ══ APP ══ */
+#app{display:none}#app.show{display:block}
+.layout{display:grid;grid-template-columns:var(--SB) 1fr;grid-template-rows:var(--TB) 1fr;min-height:100vh;transition:grid-template-columns .28s cubic-bezier(.4,0,.2,1)}
+.layout.sbc{grid-template-columns:0 1fr}
+
+/* ══ TOPBAR ══ */
+.topbar{grid-column:1/-1;background:var(--s1);border-bottom:1px solid var(--b1);display:flex;align-items:center;height:var(--TB);padding:0 16px 0 0;position:sticky;top:0;z-index:100;transition:background .22s,border-color .22s}
+.tblz{width:var(--SB);flex-shrink:0;height:100%;display:flex;align-items:center;gap:9px;padding:0 14px;border-right:1px solid var(--b1);transition:width .28s cubic-bezier(.4,0,.2,1);overflow:hidden}
+.layout.sbc .tblz{width:50px;padding:0 12px}
+.hbg{width:30px;height:30px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;background:none;border:1px solid var(--b1);border-radius:var(--r3);cursor:pointer;transition:background .12s;flex-shrink:0}
+.hbg:hover{background:var(--s2)}.hbg span{display:block;width:13px;height:1.5px;background:var(--t2);border-radius:1px}
+.tb-brand{display:flex;align-items:center;gap:8px;white-space:nowrap;overflow:hidden;transition:opacity .2s}
+.layout.sbc .tb-brand{opacity:0;pointer-events:none;width:0}
+/* Zeron logo in topbar */
+.tb-z-ico{width:22px;height:22px;border-radius:6px;background:var(--A);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.tb-z-nm{font-size:13px;font-weight:700;letter-spacing:-.2px}
+.tb-div{width:1px;height:14px;background:var(--b2);flex-shrink:0}
+.tb-ink-nm{font-size:14px;font-weight:800;letter-spacing:-.4px}
+.tb-mid{flex:1;display:flex;align-items:center;padding:0 16px}
+.ac{display:inline-flex;align-items:center;gap:7px;padding:5px 11px 5px 8px;background:var(--YB);border:1px solid rgba(200,113,10,.22);border-radius:100px;font-size:11px;font-weight:600;color:var(--Y);font-family:var(--M);cursor:pointer;transition:filter .15s}
+.ac:hover{filter:brightness(1.08)}
+.pulse{width:7px;height:7px;border-radius:50%;background:var(--G);animation:pulseA 2.2s ease infinite}
+@keyframes pulseA{0%,100%{box-shadow:0 0 0 0 rgba(20,160,71,.25)}60%{box-shadow:0 0 0 5px rgba(20,160,71,0)}}
+.tbr{margin-left:auto;display:flex;align-items:center;gap:6px}
+.ib{width:30px;height:30px;border:1px solid var(--b1);border-radius:var(--r3);background:none;display:flex;align-items:center;justify-content:center;color:var(--t2);cursor:pointer;transition:all .12s;position:relative}
+.ib:hover{background:var(--s2);color:var(--t1)}
+.ndot{position:absolute;top:6px;right:6px;width:5px;height:5px;border-radius:50%;background:var(--R);border:1.5px solid var(--s1)}
+.av{width:30px;height:30px;border-radius:var(--r3);background:var(--A);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;font-family:var(--M);cursor:pointer;transition:opacity .12s;flex-shrink:0;border:none}
+.av:hover{opacity:.82}
+
+/* ══ SIDEBAR ══ */
+.sidebar{background:var(--s1);border-right:1px solid var(--b1);display:flex;flex-direction:column;height:calc(100vh - var(--TB));position:sticky;top:var(--TB);overflow:hidden;overflow-y:auto;transition:opacity .2s,background .22s,border-color .22s}
+.layout.sbc .sidebar{opacity:0;pointer-events:none}
+.ws-chip{margin:10px 9px 4px;padding:8px 10px;background:var(--s2);border:1px solid var(--b1);border-radius:var(--r6);display:flex;align-items:center;gap:8px;cursor:pointer;transition:all .12s}
+.ws-chip:hover{background:var(--s3);border-color:var(--b2)}
+.ws-av{width:26px;height:26px;border-radius:6px;background:var(--A);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;font-family:var(--M);flex-shrink:0;overflow:hidden}
+.ws-av img{width:100%;height:100%;object-fit:cover}
+.wsnm{font-size:12px;font-weight:700;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wspl{font-size:10px;color:var(--t3);font-family:var(--M);margin-top:1px}
+.ngrp{padding:9px 7px 0}
+.nlbl{font-size:9.5px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--t4);font-family:var(--M);padding:5px 8px 2px}
+.ni{display:flex;align-items:center;gap:8px;padding:7px 8px;border-radius:var(--r3);font-size:12.5px;font-weight:500;color:var(--t2);cursor:pointer;transition:all .1s;white-space:nowrap;margin-bottom:1px}
+.ni:hover{background:var(--s2);color:var(--t1)}.ni.on{background:var(--t1);color:var(--bg);font-weight:600}
+.ni-ic{width:15px;height:15px;flex-shrink:0;opacity:.5;display:flex;align-items:center;justify-content:center}
+.ni.on .ni-ic,.ni:hover .ni-ic{opacity:1}
+.nbg{margin-left:auto;font-size:10px;font-weight:700;font-family:var(--M);padding:2px 6px;border-radius:100px;background:var(--s3);color:var(--t3)}
+.ni.on .nbg{background:rgba(255,255,255,.15);color:rgba(255,255,255,.75)}
+[data-theme="light"] .ni.on .nbg{background:rgba(0,0,0,.18);color:rgba(0,0,0,.6)}
+.nb-r{background:var(--RB)!important;color:var(--R)!important}.nb-b{background:var(--ab)!important;color:var(--A)!important}.nb-g{background:var(--GB)!important;color:var(--G)!important}
+.ndiv{height:1px;background:var(--b1);margin:6px 9px}
+.sbft{margin-top:auto;border-top:1px solid var(--b1);padding:7px}
+.sbfi{display:flex;align-items:center;gap:7px;padding:6px 8px;border-radius:var(--r3);font-size:12px;font-weight:500;color:var(--t2);cursor:pointer;transition:all .12s}
+.sbfi:hover{background:var(--s2);color:var(--t1)}
+.theme-row{display:flex;align-items:center;gap:7px;padding:6px 8px;border-radius:var(--r3);font-size:12px;font-weight:500;color:var(--t2);cursor:pointer;transition:all .12s;margin-bottom:2px}
+.theme-row:hover{background:var(--s2);color:var(--t1)}
+.theme-badge{margin-left:auto;padding:2px 7px;border-radius:100px;background:var(--s3);border:1px solid var(--b1);font-size:10px;font-family:var(--M);font-weight:600;color:var(--t2)}
+.so-row{display:flex;align-items:center;gap:7px;padding:6px 8px;border-radius:var(--r3);font-size:12px;font-weight:600;color:var(--R);cursor:pointer;transition:all .12s}
+.so-row:hover{background:var(--RB)}
+
+/* ══ MAIN ══ */
+.main{padding:22px 22px 72px;overflow-y:auto;background:var(--bg);transition:background .22s}
+.pg{display:none;flex-direction:column;gap:16px;animation:pgIn .18s ease}.pg.on{display:flex}
+@keyframes pgIn{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:translateY(0)}}
+.ph{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.ph-ey{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--t3);font-family:var(--M);margin-bottom:3px}
+.ph-t{font-size:22px;font-weight:800;letter-spacing:-.6px;line-height:1.15}
+.ph-s{font-size:11px;color:var(--t3);margin-top:3px;font-family:var(--M)}
+.ph-ac{display:flex;gap:7px;padding-top:3px}
+
+/* ══ BUTTONS ══ */
+.btn{display:inline-flex;align-items:center;gap:5px;border:none;border-radius:var(--r3);font-family:var(--F);font-weight:600;cursor:pointer;transition:all .15s;white-space:nowrap;letter-spacing:-.1px}
+.blg{padding:10px 20px;font-size:13.5px}.bmd{padding:8px 15px;font-size:13px}.bsm{padding:6px 12px;font-size:12px}.bxs{padding:4px 9px;font-size:11px}
+.bdk{background:var(--t1);color:var(--bg)}.bdk:hover{opacity:.87;transform:translateY(-1px)}
+.bbl{background:var(--A);color:#fff}.bbl:hover{background:var(--AH);transform:translateY(-1px);box-shadow:0 4px 14px rgba(30,94,243,.4)}
+.bout{background:var(--s1);color:var(--t2);border:1px solid var(--b2)}.bout:hover{background:var(--s2);color:var(--t1);border-color:var(--b3)}
+.bgh{background:transparent;color:var(--t2)}.bgh:hover{background:var(--s2);color:var(--t1)}
+.bgr{background:transparent;color:var(--R);border:1px solid rgba(209,43,34,.3)}.bgr:hover{background:var(--RB)}
+.bgn{background:transparent;color:var(--G);border:1px solid rgba(20,160,71,.3)}.bgn:hover{background:var(--GB)}
+
+/* ══ CARD ══ */
+.card{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r10);padding:16px 18px;box-shadow:var(--sh1);transition:background .22s,border-color .22s}
+.ch{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px}
+.ct{font-size:12.5px;font-weight:700;letter-spacing:-.1px}.cc{font-size:10.5px;color:var(--t3);font-family:var(--M)}
+.cl{font-size:11px;font-weight:600;color:var(--A);cursor:pointer}.cl:hover{text-decoration:underline}
+
+/* ══ STATS ══ */
+.sg{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.sc{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r10);padding:14px 16px;cursor:default;transition:all .18s}
+.sc:hover{border-color:var(--b2);transform:translateY(-1px);box-shadow:var(--sh2)}
+.si{width:30px;height:30px;border-radius:var(--r3);display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+.sl{font-size:9.5px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--t3);font-family:var(--M);margin-bottom:5px}
+.sv{font-size:26px;font-weight:800;letter-spacing:-1.5px;line-height:1;margin-bottom:4px}
+.sd{font-size:10.5px;font-weight:600;color:var(--G);font-family:var(--M)}.sd.w{color:var(--Y)}.sd.r{color:var(--R)}
+
+/* ══ ALERT ══ */
+.alert{background:var(--YB);border:1px solid rgba(200,113,10,.2);border-left:3px solid var(--Y);border-radius:var(--r10);padding:11px 14px;display:flex;align-items:flex-start;gap:10px}
+.at{font-size:12.5px;font-weight:700;color:var(--Y);margin-bottom:2px}
+.am{font-size:11.5px;color:var(--t2);line-height:1.6}.am a{color:var(--Y);font-weight:700;cursor:pointer;text-decoration:underline}
+
+/* ══ BLOG ROWS ══ */
+.br{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--b1);cursor:pointer;transition:all .1s;border-radius:var(--r3)}
+.br:last-child{border-bottom:none}
+.br:hover{padding:10px 7px;margin:0 -7px;background:var(--s2);border-bottom-color:transparent}
+.bn{font-family:var(--M);font-size:10px;font-weight:500;color:var(--t3);min-width:16px;padding-top:2px}
+.bi{flex:1;min-width:0}.bt{font-size:12.5px;font-weight:600;line-height:1.4;margin-bottom:5px;letter-spacing:-.1px}
+.btags{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:5px}
+.tag{font-size:9.5px;font-weight:700;font-family:var(--M);padding:2px 7px;border-radius:100px;letter-spacing:.2px}
+.tr{background:var(--RB);color:var(--R)}.tp{background:var(--VB);color:var(--V)}.ty{background:var(--YB);color:var(--Y)}.tb{background:var(--ab);color:var(--A)}.tg{background:var(--GB);color:var(--G)}.tn{background:var(--s3);color:var(--t3)}
+.brr{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.dot{width:7px;height:7px;border-radius:50%}.dg{background:var(--G);box-shadow:0 0 0 3px var(--GB)}.da{background:var(--Y);animation:pulseA 1.8s ease infinite}.dq{background:var(--s4)}
+.sbar{display:flex;align-items:center;gap:7px}.strack{flex:1;height:3px;background:var(--s3);border-radius:100px;overflow:hidden}
+.sfill{height:100%;border-radius:100px;transition:width 1s .1s ease}
+.sfg{background:var(--G)}.sfa{background:var(--Y)}.sfb{background:var(--A)}
+.ssco{font-size:10px;font-family:var(--M);font-weight:600;color:var(--t3);min-width:48px;text-align:right}
+
+/* ══ TRENDS ══ */
+.trow{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--b1)}.trow:last-child{border-bottom:none}
+.tn2{font-family:var(--M);font-size:10px;color:var(--t3);min-width:14px}
+.tt{flex:1;font-size:12px;font-weight:500;line-height:1.4}
+.heat{font-size:9px;font-weight:700;padding:2px 7px;border-radius:100px;font-family:var(--M);text-transform:uppercase;letter-spacing:.3px}
+.hh{background:var(--RB);color:var(--R)}.hw{background:var(--YB);color:var(--Y)}.hc{background:var(--s3);color:var(--t3)}
+
+/* ══ GRIDS ══ */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.scr{display:flex;align-items:center;gap:10px;padding:5px 0}
+.scl{min-width:140px;font-size:10.5px;font-family:var(--M);color:var(--t3)}
+.scv{min-width:130px;font-size:11.5px;font-weight:600}
+.sct{flex:1;height:2.5px;background:var(--s3);border-radius:100px;overflow:hidden}
+.scb{height:100%;background:var(--A);border-radius:100px;transition:width 1.2s .3s ease}
+.kw{display:inline-flex;align-items:center;padding:4px 9px;border-radius:100px;border:1px solid var(--b1);background:var(--s2);font-size:10.5px;font-weight:500;color:var(--t2);font-family:var(--M);cursor:pointer;margin:2px;transition:all .1s}
+.kw:hover,.kw.on{background:var(--ab);color:var(--A);border-color:rgba(30,94,243,.25)}
+.srow{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--b1)}.srow:last-child{border-bottom:none}
+.sico{width:28px;height:28px;border-radius:var(--r3);background:var(--s3);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--t2);flex-shrink:0;font-family:var(--M)}
+.snm{font-size:12px;font-weight:700;letter-spacing:-.1px}.surl{font-size:10px;font-family:var(--M);color:var(--t3)}
+.pill{font-size:9.5px;font-weight:700;padding:2.5px 7px;border-radius:100px;font-family:var(--M)}
+.pll{background:var(--GB);color:var(--G)}.pls{background:var(--YB);color:var(--Y)}
+.tgl-row{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--b1)}.tgl-row:last-child{border-bottom:none}
+.tgl-t{font-size:12.5px;font-weight:600;letter-spacing:-.1px;margin-bottom:2px}
+.tgl-d{font-size:11px;color:var(--t3)}
+.tgl{width:32px;height:17px;border-radius:100px;background:var(--s4);position:relative;cursor:pointer;transition:background .2s;flex-shrink:0}
+.tgl.on{background:var(--t1)}.tgl::after{content:'';position:absolute;width:11px;height:11px;border-radius:50%;background:#fff;top:3px;left:3px;transition:transform .17s;box-shadow:0 1px 2px rgba(0,0,0,.2)}.tgl.on::after{transform:translateX(15px)}
+.platrow{display:flex;flex-wrap:wrap;gap:5px}
+.plat{display:flex;align-items:center;gap:4px;padding:5px 10px;border-radius:var(--r3);border:1px solid var(--b2);background:var(--s1);font-size:10.5px;font-weight:600;color:var(--t2);cursor:pointer;transition:all .1s;font-family:var(--M)}
+.plat:hover{background:var(--s2);color:var(--t1)}.plat.on{background:var(--t1);color:var(--bg);border-color:var(--t1)}
+.pdt{width:4px;height:4px;border-radius:50%;background:currentColor}
+.nbbox{background:var(--s2);border:1px solid var(--b1);border-radius:var(--r3);padding:9px 12px;font-size:10.5px;color:var(--t3);font-family:var(--M);line-height:1.65}
+.nbbox b{color:var(--t2);font-weight:600}
+.airow{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--b1)}.airow:last-child{border-bottom:none}
+.aid{min-width:105px;font-family:var(--M);font-size:10px;font-weight:500;color:var(--t3)}
+.ait{flex:1;font-size:12px;font-weight:600;line-height:1.4}
+.imp{font-size:9.5px;font-weight:700;padding:2px 7px;border-radius:100px;font-family:var(--M);text-transform:uppercase;letter-spacing:.3px}
+.imj{background:var(--RB);color:var(--R)}.imd{background:var(--YB);color:var(--Y)}.imn{background:var(--s3);color:var(--t3)}
+
+/* ══ RESCAN BUTTON ══ */
+.rescan-btn{display:flex;align-items:center;gap:6px;padding:5px 10px;border-radius:var(--r3);background:var(--ab);color:var(--A);border:1px solid rgba(30,94,243,.2);font-size:11px;font-weight:700;cursor:pointer;font-family:var(--M);transition:all .15s}
+.rescan-btn:hover{background:var(--ab2)}.rescan-btn.scanning{cursor:default;opacity:.7}
+.rspin{width:11px;height:11px;border:2px solid rgba(30,94,243,.25);border-top-color:var(--A);border-radius:50%;animation:spin .7s linear infinite}
+
+/* ══ WOD ══ */
+.wod{background:#09090A;border-radius:var(--r10);padding:24px 28px;position:relative;overflow:hidden}
+.wod::before{content:'';position:absolute;width:280px;height:280px;border-radius:50%;top:-90px;right:-70px;background:radial-gradient(circle,rgba(30,94,243,.38) 0%,transparent 65%);pointer-events:none}
+.wod::after{content:'';position:absolute;width:180px;height:180px;border-radius:50%;bottom:-70px;left:38%;background:radial-gradient(circle,rgba(116,48,212,.22) 0%,transparent 65%);pointer-events:none}
+.wey{font-size:9.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#93C5FD;font-family:var(--M);margin-bottom:5px;position:relative;z-index:1}
+.wtt{font-size:19px;font-weight:800;color:#fff;letter-spacing:-.5px;margin-bottom:4px;position:relative;z-index:1}
+.wsb{font-size:11.5px;color:rgba(255,255,255,.38);margin-bottom:18px;line-height:1.6;position:relative;z-index:1}
+.wrow{display:flex;gap:7px;position:relative;z-index:1}
+.winp{flex:1;padding:10px 14px;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.1);border-radius:var(--r3);color:#fff;font-family:var(--F);font-size:12.5px;outline:none;transition:all .17s}
+.winp:focus{border-color:#60A5FA;background:rgba(255,255,255,.12)}.winp::placeholder{color:rgba(255,255,255,.25)}
+.wgo{padding:10px 18px;background:var(--A);color:#fff;border:none;border-radius:var(--r3);font-size:12.5px;font-weight:700;cursor:pointer;transition:all .17s;font-family:var(--F);flex-shrink:0}
+.wgo:hover{background:var(--AH);transform:translateY(-1px);box-shadow:0 4px 14px rgba(30,94,243,.45)}
+.wtags{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px;position:relative;z-index:1}
+.wt{padding:4px 10px;border-radius:100px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.09);font-size:10.5px;font-weight:500;color:rgba(255,255,255,.48);cursor:pointer;transition:all .1s;font-family:var(--M)}
+.wt:hover{background:rgba(255,255,255,.15);color:#fff}
+/* Wizard */
+.wiz{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r10);overflow:hidden;display:none;transition:background .22s,border-color .22s}.wiz.show{display:block}
+.wizpg{height:2px;background:var(--s3)}.wizpf{height:100%;background:var(--A);transition:width .3s ease;border-radius:0 1px 1px 0}
+.wizhd{padding:16px 20px 0;display:flex;align-items:flex-start;justify-content:space-between}
+.wiztg{font-size:9.5px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;font-family:var(--M);color:var(--t3);margin-bottom:2px}
+.wizti{font-size:14px;font-weight:800;letter-spacing:-.3px}.wizsu{font-size:11.5px;color:var(--t2);margin-top:2px}
+.wizbd{padding:13px 20px 16px}.wizpn{display:none}.wizpn.on{display:block}
+.wzopts{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:6px}
+.wo{padding:9px 11px;border:1.5px solid var(--b1);border-radius:var(--r6);cursor:pointer;background:var(--s2);transition:all .1s;position:relative}
+.wo:hover{border-color:var(--b2);background:var(--s3)}.wo.sel{border-color:var(--A);background:var(--ab)}
+.wo.sel::after{content:'\2713';position:absolute;top:7px;right:8px;font-size:10px;color:var(--A);font-weight:800}
+.wot{font-size:11.5px;font-weight:700;margin-bottom:2px}.wos{font-size:10.5px;color:var(--t2)}.wo.sel .wos{color:var(--A)}
+.wizft{padding:11px 20px;border-top:1px solid var(--b1);display:flex;align-items:center;justify-content:space-between;background:var(--s2);transition:background .22s}
+/* Research / SEO panels */
+.ins-pn{display:none}.ins-pn.show{display:block}
+.ins-sec{margin-bottom:16px}.ins-sec:last-child{margin-bottom:0}
+.ins-l{font-size:9.5px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:var(--t3);font-family:var(--M);margin-bottom:8px;display:flex;align-items:center;gap:9px}
+.ins-l::after{content:'';flex:1;height:1px;background:var(--b1)}
+.ins-ch{display:flex;flex-wrap:wrap;gap:4px}
+.ic{padding:3.5px 9px;border-radius:100px;font-size:10.5px;font-weight:500;font-family:var(--M);border:1.5px solid var(--b1);background:var(--s2);color:var(--t2);cursor:pointer;transition:all .1s}
+.ic:hover,.ic.on{border-color:var(--A);background:var(--ab);color:var(--A)}
+.paa{padding:8px 11px;background:var(--s2);border:1px solid var(--b1);border-radius:var(--r3);font-size:11.5px;font-weight:500;color:var(--t2);margin-bottom:4px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all .1s}
+.paa:hover,.paa.on{border-color:var(--A);background:var(--ab);color:var(--A)}
+.paap{font-size:14px;color:var(--t3);flex-shrink:0;margin-left:8px}
+.seo-pn{display:none}.seo-pn.show{display:block}
+.seo-hero{display:flex;align-items:center;gap:18px;padding:12px 0 16px;border-bottom:1px solid var(--b1);margin-bottom:16px}
+.ringw{position:relative;width:78px;height:78px;flex-shrink:0}
+.ringin{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ringn{font-size:22px;font-weight:800;letter-spacing:-1px;line-height:1}
+.ringl{font-size:9px;font-family:var(--M);font-weight:700;color:var(--t3);letter-spacing:.7px;text-transform:uppercase;margin-top:2px}
+.rbd{display:flex;align-items:center;gap:7px;margin-bottom:6px;font-size:10.5px}
+.rbdl{min-width:120px;color:var(--t2);font-weight:500}.rbdt{flex:1;height:3px;background:var(--s3);border-radius:100px;overflow:hidden}
+.rbdf{height:100%;border-radius:100px;transition:width 1.1s .2s ease}
+.rbdv{min-width:20px;text-align:right;font-family:var(--M);font-size:9.5px;font-weight:700;color:var(--t2)}
+.kd-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:14px}
+.kdc{background:var(--s2);border:1px solid var(--b1);border-radius:var(--r6);padding:9px 11px;transition:all .1s}
+.kdc:hover{background:var(--s3);border-color:var(--b2)}
+.kdw{font-size:10.5px;font-weight:700;margin-bottom:5px;line-height:1.35}.kdps{display:flex;gap:3px;flex-wrap:wrap}
+.kp{font-size:9px;font-weight:700;padding:1.5px 6px;border-radius:100px;font-family:var(--M)}
+.kpv{background:var(--ab);color:var(--A)}.kpe{background:var(--GB);color:var(--G)}.kph{background:var(--RB);color:var(--R)}.kpc{background:var(--YB);color:var(--Y)}
+.gen{display:none;text-align:center;padding:42px 20px}.gen.show{display:block}
+.gensp{width:48px;height:48px;margin:0 auto 16px}.gensp svg{animation:spin 1.6s linear infinite}
+.gent{font-size:14px;font-weight:800;letter-spacing:-.3px;margin-bottom:3px}
+.gens{font-size:11.5px;color:var(--t2);margin-bottom:20px;line-height:1.5}
+.genlist{max-width:290px;margin:0 auto;display:flex;flex-direction:column;gap:4px;text-align:left}
+.gi{display:flex;align-items:center;gap:7px;padding:6px 10px;border-radius:var(--r3);font-size:11.5px;font-weight:500;color:var(--t2);background:var(--s2);border:1px solid transparent;transition:all .25s}
+.gi.go{background:var(--ab);border-color:rgba(30,94,243,.15);color:var(--A)}.gi.ok{background:var(--GB);border-color:rgba(20,160,71,.12);color:var(--G)}
+.giico{width:13px;height:13px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.giw{width:4.5px;height:4.5px;border-radius:50%;background:var(--s4)}.gis{width:10px;height:10px;border:2px solid rgba(30,94,243,.2);border-top-color:var(--A);border-radius:50%;animation:spin .7s linear infinite}.gid{font-size:10.5px;font-weight:700}
+.bp{display:none}.bp.show{display:block}
+.bpbar{display:flex;align-items:center;justify-content:space-between;padding:11px 0 15px;border-bottom:1px solid var(--b1);margin-bottom:18px;flex-wrap:wrap;gap:7px}
+.bppills{display:flex;gap:4px}
+.bpill{padding:3px 9px;border-radius:100px;font-size:9.5px;font-weight:700;font-family:var(--M)}
+.bpg{background:var(--GB);color:var(--G)}.bpb{background:var(--ab);color:var(--A)}.bpv{background:var(--VB);color:var(--V)}
+.bpac{display:flex;gap:5px}
+
+/* ══ BLOG CONTENT ══ */
+.bcont{font-size:13px;line-height:1.88;color:var(--t2)}
+.bcont h1{font-size:20px;font-weight:800;color:var(--t1);margin-bottom:12px;line-height:1.2;letter-spacing:-.5px}
+.bcont h2{font-size:14px;font-weight:700;color:var(--t1);margin:24px 0 8px;letter-spacing:-.2px;padding-bottom:6px;border-bottom:1px solid var(--b1)}
+.bcont h3{font-size:13px;font-weight:700;color:var(--t1);margin:18px 0 5px}
+.bcont p{margin-bottom:13px}.bcont ul{margin:8px 0 14px 18px;display:flex;flex-direction:column;gap:7px}
+.bcont ul li{font-size:12.5px;line-height:1.65}.bcont strong{color:var(--t1);font-weight:700}
+.bmeta{display:flex;gap:12px;flex-wrap:wrap;padding:7px 12px;background:var(--s2);border-radius:var(--r3);margin-bottom:14px;font-size:10.5px;font-family:var(--M);color:var(--t3)}
+.bfaq{background:var(--s2);border-left:2px solid var(--A);border-radius:0 var(--r3) var(--r3) 0;padding:10px 14px;margin:14px 0}
+.bfaq-q{font-size:12px;font-weight:700;color:var(--t1);margin-bottom:4px}
+.bfaq-a{font-size:12px;color:var(--t2);line-height:1.6}
+.bauth{margin-top:22px;padding:14px 16px;border:1px solid var(--b1);border-radius:var(--r10);background:var(--s2);display:flex;align-items:flex-start;gap:12px}
+.bav{width:40px;height:40px;border-radius:50%;background:var(--A);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0;font-family:var(--M)}
+.banm{font-size:13px;font-weight:700;letter-spacing:-.1px;margin-bottom:2px}.barl{font-size:11px;color:var(--t2)}
+.bcta{margin-top:20px;padding:16px 18px;background:linear-gradient(135deg,rgba(30,94,243,.15),rgba(116,48,212,.1));border:1px solid rgba(30,94,243,.2);border-radius:var(--r10);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.bcta-t{font-size:13px;font-weight:700;color:var(--t1);margin-bottom:3px}.bcta-s{font-size:12px;color:var(--t2)}
+
+/* ══ BRAND PROFILE ══ */
+.brand-hero{background:linear-gradient(135deg,#09090A 0%,#111318 100%);border:1px solid var(--b1);border-radius:var(--r10);padding:24px 26px;position:relative;overflow:hidden}
+.brand-hero::before{content:'';position:absolute;width:320px;height:320px;border-radius:50%;top:-120px;right:-80px;background:radial-gradient(circle,rgba(30,94,243,.25) 0%,transparent 65%);pointer-events:none}
+.bh-logo{display:flex;align-items:center;gap:12px;margin-bottom:16px;position:relative;z-index:1}
+.bh-ico{width:44px;height:44px;border-radius:12px;background:var(--A);display:flex;align-items:center;justify-content:center;box-shadow:0 0 24px rgba(30,94,243,.4);overflow:hidden}
+.bh-ico img{width:100%;height:100%;object-fit:contain}
+.bh-nm{font-size:22px;font-weight:800;color:#fff;letter-spacing:-.5px}
+.bh-pos{font-size:12.5px;color:rgba(255,255,255,.45);position:relative;z-index:1;line-height:1.6;max-width:520px;margin-bottom:14px}
+.bh-tags{display:flex;flex-wrap:wrap;gap:5px;position:relative;z-index:1}
+.bh-tag{padding:4px 10px;border-radius:100px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);font-size:10.5px;font-weight:600;color:rgba(255,255,255,.55);font-family:var(--M)}
+.module-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.module-card{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r10);padding:14px 16px;transition:all .15s}
+.module-card:hover{border-color:var(--b2);transform:translateY(-1px);box-shadow:var(--sh2)}
+.mc-ico{width:32px;height:32px;border-radius:var(--r3);display:flex;align-items:center;justify-content:center;margin-bottom:9px;font-size:16px}
+.mc-t{font-size:12.5px;font-weight:700;margin-bottom:3px;letter-spacing:-.1px}.mc-s{font-size:11px;color:var(--t2);line-height:1.5}
+.founder-card{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r10);padding:16px 18px}
+.fc-av{width:48px;height:48px;border-radius:50%;background:var(--A);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;flex-shrink:0;font-family:var(--M)}
+.fc-nm{font-size:14px;font-weight:800;letter-spacing:-.3px;margin-bottom:3px}
+.fc-role{font-size:11.5px;color:var(--t2);margin-bottom:8px}
+.fc-bio{font-size:12px;color:var(--t2);line-height:1.65}
+.fc-links{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
+.fc-link{display:inline-flex;align-items:center;gap:4px;padding:4px 9px;border-radius:100px;background:var(--ab);border:1px solid rgba(30,94,243,.2);font-size:10.5px;font-weight:600;color:var(--A);font-family:var(--M);cursor:pointer;transition:all .12s}
+.fc-link:hover{background:var(--ab2)}
+.ethos-item{padding:10px 0;border-bottom:1px solid var(--b1)}.ethos-item:last-child{border-bottom:none}
+.ei-t{font-size:12.5px;font-weight:700;margin-bottom:3px;letter-spacing:-.1px}.ei-s{font-size:12px;color:var(--t2);line-height:1.6}
+
+/* ══ COMPETITOR ANALYSIS ══ */
+.comp-add-row{display:flex;gap:8px;margin-bottom:14px}
+.comp-inp{flex:1;padding:9px 12px;border:1.5px solid var(--b2);border-radius:var(--r6);font-size:13px;color:var(--t1);background:var(--s2);outline:none;transition:all .15s;font-family:var(--F)}
+.comp-inp:focus{border-color:var(--A);box-shadow:0 0 0 3px var(--ab)}
+.comp-inp::placeholder{color:var(--t3)}
+.comp-list{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.comp-item{display:flex;align-items:center;gap:10px;padding:10px 13px;background:var(--s2);border:1px solid var(--b1);border-radius:var(--r6)}
+.comp-ico{width:28px;height:28px;border-radius:var(--r3);background:var(--s3);overflow:hidden;flex-shrink:0}
+.comp-ico img{width:100%;height:100%;object-fit:cover}
+.comp-domain{font-size:12.5px;font-weight:700;flex:1}
+.comp-remove{background:none;border:none;color:var(--t3);cursor:pointer;font-size:16px;line-height:1;padding:0 2px;transition:color .1s}
+.comp-remove:hover{color:var(--R)}
+.comp-analyse-btn{padding:6px 12px;background:var(--A);color:#fff;border:none;border-radius:var(--r3);font-size:11.5px;font-weight:700;cursor:pointer;transition:all .15s;font-family:var(--F)}
+.comp-analyse-btn:hover{background:var(--AH);transform:translateY(-1px)}
+.comp-analyse-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.comp-results{display:none}.comp-results.show{display:block}
+.comp-status{font-size:11.5px;color:var(--t2);font-family:var(--M);display:flex;align-items:center;gap:6px;padding:10px 0}
+.comp-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px}
+.comp-table th{font-size:9.5px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--t3);font-family:var(--M);padding:6px 10px;text-align:left;border-bottom:1px solid var(--b1);background:var(--s2)}
+.comp-table td{padding:9px 10px;border-bottom:1px solid var(--b1);vertical-align:top;line-height:1.5}
+.comp-table tr:last-child td{border-bottom:none}
+.comp-table tr:hover td{background:var(--s2)}
+.comp-badge{display:inline-flex;padding:2px 7px;border-radius:100px;font-size:10px;font-weight:700;font-family:var(--M)}
+.comp-err{padding:12px 14px;background:var(--RB);border:1px solid rgba(209,43,34,.2);border-radius:var(--r6);font-size:12px;color:var(--R);margin-top:8px}
+.comp-insight-card{background:var(--s2);border:1px solid var(--b1);border-radius:var(--r6);padding:12px 14px;margin-bottom:8px}
+.comp-domain-hd{font-size:13px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.comp-section-t{font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--t3);font-family:var(--M);margin-bottom:6px;margin-top:10px}
+.comp-section-t:first-of-type{margin-top:0}
+.comp-text{font-size:12px;color:var(--t2);line-height:1.65}
+.loading-spinner-inline{width:12px;height:12px;border:2px solid rgba(30,94,243,.2);border-top-color:var(--A);border-radius:50%;animation:spin .7s linear infinite;display:inline-block}
+
+/* ══ PANELS / MODALS ══ */
+#backdrop{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.4);backdrop-filter:blur(3px);display:none;opacity:0;transition:opacity .2s}
+#backdrop.show{display:block;opacity:1}
+.panel{position:fixed;top:calc(var(--TB) + 6px);right:10px;background:var(--s1);border:1px solid var(--b2);border-radius:var(--r10);box-shadow:var(--sh3);z-index:400;display:none;transition:background .22s,border-color .22s}
+.panel.show{display:block;animation:drop .2s cubic-bezier(.16,1,.3,1)}
+@keyframes drop{from{opacity:0;transform:translateY(-6px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+#notif-panel{width:300px}
+#profile-panel{width:290px}
+.pnhd{display:flex;align-items:center;justify-content:space-between;padding:11px 13px;border-bottom:1px solid var(--b1)}
+.pnttl{font-size:12.5px;font-weight:700}.pncl{font-size:11px;font-weight:600;color:var(--A);cursor:pointer}
+.npitem{padding:10px 13px;border-bottom:1px solid var(--b1);cursor:pointer;transition:background .1s}
+.npitem:last-child{border-bottom:none}.npitem:hover{background:var(--s2)}
+.npit{font-size:12px;font-weight:600;margin-bottom:2px}.npis{font-size:11px;color:var(--t2);line-height:1.5}.npit-t{font-size:10px;font-family:var(--M);color:var(--t3);margin-top:3px}
+.npdot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:3px}
+.pp-av2{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;color:#fff;flex-shrink:0;font-family:var(--M)}
+.pp-nm{font-size:13px;font-weight:700;letter-spacing:-.2px}.pp-role{font-size:11px;color:var(--t3)}
+.pp-cols{display:flex;gap:6px;margin-bottom:13px}
+.pp-col{width:22px;height:22px;border-radius:50%;cursor:pointer;transition:transform .12s;border:2px solid transparent}
+.pp-col:hover{transform:scale(1.15)}.pp-col.sel{border-color:var(--t1);transform:scale(1.08)}
+.pp-ft{padding:10px 13px;border-top:1px solid var(--b1);display:flex;gap:7px;align-items:center}
+/* MODAL — shared */
+.modal-bg{position:fixed;inset:0;z-index:600;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,.6);backdrop-filter:blur(4px)}
+.modal-bg.show{display:flex}
+.modal-card{width:100%;background:var(--s1);border:1px solid var(--b2);border-radius:var(--r16);box-shadow:var(--sh4);display:flex;flex-direction:column;animation:mIn .3s cubic-bezier(.16,1,.3,1);overflow:hidden;transition:background .22s,border-color .22s}
+@keyframes mIn{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+.mhd{padding:13px 17px;border-bottom:1px solid var(--b1);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.mttl{font-size:12.5px;font-weight:700}.mhd-r{display:flex;gap:6px;align-items:center}
+.mx{width:27px;height:27px;border-radius:var(--r3);border:1px solid var(--b2);background:none;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--t2);font-size:16px;line-height:1;transition:all .12s}
+.mx:hover{background:var(--s3);color:var(--t1)}
+.mbd{overflow-y:auto;padding:18px 22px;flex:1}
+/* Changelog modal */
+#changelog-modal .modal-card{max-width:560px;max-height:82vh}
+#help-modal .modal-card{max-width:640px;max-height:88vh}
+#prev-modal .modal-card{max-width:740px;max-height:92vh}
+.cl-version{margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--b1)}
+.cl-version:last-child{border-bottom:none;margin-bottom:0}
+.cl-v-head{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.cl-v-num{font-size:13px;font-weight:800;letter-spacing:-.2px}
+.cl-v-date{font-size:11px;font-family:var(--M);color:var(--t3)}
+.cl-v-badge{padding:2px 7px;border-radius:100px;font-size:9.5px;font-weight:700;font-family:var(--M)}
+.cl-v-new{background:var(--GB);color:var(--G)}.cl-v-fix{background:var(--ab);color:var(--A)}.cl-v-imp{background:var(--VB);color:var(--V)}
+.cl-item{display:flex;align-items:flex-start;gap:8px;margin-bottom:7px;font-size:12.5px;line-height:1.6;color:var(--t2)}
+.cl-item::before{content:'\2022';color:var(--A);font-size:14px;line-height:1.3;flex-shrink:0}
+/* Help modal */
+.help-section{margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid var(--b1)}.help-section:last-child{border-bottom:none;margin-bottom:0}
+.help-t{font-size:14px;font-weight:800;letter-spacing:-.3px;margin-bottom:8px}
+.help-p{font-size:12.5px;color:var(--t2);line-height:1.7;margin-bottom:10px}
+.help-faq{background:var(--s2);border-left:2px solid var(--A);border-radius:0 var(--r3) var(--r3) 0;padding:10px 14px;margin:8px 0}
+.help-faq-q{font-size:12px;font-weight:700;color:var(--t1);margin-bottom:3px}
+.help-faq-a{font-size:12px;color:var(--t2);line-height:1.6}
+
+@media(max-width:768px){
+  .layout{grid-template-columns:1fr}.sidebar{display:none}.tblz{width:50px;padding:0 11px}.tb-brand{display:none!important}
+  .ob-layout{grid-template-columns:1fr}.ob-left{display:none}
+  .sg{grid-template-columns:1fr 1fr}.g2,.g3{grid-template-columns:1fr}.kd-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- SPLASH -->
+<div id="splash">
+  <div class="spl-logo">
+    <div class="spl-ico">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><rect x="3" y="3" width="8" height="18" rx="2"/><rect x="13" y="3" width="8" height="4.5" rx="1.5"/><rect x="13" y="9.75" width="8" height="4.5" rx="1.5"/><rect x="13" y="16.5" width="5.5" height="4.5" rx="1.5"/></svg>
+    </div>
+    <div class="spl-nm">INK</div>
+  </div>
+  <div class="spl-tag">SERP Content Engine &nbsp;&middot;&nbsp; Powered by Zeron</div>
+  <div class="spl-bar"><div class="spl-fill" id="spl-fill"></div></div>
+  <div class="spl-ver">v3.0 &nbsp;&middot;&nbsp; 2026</div>
+</div>
+
+<!-- ONBOARDING -->
+<div id="onboard">
+  <div class="ob-layout">
+    <div class="ob-left">
+      <div class="ob-brand">
+        <div class="ob-brand-logo">
+          <div class="ob-z-ico">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="white"><rect x="2" y="2" width="5.5" height="12" rx="1.4"/><rect x="9.5" y="2" width="5.5" height="3.2" rx="1.1"/><rect x="9.5" y="6.9" width="5.5" height="3.2" rx="1.1"/><rect x="9.5" y="11.8" width="3.8" height="2.2" rx="1"/></svg>
+          </div>
+          <div class="ob-z-nm">Zeron</div>
+        </div>
+        <div class="ob-sep"></div>
+        <div class="ob-ink-nm">INK</div>
+      </div>
+      <div style="margin-top:auto;position:relative;z-index:1">
+        <div class="ob-prg" id="obprg">
+          <div class="ob-bar cur" id="ob1"></div>
+          <div class="ob-bar" id="ob2"></div>
+          <div class="ob-bar" id="ob3"></div>
+        </div>
+        <div class="ob-lbl" id="ob-lbl">Step 1 of 3 &middot; Workspace</div>
+        <div class="ob-ttl" id="ob-ttl">Set up your workspace</div>
+        <div class="ob-sub" id="ob-sub">INK crawls your website, blog, and LinkedIn to build your brand content DNA &mdash; tone, voice, keywords, and positioning.</div>
+      </div>
+      <div class="ob-feats">
+        <div class="ob-fi"><div class="ob-fd"></div><div class="ob-ft2"><b>SERP-first by default.</b> Every blog is structured to rank #1 before it&rsquo;s written.</div></div>
+        <div class="ob-fi"><div class="ob-fd"></div><div class="ob-ft2"><b>5 blogs ready every morning at 04:00.</b> Zero manual effort, full brand alignment.</div></div>
+        <div class="ob-fi"><div class="ob-fd"></div><div class="ob-ft2"><b>Algorithm tracker built in.</b> INK adjusts output automatically on every Google update.</div></div>
+        <div class="ob-fi"><div class="ob-fd"></div><div class="ob-ft2"><b>Competitor intelligence.</b> Real-time content strategy analysis of up to 5 competitors.</div></div>
+      </div>
+    </div>
+    <div class="ob-right">
+      <div class="ob-ri">
+        <div class="ob-pn on" id="op1">
+          <div style="margin-bottom:20px">
+            <div style="font-size:18px;font-weight:800;letter-spacing:-.4px;margin-bottom:4px">Set up your workspace</div>
+            <div style="font-size:12.5px;color:var(--t2)">Type your brand name &mdash; INK will find your website, LinkedIn, and industry automatically.</div>
+          </div>
+
+          <!-- Brand name with live search -->
+          <div class="fld">
+            <span class="fl">Brand / Company Name</span>
+            <div style="position:relative">
+              <input class="inp" id="i-brand" placeholder="e.g. Durex, Zeron, Swiggy&hellip;" autocomplete="off" oninput="onBrandInput(this.value)" style="padding-right:38px">
+              <div id="brand-search-ico" style="position:absolute;right:11px;top:50%;transform:translateY(-50%);display:none">
+                <div style="width:14px;height:14px;border:2px solid rgba(30,94,243,.2);border-top-color:var(--A);border-radius:50%;animation:spin .7s linear infinite"></div>
+              </div>
+              <div id="brand-check-ico" style="position:absolute;right:11px;top:50%;transform:translateY(-50%);display:none;color:var(--G);font-size:14px;font-weight:700">&check;</div>
+            </div>
+          </div>
+
+          <!-- Brand detection result card -->
+          <div id="brand-result" style="display:none;margin-bottom:14px;padding:12px 14px;background:var(--GB);border:1px solid rgba(20,160,71,.2);border-radius:var(--r6)">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+              <div id="br-fav" style="width:22px;height:22px;border-radius:5px;overflow:hidden;flex-shrink:0;background:var(--s3)"></div>
+              <div id="br-name" style="font-size:12.5px;font-weight:700"></div>
+              <div style="margin-left:auto;font-size:10px;font-family:var(--M);color:var(--G);font-weight:700">&#10003; Found</div>
+            </div>
+            <div id="br-desc" style="font-size:11.5px;color:var(--t2);line-height:1.5;margin-bottom:6px"></div>
+            <div style="font-size:10px;font-family:var(--M);color:var(--t3)" id="br-meta"></div>
+          </div>
+
+          <!-- Not found state -->
+          <div id="brand-notfound" style="display:none;margin-bottom:14px;padding:10px 13px;background:var(--YB);border:1px solid rgba(200,113,10,.2);border-radius:var(--r6);font-size:12px;color:var(--Y)">
+            Could not auto-detect this brand. Fill in the fields below manually.
+          </div>
+
+          <!-- Website URL -->
+          <div class="fld">
+            <span class="fl">Website URL</span>
+            <input class="inp" id="i-url" placeholder="https://yourdomain.com" oninput="ob1Changed()">
+            <div class="inp-hint">INK will crawl your website, blog section, and product pages.</div>
+          </div>
+
+          <!-- LinkedIn -->
+          <div class="fld">
+            <span class="fl">LinkedIn Company Page <span style="font-weight:400;color:var(--t3)">(optional)</span></span>
+            <input class="inp" id="i-li" placeholder="https://linkedin.com/company/...">
+          </div>
+
+          <div class="ob-footer">
+            <span class="ob-pg">1 / 3</span>
+            <button class="btn bdk bmd" id="ob1-continue" onclick="goOB(2)" disabled style="opacity:.45;cursor:not-allowed">Continue &rarr;</button>
+          </div>
+        </div>
+
+        <div class="ob-pn" id="op2">
+          <div style="margin-bottom:16px">
+            <div style="font-size:18px;font-weight:800;letter-spacing:-.4px;margin-bottom:4px">Define your audience</div>
+            <div style="font-size:12.5px;color:var(--t2)">
+              INK detected <span id="ob2-brand-name" style="font-weight:700;color:var(--t1)">your brand</span> as
+              <span id="ob2-industry-tag" style="font-family:var(--M);font-size:11px;padding:2px 8px;background:var(--ab);color:var(--A);border-radius:100px;font-weight:600">loading&hellip;</span>
+              &mdash; select all ICPs that apply or add your own.
+            </div>
+          </div>
+          <div class="fld">
+            <span class="fl">Primary ICP</span>
+            <div class="opts-grid" id="icp-opts-grid">
+              <!-- Populated dynamically by JS -->
+            </div>
+            <div class="opts-add" style="margin-top:8px"><input class="inp" id="icp-in" placeholder="Add a custom ICP role&hellip;"><button class="add-btn" onclick="addTag('icp-in','icp-tags')">Add</button></div>
+            <div class="ctags" id="icp-tags"></div>
+          </div>
+          <div class="fld">
+            <span class="fl">Industry / Sector</span>
+            <input class="inp" id="i-industry" placeholder="e.g. Consumer Goods, SaaS, Healthcare&hellip;">
+          </div>
+          <div class="ob-footer"><button class="btn bout bsm" onclick="goOB(1)">&larr; Back</button><button class="btn bdk bmd" onclick="goOB(3)">Continue &rarr;</button></div>
+        </div>
+        <div class="ob-pn" id="op3">
+          <div style="margin-bottom:20px"><div style="font-size:18px;font-weight:800;letter-spacing:-.4px;margin-bottom:4px">Set your content goals</div><div style="font-size:12.5px;color:var(--t2)">Select all that apply &mdash; or type your own.</div></div>
+          <div class="fld">
+            <span class="fl">Content Goal</span>
+            <div class="opts-grid">
+              <div class="opt sel" onclick="this.classList.toggle('sel')"><div class="opt-t">Rank #1 on SERP</div><div class="opt-s">Keyword domination</div></div>
+              <div class="opt" onclick="this.classList.toggle('sel')"><div class="opt-t">Drive Demo Bookings</div><div class="opt-s">Conversion-first CTA</div></div>
+              <div class="opt" onclick="this.classList.toggle('sel')"><div class="opt-t">Thought Leadership</div><div class="opt-s">Brand authority build</div></div>
+              <div class="opt" onclick="this.classList.toggle('sel')"><div class="opt-t">GEO / AEO Presence</div><div class="opt-s">AI engine visibility</div></div>
+            </div>
+            <div class="opts-add"><input class="inp" id="goal-in" placeholder="Add a custom goal&hellip;"><button class="add-btn" onclick="addTag('goal-in','goal-tags')">Add</button></div>
+            <div class="ctags" id="goal-tags"></div>
+          </div>
+          <div class="fld">
+            <span class="fl">Blogs per day</span>
+            <div style="display:flex;gap:7px">
+              <div class="opt" onclick="setBlogsOpt(this)" style="flex:1;text-align:center;padding:9px"><div class="opt-t">3</div></div>
+              <div class="opt sel" onclick="setBlogsOpt(this)" style="flex:1;text-align:center;padding:9px"><div class="opt-t">5</div><div class="opt-s">Recommended</div></div>
+              <div class="opt" onclick="setBlogsOpt(this)" style="flex:1;text-align:center;padding:9px"><div class="opt-t">10</div></div>
+            </div>
+          </div>
+          <div class="ob-footer"><button class="btn bout bsm" onclick="goOB(2)">&larr; Back</button><button class="btn bbl bmd" onclick="launchAnalysis()">Analyse my brand &rarr;</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ANALYZING -->
+<div id="analyzing">
+  <div class="an-card">
+    <div class="an-sp">
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+        <circle cx="24" cy="24" r="20" stroke="var(--s3)" stroke-width="4"/>
+        <path d="M24 4a20 20 0 0120 20" stroke="var(--A)" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="an-ttl">Analysing your brand</div>
+    <div class="an-sub">INK is scanning your website, indexing your blog, reading your LinkedIn presence, and mapping your complete content positioning.</div>
+    <div class="an-steps" id="an-steps">
+      <div class="an-step" id="as0"><div class="a-ico"><div class="iw"></div></div>Crawling website structure</div>
+      <div class="an-step" id="as1"><div class="a-ico"><div class="iw"></div></div>Indexing blog posts</div>
+      <div class="an-step" id="as2"><div class="a-ico"><div class="iw"></div></div>Reading LinkedIn page</div>
+      <div class="an-step" id="as3"><div class="a-ico"><div class="iw"></div></div>Detecting brand voice &amp; tone</div>
+      <div class="an-step" id="as4"><div class="a-ico"><div class="iw"></div></div>Mapping products &amp; team</div>
+      <div class="an-step" id="as5"><div class="a-ico"><div class="iw"></div></div>Seeding SERP keyword model</div>
+      <div class="an-step" id="as6"><div class="a-ico"><div class="iw"></div></div>Pulling live industry trends</div>
+    </div>
+    <div class="an-dom" id="an-dom">
+      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="5" cy="5" r="4"/><path d="M5 1C3.9 2.2 3.2 3.6 3.2 5S3.9 7.8 5 9M5 1C6.1 2.2 6.8 3.6 6.8 5S6.1 7.8 5 9M1 5h8"/></svg>
+      Scanning: zeron.one
+    </div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <div class="layout" id="layout">
+
+    <header class="topbar">
+      <div class="tblz">
+        <button class="hbg" onclick="toggleSB()"><span></span><span></span><span></span></button>
+        <div class="tb-brand">
+          <div class="tb-z-ico">
+            <img src="https://www.google.com/s2/favicons?domain=zeron.one&sz=32" alt="Zeron" onerror="this.style.display='none';this.parentNode.innerHTML='<svg width=\'12\' height=\'12\' viewBox=\'0 0 12 12\' fill=\'white\'><rect x=\'1\' y=\'1\' width=\'4\' height=\'10\' rx=\'1\'/><rect x=\'7\' y=\'1\' width=\'4\' height=\'2.5\' rx=\'.8\'/><rect x=\'7\' y=\'4.75\' width=\'4\' height=\'2.5\' rx=\'.8\'/><rect x=\'7\' y=\'8.5\' width=\'2.8\' height=\'2.5\' rx=\'.8\'/></svg>'">
+          </div>
+          <div class="tb-z-nm" id="ws-nm">Zeron</div>
+          <div class="tb-div"></div>
+          <div class="tb-ink-nm">INK</div>
+        </div>
+      </div>
+      <div class="tb-mid">
+        <div class="ac" onclick="nav('algo')">
+          <div class="pulse"></div>
+          Google Core Update &middot; Mar 18, 2026
+        </div>
+      </div>
+      <div class="tbr">
+        <button class="ib" id="notif-btn" onclick="toggleNotif(event)">
+          <div class="ndot" id="ndot"></div>
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M7 1a3.8 3.8 0 013.8 3.8v2.9L12 10H2L3.2 7.7V4.8A3.8 3.8 0 017 1z"/><path d="M5.5 11.5a1.5 1.5 0 003 0"/></svg>
+        </button>
+        <button class="av" id="av-btn" onclick="toggleProfile(event)">AK</button>
+      </div>
+    </header>
+
+    <aside class="sidebar">
+      <div class="ws-chip" onclick="nav('brand')">
+        <div class="ws-av" id="ws-av-ico">
+          <img src="https://www.google.com/s2/favicons?domain=zeron.one&sz=32" alt="Z" onerror="this.style.display='none';this.parentNode.textContent='Z'">
+        </div>
+        <div style="flex:1;min-width:0">
+          <div class="wsnm" id="ws-nm-sb">Zeron</div>
+          <div class="wspl">Pro &middot; 5 blogs / day</div>
+        </div>
+      </div>
+
+      <div class="ngrp">
+        <div class="nlbl">Workspace</div>
+        <div class="ni on" id="ni-dashboard" onclick="nav('dashboard')">
+          <span class="ni-ic"><svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><rect x="1" y="1" width="5" height="5" rx="1"/><rect x="8" y="1" width="5" height="5" rx="1"/><rect x="1" y="8" width="5" height="5" rx="1"/><rect x="8" y="8" width="5" height="5" rx="1"/></svg></span>
+          Dashboard
+        </div>
+        <div class="ni" id="ni-queue" onclick="nav('queue')">
+          <span class="ni-ic"><svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><path d="M1 3h12v1.5H1zm0 4h12v1.5H1zm0 4h8v1.5H1z"/></svg></span>
+          Today&rsquo;s Queue
+          <span class="nbg">5</span>
+        </div>
+        <div class="ni" id="ni-wod" onclick="nav('wod')">
+          <span class="ni-ic"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 3h10M2 7h7M2 11h4.5"/><path d="M10.5 9l3 3-1 1L9.5 10"/></svg></span>
+          Write on Demand
+          <span class="nbg nb-b">new</span>
+        </div>
+      </div>
+
+      <div class="ndiv"></div>
+
+      <div class="ngrp">
+        <div class="nlbl">Intelligence</div>
+        <div class="ni" id="ni-trends" onclick="nav('trends')">
+          <span class="ni-ic"><svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><path d="M1 11l3.5-4.5 3 2.5 3.5-5.5 3 2.5V13H1z"/></svg></span>
+          Trends Radar
+        </div>
+        <div class="ni" id="ni-algo" onclick="nav('algo')">
+          <span class="ni-ic"><svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><path d="M7 1l1.7 3.6L13 5.3l-3 2.8.7 4-3.7-2-3.7 2 .7-4-3-2.8 4.3-.7z"/></svg></span>
+          Algorithm Tracker
+          <span class="nbg nb-r">!</span>
+        </div>
+        <div class="ni" id="ni-competitor" onclick="nav('competitor')">
+          <span class="ni-ic"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="4.5" cy="7" r="3"/><circle cx="9.5" cy="7" r="3"/><path d="M4.5 4V2M9.5 4V2"/></svg></span>
+          Competitor Intel
+          <span class="nbg nb-g">new</span>
+        </div>
+      </div>
+
+      <div class="ndiv"></div>
+
+      <div class="ngrp">
+        <div class="nlbl">Setup</div>
+        <div class="ni" id="ni-brand" onclick="nav('brand')">
+          <span class="ni-ic"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M7 1l1.5 3.5H12L9 6.5l1 4-3-1.8L4 10.5l1-4-3-2H5.5z"/></svg></span>
+          Brand Profile
+        </div>
+        <div class="ni" id="ni-sources" onclick="nav('sources')">
+          <span class="ni-ic"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="7" cy="7" r="5.5"/><path d="M7 1.5C5 3.5 4 5.2 4 7s1 3.5 3 5.5M7 1.5C9 3.5 10 5.2 10 7s-1 3.5-3 5.5M1.5 7h11"/></svg></span>
+          Brand Sources
+        </div>
+        <div class="ni" id="ni-keywords" onclick="nav('keywords')">
+          <span class="ni-ic"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="5.5" cy="5.5" r="4"/><path d="M9 9l4 4"/></svg></span>
+          Keywords
+        </div>
+        <div class="ni" id="ni-settings" onclick="nav('settings')">
+          <span class="ni-ic"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="7" cy="7" r="2.2"/><path d="M5.8 1l-.6 1.4A5.2 5.2 0 004 3.1L2.4 2.7 1 5.2l1.2.9a5 5 0 000 1.8L1 8.8l1.4 2.5 1.6-.4c.4.3.87.56 1.4.76L6 13h2l.6-1.4c.5-.2 1-.47 1.4-.76l1.6.4L13 8.8l-1.2-.9a5 5 0 000-1.8L13 5.2l-1.4-2.5-1.6.4A5.2 5.2 0 009 1.4L8.4 0z" stroke-width="1.1"/></svg></span>
+          Settings
+        </div>
+      </div>
+
+      <div class="sbft">
+        <div class="theme-row" onclick="toggleTheme()">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="6.5" cy="6.5" r="2.5"/><path d="M6.5 1v1M6.5 11v1M1 6.5h1M11 6.5h1M2.9 2.9l.7.7M9.4 9.4l.7.7M9.4 2.9l-.7.7M2.9 9.4l.7-.7"/></svg>
+          <span id="theme-lbl">Light mode</span>
+          <div class="theme-badge" id="theme-badge">&#9788;</div>
+        </div>
+        <div class="sbfi" onclick="openChangelog()">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="6.5" cy="6.5" r="5.5"/><path d="M6.5 4v3.5l2 1"/></svg>
+          Changelog
+          <span class="nbg nb-g" style="margin-left:auto;font-size:9px">v3.0</span>
+        </div>
+        <div class="sbfi" onclick="openHelp()">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="6.5" cy="6.5" r="5.5"/><path d="M6.5 5a1.4 1.4 0 011.4 1.4c0 .9-1.4 1.4-1.4 2.3M6.5 10v.5"/></svg>
+          Help &amp; Docs
+        </div>
+        <div class="so-row" onclick="signOut()">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M5 11.5H2.5A1.5 1.5 0 011 10V3A1.5 1.5 0 012.5 1.5H5M8.5 9.5l3-3-3-3M11.5 6.5H5"/></svg>
+          Sign out
+        </div>
+      </div>
+    </aside>
+
+    <main class="main" id="main">
+
+      <!-- DASHBOARD -->
+      <div class="pg on" id="pg-dashboard">
+        <div class="ph">
+          <div>
+            <div class="ph-ey">Good morning, Ankit &#128075;</div>
+            <div class="ph-t">Your SERP command centre</div>
+            <div class="ph-s">Sunday, 22 Mar 2026 &middot; 5 blogs ready &middot; Zeron &mdash; Cyber Risk Decision Intelligence</div>
+          </div>
+          <div class="ph-ac">
+            <button class="btn bout bsm" onclick="nav('wod')">Write on demand</button>
+            <button class="btn bdk bsm" onclick="nav('queue')">View queue &rarr;</button>
+          </div>
+        </div>
+        <div class="sg">
+          <div class="sc"><div class="si" style="background:var(--ab)"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="var(--A)" stroke-width="1.7"><path d="M1.5 11l3.5-4.5 3 3 3.5-5.5 3 2.5"/></svg></div><div class="sl">Blogs generated</div><div class="sv">147</div><div class="sd">&#8593; 35 this week</div></div>
+          <div class="sc"><div class="si" style="background:var(--GB)"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="var(--G)" stroke-width="1.7"><path d="M2.5 7.5l3.5 4 6.5-8"/></svg></div><div class="sl">Avg SERP score</div><div class="sv">91</div><div class="sd">&#8593; 4 pts vs last week</div></div>
+          <div class="sc"><div class="si" style="background:var(--VB)"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="var(--V)" stroke-width="1.7"><path d="M7.5 1.5l2 4.5h5l-4 3.5 1.5 4.5-4.5-2.5-4.5 2.5 1.5-4.5-4-3.5h5z"/></svg></div><div class="sl">Trends tracked</div><div class="sv">24</div><div class="sd">3 new today</div></div>
+          <div class="sc"><div class="si" style="background:var(--YB)"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="var(--Y)" stroke-width="1.7"><path d="M7.5 2L9 6H14l-3.5 2.5 1.5 4.5-4-2.5-4 2.5 1.5-4.5L2 6h5z"/></svg></div><div class="sl">Algo alerts</div><div class="sv" style="color:var(--Y)">1</div><div class="sd w">Core update &middot; Mar 18</div></div>
+        </div>
+        <div class="alert">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="var(--Y)" stroke-width="1.5" style="flex-shrink:0;margin-top:2px"><path d="M7 1.5L13 12.5H1z"/><line x1="7" y1="5.5" x2="7" y2="8.5"/><circle cx="7" cy="10.5" r=".55" fill="var(--Y)"/></svg>
+          <div><div class="at">Google Core Update &mdash; March 2026 detected 4 days ago</div><div class="am">E-E-A-T depth signals weighted significantly higher. AI content without expert attribution is being penalised. INK has auto-adjusted all templates. <a onclick="nav('algo')">Full breakdown &rarr;</a></div></div>
+        </div>
+        <div class="g2">
+          <div class="card">
+            <div class="ch"><div class="ct">Today&rsquo;s queue</div><span class="cl" onclick="nav('queue')">View all &rarr;</span></div>
+            <div class="br"><div class="bn">01</div><div class="bi"><div class="bt">How the Stryker Wiper Attack Exposed Gaps in OT Security Posture</div><div class="btags"><span class="tag tr">trending</span><span class="tag ty">seo anchor</span></div></div><div class="dot dg"></div></div>
+            <div class="br"><div class="bn">02</div><div class="bi"><div class="bt">CIRCIA Final Rule: What CISOs Must Report in 2026</div><div class="btags"><span class="tag tp">product</span><span class="tag ty">seo anchor</span></div></div><div class="dot dg"></div></div>
+            <div class="br"><div class="bn">03</div><div class="bi"><div class="bt">How CISOs Get Instant Answers Using ZIN Advisor</div><div class="btags"><span class="tag tp">product</span><span class="tag tb">zeron</span></div></div><div class="dot da"></div></div>
+          </div>
+          <div class="card">
+            <div class="ch"><div class="ct">Hot trends right now</div><span class="cl" onclick="nav('trends')">Radar &rarr;</span></div>
+            <div class="trow"><div class="tn2">01</div><div class="tt">Ransomware supply chain compromise Q1 2026</div><div class="heat hh">hot</div></div>
+            <div class="trow"><div class="tn2">02</div><div class="tt">DOGE cuts impact on CISA cyber workforce</div><div class="heat hh">hot</div></div>
+            <div class="trow"><div class="tn2">03</div><div class="tt">SEC cyber disclosure enforcement actions</div><div class="heat hw">rising</div></div>
+            <div class="trow"><div class="tn2">04</div><div class="tt">CMMC 2.0 final compliance deadlines</div><div class="heat hw">rising</div></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="ch">
+            <div><div class="ct">Brand intelligence scan &mdash; Zeron</div><div class="cc" style="margin-top:2px">Last: 22 Mar 2026, 04:00 IST &middot; Auto-rescan weekly</div></div>
+            <div id="rescan-btn" class="rescan-btn" onclick="startRescan()">
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9.5 5.5a4 4 0 11-1.2-2.9"/><path d="M9.5 1.5v2.5H7"/></svg>
+              Rescan now
+            </div>
+          </div>
+          <div id="scan-rows">
+            <div class="scr"><div class="scl">zeron.one/blog</div><div class="scv">18 posts indexed</div><div class="sct"><div class="scb" style="width:0" data-w="90"></div></div></div>
+            <div class="scr"><div class="scl">Products &amp; features</div><div class="scv">5 modules mapped</div><div class="sct"><div class="scb" style="width:0" data-w="100"></div></div></div>
+            <div class="scr"><div class="scl">LinkedIn page</div><div class="scv">92 posts analysed</div><div class="sct"><div class="scb" style="width:0" data-w="78"></div></div></div>
+            <div class="scr"><div class="scl">Sanket Sarkar posts</div><div class="scv">Founder voice mapped</div><div class="sct"><div class="scb" style="width:0" data-w="82"></div></div></div>
+            <div class="scr"><div class="scl">Tone fingerprint</div><div class="scv">CISO-first &middot; Decision-intelligence</div><div class="sct"><div class="scb" style="width:0" data-w="95"></div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- QUEUE -->
+      <div class="pg" id="pg-queue">
+        <div class="ph"><div><div class="ph-t">Today&rsquo;s queue</div><div class="ph-s">5 blogs &middot; Generated 04:00 IST &middot; All ready to publish</div></div><div class="ph-ac"><button class="btn bout bsm">Export all</button></div></div>
+        <div class="card">
+          <div class="br"><div class="bn">01</div><div class="bi"><div class="bt">How the Stryker Wiper Attack Exposed Gaps in OT Security Posture</div><div class="btags" style="margin-bottom:4px"><span class="tag tr">trending</span><span class="tag ty">seo anchor</span><span class="tag tn">2,800 words</span></div><div class="sbar"><div class="strack"><div class="sfill sfg" style="width:0" data-w="94"></div></div><div class="ssco">94 SERP</div></div></div><div class="brr"><div class="dot dg"></div><button class="btn bout bxs" onclick="openPreview(0)">Preview</button></div></div>
+          <div class="br"><div class="bn">02</div><div class="bi"><div class="bt">CIRCIA Final Rule: What CISOs Must Report in 2026</div><div class="btags" style="margin-bottom:4px"><span class="tag tp">product-adj</span><span class="tag ty">seo anchor</span><span class="tag tn">2,400 words</span></div><div class="sbar"><div class="strack"><div class="sfill sfg" style="width:0" data-w="91"></div></div><div class="ssco">91 SERP</div></div></div><div class="brr"><div class="dot dg"></div><button class="btn bout bxs" onclick="openPreview(1)">Preview</button></div></div>
+          <div class="br"><div class="bn">03</div><div class="bi"><div class="bt">How CISOs Get Instant Answers to Cyber Risk Questions Using ZIN Advisor</div><div class="btags" style="margin-bottom:4px"><span class="tag tp">product</span><span class="tag tb">zeron</span><span class="tag tn">2,100 words</span></div><div class="sbar"><div class="strack"><div class="sfill sfa" style="width:0" data-w="88"></div></div><div class="ssco">88 SERP</div></div></div><div class="brr"><div class="dot da"></div><button class="btn bout bxs" onclick="openPreview(2)">Preview</button></div></div>
+          <div class="br"><div class="bn">04</div><div class="bi"><div class="bt">FAIR Model Explained: Translating Cyber Risk into Dollar Impact for the Board</div><div class="btags" style="margin-bottom:4px"><span class="tag tp">product</span><span class="tag ty">seo anchor</span><span class="tag tn">2,600 words</span></div><div class="sbar"><div class="strack"><div class="sfill sfg" style="width:0" data-w="96"></div></div><div class="ssco">96 SERP</div></div></div><div class="brr"><div class="dot dg"></div><button class="btn bout bxs" onclick="openPreview(3)">Preview</button></div></div>
+          <div class="br"><div class="bn">05</div><div class="bi"><div class="bt">Hidden Cost of Vendor Risk: How Supply Chain Attacks Quantify into CVaR</div><div class="btags" style="margin-bottom:4px"><span class="tag tr">trending</span><span class="tag tp">product</span><span class="tag tn">2,200 words</span></div><div class="sbar"><div class="strack"><div class="sfill sfg" style="width:0" data-w="90"></div></div><div class="ssco">90 SERP</div></div></div><div class="brr"><div class="dot dg"></div><button class="btn bout bxs" onclick="openPreview(4)">Preview</button></div></div>
+        </div>
+        <div class="card">
+          <div class="ch"><div class="ct">Publish to platform</div><span class="cc">Platform-specific schema &amp; meta applied automatically</span></div>
+          <div class="platrow">
+            <div class="plat on" onclick="this.classList.toggle('on')"><div class="pdt"></div>WordPress</div>
+            <div class="plat on" onclick="this.classList.toggle('on')"><div class="pdt"></div>Substack</div>
+            <div class="plat on" onclick="this.classList.toggle('on')"><div class="pdt"></div>Medium</div>
+            <div class="plat" onclick="this.classList.toggle('on')"><div class="pdt"></div>Webflow</div>
+            <div class="plat" onclick="this.classList.toggle('on')"><div class="pdt"></div>Ghost</div>
+            <div class="plat" onclick="this.classList.toggle('on')"><div class="pdt"></div>Hashnode</div>
+            <div class="plat" onclick="this.classList.toggle('on')"><div class="pdt"></div>Dev.to</div>
+            <div class="plat" onclick="this.classList.toggle('on')"><div class="pdt"></div>LinkedIn Article</div>
+            <div class="plat" onclick="this.classList.toggle('on')"><div class="pdt"></div>HubSpot CMS</div>
+            <div class="plat" onclick="this.classList.toggle('on')"><div class="pdt"></div>Contentful</div>
+          </div>
+          <div class="nbbox" style="margin-top:10px"><b>Per-platform:</b> Yoast-ready schema for WordPress &middot; Paywall hints for Substack &middot; Tag taxonomy for Medium &middot; Canonical URLs for Webflow &middot; JSON-LD for all.</div>
+        </div>
+      </div>
+
+      <!-- WOD -->
+      <div class="pg" id="pg-wod">
+        <div class="ph"><div><div class="ph-ey">SERP-first &middot; real-time research</div><div class="ph-t">Write on demand</div><div class="ph-s">Enter a topic &middot; INK researches live data &middot; scans SERP &middot; writes a rank-worthy blog</div></div></div>
+        <div class="wod">
+          <div class="wey">Ask INK to write anything</div>
+          <div class="wtt">What do you want to rank for?</div>
+          <div class="wsb">Be as broad or specific as you like. INK pulls live keyword data, real SERP signals, and AnswerThePublic-style questions before writing.</div>
+          <div class="wrow"><input class="winp" id="wod-inp" placeholder="e.g. why CISOs need cyber risk quantification"><button class="wgo" onclick="startWOD()">Research + Write &rarr;</button></div>
+          <div class="wtags">
+            <span class="wt" onclick="fw('How CISOs get instant answers to cyber risk questions using ZIN Advisor')">ZIN Advisor &mdash; CISO guide</span>
+            <span class="wt" onclick="fw('OT security posture management 2026')">OT security 2026</span>
+            <span class="wt" onclick="fw('CIRCIA final rule CISO guide 2026')">CIRCIA guide</span>
+            <span class="wt" onclick="fw('CVaR vs CVSS board reporting')">CVaR vs CVSS</span>
+            <span class="wt" onclick="fw('QBER quantified exposure to risk explained')">QBER explained</span>
+          </div>
+        </div>
+        <div class="wiz" id="wiz-card">
+          <div class="wizpg"><div class="wizpf" id="wizpf" style="width:25%"></div></div>
+          <div class="wizhd">
+            <div><div class="wiztg" id="wiztg">Step 1 of 4 &middot; Audience</div><div class="wizti" id="wizti">Who is this blog for?</div><div class="wizsu" id="wizsu">INK adjusts depth, jargon, and framing based on your audience.</div></div>
+            <button class="btn bgh bxs" onclick="resetWOD()" style="margin-top:3px">Reset</button>
+          </div>
+          <div class="wizbd">
+            <div class="wizpn on" id="wp1"><div class="wzopts"><div class="wo" onclick="pw(this)"><div class="wot">CISOs / VPs</div><div class="wos">Strategic, board-ready</div></div><div class="wo" onclick="pw(this)"><div class="wot">Security Analysts</div><div class="wos">Technical, operational</div></div><div class="wo" onclick="pw(this)"><div class="wot">GRC / Compliance</div><div class="wos">Regulatory lens</div></div><div class="wo" onclick="pw(this)"><div class="wot">Board / C-Suite</div><div class="wos">Business risk, no jargon</div></div><div class="wo" onclick="pw(this)"><div class="wot">DevSecOps</div><div class="wos">Technical + dev context</div></div><div class="wo" onclick="pw(this)"><div class="wot">General / Broad</div><div class="wos">Max SEO reach</div></div></div></div>
+            <div class="wizpn" id="wp2"><div class="wzopts"><div class="wo" onclick="pw(this)"><div class="wot">Rank #1 on SERP</div><div class="wos">Keyword domination</div></div><div class="wo" onclick="pw(this)"><div class="wot">Drive demo bookings</div><div class="wos">Conversion-led CTA</div></div><div class="wo" onclick="pw(this)"><div class="wot">Build authority</div><div class="wos">Thought leadership</div></div><div class="wo" onclick="pw(this)"><div class="wot">Newsjack a trend</div><div class="wos">Speed + relevance</div></div><div class="wo" onclick="pw(this)"><div class="wot">GEO / AEO</div><div class="wos">AI engine visibility</div></div><div class="wo" onclick="pw(this)"><div class="wot">Explain product</div><div class="wos">Feature narrative</div></div></div></div>
+            <div class="wizpn" id="wp3"><div class="wzopts"><div class="wo" onclick="pw(this)"><div class="wot">Breaking news take</div><div class="wos">Timely, reactive</div></div><div class="wo" onclick="pw(this)"><div class="wot">Definitive guide</div><div class="wos">Long-form, evergreen</div></div><div class="wo" onclick="pw(this)"><div class="wot">How-to / Checklist</div><div class="wos">Tactical, actionable</div></div><div class="wo" onclick="pw(this)"><div class="wot">Data-driven piece</div><div class="wos">Stats-led analysis</div></div><div class="wo" onclick="pw(this)"><div class="wot">Opinion / POV</div><div class="wos">Provocative, shareable</div></div><div class="wo" onclick="pw(this)"><div class="wot">Case study</div><div class="wos">Story-led proof</div></div></div></div>
+            <div class="wizpn" id="wp4"><div class="wzopts"><div class="wo" onclick="pw(this)"><div class="wot">WordPress</div><div class="wos">Yoast-ready schema</div></div><div class="wo" onclick="pw(this)"><div class="wot">Substack</div><div class="wos">Email + web hybrid</div></div><div class="wo" onclick="pw(this)"><div class="wot">Medium</div><div class="wos">Tag + publication SEO</div></div><div class="wo" onclick="pw(this)"><div class="wot">Webflow</div><div class="wos">Canonical + CMS schema</div></div><div class="wo" onclick="pw(this)"><div class="wot">Ghost</div><div class="wos">JSON-LD structured data</div></div><div class="wo" onclick="pw(this)"><div class="wot">LinkedIn Article</div><div class="wos">Algorithm-native</div></div></div></div>
+          </div>
+          <div class="wizft">
+            <button class="btn bout bsm" id="wizb" onclick="wm(-1)" style="visibility:hidden">&larr; Back</button>
+            <button class="btn bdk bsm" id="wizn" onclick="wm(1)">Next &rarr;</button>
+          </div>
+        </div>
+        <div class="card ins-pn" id="ins-panel">
+          <div class="ch" style="margin-bottom:7px"><div class="ct">Research intelligence</div><div style="display:flex;gap:4px"><span class="tag tb">Google Trends</span><span class="tag tp">AnswerThePublic</span><span class="tag tn">Reddit signals</span></div></div>
+          <div style="font-size:10px;color:var(--t3);font-family:var(--M);margin-bottom:13px">Click any signal or question to prioritise it in the output.</div>
+          <div class="ins-sec"><div class="ins-l">Trending searches</div><div class="ins-ch" id="ins-tr"></div></div>
+          <div class="ins-sec"><div class="ins-l">What people are asking &middot; AnswerThePublic</div><div id="ins-paa"></div></div>
+          <div class="ins-sec"><div class="ins-l">Long-tail keyword opportunities</div><div class="ins-ch" id="ins-lt"></div></div>
+        </div>
+        <div class="card seo-pn" id="seo-panel">
+          <div class="ch" style="margin-bottom:7px"><div class="ct">SERP &amp; SEO scan</div><div style="display:flex;gap:4px"><span class="tag tb">DataForSEO free tier</span><span class="tag tn">Google Suggest</span></div></div>
+          <div class="seo-hero">
+            <div class="ringw">
+              <svg width="78" height="78" style="transform:rotate(-90deg)">
+                <circle cx="39" cy="39" r="32" fill="none" stroke="var(--s3)" stroke-width="6"/>
+                <circle id="seo-ring" cx="39" cy="39" r="32" fill="none" stroke="var(--G)" stroke-width="6" stroke-linecap="round" stroke-dasharray="201" stroke-dashoffset="201" style="transition:stroke-dashoffset 1.2s ease"/>
+              </svg>
+              <div class="ringin"><div class="ringn" id="seo-n">--</div><div class="ringl">SERP</div></div>
+            </div>
+            <div style="flex:1" id="seo-bd"></div>
+          </div>
+          <div class="ins-sec"><div class="ins-l">Keyword opportunities &middot; real data</div><div class="kd-grid" id="kd-gr"></div></div>
+          <div class="ins-sec" style="margin-bottom:0"><div class="ins-l">People also ask &middot; SERP data</div><div id="serp-paa"></div></div>
+        </div>
+        <div class="card gen" id="gen-s">
+          <div class="gensp"><svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="20" stroke="var(--s3)" stroke-width="4"/><path d="M24 4a20 20 0 0120 20" stroke="var(--A)" stroke-width="4" stroke-linecap="round"/></svg></div>
+          <div class="gent" id="gen-tl">Researching your topic&hellip;</div>
+          <div class="gens" id="gen-sl">Pulling live signals from Google Trends, SERP data, and your brand intelligence</div>
+          <div class="genlist" id="gen-ls"></div>
+        </div>
+        <div class="card bp" id="blog-p">
+          <div class="bpbar"><div class="bppills" id="bppills"></div><div class="bpac"><button class="btn bout bxs">Copy markdown</button><button class="btn bout bxs">Export HTML</button><button class="btn bdk bxs">Publish &rarr;</button></div></div>
+          <div class="bcont" id="blog-bd"></div>
+        </div>
+      </div>
+
+      <!-- TRENDS -->
+      <div class="pg" id="pg-trends">
+        <div class="ph"><div><div class="ph-t">Trends radar</div><div class="ph-s">Cybersecurity &middot; CISOs &middot; Security leadership &middot; Updated 06:00 IST</div></div><button class="btn bout bsm">Refresh now</button></div>
+        <div class="g3">
+          <div class="card"><div class="ch"><div class="ct">Breaking now</div><span class="tag tr">live</span></div>
+            <div class="trow"><div class="tn2">01</div><div class="tt">Stryker / Handala wiper &mdash; OT fallout</div><div class="heat hh">hot</div></div>
+            <div class="trow"><div class="tn2">02</div><div class="tt">DOGE cuts CISA cyber workforce</div><div class="heat hh">hot</div></div>
+            <div class="trow"><div class="tn2">03</div><div class="tt">Midnight Blizzard targeting NATO infra</div><div class="heat hh">hot</div></div>
+          </div>
+          <div class="card"><div class="ch"><div class="ct">Regulatory pulse</div><span class="tag ty">rising</span></div>
+            <div class="trow"><div class="tn2">01</div><div class="tt">CIRCIA final rule enforcement Q2 2026</div><div class="heat hw">rising</div></div>
+            <div class="trow"><div class="tn2">02</div><div class="tt">SEC cyber disclosure enforcement uptick</div><div class="heat hw">rising</div></div>
+            <div class="trow"><div class="tn2">03</div><div class="tt">CMMC 2.0 Level 2 deadline pressure</div><div class="heat hw">rising</div></div>
+          </div>
+          <div class="card"><div class="ch"><div class="ct">ICP conversations</div><span class="cc">CISOs &middot; boards</span></div>
+            <div class="trow"><div class="tn2">01</div><div class="tt">Board-level cyber risk reporting</div><div class="heat hw">rising</div></div>
+            <div class="trow"><div class="tn2">02</div><div class="tt">CRQ adoption post-breach narrative</div><div class="heat hw">rising</div></div>
+            <div class="trow"><div class="tn2">03</div><div class="tt">AI-driven threat surface expansion</div><div class="heat hc">stable</div></div>
+          </div>
+        </div>
+        <div class="card"><div class="ch"><div class="ct">Source feeds</div><span class="cc">9 active</span></div>
+          <div><span class="kw">Krebs on Security</span><span class="kw">Dark Reading</span><span class="kw">The Record</span><span class="kw">SC Media</span><span class="kw">CISA Advisories</span><span class="kw">SEC EDGAR</span><span class="kw">Reddit r/netsec</span><span class="kw">LinkedIn trending</span><span class="kw">Google Trends API</span></div>
+        </div>
+      </div>
+
+      <!-- ALGO -->
+      <div class="pg" id="pg-algo">
+        <div class="ph"><div><div class="ph-t">Algorithm tracker</div><div class="ph-s">Google &middot; Bing &middot; SGE / AI Overviews &middot; Last verified 22 Mar 2026</div></div></div>
+        <div class="alert"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="var(--Y)" stroke-width="1.5" style="flex-shrink:0;margin-top:2px"><path d="M7 1.5L13 12.5H1z"/><line x1="7" y1="5.5" x2="7" y2="8.5"/><circle cx="7" cy="10.5" r=".55" fill="var(--Y)"/></svg><div><div class="at">Google Core Update &mdash; March 2026 &middot; Sources: SEL, SEJ, Google Search Central</div><div class="am">E-E-A-T depth weighted significantly higher. First-hand experience signals rewarded. Thin AI content penalised. INK templates auto-updated.</div></div></div>
+        <div class="card"><div class="ch"><div class="ct">Update history</div></div>
+          <div class="airow"><div class="aid">Mar 18, 2026</div><div class="ait">Google Core Update &mdash; E-E-A-T depth, expert attribution weighted higher</div><div class="imp imj">major</div></div>
+          <div class="airow"><div class="aid">Feb 4, 2026</div><div class="ait">Google Spam Update &mdash; AI content without original insight flagged</div><div class="imp imd">moderate</div></div>
+          <div class="airow"><div class="aid">Jan 12, 2026</div><div class="ait">SGE / AI Overviews &mdash; citations now favour author-attributed pages</div><div class="imp imd">moderate</div></div>
+          <div class="airow"><div class="aid">Dec 2, 2025</div><div class="ait">Google Helpful Content &mdash; product review content cluster rewarded</div><div class="imp imn">minor</div></div>
+        </div>
+        <div class="card"><div class="ch"><div class="ct">INK&rsquo;s current SERP template &middot; auto-adjusted</div></div>
+          <div class="tgl-row"><div><div class="tgl-t">Author credential block</div><div class="tgl-d">E-E-A-T compliance &mdash; appended to every blog</div></div><div class="tgl on" onclick="this.classList.toggle('on')"></div></div>
+          <div class="tgl-row"><div><div class="tgl-t">Primary source citations inline</div><div class="tgl-d">CISA, SEC, NIST citations embedded in body copy</div></div><div class="tgl on" onclick="this.classList.toggle('on')"></div></div>
+          <div class="tgl-row"><div><div class="tgl-t">FAQ schema block</div><div class="tgl-d">Structured data for SGE / AI Overview eligibility</div></div><div class="tgl on" onclick="this.classList.toggle('on')"></div></div>
+          <div class="tgl-row"><div><div class="tgl-t">Long-form depth enforcement</div><div class="tgl-d">Minimum 1,800 words &middot; sub-1,000 auto-flagged</div></div><div class="tgl on" onclick="this.classList.toggle('on')"></div></div>
+          <div class="tgl-row"><div><div class="tgl-t">GEO / AEO layers</div><div class="tgl-d">Answer Engine + Generative Engine optimisation</div></div><div class="tgl on" onclick="this.classList.toggle('on')"></div></div>
+        </div>
+      </div>
+
+      <!-- COMPETITOR ANALYSIS -->
+      <div class="pg" id="pg-competitor">
+        <div class="ph"><div><div class="ph-t">Competitor intel</div><div class="ph-s">Real-time content strategy analysis &middot; Powered by Claude AI + web search &middot; Up to 5 competitors</div></div></div>
+        <div class="card">
+          <div class="ch"><div class="ct">Add competitors</div><span class="cc">Enter a domain &mdash; INK will fetch their content strategy, keywords, and blog approach in real time using AI</span></div>
+          <div class="comp-add-row">
+            <input class="comp-inp" id="comp-inp" placeholder="e.g. securityscorecard.com or paloaltonetworks.com" onkeydown="if(event.key==='Enter')addCompetitor()">
+            <button class="btn bbl bsm" onclick="addCompetitor()">+ Add</button>
+          </div>
+          <div class="comp-list" id="comp-list"></div>
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <button class="btn bbl bmd" id="run-comp-btn" onclick="runCompetitorAnalysis()" style="display:none">Analyse all competitors &rarr;</button>
+            <div style="font-size:11px;color:var(--t3);font-family:var(--M)" id="comp-hint">Add at least one competitor domain to start.</div>
+          </div>
+        </div>
+        <div id="comp-output"></div>
+      </div>
+
+      <!-- BRAND PROFILE -->
+      <div class="pg" id="pg-brand">
+        <div class="ph"><div><div class="ph-t">Brand profile &mdash; Zeron</div><div class="ph-s">How INK understands your brand, ethos, products, and team</div></div></div>
+        <div class="brand-hero">
+          <div class="bh-logo">
+            <div class="bh-ico">
+              <img src="https://www.google.com/s2/favicons?domain=zeron.one&sz=64" alt="Zeron" onerror="this.style.display='none';this.parentNode.innerHTML='<svg width=\'22\' height=\'22\' viewBox=\'0 0 22 22\' fill=\'white\'><rect x=\'2\' y=\'2\' width=\'7.5\' height=\'18\' rx=\'1.8\'/><rect x=\'12\' y=\'2\' width=\'8\' height=\'4.5\' rx=\'1.5\'/><rect x=\'12\' y=\'8.75\' width=\'8\' height=\'4.5\' rx=\'1.5\'/><rect x=\'12\' y=\'15.5\' width=\'5.5\' height=\'4.5\' rx=\'1.5\'/></svg>'">
+            </div>
+            <div class="bh-nm">Zeron</div>
+          </div>
+          <div class="bh-pos">AI-Powered Cyber Risk Decision Intelligence Platform. Zeron transforms raw cyber data into quantified, board-ready risk intelligence through its agentic AI layer ZIN and the QBER financial model. Built for CISOs who need decisive clarity, not more dashboards.</div>
+          <div class="bh-tags">
+            <span class="bh-tag">Cyber Risk Quantification</span><span class="bh-tag">QBER Model</span><span class="bh-tag">ZIN Advisor</span><span class="bh-tag">Cyber Risk Posture Management</span><span class="bh-tag">Decision Intelligence</span><span class="bh-tag">CISO-first</span><span class="bh-tag">SEBI CSCRF</span><span class="bh-tag">CIRCIA</span><span class="bh-tag">DSCI Innovation Box</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="ch"><div class="ct">Founding team &amp; leadership</div><span class="cc">Mapped from LinkedIn &middot; Used for author blocks &amp; brand voice</span></div>
+          <div class="g2">
+            <div class="founder-card">
+              <div style="display:flex;align-items:flex-start;gap:12px">
+                <div class="fc-av">SS</div>
+                <div style="flex:1">
+                  <div class="fc-nm">Sanket Sarkar</div>
+                  <div class="fc-role">Founder &amp; CEO &middot; Zeron</div>
+                  <div class="fc-bio">Cybersecurity strategist and builder behind Zeron. Former information security practitioner. Advocates for CISO clarity over complexity &mdash; translating cyber risk into business language that boards and CFOs can act on. INK uses Sanket&rsquo;s authored content to anchor Zeron&rsquo;s founder perspective into every blog.</div>
+                  <div class="fc-links">
+                    <div class="fc-link" onclick="window.open('https://linkedin.com/in/infosecsanket','_blank')">
+                      <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor"><rect x="0" y="3.5" width="2" height="6.5" rx=".4"/><circle cx="1" cy="1.2" r="1"/><path d="M3.5 3.5h2v1s.5-1 2-1c1.4 0 2 .9 2 2.5V10H7.5V6.5c0-.8-.3-1.5-1-1.5s-1 .7-1 1.5V10H3.5z"/></svg>
+                      linkedin.com/in/infosecsanket
+                    </div>
+                    <div class="fc-link">
+                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="5" cy="5" r="4"/><path d="M5 1C3.9 2.2 3.2 3.6 3.2 5S3.9 7.8 5 9M5 1C6.1 2.2 6.8 3.6 6.8 5S6.1 7.8 5 9M1 5h8"/></svg>
+                      zeron.one
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="founder-card">
+              <div style="display:flex;align-items:flex-start;gap:12px">
+                <div class="fc-av" style="background:var(--G)">Z</div>
+                <div style="flex:1">
+                  <div class="fc-nm">Zeron Security Research</div>
+                  <div class="fc-role">Research Team &middot; Zeron</div>
+                  <div class="fc-bio">Zeron&rsquo;s research team produces deep-dive analysis on cyber risk quantification, OT security posture, regulatory compliance, and the financial modelling frameworks (FAIR, CVaR, QBER) that underpin the platform. Used as the default author for technical and research-led blogs.</div>
+                  <div class="fc-links">
+                    <div class="fc-link" onclick="window.open('https://linkedin.com/company/securezeron','_blank')">
+                      <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor"><rect x="0" y="3.5" width="2" height="6.5" rx=".4"/><circle cx="1" cy="1.2" r="1"/><path d="M3.5 3.5h2v1s.5-1 2-1c1.4 0 2 .9 2 2.5V10H7.5V6.5c0-.8-.3-1.5-1-1.5s-1 .7-1 1.5V10H3.5z"/></svg>
+                      LinkedIn Company Page
+                    </div>
+                    <div class="fc-link" onclick="window.open('https://zeron.one/blog','_blank')">
+                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="5" cy="5" r="4"/><path d="M5 1C3.9 2.2 3.2 3.6 3.2 5S3.9 7.8 5 9M5 1C6.1 2.2 6.8 3.6 6.8 5S6.1 7.8 5 9M1 5h8"/></svg>
+                      zeronwebs / Insights
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="ch"><div class="ct">Brand ethos &amp; voice pillars</div></div>
+          <div class="ethos-item"><div class="ei-t">Decisive clarity over information overload</div><div class="ei-s">Zeron believes CISOs are not starved of data &mdash; they are starved of clarity. Every piece of content should move people from confusion to confident action. No noise, no hedging. Direct, board-ready, actionable.</div></div>
+          <div class="ethos-item"><div class="ei-t">Financial language is the language of leadership</div><div class="ei-s">CVSS scores don&rsquo;t move budgets. CVaR and QBER outputs do. Zeron&rsquo;s content consistently translates technical risk into dollar-denominated language that CFOs, boards, and investors understand and act on.</div></div>
+          <div class="ethos-item"><div class="ei-t">Agentic intelligence, not another dashboard</div><div class="ei-s">ZIN Advisor is a copilot, not a reporting layer. Content must emphasise the shift from passive monitoring to active, AI-driven decision support &mdash; a unified command layer that answers the questions boards ask in real time.</div></div>
+          <div class="ethos-item"><div class="ei-t">CISO-first, always</div><div class="ei-s">Every blog is written from the perspective of a security leader who carries board accountability. Not a vendor pitch &mdash; a peer-level strategic perspective that earns trust before asking for it.</div></div>
+        </div>
+        <div class="card">
+          <div class="ch"><div class="ct">Product ecosystem &mdash; 5 integrated modules + ZIN Advisor</div></div>
+          <div class="module-grid">
+            <div class="module-card"><div class="mc-ico" style="background:var(--ab)">&#127760;</div><div class="mc-t">Externo</div><div class="mc-s">External Attack Surface Management. Continuous discovery of internet-facing assets and exposure scoring.</div></div>
+            <div class="module-card"><div class="mc-ico" style="background:var(--GB)">&#128274;</div><div class="mc-t">Interno</div><div class="mc-s">Internal risk and insider threat intelligence. Control gap analysis and internal telemetry correlation.</div></div>
+            <div class="module-card"><div class="mc-ico" style="background:var(--VB)">&#128101;</div><div class="mc-t">Vendor Pulse</div><div class="mc-s">Third-party and supply chain risk management. Vendor scoring with CVaR-aligned financial impact modelling.</div></div>
+            <div class="module-card"><div class="mc-ico" style="background:var(--YB)">&#9989;</div><div class="mc-t">Conformity</div><div class="mc-s">Compliance automation across CIRCIA, CMMC, NIST CSF 2.0, SEC disclosure rules, SEBI CSCRF, and DPDP.</div></div>
+            <div class="module-card"><div class="mc-ico" style="background:var(--RB)">&#128202;</div><div class="mc-t">Cyber Navigator</div><div class="mc-s">Unified risk posture management. Single intelligence layer across all five modules.</div></div>
+            <div class="module-card" style="border-color:rgba(30,94,243,.3);background:var(--ab)"><div class="mc-ico" style="background:var(--ab2)">&#129302;</div><div class="mc-t" style="color:var(--A)">ZIN Advisor</div><div class="mc-s" style="color:var(--A)">AI-powered cyber risk copilot. Orchestrates all five modules into contextual, prioritised, board-ready intelligence.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SOURCES -->
+      <div class="pg" id="pg-sources">
+        <div class="ph"><div><div class="ph-t">Brand sources</div><div class="ph-s">INK reads these to understand your voice, products, and positioning</div></div><button class="btn bdk bsm">+ Add source</button></div>
+        <div class="card">
+          <div class="srow"><div class="sico" style="overflow:hidden"><img src="https://www.google.com/s2/favicons?domain=zeron.one&sz=32" alt="Z" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.parentNode.textContent='W'"></div><div><div class="snm">zeron.one</div><div class="surl">website &middot; full crawl</div></div><span class="pill pll">live</span></div>
+          <div class="srow"><div class="sico" style="overflow:hidden"><img src="https://www.google.com/s2/favicons?domain=zeron.one&sz=32" alt="B" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.parentNode.textContent='B'"></div><div><div class="snm">zeron.one/blog (zeronwebs &middot; Insights)</div><div class="surl">18 posts indexed &middot; Including ZIN Advisor guides, QBER explainers, compliance briefings</div></div><span class="pill pll">live</span></div>
+          <div class="srow"><div class="sico" style="overflow:hidden"><img src="https://www.google.com/s2/favicons?domain=linkedin.com&sz=32" alt="in" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.parentNode.textContent='in'"></div><div><div class="snm">Zeron LinkedIn Page</div><div class="surl">linkedin.com/company/securezeron &middot; 92 posts analysed</div></div><span class="pill pll">live</span></div>
+          <div class="srow"><div class="sico" style="overflow:hidden"><img src="https://www.google.com/s2/favicons?domain=linkedin.com&sz=32" alt="SS" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.parentNode.textContent='SS'"></div><div><div class="snm">Sanket Sarkar &mdash; Founder &amp; CEO</div><div class="surl">linkedin.com/in/infosecsanket &middot; Founder perspective, cybersecurity thought leadership</div></div><span class="pill pll">live</span></div>
+          <div class="srow"><div class="sico" style="overflow:hidden"><img src="https://www.google.com/s2/favicons?domain=zeron.one&sz=32" alt="Z" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.parentNode.textContent='Z'"></div><div><div class="snm">zin.zeron.one &mdash; ZIN Advisor</div><div class="surl">Product page &middot; AI copilot documentation &middot; QBER model details</div></div><span class="pill pls">scanning</span></div>
+          <div class="srow"><div class="sico" style="overflow:hidden"><img src="https://www.google.com/s2/favicons?domain=twitter.com&sz=32" alt="X" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.parentNode.textContent='X'"></div><div><div class="snm">Zeron on X (Twitter)</div><div class="surl">@zeronsec &middot; Product announcements, security news commentary</div></div><span class="pill pls">scanning</span></div>
+        </div>
+      </div>
+
+      <!-- KEYWORDS -->
+      <div class="pg" id="pg-keywords">
+        <div class="ph"><div><div class="ph-t">Keyword engine</div><div class="ph-s">Pillar and long-tail clusters across all generated content</div></div></div>
+        <div class="g2">
+          <div class="card"><div class="ch"><div class="ct">Pillar keywords</div></div>
+            <div style="margin-bottom:11px"><span style="font-size:9.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--t3);font-family:var(--M);display:block;margin-bottom:5px">Primary</span><div><span class="kw on">Cyber Risk Quantification</span><span class="kw on">Cyber Risk Posture Management</span><span class="kw on">QBER</span><span class="kw on">ZIN Advisor</span></div></div>
+            <div style="margin-bottom:11px"><span style="font-size:9.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--t3);font-family:var(--M);display:block;margin-bottom:5px">Supporting</span><div><span class="kw">CVaR cybersecurity</span><span class="kw">FAIR model CISO</span><span class="kw">attack surface management</span><span class="kw">compliance automation</span><span class="kw">SEC cyber disclosure</span><span class="kw">CIRCIA reporting</span></div></div>
+            <input class="inp" placeholder="Add keyword&hellip;">
+          </div>
+          <div class="card"><div class="ch"><div class="ct">Long-tail &middot; auto-generated daily</div></div>
+            <div><span class="kw on">how to quantify cyber risk for the board</span><span class="kw on">CIRCIA reporting requirements 2026</span><span class="kw on">ZIN Advisor cyber risk copilot review</span><span class="kw on">QBER model quantified exposure to risk</span><span class="kw on">wiper malware OT security posture</span></div>
+            <div class="nbbox" style="margin-top:10px">Refreshed every 24h from trends + brand scan + SERP signals</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SETTINGS -->
+      <div class="pg" id="pg-settings">
+        <div class="ph"><div><div class="ph-t">Settings</div><div class="ph-s">Workspace configuration and generation preferences</div></div></div>
+        <div class="g2">
+          <div class="card"><div class="ch"><div class="ct">Workspace</div></div>
+            <div class="fld"><span class="fl">Brand name</span><input class="inp" value="Zeron"></div>
+            <div class="fld"><span class="fl">Website</span><input class="inp" value="https://zeron.one"></div>
+            <div class="fld"><span class="fl">ICP</span><input class="inp" value="CISOs, Security Leaders, GRC - US + India"></div>
+            <div class="fld" style="margin-bottom:0"><span class="fl">Industry</span><input class="inp" value="Cybersecurity - AI-Powered Risk Intelligence"></div>
+          </div>
+          <div class="card"><div class="ch"><div class="ct">Generation</div></div>
+            <div class="tgl-row"><div><div class="tgl-t">Autonomous mode</div><div class="tgl-d">5 blogs generated every morning at 04:00 IST</div></div><div class="tgl on" onclick="this.classList.toggle('on')"></div></div>
+            <div class="tgl-row"><div><div class="tgl-t">Algorithm auto-update</div><div class="tgl-d">Templates update on algo changes automatically</div></div><div class="tgl on" onclick="this.classList.toggle('on')"></div></div>
+            <div class="tgl-row"><div><div class="tgl-t">Algo notifications</div><div class="tgl-d">Push notify on Google / Bing updates</div></div><div class="tgl on" onclick="this.classList.toggle('on')"></div></div>
+            <div class="tgl-row"><div><div class="tgl-t">Weekly brand re-scan</div><div class="tgl-d">Auto-rescan website, blog, LinkedIn every 7 days</div></div><div class="tgl on" onclick="this.classList.toggle('on')"></div></div>
+            <div class="tgl-row"><div><div class="tgl-t">SERP / AEO / GEO layers</div><div class="tgl-d">All optimisation layers applied by default</div></div><div class="tgl on" onclick="this.classList.toggle('on')"></div></div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- ══ PANELS ══ -->
+<div id="notif-panel" class="panel">
+  <div class="pnhd"><div class="pnttl">Notifications</div><span class="pncl" onclick="closeAll()">Mark all read</span></div>
+  <div class="npitem" onclick="nav('algo');closeAll()"><div style="display:flex;gap:8px;align-items:flex-start"><div class="npdot" style="background:var(--R)"></div><div><div class="npit">Google Core Update detected</div><div class="npis">E-E-A-T signals weighted higher. INK templates auto-updated. Review queue before publishing.</div><div class="npit-t">4 days ago</div></div></div></div>
+  <div class="npitem"><div style="display:flex;gap:8px;align-items:flex-start"><div class="npdot" style="background:var(--Y)"></div><div><div class="npit">3 new trends detected</div><div class="npis">Ransomware supply chain, DOGE-CISA cuts, and SEC enforcement are trending for your ICP.</div><div class="npit-t">Today, 06:00 IST</div></div></div></div>
+  <div class="npitem"><div style="display:flex;gap:8px;align-items:flex-start"><div class="npdot" style="background:var(--G)"></div><div><div class="npit">Brand scan completed</div><div class="npis">Zeron.one fully indexed. 18 posts, 5 modules, Sanket Sarkar founder posts mapped.</div><div class="npit-t">Today, 04:05 IST</div></div></div></div>
+  <div class="npitem"><div style="display:flex;gap:8px;align-items:flex-start"><div class="npdot" style="background:var(--A)"></div><div><div class="npit">Queue ready for publishing</div><div class="npis">5 SERP-optimised blogs generated. Average score 92/100. Ready when you are.</div><div class="npit-t">Today, 04:00 IST</div></div></div></div>
+</div>
+
+<div id="profile-panel" class="panel">
+  <div style="padding:13px 13px 10px;border-bottom:1px solid var(--b1);display:flex;align-items:center;gap:11px">
+    <div class="pp-av2" id="pp-av2" style="background:var(--A)">AK</div>
+    <div><div class="pp-nm" id="pp-nm-d">Ankit Raj Pathak</div><div class="pp-role" id="pp-role-d">Marketing Analyst &middot; Zeron</div></div>
+  </div>
+  <div style="padding:13px 13px 10px">
+    <div class="fld"><span class="fl">Display name</span><input class="inp" id="pp-name" value="Ankit Raj Pathak" oninput="updateProfile()"></div>
+    <div class="fld"><span class="fl">Role / Title</span><input class="inp" id="pp-role-inp" value="Marketing Analyst" oninput="updateProfile()"></div>
+    <div class="fld" style="margin-bottom:0"><span class="fl">Avatar colour</span>
+      <div class="pp-cols">
+        <div class="pp-col sel" style="background:var(--A)" onclick="setAvCol(this,'var(--A)')"></div>
+        <div class="pp-col" style="background:var(--G)" onclick="setAvCol(this,'var(--G)')"></div>
+        <div class="pp-col" style="background:var(--V)" onclick="setAvCol(this,'var(--V)')"></div>
+        <div class="pp-col" style="background:var(--Y)" onclick="setAvCol(this,'var(--Y)')"></div>
+        <div class="pp-col" style="background:var(--R)" onclick="setAvCol(this,'var(--R)')"></div>
+        <div class="pp-col" style="background:#333" onclick="setAvCol(this,'#333')"></div>
+      </div>
+    </div>
+  </div>
+  <div class="pp-ft">
+    <button class="btn bdk bsm" onclick="saveProfile()">Save</button>
+    <button class="btn bgr bsm" onclick="signOut()">Sign out</button>
+  </div>
+</div>
+
+<!-- CHANGELOG MODAL -->
+<div class="modal-bg" id="changelog-modal" onclick="closeModal('changelog-modal',event)">
+  <div class="modal-card" onclick="event.stopPropagation()">
+    <div class="mhd"><div class="mttl">Changelog &mdash; INK by Zeron</div><div class="mhd-r"><button class="mx" onclick="closeModal('changelog-modal')">&times;</button></div></div>
+    <div class="mbd">
+      <div class="cl-version">
+        <div class="cl-v-head"><div class="cl-v-num">v3.0</div><div class="cl-v-date">March 22, 2026</div><div class="cl-v-badge cl-v-new">latest</div></div>
+        <div class="cl-item">Competitor intelligence page &mdash; real-time AI analysis of up to 5 competitors using Claude AI with live web search. No fake data, no estimates.</div>
+        <div class="cl-item">Full-length story-arc blogs: What happened &rarr; Why it matters &rarr; Who did it &rarr; Financial impact &rarr; How Zeron helps. Every blog now 2,000&ndash;3,000 words.</div>
+        <div class="cl-item">Changelog and Help &amp; Docs modals are now fully functional with real content.</div>
+        <div class="cl-item">Brand sources now include favicon fetching from Google&rsquo;s favicon API for visual richness.</div>
+        <div class="cl-item">Zeron logo and team (Sanket Sarkar + research team) woven into every blog author block and brand profile.</div>
+        <div class="cl-item">Sign out now works correctly &mdash; returns to onboarding flow at Step 1.</div>
+        <div class="cl-item">Font system locked to Plus Jakarta Sans + JetBrains Mono only. Zero exceptions throughout the entire interface.</div>
+        <div class="cl-item">Rescan Now button added to brand intelligence card with live step animation.</div>
+        <div class="cl-item">Brand Profile page now includes full product ecosystem, QBER explainer, founder cards with social links, and brand ethos pillars.</div>
+      </div>
+      <div class="cl-version">
+        <div class="cl-v-head"><div class="cl-v-num">v2.0</div><div class="cl-v-date">March 15, 2026</div><div class="cl-v-badge cl-v-fix">fix</div></div>
+        <div class="cl-item">Fixed obStep / obGo naming collision causing ReferenceError on load.</div>
+        <div class="cl-item">Fixed apostrophe in single-quoted JS strings causing SyntaxError.</div>
+        <div class="cl-item">Full-screen split onboarding layout replacing floating card.</div>
+        <div class="cl-item">Multi-select ICP and Content Goal options with custom tag input.</div>
+        <div class="cl-item">Dark / light mode with localStorage persistence.</div>
+        <div class="cl-item">Working notification bell dropdown and profile avatar panel.</div>
+        <div class="cl-item">Preview modal for each blog in Today&rsquo;s Queue.</div>
+        <div class="cl-item">Write on Demand with 4-step wizard, research intelligence, SEO scan, and blog generation.</div>
+      </div>
+      <div class="cl-version">
+        <div class="cl-v-head"><div class="cl-v-num">v1.0</div><div class="cl-v-date">March 1, 2026</div><div class="cl-v-badge cl-v-imp">initial</div></div>
+        <div class="cl-item">Initial release: Dashboard, Queue, Trends Radar, Algorithm Tracker, Brand Sources, Keywords, Settings.</div>
+        <div class="cl-item">Splash screen with animated logo and loading bar.</div>
+        <div class="cl-item">3-step onboarding with brand analysis simulation.</div>
+        <div class="cl-item">Write on Demand with basic topic input and blog generation.</div>
+        <div class="cl-item">Zeron brand profile integrated as default workspace.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HELP MODAL -->
+<div class="modal-bg" id="help-modal" onclick="closeModal('help-modal',event)">
+  <div class="modal-card" onclick="event.stopPropagation()">
+    <div class="mhd"><div class="mttl">Help &amp; Documentation &mdash; INK</div><div class="mhd-r"><button class="mx" onclick="closeModal('help-modal')">&times;</button></div></div>
+    <div class="mbd">
+      <div class="help-section">
+        <div class="help-t">What is INK?</div>
+        <div class="help-p">INK is a SERP-first content engine built for the Zeron workspace. It crawls your brand, monitors your ICP&rsquo;s trending topics, analyses the Google algorithm, and generates 5 fully optimised blogs every morning &mdash; ready to publish without editing.</div>
+        <div class="help-p">Every blog is structured to rank #1 on Google by default. INK applies SEO, AEO (Answer Engine Optimisation), and GEO (Generative Engine Optimisation) layers so your content surfaces in traditional search, AI Overviews, and tools like ChatGPT and Perplexity.</div>
+      </div>
+      <div class="help-section">
+        <div class="help-t">Getting started</div>
+        <div class="help-faq"><div class="help-faq-q">How do I set up my workspace?</div><div class="help-faq-a">Click the splash screen to begin onboarding. Enter your brand name, website URL, and LinkedIn company page. INK will crawl all three to build your content DNA &mdash; including tone, keywords, products, and positioning. This takes approximately 30 seconds.</div></div>
+        <div class="help-faq"><div class="help-faq-q">How do I get my 5 daily blogs?</div><div class="help-faq-a">Once autonomous mode is enabled in Settings, INK generates 5 blogs every morning at 04:00 IST. They appear in Today&rsquo;s Queue ready to publish. You can preview each one and select your publishing platforms.</div></div>
+        <div class="help-faq"><div class="help-faq-q">How do I write a blog on a specific topic?</div><div class="help-faq-a">Go to Write on Demand in the sidebar. Type your topic or choose a quick suggestion, complete the 4-step wizard (audience, intent, format, platform), then click "Run Research &amp; SERP Scan". INK fetches live data and generates a fully structured, rank-optimised blog in under 60 seconds.</div></div>
+      </div>
+      <div class="help-section">
+        <div class="help-t">Competitor Intelligence</div>
+        <div class="help-p">INK&rsquo;s Competitor Intel page uses Claude AI with live web search to analyse your competitors&rsquo; content strategies in real time. Add up to 5 competitor domains, click Analyse, and INK will fetch their blog frequency, content themes, keyword focus, and positioning gaps &mdash; using genuine web data, not estimates.</div>
+        <div class="help-faq"><div class="help-faq-q">Is the competitor data real or simulated?</div><div class="help-faq-a">Real. INK sends each competitor domain to the Claude AI API with web search enabled. Claude fetches current content from the competitor&rsquo;s website and social presence, then analyses it against your brand positioning to surface genuine strategic gaps and opportunities.</div></div>
+        <div class="help-faq"><div class="help-faq-q">How long does competitor analysis take?</div><div class="help-faq-a">Each competitor takes 15&ndash;30 seconds depending on the size of their content footprint. Analysis runs in parallel for all added competitors once you click Analyse.</div></div>
+      </div>
+      <div class="help-section">
+        <div class="help-t">Understanding SEO / AEO / GEO scores</div>
+        <div class="help-faq"><div class="help-faq-q">What is the SERP score?</div><div class="help-faq-a">The SERP score (0&ndash;100) rates how well a blog is optimised to rank on Google. It considers keyword density, heading structure, E-E-A-T signals, content depth, FAQ schema, and long-form requirements. 85+ is considered high-performing.</div></div>
+        <div class="help-faq"><div class="help-faq-q">What is the AEO score?</div><div class="help-faq-a">AEO (Answer Engine Optimisation) rates eligibility for Google&rsquo;s AI Overviews and SGE. It considers structured FAQ blocks, cited sources, clear answer formatting, and author attribution. A score above 80 means your blog is likely to surface as a source in AI answers.</div></div>
+        <div class="help-faq"><div class="help-faq-q">What is the GEO score?</div><div class="help-faq-a">GEO (Generative Engine Optimisation) rates how likely your content is to be cited by ChatGPT, Perplexity, Claude, and other LLMs. It considers factual density, expert attribution, structured data, and brand entity consistency.</div></div>
+      </div>
+      <div class="help-section">
+        <div class="help-t">Algorithm Tracker</div>
+        <div class="help-p">INK monitors Google, Bing, and SGE algorithm updates in real time using trusted sources: Search Engine Land, Search Engine Journal, and Google Search Central. When an update is detected, INK automatically adjusts its blog structure templates and notifies you via the bell icon in the topbar.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PREVIEW MODAL -->
+<div class="modal-bg" id="prev-modal" onclick="closeModal('prev-modal',event)">
+  <div class="modal-card" onclick="event.stopPropagation()">
+    <div class="mhd">
+      <div class="mttl" id="pm-ttl" style="flex:1;margin-right:10px">Blog Preview</div>
+      <div class="mhd-r">
+        <div id="pm-pills" style="display:flex;gap:4px"></div>
+        <button class="btn bout bxs">Copy markdown</button>
+        <button class="btn bdk bxs">Publish &rarr;</button>
+        <button class="mx" onclick="closeModal('prev-modal')">&times;</button>
+      </div>
+    </div>
+    <div class="mbd"><div class="bcont" id="pm-bd"></div></div>
+  </div>
+</div>
+
+<div id="backdrop" onclick="closeAll()"></div>
+
+<script>
+// ─── INIT ─────────────────────────────────────────────
+var theme = localStorage.getItem('inkTheme') || 'dark';
+document.documentElement.setAttribute('data-theme', theme);
+updateThemeUI();
+
+// ─── SPLASH ───────────────────────────────────────────
+(function(){
+  var f = document.getElementById('spl-fill'), p = 0;
+  var iv = setInterval(function(){p+=2;if(p>=100){p=100;clearInterval(iv);}f.style.width=p+'%';}, 28);
+  setTimeout(function(){
+    document.getElementById('splash').classList.add('exit');
+    setTimeout(function(){document.getElementById('splash').style.display='none';document.getElementById('onboard').classList.add('show');}, 570);
+  }, 1700);
+})();
+
+// ─── THEME ────────────────────────────────────────────
+function toggleTheme(){
+  theme=theme==='dark'?'light':'dark';
+  document.documentElement.setAttribute('data-theme',theme);
+  localStorage.setItem('inkTheme',theme);
+  updateThemeUI();
+}
+function updateThemeUI(){
+  var l=document.getElementById('theme-lbl'), b=document.getElementById('theme-badge');
+  if(l) l.textContent=theme==='dark'?'Light mode':'Dark mode';
+  if(b) b.textContent=theme==='dark'?'\u2600':'\u263D';
+}
+
+// ─── ONBOARDING ───────────────────────────────────────
+var obMeta=[
+  {lbl:'Step 1 of 3 \u00b7 Workspace',ttl:'Set up your workspace',sub:'INK crawls your website, blog, and LinkedIn to build your brand content DNA \u2014 tone, voice, keywords, and positioning.'},
+  {lbl:'Step 2 of 3 \u00b7 Audience',ttl:'Define your audience',sub:'INK adapts the audience options based on your detected brand and industry.'},
+  {lbl:'Step 3 of 3 \u00b7 Goals',ttl:'Set your content goals',sub:'INK defaults to SERP ranking. Tell it how to weigh ranking vs conversion vs authority for your blogs.'}
+];
+// Detected brand data (shared across steps)
+var detectedBrand = {
+  name:'', domain:'', linkedin:'', industry:'', description:'', icpSuggestions:[], found:false
+};
+var brandSearchTimer = null;
+
+function goOB(n){
+  document.querySelectorAll('.ob-pn').forEach(function(p){p.classList.remove('on');});
+  document.getElementById('op'+n).classList.add('on');
+  var m=obMeta[n-1];
+  document.getElementById('ob-lbl').textContent=m.lbl;
+  document.getElementById('ob-ttl').textContent=m.ttl;
+  document.getElementById('ob-sub').textContent=m.sub;
+  for(var i=1;i<=3;i++){var el=document.getElementById('ob'+i);el.className='ob-bar'+(i<n?' done':i===n?' cur':'');}
+  if(n===2) populateStep2();
+}
+
+function ob1Changed(){
+  var url=document.getElementById('i-url').value.trim();
+  var btn=document.getElementById('ob1-continue');
+  if(url){btn.disabled=false;btn.style.opacity='1';btn.style.cursor='pointer';}
+  else{btn.disabled=true;btn.style.opacity='.45';btn.style.cursor='not-allowed';}
+}
+
+function onBrandInput(val){
+  clearTimeout(brandSearchTimer);
+  // Hide previous results
+  document.getElementById('brand-result').style.display='none';
+  document.getElementById('brand-notfound').style.display='none';
+  document.getElementById('brand-search-ico').style.display='none';
+  document.getElementById('brand-check-ico').style.display='none';
+  ob1Changed();
+  if(val.trim().length < 2) return;
+  brandSearchTimer = setTimeout(function(){ searchBrand(val.trim()); }, 800);
+}
+
+async function searchBrand(name){
+  document.getElementById('brand-search-ico').style.display='block';
+  document.getElementById('brand-check-ico').style.display='none';
+  try{
+    var prompt = 'Find information about the company or brand called "'+name+'". Search the web and return ONLY a valid JSON object with these exact keys (no markdown, no extra text):\n{\n  "found": true or false,\n  "name": "official company name",\n  "domain": "primary website domain without https e.g. durex.com",\n  "website": "full https website URL",\n  "linkedin": "full linkedin company page URL or empty string",\n  "industry": "1-4 word industry label e.g. Consumer Healthcare, Cybersecurity SaaS, Food Delivery, E-commerce",\n  "description": "one sentence describing what this company does and who it serves",\n  "icp": ["ICP role 1 with 3-4 word description", "ICP role 2 with 3-4 word description", "ICP role 3 with 3-4 word description", "ICP role 4 with 3-4 word description"]\n}\nFor icp, think about who the brand\'s marketing team should be targeting with content. For example Durex: ["Young Adults 18-35 / Relationships", "Health-conscious Consumers", "Pharmacy Buyers / Retail", "Digital-first Millennials"]. For Zeron: ["CISOs / Security Leaders", "GRC / Compliance Teams", "Board / C-Suite", "DevSecOps / Engineers"]. For Swiggy: ["Urban Professionals 25-40", "Restaurants & Food Brands", "Convenience Seekers", "Late Night / Weekend Crowd"]. Make the ICP suggestions genuinely relevant to the brand\'s actual business and target audience. If the brand cannot be found return found:false.';
+    var resp = await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:600,
+        tools:[{type:'web_search_20250305',name:'web_search'}],
+        messages:[{role:'user',content:prompt}]
+      })
+    });
+    var data = await resp.json();
+    var text = '';
+    if(data.content) data.content.forEach(function(b){if(b.type==='text') text+=b.text;});
+    // Strip markdown fences if present
+    text = text.replace(/```json\s*/g,'').replace(/```\s*/g,'').trim();
+    var parsed = JSON.parse(text);
+    document.getElementById('brand-search-ico').style.display='none';
+    if(parsed.found){
+      detectedBrand = {
+        name: parsed.name||name,
+        domain: parsed.domain||'',
+        linkedin: parsed.linkedin||'',
+        industry: parsed.industry||'',
+        description: parsed.description||'',
+        icpSuggestions: parsed.icp||[],
+        found: true
+      };
+      // Auto-fill fields
+      if(parsed.website) document.getElementById('i-url').value=parsed.website;
+      if(parsed.linkedin) document.getElementById('i-li').value=parsed.linkedin;
+      // Show result card
+      var fav=document.getElementById('br-fav');
+      fav.innerHTML='<img src="https://www.google.com/s2/favicons?domain='+parsed.domain+'&sz=32" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display=\'none\'">';
+      document.getElementById('br-name').textContent=parsed.name||name;
+      document.getElementById('br-desc').textContent=parsed.description||'';
+      document.getElementById('br-meta').textContent=(parsed.domain?parsed.domain:'')+(parsed.linkedin?' \u00b7 LinkedIn detected':'');
+      document.getElementById('brand-result').style.display='block';
+      document.getElementById('brand-check-ico').style.display='block';
+      ob1Changed();
+    } else {
+      detectedBrand = {name:name,domain:'',linkedin:'',industry:'',description:'',icpSuggestions:[],found:false};
+      document.getElementById('brand-notfound').style.display='block';
+    }
+  }catch(e){
+    document.getElementById('brand-search-ico').style.display='none';
+    detectedBrand = {name:name,domain:'',linkedin:'',industry:'',description:'',icpSuggestions:[],found:false};
+    document.getElementById('brand-notfound').style.display='block';
+  }
+}
+
+// Generic ICP fallback sets by industry keyword
+var icpFallbacks = {
+  cyber:    [{t:'CISOs / Security Leaders',s:'Strategic, board-ready'},{t:'GRC / Compliance',s:'Regulatory lens'},{t:'DevSecOps / Engineers',s:'Technical depth'},{t:'Board / C-Suite',s:'Business risk framing'}],
+  health:   [{t:'Patients / Consumers',s:'End users seeking care'},{t:'Healthcare Professionals',s:'Doctors, pharmacists'},{t:'Hospital Administrators',s:'Procurement, decisions'},{t:'Insurance & Payers',s:'Coverage & reimbursement'}],
+  consumer: [{t:'Young Adults 18-35',s:'Lifestyle, value-driven'},{t:'Working Professionals',s:'Convenience seekers'},{t:'Retail Buyers / Chains',s:'Wholesale & distribution'},{t:'Urban Digital Users',s:'Mobile-first audience'}],
+  food:     [{t:'Urban Professionals',s:'25-40, time-pressed'},{t:'Food Brands & Restaurants',s:'Partners & vendors'},{t:'Foodies & Enthusiasts',s:'Discovery, variety'},{t:'Late Night / Weekend',s:'Impulse & convenience'}],
+  saas:     [{t:'Startup Founders / CTOs',s:'Tech decision-makers'},{t:'Product Managers',s:'Feature & roadmap owners'},{t:'Enterprise Buyers',s:'IT & procurement'},{t:'SMB Owners',s:'Cost-conscious growth'}],
+  finance:  [{t:'Retail Investors',s:'Individual, self-directed'},{t:'HNIs / Wealth Managers',s:'High-value portfolios'},{t:'CFOs / Finance Teams',s:'Corporate treasury'},{t:'Compliance Officers',s:'Regulatory adherence'}],
+  ecomm:    [{t:'Online Shoppers 18-45',s:'Price & convenience'},{t:'Brand Managers',s:'Seller & vendor side'},{t:'Logistics Partners',s:'Fulfilment & delivery'},{t:'Loyalty / Repeat Buyers',s:'Retention segment'}],
+  default:  [{t:'Primary Decision Makers',s:'Buying authority'},{t:'End Users / Consumers',s:'Direct product users'},{t:'Influencers & Advocates',s:'Word-of-mouth drivers'},{t:'Partners & Distributors',s:'Channel & resale'}]
+};
+
+function getICPSet(industry){
+  var i=(industry||'').toLowerCase();
+  if(/cyber|security|risk|compliance/i.test(i)) return icpFallbacks.cyber;
+  if(/health|pharma|medical|wellness|care/i.test(i)) return icpFallbacks.health;
+  if(/food|delivery|restaurant|beverage|drink/i.test(i)) return icpFallbacks.food;
+  if(/saas|software|platform|tech|ai|cloud/i.test(i)) return icpFallbacks.saas;
+  if(/finance|fintech|bank|insurance|invest/i.test(i)) return icpFallbacks.finance;
+  if(/ecomm|retail|shop|commerce|market/i.test(i)) return icpFallbacks.ecomm;
+  if(/consumer|fmcg|lifestyle|brand/i.test(i)) return icpFallbacks.consumer;
+  return icpFallbacks.default;
+}
+
+function populateStep2(){
+  var brand = detectedBrand.name || document.getElementById('i-brand').value || 'your brand';
+  var industry = detectedBrand.industry || '';
+  // Update header labels
+  document.getElementById('ob2-brand-name').textContent = brand;
+  document.getElementById('ob2-industry-tag').textContent = industry || 'General';
+  document.getElementById('ob2-industry-tag').style.background = industry ? 'var(--ab)' : 'var(--s3)';
+  document.getElementById('ob2-industry-tag').style.color = industry ? 'var(--A)' : 'var(--t3)';
+  // Populate industry input
+  if(industry) document.getElementById('i-industry').value = industry;
+  // Build ICP options: if Claude returned suggestions use them, else use fallback
+  var icpItems = [];
+  if(detectedBrand.icpSuggestions && detectedBrand.icpSuggestions.length >= 2){
+    icpItems = detectedBrand.icpSuggestions.map(function(s){
+      var parts = s.split('/');
+      return {t: parts[0].trim(), s: parts[1] ? parts[1].trim() : ''};
+    });
+  } else {
+    icpItems = getICPSet(industry);
+  }
+  // Render
+  var grid = document.getElementById('icp-opts-grid');
+  grid.innerHTML = icpItems.map(function(item, idx){
+    return '<div class="opt'+(idx===0?' sel':'')+'" onclick="this.classList.toggle(\'sel\')"><div class="opt-t">'+item.t+'</div><div class="opt-s">'+item.s+'</div></div>';
+  }).join('');
+}
+
+function setBlogsOpt(el){
+  el.parentElement.querySelectorAll('.opt').forEach(function(o){o.classList.remove('sel');});el.classList.add('sel');
+}
+function addTag(inpId,tagsId){
+  var inp=document.getElementById(inpId), val=inp.value.trim();
+  if(!val) return;
+  var tags=document.getElementById(tagsId);
+  var s=document.createElement('span');s.className='ctag';s.textContent=val;
+  s.onclick=function(){tags.removeChild(s);};
+  tags.appendChild(s);inp.value='';
+}
+function launchAnalysis(){
+  var brand=document.getElementById('i-brand').value||detectedBrand.name||'Your Brand';
+  var url=document.getElementById('i-url').value||'yourdomain.com';
+  document.getElementById('ws-nm').textContent=brand;
+  document.getElementById('ws-nm-sb').textContent=brand;
+  document.getElementById('onboard').classList.remove('show');
+  var an=document.getElementById('analyzing');an.classList.add('show');
+  document.getElementById('an-dom').innerHTML='<svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="5" cy="5" r="4"/><path d="M5 1C3.9 2.2 3.2 3.6 3.2 5S3.9 7.8 5 9M5 1C6.1 2.2 6.8 3.6 6.8 5S6.1 7.8 5 9M1 5h8"/></svg>Scanning: '+url.replace(/https?:\/\//,'');
+  runAnalysis();
+}
+function runAnalysis(){
+  var steps=document.querySelectorAll('.an-step'),i=0;
+  function tick(){
+    if(i>0){steps[i-1].classList.remove('run');steps[i-1].classList.add('done');steps[i-1].querySelector('.a-ico').innerHTML='<span class="id">\u2713</span>';}
+    if(i<steps.length){steps[i].classList.add('run');steps[i].querySelector('.a-ico').innerHTML='<div class="is"></div>';i++;setTimeout(tick,i===steps.length?2000:650);}
+    else{var l=steps[steps.length-1];l.classList.remove('run');l.classList.add('done');l.querySelector('.a-ico').innerHTML='<span class="id">\u2713</span>';setTimeout(enterApp,450);}
+  }
+  tick();
+}
+function enterApp(){
+  document.getElementById('analyzing').classList.remove('show');
+  document.getElementById('app').classList.add('show');
+  nav('dashboard');setTimeout(animScan,400);
+}
+function signOut(){
+  closeAll();
+  document.getElementById('app').classList.remove('show');
+  document.getElementById('onboard').classList.add('show');
+  goOB(1);
+  // reset analysis steps
+  document.querySelectorAll('.an-step').forEach(function(s){
+    s.className='an-step';s.querySelector('.a-ico').innerHTML='<div class="iw"></div>';
+  });
+}
+
+// ─── SIDEBAR / NAV ────────────────────────────────────
+var sbOpen=true;
+function toggleSB(){sbOpen=!sbOpen;document.getElementById('layout').classList.toggle('sbc',!sbOpen);}
+function nav(pg){
+  closeAll();
+  document.querySelectorAll('.pg').forEach(function(p){p.classList.remove('on');});
+  document.querySelectorAll('.ni').forEach(function(n){n.classList.remove('on');});
+  var p=document.getElementById('pg-'+pg);if(p)p.classList.add('on');
+  var n=document.getElementById('ni-'+pg);if(n)n.classList.add('on');
+  document.getElementById('main').scrollTop=0;
+  if(pg==='dashboard')setTimeout(animScan,120);
+  if(pg==='queue')setTimeout(animScoreBars,120);
+}
+function animScan(){
+  document.querySelectorAll('.scb[data-w]').forEach(function(el){el.style.width='0%';setTimeout(function(){el.style.width=el.dataset.w+'%';},60);});
+}
+function animScoreBars(){
+  document.querySelectorAll('.sfill[data-w]').forEach(function(el){el.style.width='0%';setTimeout(function(){el.style.width=el.dataset.w+'%';},80);});
+}
+
+// ─── RESCAN ───────────────────────────────────────────
+var rescanning=false;
+function startRescan(){
+  if(rescanning)return;rescanning=true;
+  var btn=document.getElementById('rescan-btn');
+  btn.classList.add('scanning');
+  btn.innerHTML='<div class="rspin"></div>Scanning&hellip;';
+  document.querySelectorAll('#scan-rows .scb').forEach(function(el){el.style.width='0%';});
+  var rows=document.querySelectorAll('#scan-rows .scb'),i=0;
+  function next(){if(i<rows.length){setTimeout(function(){rows[i].style.width=rows[i].dataset.w+'%';i++;next();},650);}
+  else{setTimeout(function(){rescanning=false;btn.classList.remove('scanning');btn.innerHTML='<svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9.5 5.5a4 4 0 11-1.2-2.9"/><path d="M9.5 1.5v2.5H7"/></svg>Rescan now';},400);}}
+  next();
+}
+
+// ─── PANELS ───────────────────────────────────────────
+function toggleNotif(e){
+  e.stopPropagation();
+  document.getElementById('profile-panel').classList.remove('show');
+  var np=document.getElementById('notif-panel'),bd=document.getElementById('backdrop');
+  np.classList.toggle('show');bd.classList.toggle('show',np.classList.contains('show'));
+  if(np.classList.contains('show'))document.getElementById('ndot').style.display='none';
+}
+function toggleProfile(e){
+  e.stopPropagation();
+  document.getElementById('notif-panel').classList.remove('show');
+  var pp=document.getElementById('profile-panel'),bd=document.getElementById('backdrop');
+  pp.classList.toggle('show');bd.classList.toggle('show',pp.classList.contains('show'));
+}
+function updateProfile(){
+  var nm=document.getElementById('pp-name').value;
+  var role=document.getElementById('pp-role-inp').value;
+  document.getElementById('pp-nm-d').textContent=nm;
+  document.getElementById('pp-role-d').textContent=role+' \u00b7 Zeron';
+  var init=nm.split(' ').map(function(w){return w.charAt(0).toUpperCase();}).slice(0,2).join('');
+  document.getElementById('pp-av2').textContent=init;
+  document.getElementById('av-btn').textContent=init;
+}
+function setAvCol(el,col){
+  document.querySelectorAll('.pp-col').forEach(function(c){c.classList.remove('sel');});el.classList.add('sel');
+  document.getElementById('pp-av2').style.background=col;
+  document.getElementById('av-btn').style.background=col;
+}
+function saveProfile(){closeAll();}
+function closeAll(){
+  document.getElementById('notif-panel').classList.remove('show');
+  document.getElementById('profile-panel').classList.remove('show');
+  document.getElementById('backdrop').classList.remove('show');
+}
+function openChangelog(){closeAll();document.getElementById('changelog-modal').classList.add('show');}
+function openHelp(){closeAll();document.getElementById('help-modal').classList.add('show');}
+function closeModal(id,e){
+  if(!e||e.target===document.getElementById(id))document.getElementById(id).classList.remove('show');
+}
+
+// ─── PREVIEW MODAL ────────────────────────────────────
+var queueData=[
+  {title:'How the Stryker Wiper Attack Exposed Gaps in OT Security Posture',serp:94,aeo:90,geo:87,type:'ot'},
+  {title:'CIRCIA Final Rule: What CISOs Must Report in 2026',serp:91,aeo:88,geo:85,type:'circia'},
+  {title:'How CISOs Get Instant Answers to Cyber Risk Questions Using ZIN Advisor',serp:88,aeo:85,geo:83,type:'zin'},
+  {title:'FAIR Model Explained: Translating Cyber Risk into Dollar Impact for the Board',serp:96,aeo:93,geo:90,type:'fair'},
+  {title:'Hidden Cost of Vendor Risk: How Supply Chain Attacks Quantify into CVaR',serp:90,aeo:87,geo:84,type:'vendor'}
+];
+function openPreview(idx){
+  var d=queueData[idx];
+  document.getElementById('pm-ttl').textContent=d.title.length>58?d.title.substring(0,58)+'\u2026':d.title;
+  document.getElementById('pm-pills').innerHTML='<span class="bpill bpg">SERP '+d.serp+'/100</span><span class="bpill bpb">AEO '+d.aeo+'/100</span><span class="bpill bpv">GEO '+d.geo+'/100</span>';
+  document.getElementById('pm-bd').innerHTML=getBlogContent(d.type,d.title);
+  document.getElementById('prev-modal').classList.add('show');
+}
+
+// ─── FULL BLOG CONTENT ────────────────────────────────
+function getBlogContent(type,title){
+  var fns={ot:otBlog,circia:circiaBlog,zin:zinBlog,fair:fairBlog,vendor:vendorBlog};
+  return (fns[type]||fairBlog)(title);
+}
+
+function otBlog(title){
+  return'<div class="bmeta"><span>Zeron Security Research</span><span>March 22, 2026</span><span>13 min read</span><span>OT Security &middot; Threat Intelligence</span></div>'+
+  '<h1>'+title+'</h1>'+
+  '<h2>The incident: what happened and who was behind it</h2>'+
+  '<p>On the morning of March 14, 2026, cybersecurity researchers monitoring ICS/OT threat activity flagged a coordinated destructive attack against a healthcare device manufacturer in the United States. The threat actor &mdash; identified as the Handala group, a hacktivist collective with documented ties to geopolitical disruption campaigns &mdash; deployed a custom wiper payload later named "Stryker" by incident responders. Unlike ransomware, Stryker had a single purpose: destroy. There was no ransom demand, no decryption key, no negotiation channel. The goal was irreversible operational disruption.</p>'+
+  '<p>Handala is not a new actor. The group has previously targeted Israeli critical infrastructure and has escalated its operations globally as geopolitical tensions have intensified through 2025 and into 2026. What made the Stryker deployment notable was its deliberate targeting of the operational technology layer &mdash; the industrial control systems, PLCs, and SCADA interfaces that govern physical manufacturing and device production processes &mdash; not the corporate IT network.</p>'+
+  '<p>The distinction matters enormously. When IT systems are wiped, the damage is significant but recoverable. When OT systems are destroyed, the impact cascades into the physical world: production lines halt, supply chains freeze, safety systems may fail, and the recovery timeline is measured in weeks or months, not days.</p>'+
+  '<h2>What the attack revealed about OT security posture</h2>'+
+  '<p>The Stryker attack was not a product of exceptional sophistication on the attacker&rsquo;s side. It exploited conditions that security researchers have been documenting for years: the persistent, systemic gap in OT security posture that most organisations have failed to close.</p>'+
+  '<p>Post-incident analysis revealed four critical failures, each of which compounds the others:</p>'+
+  '<ul>'+
+  '<li><strong>Incomplete asset visibility.</strong> The organisation had no comprehensive inventory of OT devices reachable from the corporate network. Several legacy PLCs running firmware from 2017 had never been flagged in any risk register. Attackers used these as footholds to pivot deeper into the OT environment.</li>'+
+  '<li><strong>Flat network architecture.</strong> IT and OT networks had been partially segmented following a compliance audit in 2024, but the segmentation was incomplete. A compromised engineering workstation provided a bridge. Standard IT incident response tools could not operate in the OT environment without risking further disruption.</li>'+
+  '<li><strong>No financial quantification of OT risk.</strong> The organisation&rsquo;s most recent board risk presentation rated their OT risk as "High" on a red-amber-green scale. When the board asked the CISO after the incident what the exposure was worth in financial terms, there was no answer. There had been no CVaR modelling, no FAIR analysis, no attempt to translate OT vulnerability into a dollar figure that could have driven pre-emptive investment.</li>'+
+  '<li><strong>CIRCIA reporting delayed by posture opacity.</strong> The organisation took 94 hours to file their CIRCIA report &mdash; missing the 72-hour window. The delay was not negligence; it was the result of not knowing the scope of the incident because they had no continuous posture management system to query.</li>'+
+  '</ul>'+
+  '<h2>The financial reality: what a wiper attack actually costs</h2>'+
+  '<p>The instinct after an OT breach is to focus on operational recovery. The harder conversation &mdash; and the one boards and CFOs are increasingly demanding &mdash; is the financial impact quantification. What did this cost us, in total, across all dimensions?</p>'+
+  '<p>Based on publicly disclosed information and sector benchmarks, a wiper attack of this scale against an OT environment in the healthcare manufacturing sector typically produces losses across five categories:</p>'+
+  '<ul>'+
+  '<li><strong>Production downtime and revenue loss</strong> &mdash; typically $1.2M&ndash;$4.8M per week for a mid-size manufacturer during complete OT system recovery</li>'+
+  '<li><strong>Physical hardware replacement</strong> &mdash; destroyed firmware on PLCs and SCADA controllers requires component replacement, often from constrained supply chains: $800K&ndash;$2.2M</li>'+
+  '<li><strong>Incident response and forensics</strong> &mdash; specialised OT incident response firms command premium rates: $400K&ndash;$1.8M for a six-week engagement</li>'+
+  '<li><strong>Regulatory penalties</strong> &mdash; CIRCIA late filing plus SEC disclosure violations (if the organisation is publicly listed): $500K&ndash;$5M depending on materiality determination</li>'+
+  '<li><strong>Cyber insurance impact</strong> &mdash; premiums typically increase 25&ndash;60% post-incident for organisations with demonstrated OT posture gaps</li>'+
+  '</ul>'+
+  '<p>Total expected financial exposure for this class of incident: <strong>$3.9M&ndash;$14.6M</strong> at 95th percentile confidence. That is a CVaR figure. And that figure, had it been available to the CISO before the incident, would have justified a very different level of pre-emptive investment in OT security posture management.</p>'+
+  '<h2>How Zeron addresses OT security posture gaps</h2>'+
+  '<p>Zeron&rsquo;s Cyber Risk Posture Management platform approaches OT security from the dimension that traditional tools miss: financial quantification. The platform does not replace OT-specific security tools. It provides the intelligence layer above them that translates what those tools detect into business-aligned risk language that CISOs can take to boards and CFOs can act on.</p>'+
+  '<p><strong>Externo</strong> provides continuous external attack surface discovery that maps every internet-facing asset, including OT interfaces, exposed HMIs (Human-Machine Interfaces), and remote access services that are the primary entry vectors for groups like Handala. It does not just identify these assets &mdash; it scores them by financial exposure using the QBER model.</p>'+
+  '<p><strong>ZIN Advisor</strong>, Zeron&rsquo;s AI-powered cyber risk copilot, continuously correlates Externo&rsquo;s external signals with internal telemetry from Interno, compliance posture from Conformity, and third-party vendor risk from Vendor Pulse. When an anomaly emerges that resembles a pre-wiper reconnaissance pattern, ZIN Advisor surfaces it as a prioritised, board-ready risk answer &mdash; not an alert that requires an analyst to investigate for three hours before it becomes actionable.</p>'+
+  '<p>The <strong>QBER (Quantified Exposure to Risk)</strong> model translates every detected exposure into a financial range using FAIR-aligned probabilistic modelling. Instead of "High severity OT exposure," the CISO receives "Expected financial loss from current OT posture: $4.2M at 95th percentile confidence over the next 90 days." That is the number that moves budget decisions.</p>'+
+  '<div class="bfaq"><div class="bfaq-q">What is the difference between a wiper attack and ransomware in OT environments?</div><div class="bfaq-a">Ransomware encrypts systems and demands payment for decryption. A wiper attack permanently destroys data and firmware with no recovery path other than physical hardware replacement and OS reinstallation. In OT environments, wiper attacks are significantly more damaging because they can affect physical control systems, and recovery timelines are 3&ndash;5x longer than ransomware recovery due to hardware dependencies.</div></div>'+
+  '<div class="bfaq"><div class="bfaq-q">Does CIRCIA require reporting OT security incidents?</div><div class="bfaq-a">Yes. CIRCIA applies to covered entities operating critical infrastructure across 16 sectors, including healthcare, manufacturing, and energy &mdash; all of which operate OT environments. A destructive attack against OT systems that disrupts operational continuity would typically qualify as a covered cyber incident requiring 72-hour reporting to CISA.</div></div>'+
+  '<h2>Conclusion: posture management is the pre-requisite for everything else</h2>'+
+  '<p>The Stryker wiper attack will not be the last of its kind. Handala has already signalled continuation of its operational disruption campaign. Other threat actors are observing the results and adapting their own TTPs.</p>'+
+  '<p>The organisations that will weather the next wave are not those with the most security tools. They are the ones who have built a continuous, financially-quantified picture of their OT risk posture &mdash; one that can answer the board&rsquo;s question before the incident, not after it.</p>'+
+  '<div class="bcta"><div><div class="bcta-t">How exposed is your OT environment right now?</div><div class="bcta-s">See how Zeron&rsquo;s QBER model quantifies your OT risk exposure in financial terms &mdash; in under 30 minutes.</div></div><button class="btn bbl bsm">Book a demo &rarr;</button></div>'+
+  '<div class="bauth"><div class="bav">SS</div><div><div class="banm">Sanket Sarkar &mdash; Founder &amp; CEO, Zeron</div><div class="barl">linkedin.com/in/infosecsanket &middot; Zeron &mdash; AI-Powered Cyber Risk Decision Intelligence</div></div></div>';
+}
+
+function zinBlog(title){
+  return'<div class="bmeta"><span>zeronwebs</span><span>Insights</span><span>March 2, 2026</span><span>12 min read</span><span>ZIN Advisor &middot; AI Copilot</span></div>'+
+  '<h1>'+title+'</h1>'+
+  '<h2>The question every CISO is now being asked</h2>'+
+  '<p>Security leaders are no longer asked, "Are we secure?" They are asked:</p>'+
+  '<ul><li>What is our financial exposure?</li><li>Which risks demand immediate action?</li><li>How does cyber impact business continuity?</li><li>What would it cost us if our largest vendor was breached today?</li><li>Are we compliant with CIRCIA? When did we last verify it?</li></ul>'+
+  '<p>These are not questions that a SIEM dashboard answers. They are not questions that a weekly vulnerability report addresses. They are questions that require a CISO to have a single, unified source of intelligence that speaks in business language &mdash; instantly, contextually, and with financial precision.</p>'+
+  '<p>That is precisely where ZIN Advisor steps in.</p>'+
+  '<h2>What is ZIN Advisor?</h2>'+
+  '<p>ZIN Advisor is an AI-powered cyber risk copilot built on <strong>Zeron Intelligence (ZIN)</strong>. It combines agentic AI with the QBER financial risk model to transform raw cyber data into quantified, decision-ready intelligence. Instead of functioning as another dashboard that adds to the noise, ZIN Advisor acts as a unified command layer that translates complex security signals into business-aligned risk insights &mdash; in the format that boards, CFOs, and CISOs need to act on.</p>'+
+  '<p>The distinction between a dashboard and a copilot is not semantic. A dashboard shows you data. A copilot reasons about that data, correlates it with context you have not explicitly connected, and delivers prioritised answers to the questions that matter most. ZIN Advisor is built to do the latter.</p>'+
+  '<h2>How ZIN Advisor turns raw data into instant risk answers</h2>'+
+  '<p>ZIN Advisor ingests structured and unstructured security data across the organisation, correlates signals in real time, and applies financial risk modelling through QBER. The system transforms technical telemetry into contextual, role-specific intelligence. Within seconds, CISOs receive prioritised, actionable insights instead of fragmented dashboards.</p>'+
+  '<p>Consider a scenario: a new critical CVE is published affecting a widely deployed VPN appliance. Within the ZIN Advisor interface, the CISO can ask: "What is our financial exposure from the new VPN CVE if exploited?" ZIN Advisor queries Externo (external attack surface), cross-references internal asset data from Interno, checks vendor exposure via Vendor Pulse, and delivers: "Estimated CVaR impact: $2.8M at 95th percentile. 3 of your critical vendors use this appliance. Conformity posture: CIRCIA reporting would be triggered. Recommended action: prioritise patching for these 7 internet-facing instances within 48 hours."</p>'+
+  '<p>That answer &mdash; from question to board-ready intelligence &mdash; takes seconds. Without ZIN Advisor, it requires an analyst to spend 3 hours stitching together five different tool outputs.</p>'+
+  '<h2>The five data streams that power ZIN Advisor</h2>'+
+  '<p>ZIN Advisor ingests and correlates five core data domains:</p>'+
+  '<ul>'+
+  '<li><strong>External Attack Surface Data via Externo</strong> &mdash; continuous discovery of internet-facing assets, exposed services, misconfigured cloud resources, and digital risk signals</li>'+
+  '<li><strong>Internal Risk Signals via Interno</strong> &mdash; control gaps, privilege escalation patterns, insider risk indicators, and lateral movement telemetry</li>'+
+  '<li><strong>Third-Party and Vendor Data via Vendor Pulse</strong> &mdash; real-time vendor security posture, breach signals, and supply chain risk with CVaR-linked financial exposure</li>'+
+  '<li><strong>Compliance and Audit Logs via Conformity</strong> &mdash; regulatory posture across CIRCIA, CMMC 2.0, NIST CSF 2.0, SEC disclosure rules, SEBI CSCRF, and DPDP Act</li>'+
+  '<li><strong>Threat Intelligence Feeds</strong> &mdash; curated IOC and TTP intelligence contextualised against your specific attack surface and asset profile</li>'+
+  '</ul>'+
+  '<p>By correlating these five domains simultaneously, ZIN Advisor builds a unified risk picture that no single-domain tool can replicate. The result is not a comprehensive report &mdash; it is a specific, contextual answer to a specific question, updated continuously as the threat landscape evolves.</p>'+
+  '<h2>How the QBER model makes ZIN Advisor&rsquo;s answers financially precise</h2>'+
+  '<p>ZIN Advisor&rsquo;s answers are not qualitative. They are not "high risk" or "critical severity." They are financial. This precision comes from the <strong>QBER (Quantified Exposure to Risk)</strong> model, which applies FAIR-aligned probabilistic financial modelling to every risk signal ZIN processes.</p>'+
+  '<p>Where traditional tools say "CVSS score: 9.2, Critical," QBER says "Expected financial loss in a compromise scenario: $4.2M at 95th percentile confidence over 90 days." That is a CVaR figure &mdash; Conditional Value at Risk &mdash; expressed in the language that finance, boards, and insurers understand.</p>'+
+  '<p>This financial precision is what allows ZIN Advisor to answer the questions that matter most in board meetings and budget conversations: not "how severe is this?" but "what does it cost us if we do nothing?" and "what does it save us if we invest $1.5M in this control?"</p>'+
+  '<div class="bfaq"><div class="bfaq-q">What makes ZIN Advisor different from a traditional SIEM?</div><div class="bfaq-a">SIEMs aggregate events and generate alerts. ZIN Advisor reasons, correlates across five data domains, and delivers prioritised, financially-quantified answers to business questions. A SIEM tells you an anomaly occurred. ZIN Advisor tells you what it means for your financial exposure, your compliance posture, and what your next action should be.</div></div>'+
+  '<div class="bfaq"><div class="bfaq-q">Is ZIN Advisor a standalone product or part of the Zeron platform?</div><div class="bfaq-a">ZIN Advisor is the intelligence layer that orchestrates all five Zeron modules: Externo, Interno, Vendor Pulse, Conformity, and Cyber Navigator. It can surface insights from each module independently, but its full power comes from correlating signals across all five simultaneously to answer complex, cross-domain risk questions.</div></div>'+
+  '<h2>Conclusion: from reactive oversight to informed strategic leadership</h2>'+
+  '<p>Modern cybersecurity leadership is no longer about monitoring metrics. It is about commanding clarity in moments that matter. When every board question demands precision and every decision carries business impact, CISOs need more than visibility. They need intelligence that is unified, contextual, and instantly actionable.</p>'+
+  '<p>That is where ZIN Advisor elevates cybersecurity from reactive oversight to informed strategic leadership.</p>'+
+  '<div class="bcta"><div><div class="bcta-t">Ready to experience ZIN Advisor?</div><div class="bcta-s">See how Zeron translates your cyber exposure into decision-ready intelligence in under 30 minutes.</div></div><button class="btn bbl bsm">Book a demo &rarr;</button></div>'+
+  '<div class="bauth"><div class="bav">SS</div><div><div class="banm">Sanket Sarkar &mdash; Founder &amp; CEO, Zeron</div><div class="barl">linkedin.com/in/infosecsanket &middot; AI-Powered Cyber Risk Decision Intelligence &middot; ZIN Advisor &middot; QBER Model</div></div></div>';
+}
+
+function circiaBlog(title){
+  return'<div class="bmeta"><span>Zeron Security Research</span><span>March 22, 2026</span><span>11 min read</span><span>Regulatory Compliance &middot; CIRCIA</span></div>'+
+  '<h1>'+title+'</h1>'+
+  '<h2>What changed in 2026: CIRCIA moves from rulemaking to enforcement</h2>'+
+  '<p>For two years after the Cyber Incident Reporting for Critical Infrastructure Act was signed into law in 2022, organisations watched the rulemaking process unfold from a comfortable distance. The deadlines felt distant. The final rule was still being written. Then, in late 2025, CISA published the final rule, and 2026 became the year that compliance stopped being a preparation exercise and became a live enforcement reality.</p>'+
+  '<p>The organisations that treated CIRCIA as a future concern are now operating under active compliance obligations with material consequences for non-compliance. The question for CISOs in 2026 is no longer "what does CIRCIA require?" It is "can my organisation meet those requirements without manual scrambling &mdash; and can I prove that to a board and a regulator?"</p>'+
+  '<h2>The core CIRCIA obligations every CISO must understand</h2>'+
+  '<p>CIRCIA creates four distinct reporting obligations for covered entities:</p>'+
+  '<ul>'+
+  '<li><strong>72-hour cyber incident reports to CISA</strong> &mdash; triggered upon "reasonable belief" that a covered cyber incident has occurred. The clock starts from awareness, not containment. This is the obligation most organisations will violate first, because 72 hours is not enough time to achieve certainty in most breach scenarios. CIRCIA deliberately uses a lower threshold: reasonable belief.</li>'+
+  '<li><strong>24-hour ransomware payment reports</strong> &mdash; from the moment a ransomware payment is made or instructed. This obligation exists independently of whether a cyber incident report has been filed.</li>'+
+  '<li><strong>Supplemental reports within 72 hours of the initial submission</strong> &mdash; with additional known information about the incident as understanding develops.</li>'+
+  '<li><strong>Data preservation obligations</strong> &mdash; covered entities must preserve relevant data for CISA review upon request. The duration and scope of preservation are defined in the final rule.</li>'+
+  '</ul>'+
+  '<h2>Who is a covered entity?</h2>'+
+  '<p>CIRCIA applies to covered entities operating within 16 critical infrastructure sectors: chemical, commercial facilities, communications, critical manufacturing, dams, defence industrial base, emergency services, energy, financial services, food and agriculture, government facilities, healthcare and public health, information technology, nuclear reactors, transportation systems, and water and wastewater systems.</p>'+
+  '<p>Within these sectors, covered entity status is further defined by size thresholds that vary by sector. CISA&rsquo;s final rule provides sector-specific guidance, but the default presumption for any organisation operating in these sectors at scale is that CIRCIA applies.</p>'+
+  '<h2>Where CISOs will fail without continuous posture management</h2>'+
+  '<p>The 72-hour window sounds manageable until you examine what it actually demands. At the moment a cyber incident occurs &mdash; or at the moment you have reasonable belief that one has occurred &mdash; you need to be able to answer: Which systems were affected? What data was potentially accessed? Is this a covered cyber incident under CIRCIA? Has any ransomware payment been made or authorised?</p>'+
+  '<p>Without a continuous posture management system, answering these questions requires manually stitching together outputs from SIEM, endpoint detection, cloud security tools, and ticketing systems. In a real incident, under time pressure, with potentially degraded visibility, this process takes days. The 72-hour clock does not pause while your team assembles the picture.</p>'+
+  '<h2>How Zeron&rsquo;s Conformity module automates CIRCIA compliance</h2>'+
+  '<p>Zeron&rsquo;s <strong>Conformity</strong> module is built around the premise that regulatory compliance should be a continuous posture, not an incident-triggered response. It maps your control environment against CIRCIA requirements in real time, maintains audit-ready documentation continuously (not just before audits), and provides the organisational awareness that the 72-hour window requires.</p>'+
+  '<p>When an incident is detected, <strong>ZIN Advisor</strong> integrates with Conformity to answer the CIRCIA threshold question directly: "Does the observed incident cross the covered cyber incident threshold under CIRCIA?" If yes, it pre-populates the CISA reporting template with known incident data, flags which data preservation obligations apply, and tracks the 72-hour countdown in the CISO dashboard.</p>'+
+  '<div class="bfaq"><div class="bfaq-q">What constitutes a covered cyber incident under CIRCIA?</div><div class="bfaq-a">CIRCIA defines a covered cyber incident as a substantial cyber incident that results in: significant loss of confidentiality, integrity, or availability; serious impact on safety and resiliency of operational systems; disruption to business or industrial operations; or unauthorised access facilitated through a third-party provider. Ransomware attacks, regardless of whether data was exfiltrated, are explicitly covered.</div></div>'+
+  '<div class="bfaq"><div class="bfaq-q">What are the consequences of missing the 72-hour CIRCIA filing window?</div><div class="bfaq-a">CISA can issue subpoenas to compel reporting from entities that fail to meet their obligations. For persistent non-compliance, CISA can refer matters to the Department of Justice. While the initial enforcement posture is expected to be compliance-focused rather than punitive, organisations with documented CIRCIA violations face heightened scrutiny in subsequent regulatory interactions and potential civil liability exposure.</div></div>'+
+  '<h2>Conclusion: compliance posture is not a checkbox, it is a capability</h2>'+
+  '<p>CIRCIA enforcement in 2026 separates organisations that built compliance as a continuous capability from those that treated it as an audit exercise. The difference will be visible within the first 72 hours of the next significant incident.</p>'+
+  '<div class="bcta"><div><div class="bcta-t">Is your organisation CIRCIA-ready today?</div><div class="bcta-s">Zeron&rsquo;s Conformity module gives you continuous CIRCIA posture visibility so the 72-hour clock does not catch you off guard.</div></div><button class="btn bbl bsm">Book a demo &rarr;</button></div>'+
+  '<div class="bauth"><div class="bav">SS</div><div><div class="banm">Sanket Sarkar &mdash; Founder &amp; CEO, Zeron</div><div class="barl">linkedin.com/in/infosecsanket &middot; Zeron &mdash; AI-Powered Cyber Risk Decision Intelligence</div></div></div>';
+}
+
+function fairBlog(title){
+  return'<div class="bmeta"><span>Zeron Security Research</span><span>March 22, 2026</span><span>10 min read</span><span>Cyber Risk Quantification &middot; FAIR Model</span></div>'+
+  '<h1>'+title+'</h1>'+
+  '<h2>The problem with "High, Medium, Low"</h2>'+
+  '<p>Walk into any board meeting and present a risk matrix with red, amber, and green ratings, and the board will nod and move on. They have seen it dozens of times. They do not have the context to act on it, no basis to compare this cyber risk against capital expenditure decisions, insurance renewal considerations, or M&A due diligence. The qualitative risk language that the security industry has been using for three decades does not translate into the language of business decisions.</p>'+
+  '<p>The FAIR (Factor Analysis of Information Risk) framework exists to solve this problem. It provides a structured methodology for translating cyber risk into financial terms &mdash; specifically, into probabilistic loss estimates that speak the same language as enterprise risk management, insurance underwriting, and board-level strategy. But understanding what FAIR is and operationalising it at scale for real-time board reporting are two very different challenges.</p>'+
+  '<h2>How FAIR works: the core model</h2>'+
+  '<p>FAIR decomposes cyber risk into two primary components that, when combined, produce a financial risk estimate:</p>'+
+  '<ul>'+
+  '<li><strong>Loss Event Frequency (LEF)</strong> &mdash; how often is a threat agent likely to act against a specific asset, and of those actions, how many will be successful? LEF combines Threat Event Frequency (how often a threat agent contacts an asset) with Vulnerability (the probability that the action succeeds given the controls in place).</li>'+
+  '<li><strong>Loss Magnitude (LM)</strong> &mdash; when a loss event does occur, how much will it cost? FAIR breaks this into six loss form categories: productivity, response, replacement, fines and judgments, competitive advantage, and reputation.</li>'+
+  '</ul>'+
+  '<p>The combination of LEF and LM, modelled probabilistically using Monte Carlo simulation, produces a range of financial outcomes. The output is not a single number. It is a distribution: "Most likely loss: $1.2M. 90th percentile loss: $4.8M. 95th percentile loss: $7.2M." The 95th percentile figure is your CVaR &mdash; the number that most closely approximates the worst-case scenario you should be planning for.</p>'+
+  '<h2>From FAIR to CVaR: the board conversation CISO have been missing</h2>'+
+  '<p>CVaR (Conditional Value at Risk) is a financial risk metric borrowed from quantitative finance, where it has been used for decades to model portfolio risk. In the context of cyber risk, CVaR answers the question: "What is the expected loss, in dollar terms, in the worst X% of scenarios?"</p>'+
+  '<p>When a CISO can tell the board "Our CVaR for our OT environment over the next 12 months is $6.4M at 95% confidence," several things happen that do not happen with a qualitative risk rating:</p>'+
+  '<ul>'+
+  '<li>The board can compare this against the cost of the proposed security investments that would reduce this exposure</li>'+
+  '<li>The CFO can make an informed decision about cyber insurance coverage levels</li>'+
+  '<li>The CEO can contextualise this against M&A targets in due diligence processes</li>'+
+  '<li>The audit committee can assess whether the organisation&rsquo;s SEC material risk disclosures are accurate</li>'+
+  '</ul>'+
+  '<h2>How Zeron&rsquo;s QBER model operationalises FAIR at scale</h2>'+
+  '<p>Zeron&rsquo;s <strong>QBER (Quantified Exposure to Risk)</strong> model implements FAIR-aligned financial quantification at the speed and scale that manual FAIR analysis cannot achieve. Rather than requiring security analysts to manually populate FAIR ontology spreadsheets for each threat scenario, QBER ingests telemetry from all five Zeron platform modules and applies Monte Carlo simulation against historical breach cost data and threat intelligence to produce continuously updated CVaR outputs.</p>'+
+  '<p>The result is a living financial risk picture. When a new vulnerability is disclosed, QBER automatically recalculates your CVaR exposure based on whether you have that asset, what controls are in place, and how the historical exploitation pattern for that vulnerability class matches your specific threat profile.</p>'+
+  '<div class="bfaq"><div class="bfaq-q">Is FAIR the same as CVSS?</div><div class="bfaq-a">No. CVSS (Common Vulnerability Scoring System) scores the technical severity of individual vulnerabilities on a scale of 0&ndash;10. FAIR is a methodology for quantifying risk in financial terms across a threat scenario, incorporating threat agent behaviour, control effectiveness, and loss magnitude. FAIR uses CVSS data as one input among many. The outputs are fundamentally different: CVSS produces a severity number, FAIR produces a financial loss distribution.</div></div>'+
+  '<div class="bfaq"><div class="bfaq-q">How does Zeron&rsquo;s QBER model differ from manually running FAIR?</div><div class="bfaq-a">Manual FAIR analysis is time-consuming, requires specialist expertise, and produces a point-in-time estimate that becomes stale as the threat landscape evolves. QBER automates the data ingestion, correlation, and simulation components, producing continuously updated CVaR outputs that reflect the current state of your attack surface, your controls, and the active threat intelligence relevant to your sector and asset profile.</div></div>'+
+  '<div class="bcta"><div><div class="bcta-t">See QBER translate your risk into CVaR</div><div class="bcta-s">Watch Zeron map your real attack surface data to board-ready financial risk outputs in under 30 minutes.</div></div><button class="btn bbl bsm">Book a demo &rarr;</button></div>'+
+  '<div class="bauth"><div class="bav">SS</div><div><div class="banm">Sanket Sarkar &mdash; Founder &amp; CEO, Zeron</div><div class="barl">linkedin.com/in/infosecsanket &middot; Zeron &mdash; AI-Powered Cyber Risk Decision Intelligence</div></div></div>';
+}
+
+function vendorBlog(title){
+  return'<div class="bmeta"><span>Zeron Security Research</span><span>March 22, 2026</span><span>10 min read</span><span>Vendor Risk &middot; Supply Chain Security</span></div>'+
+  '<h1>'+title+'</h1>'+
+  '<h2>Supply chain attacks: the threat that bypasses your perimeter entirely</h2>'+
+  '<p>Every major supply chain attack of the past five years follows the same pattern: attackers identify that a target organisation has invested heavily in hardening its own perimeter. Rather than attempting a direct breach against hardened defences, they find a trusted vendor &mdash; a software provider, a managed service provider, a cloud infrastructure partner &mdash; whose access to the target&rsquo;s systems is implicit and often poorly monitored. The vendor becomes the entry point.</p>'+
+  '<p>The 2020 SolarWinds attack compromised approximately 18,000 organisations through a single software update mechanism. The 2021 Kaseya attack affected over 1,500 businesses through a single MSP platform. In Q1 2026 alone, threat intelligence firms have documented 23 confirmed supply chain compromise events affecting organisations across the financial services, healthcare, and critical infrastructure sectors.</p>'+
+  '<p>The common denominator is not a failure of the attacked organisation&rsquo;s own controls. It is the absence of a quantified, continuously monitored picture of vendor-introduced risk.</p>'+
+  '<h2>Why vendor scorecards fail the board test</h2>'+
+  '<p>Most organisations with a formal vendor risk programme can tell you which vendors have completed their annual security questionnaire and what score they received. Vendor A: 72/100. Vendor B: 61/100. Vendor C: 84/100. These numbers exist in spreadsheets, in GRC platforms, in audit reports.</p>'+
+  '<p>What they cannot tell you is: "If Vendor B is compromised tomorrow, what is our expected financial exposure?" That question &mdash; which is the question every CFO and board member now asks in the post-SolarWinds world &mdash; requires a different analytical framework entirely.</p>'+
+  '<p>A questionnaire score of 61/100 tells you something about Vendor B&rsquo;s control maturity. It tells you nothing about the blast radius of a Vendor B compromise on your specific environment, the data and systems they have access to, the historical frequency of breaches in their sector, or the financial loss distribution you face if they are successfully attacked.</p>'+
+  '<h2>CVaR-based vendor risk: what it looks like in practice</h2>'+
+  '<p>CVaR-based vendor risk quantification translates the vendor risk question into financial terms. For each vendor, the analysis models: breach probability (how likely is this vendor to experience a compromise in the next 12 months, given their sector, size, and control profile), propagation likelihood (if they are compromised, what is the probability that the compromise reaches your environment), and impact magnitude (given propagation, what is your expected financial loss across productivity, response, data loss, and regulatory exposure).</p>'+
+  '<p>The output for a Tier 1 cloud infrastructure vendor might be: "CVaR: $8.4M at 95% confidence if this vendor is compromised within the next 12 months." That number &mdash; not a scorecard rating &mdash; is the basis for prioritised remediation investment, contract renegotiation, and cyber insurance positioning.</p>'+
+  '<h2>How Zeron Vendor Pulse delivers continuous vendor risk intelligence</h2>'+
+  '<p>Zeron&rsquo;s <strong>Vendor Pulse</strong> module moves vendor risk management from periodic questionnaire cycles to continuous posture monitoring. It maps your vendor ecosystem, continuously monitors external signals of vendor compromise (including dark web signals, breach disclosures, and threat intelligence feeds specific to your vendors&rsquo; sectors), and feeds that intelligence into the QBER model to produce CVaR-denominated exposure estimates per vendor and per vendor tier.</p>'+
+  '<p>When a breach signal emerges for a vendor in your ecosystem, <strong>ZIN Advisor</strong> immediately surfaces the financial exposure impact: "Your Tier 1 cloud provider has an active breach indicator. Estimated CVaR impact to your organisation: $6.8M. Recommended actions: activate contractual incident notification provisions, assess data residency exposure, review access privileges."</p>'+
+  '<div class="bfaq"><div class="bfaq-q">How does Vendor Pulse differ from traditional VRM platforms?</div><div class="bfaq-a">Traditional VRM platforms manage questionnaire workflows, store responses, and generate compliance reports. Vendor Pulse provides continuous external monitoring of vendor security posture, real-time breach signal detection, and CVaR-based financial exposure quantification. It is the difference between knowing a vendor&rsquo;s self-reported security posture and knowing their actual risk contribution to your financial exposure in real time.</div></div>'+
+  '<div class="bcta"><div><div class="bcta-t">Quantify your vendor risk in CVaR terms</div><div class="bcta-s">See how Zeron maps your full vendor ecosystem to financial exposure estimates &mdash; identifying which vendors demand immediate action.</div></div><button class="btn bbl bsm">Book a demo &rarr;</button></div>'+
+  '<div class="bauth"><div class="bav">SS</div><div><div class="banm">Sanket Sarkar &mdash; Founder &amp; CEO, Zeron</div><div class="barl">linkedin.com/in/infosecsanket &middot; Zeron &mdash; AI-Powered Cyber Risk Decision Intelligence</div></div></div>';
+}
+
+// ─── WOD ──────────────────────────────────────────────
+var wizN=1,wodTopic='';
+var wizMeta=[
+  {tg:'Step 1 of 4 \u00b7 Audience',ti:'Who is this blog for?',su:'INK adjusts depth, jargon, and framing based on your audience.'},
+  {tg:'Step 2 of 4 \u00b7 Intent',ti:'What should this blog achieve?',su:'INK adjusts the CTA, structure, and keyword strategy accordingly.'},
+  {tg:'Step 3 of 4 \u00b7 Format',ti:'What angle or format works best?',su:'Pick the format that best matches your goal.'},
+  {tg:'Step 4 of 4 \u00b7 Platform',ti:'Where will this be published?',su:'INK applies platform-specific optimisation for schema, meta, and structure.'}
+];
+function fw(t){document.getElementById('wod-inp').value=t;}
+function startWOD(){
+  var t=document.getElementById('wod-inp').value.trim();
+  if(!t){document.getElementById('wod-inp').focus();return;}
+  wodTopic=t;wizN=1;
+  var wc=document.getElementById('wiz-card');wc.classList.add('show');
+  updateWiz();wc.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function resetWOD(){
+  document.getElementById('wiz-card').classList.remove('show');
+  ['ins-panel','seo-panel','blog-p'].forEach(function(id){document.getElementById(id).classList.remove('show');});
+  document.getElementById('gen-s').classList.remove('show');
+  document.getElementById('wod-inp').value='';wizN=1;
+}
+function updateWiz(){
+  var m=wizMeta[wizN-1];
+  document.getElementById('wiztg').textContent=m.tg;
+  document.getElementById('wizti').textContent=m.ti;
+  document.getElementById('wizsu').textContent=m.su;
+  document.getElementById('wizpf').style.width=(wizN*25)+'%';
+  document.querySelectorAll('.wizpn').forEach(function(p){p.classList.remove('on');});
+  document.getElementById('wp'+wizN).classList.add('on');
+  document.getElementById('wizb').style.visibility=wizN>1?'visible':'hidden';
+  var nx=document.getElementById('wizn');
+  if(wizN===4){nx.textContent='Run Research & SERP Scan \u2192';nx.onclick=runGen;}
+  else{nx.textContent='Next \u2192';nx.onclick=function(){wm(1);};}
+}
+function wm(d){wizN=Math.max(1,Math.min(4,wizN+d));updateWiz();}
+function pw(el){el.parentElement.querySelectorAll('.wo').forEach(function(o){o.classList.remove('sel');});el.classList.add('sel');}
+
+function getTD(topic){
+  var c=/cyber|ciso|risk|security|ransomware|wiper|ot |ics|attack|circia|cmmc|stryker|vendor|fair|cvss|cvar|qber|breach|zeron|zin/i.test(topic);
+  if(c) return{
+    tr:['cyber risk quantification 2026','OT security posture management','CIRCIA compliance deadline','ransomware supply chain 2026','CISO board reporting 2026','ZIN Advisor cyber copilot','QBER risk quantification model','wiper malware OT defence','CMMC 2.0 deadline','vendor risk CVaR modelling'],
+    qs:['What should CISOs do after a wiper malware attack?','How do you quantify OT cyber risk in financial terms?','What does CIRCIA require for 72-hour incident reporting?','How is CVaR different from CVSS for board reports?','How does ZIN Advisor help CISOs make faster decisions?','What is QBER and how does it work?','How to communicate cyber risk in dollar terms to the board?'],
+    lt:['cyber risk quantification for the board 2026','ZIN Advisor cyber risk copilot for CISOs','QBER model quantified exposure to risk explained','OT ICS security posture management framework guide','CIRCIA 72-hour reporting requirement CISO checklist','CVaR calculation operational technology breach cost'],
+    kws:[{k:'cyber risk quantification',v:'8,100/mo',d:'Medium',kd:'52',c:'$14.20'},{k:'ZIN Advisor cyber copilot',v:'1,200/mo',d:'Easy',kd:'18',c:'$22.80'},{k:'QBER risk model',v:'900/mo',d:'Easy',kd:'14',c:'$28.40'},{k:'CIRCIA reporting 2026',v:'3,200/mo',d:'Easy',kd:'31',c:'$9.80'},{k:'CVaR cybersecurity board',v:'1,600/mo',d:'Easy',kd:'22',c:'$22.40'},{k:'OT security posture management',v:'2,400/mo',d:'Easy',kd:'28',c:'$18.50'}],
+    paa:['What is ZIN Advisor by Zeron?','How does QBER quantify cyber risk?','What is OT cybersecurity posture management?','How do CISOs measure cyber risk in financial terms?','What are CIRCIA reporting deadlines in 2026?'],
+    sc:{serp:91,seo:93,aeo:88,geo:85,kd:27}
+  };
+  return{tr:[topic+' 2026',topic+' guide'],qs:['What is '+topic+'?','How does '+topic+' work?'],lt:[topic+' guide 2026'],kws:[{k:topic,v:'2,400/mo',d:'Medium',kd:'45',c:'$8.40'}],paa:['What is '+topic+'?'],sc:{serp:78,seo:80,aeo:75,geo:70,kd:36}};
+}
+function runGen(){
+  document.getElementById('wiz-card').style.display='none';
+  ['ins-panel','seo-panel','blog-p'].forEach(function(id){document.getElementById(id).classList.remove('show');});
+  var gs=document.getElementById('gen-s');gs.classList.add('show');
+  var steps=['Fetching Google Trends live data','Running AnswerThePublic-style scan','Scanning SERP keyword landscape','Checking top 10 ranking competitors','Reading your brand voice & tone','Applying SERP structure templates','Writing your rank-optimised blog'];
+  document.getElementById('gen-ls').innerHTML=steps.map(function(s,i){return'<div class="gi" id="gi'+i+'"><div class="giico"><div class="giw"></div></div>'+s+'</div>';}).join('');
+  var i=0;
+  function tick(){
+    if(i>0){var p=document.getElementById('gi'+(i-1));if(p){p.className='gi ok';p.querySelector('.giico').innerHTML='<span class="gid">\u2713</span>';}}
+    if(i<steps.length){var c=document.getElementById('gi'+i);if(c){c.className='gi go';c.querySelector('.giico').innerHTML='<div class="gis"></div>';}document.getElementById('gen-tl').textContent=steps[i];i++;setTimeout(tick,i===steps.length?1800:720);}
+    else{var l=document.getElementById('gi'+(steps.length-1));if(l){l.className='gi ok';l.querySelector('.giico').innerHTML='<span class="gid">\u2713</span>';}setTimeout(function(){gs.classList.remove('show');var td=getTD(wodTopic);showIns(td);showSEO(td);showBlogInPage(td);},400);}
+  }
+  tick();
+}
+function showIns(td){
+  document.getElementById('ins-panel').classList.add('show');
+  document.getElementById('ins-tr').innerHTML=td.tr.map(function(t){return'<span class="ic" onclick="this.classList.toggle(\'on\')">'+t+'</span>';}).join('');
+  document.getElementById('ins-paa').innerHTML=td.qs.map(function(q){return'<div class="paa" onclick="this.classList.toggle(\'on\');this.querySelector(\'.paap\').textContent=this.classList.contains(\'on\')?\'\u2713\':\'\'"><span>'+q+'</span><span class="paap">+</span></div>';}).join('');
+  document.getElementById('ins-lt').innerHTML=td.lt.map(function(t){return'<span class="ic" onclick="this.classList.toggle(\'on\')">'+t+'</span>';}).join('');
+}
+function showSEO(td){
+  document.getElementById('seo-panel').classList.add('show');
+  var s=td.sc;
+  setTimeout(function(){var ring=document.getElementById('seo-ring');ring.style.strokeDashoffset=201*(1-s.serp/100);ring.style.stroke=s.serp>=85?'var(--G)':s.serp>=70?'var(--Y)':'var(--R)';document.getElementById('seo-n').textContent=s.serp;},200);
+  document.getElementById('seo-bd').innerHTML=[{l:'SEO readiness',v:s.seo,c:'var(--G)'},{l:'AEO / Answer Engine',v:s.aeo,c:'var(--A)'},{l:'GEO / Gen Engine',v:s.geo,c:'var(--V)'},{l:'Avg keyword difficulty',v:100-s.kd,c:'var(--Y)',lbl:s.kd+' KD'}].map(function(b){return'<div class="rbd"><div class="rbdl">'+b.l+'</div><div class="rbdt"><div class="rbdf" style="width:0%;background:'+b.c+'" data-v="'+b.v+'"></div></div><div class="rbdv">'+(b.lbl||b.v)+'</div></div>';}).join('');
+  setTimeout(function(){document.querySelectorAll('.rbdf[data-v]').forEach(function(el){el.style.width=el.dataset.v+'%';});},300);
+  document.getElementById('kd-gr').innerHTML=td.kws.map(function(k){return'<div class="kdc"><div class="kdw">'+k.k+'</div><div class="kdps"><span class="kp kpv">'+k.v+'</span><span class="kp '+(parseInt(k.kd)<35?'kpe':'kph')+'">'+k.d+' '+k.kd+'</span><span class="kp kpc">'+k.c+' CPC</span></div></div>';}).join('');
+  document.getElementById('serp-paa').innerHTML=td.paa.map(function(q){return'<div class="paa" onclick="this.classList.toggle(\'on\')">'+q+'<span class="paap">+</span></div>';}).join('');
+}
+function showBlogInPage(td){
+  var p=document.getElementById('blog-p');p.classList.add('show');
+  var s=td.sc;
+  document.getElementById('bppills').innerHTML='<span class="bpill bpg">SERP '+s.serp+'/100</span><span class="bpill bpb">AEO '+s.aeo+'/100</span><span class="bpill bpv">GEO '+s.geo+'/100</span>';
+  var isZin=/zin|advisor|copilot/i.test(wodTopic);var isOt=/ot |ics|wiper|stryker/i.test(wodTopic);
+  var t=wodTopic.length>70?wodTopic.substring(0,70)+'\u2026':wodTopic;
+  document.getElementById('blog-bd').innerHTML=isZin?zinBlog(t):isOt?otBlog(t):fairBlog(t);
+  p.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// ─── COMPETITOR ANALYSIS WITH CLAUDE API ──────────────
+var competitors=[];
+function addCompetitor(){
+  var inp=document.getElementById('comp-inp');
+  var val=inp.value.trim().toLowerCase().replace(/https?:\/\//,'').replace(/\/.*$/,'');
+  if(!val)return;
+  if(competitors.length>=5){alert('Maximum 5 competitors allowed.');return;}
+  if(competitors.indexOf(val)>-1){inp.value='';return;}
+  competitors.push(val);
+  renderCompetitorList();
+  inp.value='';
+}
+function renderCompetitorList(){
+  var list=document.getElementById('comp-list');
+  var hint=document.getElementById('comp-hint');
+  var btn=document.getElementById('run-comp-btn');
+  list.innerHTML=competitors.map(function(d,i){
+    return'<div class="comp-item">'+
+    '<div class="comp-ico"><img src="https://www.google.com/s2/favicons?domain='+d+'&sz=32" alt="" style="width:100%;height:100%;object-fit:cover"></div>'+
+    '<div class="comp-domain">'+d+'</div>'+
+    '<button class="comp-remove" onclick="removeComp('+i+')">&times;</button>'+
+    '</div>';
+  }).join('');
+  if(competitors.length>0){
+    btn.style.display='inline-flex';
+    hint.textContent=competitors.length+' competitor'+(competitors.length>1?'s':'')+' added. Click Analyse to fetch real-time intelligence.';
+  } else {
+    btn.style.display='none';
+    hint.textContent='Add at least one competitor domain to start.';
+  }
+}
+function removeComp(idx){
+  competitors.splice(idx,1);
+  renderCompetitorList();
+  if(competitors.length===0)document.getElementById('comp-output').innerHTML='';
+}
+
+async function runCompetitorAnalysis(){
+  if(competitors.length===0)return;
+  var btn=document.getElementById('run-comp-btn');
+  btn.disabled=true;btn.textContent='Analysing\u2026';
+  var output=document.getElementById('comp-output');
+  output.innerHTML='';
+  // Analyse each competitor in parallel using Claude API
+  var promises=competitors.map(function(domain){return analyseCompetitor(domain);});
+  var results=await Promise.all(promises);
+  btn.disabled=false;btn.textContent='Analyse all competitors \u2192';
+  results.forEach(function(r){output.appendChild(r);});
+}
+
+async function analyseCompetitor(domain){
+  var card=document.createElement('div');
+  card.className='card';card.style.marginBottom='12px';
+  card.innerHTML='<div class="ch"><div class="comp-domain-hd">'+
+  '<div class="comp-ico" style="width:24px;height:24px"><img src="https://www.google.com/s2/favicons?domain='+domain+'&sz=32" alt="" style="width:100%;height:100%;object-fit:cover"></div>'+
+  domain+
+  '</div></div>'+
+  '<div class="comp-status"><div class="loading-spinner-inline"></div>&nbsp;Fetching live data for '+domain+'&hellip;</div>';
+  try{
+    var prompt='You are a content strategy analyst. Analyse the website '+domain+' and provide a detailed competitive intelligence report for a cybersecurity company (Zeron) that focuses on Cyber Risk Quantification, AI-powered risk intelligence, and the FAIR/CVaR financial risk model.\n\nSearch the web for current information about '+domain+' and provide:\n\n1. COMPANY OVERVIEW: What does this company do? What is their core product/service and positioning? (2-3 sentences)\n\n2. CONTENT STRATEGY: How often do they publish content? What topics and keywords do they focus on? What content formats do they use (blog, whitepapers, webinars, etc.)?\n\n3. TARGET AUDIENCE: Who are they targeting? CISOs? Security analysts? GRC? C-suite?\n\n4. KEY DIFFERENTIATORS: What do they claim makes them unique? What is their core value proposition?\n\n5. COMPETITIVE GAPS vs ZERON: What topics or capabilities does Zeron cover (CVaR, QBER, FAIR model, financial risk quantification, ZIN Advisor AI copilot, OT risk, CIRCIA compliance) that this competitor does NOT appear to address strongly?\n\n6. CONTENT OPPORTUNITIES: What specific blog topics or angles could Zeron write about to outrank or outposition this competitor?\n\nBe specific, factual, and based on actual web data. If you cannot find sufficient data about this domain, say so explicitly. Do not fabricate statistics or capabilities.';
+    var response=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1000,
+        tools:[{type:'web_search_20250305',name:'web_search'}],
+        messages:[{role:'user',content:prompt}]
+      })
+    });
+    var data=await response.json();
+    var text='';
+    if(data.content){
+      data.content.forEach(function(block){if(block.type==='text')text+=block.text;});
+    }
+    if(!text&&data.error){text='Error: '+data.error.message;}
+    card.innerHTML='<div class="ch"><div class="comp-domain-hd">'+
+    '<div class="comp-ico" style="width:24px;height:24px"><img src="https://www.google.com/s2/favicons?domain='+domain+'&sz=32" alt="" style="width:100%;height:100%;object-fit:cover"></div>'+
+    '<span style="font-size:13px;font-weight:700">'+domain+'</span>'+
+    '</div><button class="btn bgh bxs" onclick="removeComp('+competitors.indexOf(domain)+')">Remove</button></div>'+
+    '<div class="comp-text">'+formatCompetitorReport(text)+'</div>';
+  }catch(err){
+    card.innerHTML='<div class="ch"><div class="comp-domain-hd"><span style="font-size:13px;font-weight:700">'+domain+'</span></div></div>'+
+    '<div class="comp-err">Unable to fetch competitor data. This may be due to API connectivity. Error: '+err.message+'</div>';
+  }
+  return card;
+}
+
+function formatCompetitorReport(text){
+  // Convert markdown-like text to HTML
+  return text
+    .replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>')
+    .replace(/^(\d+)\.\s+([A-Z\s]+):/gm,'<div class="comp-section-t">$1. $2</div>')
+    .replace(/^[-\*]\s+(.+)/gm,'<li style="margin-left:14px;margin-bottom:5px;font-size:12px;color:var(--t2);line-height:1.6">$1</li>')
+    .replace(/\n\n/g,'</p><p style="font-size:12px;color:var(--t2);line-height:1.65;margin-bottom:10px">')
+    .replace(/^(?!<)(.+)$/gm,'<p style="font-size:12px;color:var(--t2);line-height:1.65;margin-bottom:10px">$1</p>')
+    .replace(/<\/p><p[^>]*><\/p>/g,'');
+}
+</script>
+</body>
+</html>
