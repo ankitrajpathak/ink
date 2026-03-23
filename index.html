@@ -39,7 +39,7 @@ button,input,textarea{font-family:var(--F)}svg{display:block;flex-shrink:0}
 .ob-left::before{content:'';position:absolute;width:400px;height:400px;border-radius:50%;top:-120px;left:-80px;background:radial-gradient(circle,rgba(30,94,243,.28) 0%,transparent 65%);pointer-events:none}
 .ob-left::after{content:'';position:absolute;width:300px;height:300px;border-radius:50%;bottom:-80px;right:-60px;background:radial-gradient(circle,rgba(116,48,212,.18) 0%,transparent 65%);pointer-events:none}
 .ob-brand{display:flex;align-items:center;gap:10px}
-/*logo in onboard */
+/* Brand logo in onboard */
 .ob-brand-logo{display:flex;align-items:center;gap:8px}
 .ob-z-ico{width:32px;height:32px;border-radius:9px;background:var(--A);display:flex;align-items:center;justify-content:center;box-shadow:0 0 20px rgba(30,94,243,.5)}
 .ob-z-nm{font-size:18px;font-weight:800;color:#fff;letter-spacing:-.5px}
@@ -115,7 +115,7 @@ button,input,textarea{font-family:var(--F)}svg{display:block;flex-shrink:0}
 .hbg:hover{background:var(--s2)}.hbg span{display:block;width:13px;height:1.5px;background:var(--t2);border-radius:1px}
 .tb-brand{display:flex;align-items:center;gap:8px;white-space:nowrap;overflow:hidden;transition:opacity .2s}
 .layout.sbc .tb-brand{opacity:0;pointer-events:none;width:0}
-/* Zeron logo in topbar */
+/* Brand logo in topbar */
 .tb-z-ico{width:22px;height:22px;border-radius:6px;background:var(--A);display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .tb-z-nm{font-size:13px;font-weight:700;letter-spacing:-.2px}
 .tb-div{width:1px;height:14px;background:var(--b2);flex-shrink:0}
@@ -474,7 +474,7 @@ button,input,textarea{font-family:var(--F)}svg{display:block;flex-shrink:0}
     </div>
     <div class="spl-nm">INK</div>
   </div>
-  <div class="spl-tag">SERP Content Engine &nbsp;&middot;&nbsp; Powered by Zeron</div>
+  <div class="spl-tag">SERP Content Engine &nbsp;&middot;&nbsp; </div>
   <div class="spl-bar"><div class="spl-fill" id="spl-fill"></div></div>
   <div class="spl-ver">v3.0 &nbsp;&middot;&nbsp; 2026</div>
 </div>
@@ -488,10 +488,8 @@ button,input,textarea{font-family:var(--F)}svg{display:block;flex-shrink:0}
           <div class="ob-z-ico">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="white"><rect x="2" y="2" width="5.5" height="12" rx="1.4"/><rect x="9.5" y="2" width="5.5" height="3.2" rx="1.1"/><rect x="9.5" y="6.9" width="5.5" height="3.2" rx="1.1"/><rect x="9.5" y="11.8" width="3.8" height="2.2" rx="1"/></svg>
           </div>
-          <div class="ob-z-nm">Zeron</div>
+          <div class="ob-z-nm">INK</div>
         </div>
-        <div class="ob-sep"></div>
-        <div class="ob-ink-nm">INK</div>
       </div>
       <div style="margin-top:auto;position:relative;z-index:1">
         <div class="ob-prg" id="obprg">
@@ -522,7 +520,7 @@ button,input,textarea{font-family:var(--F)}svg{display:block;flex-shrink:0}
           <div class="fld">
             <span class="fl">Brand / Company Name</span>
             <div style="position:relative">
-              <input class="inp" id="i-brand" placeholder="e.g. Durex, Zeron, Swiggy&hellip;" autocomplete="off" oninput="onBrandInput(this.value)" style="padding-right:38px">
+              <input class="inp" id="i-brand" placeholder="e.g. Durex, Swiggy, Notion&hellip;" autocomplete="off" oninput="onBrandInput(this.value);ob1Changed()" style="padding-right:38px">
               <div id="brand-search-ico" style="position:absolute;right:11px;top:50%;transform:translateY(-50%);display:none">
                 <div style="width:14px;height:14px;border:2px solid rgba(30,94,243,.2);border-top-color:var(--A);border-radius:50%;animation:spin .7s linear infinite"></div>
               </div>
@@ -638,7 +636,7 @@ button,input,textarea{font-family:var(--F)}svg{display:block;flex-shrink:0}
     </div>
     <div class="an-dom" id="an-dom">
       <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="5" cy="5" r="4"/><path d="M5 1C3.9 2.2 3.2 3.6 3.2 5S3.9 7.8 5 9M5 1C6.1 2.2 6.8 3.6 6.8 5S6.1 7.8 5 9M1 5h8"/></svg>
-      Scanning: zeron.one
+      Scanning your domain...
     </div>
   </div>
 </div>
@@ -651,18 +649,18 @@ button,input,textarea{font-family:var(--F)}svg{display:block;flex-shrink:0}
       <div class="tblz">
         <button class="hbg" onclick="toggleSB()"><span></span><span></span><span></span></button>
         <div class="tb-brand">
-          <div class="tb-z-ico">
-            <img src="https://www.google.com/s2/favicons?domain=zeron.one&sz=32" alt="Zeron" onerror="this.style.display='none';this.parentNode.innerHTML='<svg width=\'12\' height=\'12\' viewBox=\'0 0 12 12\' fill=\'white\'><rect x=\'1\' y=\'1\' width=\'4\' height=\'10\' rx=\'1\'/><rect x=\'7\' y=\'1\' width=\'4\' height=\'2.5\' rx=\'.8\'/><rect x=\'7\' y=\'4.75\' width=\'4\' height=\'2.5\' rx=\'.8\'/><rect x=\'7\' y=\'8.5\' width=\'2.8\' height=\'2.5\' rx=\'.8\'/></svg>'">
+          <div class="tb-z-ico" id="tb-brand-ico" style="display:none">
+            <img id="tb-brand-img" src="" alt="" style="width:100%;height:100%;object-fit:cover">
           </div>
-          <div class="tb-z-nm" id="ws-nm">Zeron</div>
-          <div class="tb-div"></div>
+          <div class="tb-z-nm" id="ws-nm" style="display:none"></div>
+          <div class="tb-div" id="tb-brand-div" style="display:none"></div>
           <div class="tb-ink-nm">INK</div>
         </div>
       </div>
       <div class="tb-mid">
-        <div class="ac" onclick="nav('algo')">
+        <div class="ac" onclick="nav('algo')" id="algo-chip">
           <div class="pulse"></div>
-          Google Core Update &middot; Mar 18, 2026
+          <span id="algo-chip-txt">Google Core Update &middot; Mar 18, 2026</span>
         </div>
       </div>
       <div class="tbr">
@@ -676,11 +674,12 @@ button,input,textarea{font-family:var(--F)}svg{display:block;flex-shrink:0}
 
     <aside class="sidebar">
       <div class="ws-chip" onclick="nav('brand')">
-        <div class="ws-av" id="ws-av-ico">
-          <img src="https://www.google.com/s2/favicons?domain=zeron.one&sz=32" alt="Z" onerror="this.style.display='none';this.parentNode.textContent='Z'">
+        <div class="ws-av" id="ws-av-ico" style="position:relative;overflow:hidden">
+          <img id="ws-av-img" src="" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none">
+          <span id="ws-av-letter" style="position:relative;z-index:1;font-size:11px;font-weight:800">?</span>
         </div>
         <div style="flex:1;min-width:0">
-          <div class="wsnm" id="ws-nm-sb">Zeron</div>
+          <div class="wsnm" id="ws-nm-sb">Your Brand</div>
           <div class="wspl">Pro &middot; 5 blogs / day</div>
         </div>
       </div>
@@ -773,9 +772,9 @@ button,input,textarea{font-family:var(--F)}svg{display:block;flex-shrink:0}
       <div class="pg on" id="pg-dashboard">
         <div class="ph">
           <div>
-            <div class="ph-ey">Good morning, Ankit &#128075;</div>
+            <div class="ph-ey">Good morning &#128075;</div>
             <div class="ph-t">Your SERP command centre</div>
-            <div class="ph-s">Sunday, 22 Mar 2026 &middot; 5 blogs ready &middot; Zeron &mdash; Cyber Risk Decision Intelligence</div>
+            <div class="ph-s" id="dash-sub">Sunday, 22 Mar 2026 &middot; 5 blogs ready &middot; Analysing your brand&hellip;</div>
           </div>
           <div class="ph-ac">
             <button class="btn bout bsm" onclick="nav('wod')">Write on demand</button>
@@ -783,9 +782,9 @@ button,input,textarea{font-family:var(--F)}svg{display:block;flex-shrink:0}
           </div>
         </div>
         <div class="sg">
-          <div class="sc"><div class="si" style="background:var(--ab)"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="var(--A)" stroke-width="1.7"><path d="M1.5 11l3.5-4.5 3 3 3.5-5.5 3 2.5"/></svg></div><div class="sl">Blogs generated</div><div class="sv">147</div><div class="sd">&#8593; 35 this week</div></div>
-          <div class="sc"><div class="si" style="background:var(--GB)"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="var(--G)" stroke-width="1.7"><path d="M2.5 7.5l3.5 4 6.5-8"/></svg></div><div class="sl">Avg SERP score</div><div class="sv">91</div><div class="sd">&#8593; 4 pts vs last week</div></div>
-          <div class="sc"><div class="si" style="background:var(--VB)"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="var(--V)" stroke-width="1.7"><path d="M7.5 1.5l2 4.5h5l-4 3.5 1.5 4.5-4.5-2.5-4.5 2.5 1.5-4.5-4-3.5h5z"/></svg></div><div class="sl">Trends tracked</div><div class="sv">24</div><div class="sd">3 new today</div></div>
+          <div class="sc"><div class="si" style="background:var(--ab)"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="var(--A)" stroke-width="1.7"><path d="M1.5 11l3.5-4.5 3 3 3.5-5.5 3 2.5"/></svg></div><div class="sl">Blogs generated</div><div class="sv" id="stat-blogs">0</div><div class="sd" id="stat-blogs-sub">Generating...</div></div>
+          <div class="sc"><div class="si" style="background:var(--GB)"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="var(--G)" stroke-width="1.7"><path d="M2.5 7.5l3.5 4 6.5-8"/></svg></div><div class="sl">Avg SERP score</div><div class="sv" id="stat-serp">--</div><div class="sd" id="stat-serp-sub">Calculating...</div></div>
+          <div class="sc"><div class="si" style="background:var(--VB)"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="var(--V)" stroke-width="1.7"><path d="M7.5 1.5l2 4.5h5l-4 3.5 1.5 4.5-4.5-2.5-4.5 2.5 1.5-4.5-4-3.5h5z"/></svg></div><div class="sl">Trends tracked</div><div class="sv" id="stat-trends">--</div><div class="sd" id="stat-trends-sub">Scanning...</div></div>
           <div class="sc"><div class="si" style="background:var(--YB)"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="var(--Y)" stroke-width="1.7"><path d="M7.5 2L9 6H14l-3.5 2.5 1.5 4.5-4-2.5-4 2.5 1.5-4.5L2 6h5z"/></svg></div><div class="sl">Algo alerts</div><div class="sv" style="color:var(--Y)">1</div><div class="sd w">Core update &middot; Mar 18</div></div>
         </div>
         <div class="alert">
@@ -795,32 +794,33 @@ button,input,textarea{font-family:var(--F)}svg{display:block;flex-shrink:0}
         <div class="g2">
           <div class="card">
             <div class="ch"><div class="ct">Today&rsquo;s queue</div><span class="cl" onclick="nav('queue')">View all &rarr;</span></div>
-            <div class="br"><div class="bn">01</div><div class="bi"><div class="bt">How the Stryker Wiper Attack Exposed Gaps in OT Security Posture</div><div class="btags"><span class="tag tr">trending</span><span class="tag ty">seo anchor</span></div></div><div class="dot dg"></div></div>
-            <div class="br"><div class="bn">02</div><div class="bi"><div class="bt">CIRCIA Final Rule: What CISOs Must Report in 2026</div><div class="btags"><span class="tag tp">product</span><span class="tag ty">seo anchor</span></div></div><div class="dot dg"></div></div>
-            <div class="br"><div class="bn">03</div><div class="bi"><div class="bt">How CISOs Get Instant Answers Using ZIN Advisor</div><div class="btags"><span class="tag tp">product</span><span class="tag tb">zeron</span></div></div><div class="dot da"></div></div>
+            <div id="dash-queue-loading" style="text-align:center;padding:18px 0;font-size:12px;color:var(--t3);font-family:var(--M)">
+              <div style="display:inline-flex;align-items:center;gap:6px"><div style="width:12px;height:12px;border:2px solid rgba(30,94,243,.2);border-top-color:var(--A);border-radius:50%;animation:spin .7s linear infinite"></div>Generating blog ideas&hellip;</div>
+            </div>
+            <div id="dash-queue-rows"></div>
           </div>
           <div class="card">
             <div class="ch"><div class="ct">Hot trends right now</div><span class="cl" onclick="nav('trends')">Radar &rarr;</span></div>
-            <div class="trow"><div class="tn2">01</div><div class="tt">Ransomware supply chain compromise Q1 2026</div><div class="heat hh">hot</div></div>
-            <div class="trow"><div class="tn2">02</div><div class="tt">DOGE cuts impact on CISA cyber workforce</div><div class="heat hh">hot</div></div>
-            <div class="trow"><div class="tn2">03</div><div class="tt">SEC cyber disclosure enforcement actions</div><div class="heat hw">rising</div></div>
-            <div class="trow"><div class="tn2">04</div><div class="tt">CMMC 2.0 final compliance deadlines</div><div class="heat hw">rising</div></div>
+            <div id="dash-trends-loading" style="text-align:center;padding:18px 0;font-size:12px;color:var(--t3);font-family:var(--M)">
+              <div style="display:inline-flex;align-items:center;gap:6px"><div style="width:12px;height:12px;border:2px solid rgba(30,94,243,.2);border-top-color:var(--A);border-radius:50%;animation:spin .7s linear infinite"></div>Scanning industry trends&hellip;</div>
+            </div>
+            <div id="dash-trends-rows"></div>
           </div>
         </div>
         <div class="card">
           <div class="ch">
-            <div><div class="ct">Brand intelligence scan &mdash; Zeron</div><div class="cc" style="margin-top:2px">Last: 22 Mar 2026, 04:00 IST &middot; Auto-rescan weekly</div></div>
+            <div><div class="ct"><span id="scan-card-title">Brand intelligence scan</span></div><div class="cc" style="margin-top:2px">Last: 22 Mar 2026, 04:00 IST &middot; Auto-rescan weekly</div></div>
             <div id="rescan-btn" class="rescan-btn" onclick="startRescan()">
               <svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9.5 5.5a4 4 0 11-1.2-2.9"/><path d="M9.5 1.5v2.5H7"/></svg>
               Rescan now
             </div>
           </div>
           <div id="scan-rows">
-            <div class="scr"><div class="scl">zeron.one/blog</div><div class="scv">18 posts indexed</div><div class="sct"><div class="scb" style="width:0" data-w="90"></div></div></div>
-            <div class="scr"><div class="scl">Products &amp; features</div><div class="scv">5 modules mapped</div><div class="sct"><div class="scb" style="width:0" data-w="100"></div></div></div>
-            <div class="scr"><div class="scl">LinkedIn page</div><div class="scv">92 posts analysed</div><div class="sct"><div class="scb" style="width:0" data-w="78"></div></div></div>
-            <div class="scr"><div class="scl">Sanket Sarkar posts</div><div class="scv">Founder voice mapped</div><div class="sct"><div class="scb" style="width:0" data-w="82"></div></div></div>
-            <div class="scr"><div class="scl">Tone fingerprint</div><div class="scv">CISO-first &middot; Decision-intelligence</div><div class="sct"><div class="scb" style="width:0" data-w="95"></div></div></div>
+            <div class="scr"><div class="scl" id="scan-l1">Website blog</div><div class="scv" id="scan-v1">Scanning&hellip;</div><div class="sct"><div class="scb" style="width:0" data-w="88" id="scan-b1"></div></div></div>
+            <div class="scr"><div class="scl" id="scan-l2">Products &amp; pages</div><div class="scv" id="scan-v2">Scanning&hellip;</div><div class="sct"><div class="scb" style="width:0" data-w="95" id="scan-b2"></div></div></div>
+            <div class="scr"><div class="scl" id="scan-l3">LinkedIn page</div><div class="scv" id="scan-v3">Scanning&hellip;</div><div class="sct"><div class="scb" style="width:0" data-w="74" id="scan-b3"></div></div></div>
+            <div class="scr"><div class="scl" id="scan-l4">Tone fingerprint</div><div class="scv" id="scan-v4">Detecting&hellip;</div><div class="sct"><div class="scb" style="width:0" data-w="92" id="scan-b4"></div></div></div>
+            <div class="scr"><div class="scl" id="scan-l5">Keyword model</div><div class="scv" id="scan-v5">Building&hellip;</div><div class="sct"><div class="scb" style="width:0" data-w="85" id="scan-b5"></div></div></div>
           </div>
         </div>
       </div>
@@ -829,11 +829,10 @@ button,input,textarea{font-family:var(--F)}svg{display:block;flex-shrink:0}
       <div class="pg" id="pg-queue">
         <div class="ph"><div><div class="ph-t">Today&rsquo;s queue</div><div class="ph-s">5 blogs &middot; Generated 04:00 IST &middot; All ready to publish</div></div><div class="ph-ac"><button class="btn bout bsm">Export all</button></div></div>
         <div class="card">
-          <div class="br"><div class="bn">01</div><div class="bi"><div class="bt">How the Stryker Wiper Attack Exposed Gaps in OT Security Posture</div><div class="btags" style="margin-bottom:4px"><span class="tag tr">trending</span><span class="tag ty">seo anchor</span><span class="tag tn">2,800 words</span></div><div class="sbar"><div class="strack"><div class="sfill sfg" style="width:0" data-w="94"></div></div><div class="ssco">94 SERP</div></div></div><div class="brr"><div class="dot dg"></div><button class="btn bout bxs" onclick="openPreview(0)">Preview</button></div></div>
-          <div class="br"><div class="bn">02</div><div class="bi"><div class="bt">CIRCIA Final Rule: What CISOs Must Report in 2026</div><div class="btags" style="margin-bottom:4px"><span class="tag tp">product-adj</span><span class="tag ty">seo anchor</span><span class="tag tn">2,400 words</span></div><div class="sbar"><div class="strack"><div class="sfill sfg" style="width:0" data-w="91"></div></div><div class="ssco">91 SERP</div></div></div><div class="brr"><div class="dot dg"></div><button class="btn bout bxs" onclick="openPreview(1)">Preview</button></div></div>
-          <div class="br"><div class="bn">03</div><div class="bi"><div class="bt">How CISOs Get Instant Answers to Cyber Risk Questions Using ZIN Advisor</div><div class="btags" style="margin-bottom:4px"><span class="tag tp">product</span><span class="tag tb">zeron</span><span class="tag tn">2,100 words</span></div><div class="sbar"><div class="strack"><div class="sfill sfa" style="width:0" data-w="88"></div></div><div class="ssco">88 SERP</div></div></div><div class="brr"><div class="dot da"></div><button class="btn bout bxs" onclick="openPreview(2)">Preview</button></div></div>
-          <div class="br"><div class="bn">04</div><div class="bi"><div class="bt">FAIR Model Explained: Translating Cyber Risk into Dollar Impact for the Board</div><div class="btags" style="margin-bottom:4px"><span class="tag tp">product</span><span class="tag ty">seo anchor</span><span class="tag tn">2,600 words</span></div><div class="sbar"><div class="strack"><div class="sfill sfg" style="width:0" data-w="96"></div></div><div class="ssco">96 SERP</div></div></div><div class="brr"><div class="dot dg"></div><button class="btn bout bxs" onclick="openPreview(3)">Preview</button></div></div>
-          <div class="br"><div class="bn">05</div><div class="bi"><div class="bt">Hidden Cost of Vendor Risk: How Supply Chain Attacks Quantify into CVaR</div><div class="btags" style="margin-bottom:4px"><span class="tag tr">trending</span><span class="tag tp">product</span><span class="tag tn">2,200 words</span></div><div class="sbar"><div class="strack"><div class="sfill sfg" style="width:0" data-w="90"></div></div><div class="ssco">90 SERP</div></div></div><div class="brr"><div class="dot dg"></div><button class="btn bout bxs" onclick="openPreview(4)">Preview</button></div></div>
+          <div id="queue-loading" style="text-align:center;padding:28px 0;font-size:12px;color:var(--t3);font-family:var(--M)">
+            <div style="display:inline-flex;align-items:center;gap:6px"><div style="width:12px;height:12px;border:2px solid rgba(30,94,243,.2);border-top-color:var(--A);border-radius:50%;animation:spin .7s linear infinite"></div>Generating today&rsquo;s queue&hellip;</div>
+          </div>
+          <div id="queue-rows"></div>
         </div>
         <div class="card">
           <div class="ch"><div class="ct">Publish to platform</div><span class="cc">Platform-specific schema &amp; meta applied automatically</span></div>
@@ -860,13 +859,9 @@ button,input,textarea{font-family:var(--F)}svg{display:block;flex-shrink:0}
           <div class="wey">Ask INK to write anything</div>
           <div class="wtt">What do you want to rank for?</div>
           <div class="wsb">Be as broad or specific as you like. INK pulls live keyword data, real SERP signals, and AnswerThePublic-style questions before writing.</div>
-          <div class="wrow"><input class="winp" id="wod-inp" placeholder="e.g. why CISOs need cyber risk quantification"><button class="wgo" onclick="startWOD()">Research + Write &rarr;</button></div>
-          <div class="wtags">
-            <span class="wt" onclick="fw('How CISOs get instant answers to cyber risk questions using ZIN Advisor')">ZIN Advisor &mdash; CISO guide</span>
-            <span class="wt" onclick="fw('OT security posture management 2026')">OT security 2026</span>
-            <span class="wt" onclick="fw('CIRCIA final rule CISO guide 2026')">CIRCIA guide</span>
-            <span class="wt" onclick="fw('CVaR vs CVSS board reporting')">CVaR vs CVSS</span>
-            <span class="wt" onclick="fw('QBER quantified exposure to risk explained')">QBER explained</span>
+          <div class="wrow"><input class="winp" id="wod-inp" placeholder="e.g. best moisturiser for dry skin, how to track a delivery, top cloud security tools&hellip;"><button class="wgo" onclick="startWOD()">Research + Write &rarr;</button></div>
+          <div class="wtags" id="wod-quick-tags">
+            <div style="font-size:10px;font-family:var(--M);color:rgba(255,255,255,.3);padding:4px 0">Loading quick suggestions for your brand&hellip;</div>
           </div>
         </div>
         <div class="wiz" id="wiz-card">
@@ -876,7 +871,14 @@ button,input,textarea{font-family:var(--F)}svg{display:block;flex-shrink:0}
             <button class="btn bgh bxs" onclick="resetWOD()" style="margin-top:3px">Reset</button>
           </div>
           <div class="wizbd">
-            <div class="wizpn on" id="wp1"><div class="wzopts"><div class="wo" onclick="pw(this)"><div class="wot">CISOs / VPs</div><div class="wos">Strategic, board-ready</div></div><div class="wo" onclick="pw(this)"><div class="wot">Security Analysts</div><div class="wos">Technical, operational</div></div><div class="wo" onclick="pw(this)"><div class="wot">GRC / Compliance</div><div class="wos">Regulatory lens</div></div><div class="wo" onclick="pw(this)"><div class="wot">Board / C-Suite</div><div class="wos">Business risk, no jargon</div></div><div class="wo" onclick="pw(this)"><div class="wot">DevSecOps</div><div class="wos">Technical + dev context</div></div><div class="wo" onclick="pw(this)"><div class="wot">General / Broad</div><div class="wos">Max SEO reach</div></div></div></div>
+            <div class="wizpn on" id="wp1"><div class="wzopts" id="wiz-audience-opts">
+              <div class="wo" onclick="pw(this)"><div class="wot">Primary Audience</div><div class="wos">Core ICP</div></div>
+              <div class="wo" onclick="pw(this)"><div class="wot">Secondary Audience</div><div class="wos">Adjacent segment</div></div>
+              <div class="wo" onclick="pw(this)"><div class="wot">Decision Makers</div><div class="wos">Buyers / approvers</div></div>
+              <div class="wo" onclick="pw(this)"><div class="wot">End Users</div><div class="wos">Direct product users</div></div>
+              <div class="wo" onclick="pw(this)"><div class="wot">Industry Professionals</div><div class="wos">Sector experts</div></div>
+              <div class="wo" onclick="pw(this)"><div class="wot">General / Broad</div><div class="wos">Max SEO reach</div></div>
+            </div></div>
             <div class="wizpn" id="wp2"><div class="wzopts"><div class="wo" onclick="pw(this)"><div class="wot">Rank #1 on SERP</div><div class="wos">Keyword domination</div></div><div class="wo" onclick="pw(this)"><div class="wot">Drive demo bookings</div><div class="wos">Conversion-led CTA</div></div><div class="wo" onclick="pw(this)"><div class="wot">Build authority</div><div class="wos">Thought leadership</div></div><div class="wo" onclick="pw(this)"><div class="wot">Newsjack a trend</div><div class="wos">Speed + relevance</div></div><div class="wo" onclick="pw(this)"><div class="wot">GEO / AEO</div><div class="wos">AI engine visibility</div></div><div class="wo" onclick="pw(this)"><div class="wot">Explain product</div><div class="wos">Feature narrative</div></div></div></div>
             <div class="wizpn" id="wp3"><div class="wzopts"><div class="wo" onclick="pw(this)"><div class="wot">Breaking news take</div><div class="wos">Timely, reactive</div></div><div class="wo" onclick="pw(this)"><div class="wot">Definitive guide</div><div class="wos">Long-form, evergreen</div></div><div class="wo" onclick="pw(this)"><div class="wot">How-to / Checklist</div><div class="wos">Tactical, actionable</div></div><div class="wo" onclick="pw(this)"><div class="wot">Data-driven piece</div><div class="wos">Stats-led analysis</div></div><div class="wo" onclick="pw(this)"><div class="wot">Opinion / POV</div><div class="wos">Provocative, shareable</div></div><div class="wo" onclick="pw(this)"><div class="wot">Case study</div><div class="wos">Story-led proof</div></div></div></div>
             <div class="wizpn" id="wp4"><div class="wzopts"><div class="wo" onclick="pw(this)"><div class="wot">WordPress</div><div class="wos">Yoast-ready schema</div></div><div class="wo" onclick="pw(this)"><div class="wot">Substack</div><div class="wos">Email + web hybrid</div></div><div class="wo" onclick="pw(this)"><div class="wot">Medium</div><div class="wos">Tag + publication SEO</div></div><div class="wo" onclick="pw(this)"><div class="wot">Webflow</div><div class="wos">Canonical + CMS schema</div></div><div class="wo" onclick="pw(this)"><div class="wot">Ghost</div><div class="wos">JSON-LD structured data</div></div><div class="wo" onclick="pw(this)"><div class="wot">LinkedIn Article</div><div class="wos">Algorithm-native</div></div></div></div>
@@ -922,26 +924,11 @@ button,input,textarea{font-family:var(--F)}svg{display:block;flex-shrink:0}
 
       <!-- TRENDS -->
       <div class="pg" id="pg-trends">
-        <div class="ph"><div><div class="ph-t">Trends radar</div><div class="ph-s">Cybersecurity &middot; CISOs &middot; Security leadership &middot; Updated 06:00 IST</div></div><button class="btn bout bsm">Refresh now</button></div>
-        <div class="g3">
-          <div class="card"><div class="ch"><div class="ct">Breaking now</div><span class="tag tr">live</span></div>
-            <div class="trow"><div class="tn2">01</div><div class="tt">Stryker / Handala wiper &mdash; OT fallout</div><div class="heat hh">hot</div></div>
-            <div class="trow"><div class="tn2">02</div><div class="tt">DOGE cuts CISA cyber workforce</div><div class="heat hh">hot</div></div>
-            <div class="trow"><div class="tn2">03</div><div class="tt">Midnight Blizzard targeting NATO infra</div><div class="heat hh">hot</div></div>
+        <div class="ph"><div><div class="ph-t">Trends radar</div><div class="ph-s" id="trends-sub">Scanning industry trends&hellip; &middot; Updated 06:00</div></div><button class="btn bout bsm" onclick="refreshTrends()">Refresh now</button></div>
+        <div id="trends-content">
+          <div style="text-align:center;padding:40px 0;font-size:12px;color:var(--t3);font-family:var(--M)">
+            <div style="display:inline-flex;align-items:center;gap:6px"><div style="width:13px;height:13px;border:2px solid rgba(30,94,243,.2);border-top-color:var(--A);border-radius:50%;animation:spin .7s linear infinite"></div>Fetching trending topics in your industry&hellip;</div>
           </div>
-          <div class="card"><div class="ch"><div class="ct">Regulatory pulse</div><span class="tag ty">rising</span></div>
-            <div class="trow"><div class="tn2">01</div><div class="tt">CIRCIA final rule enforcement Q2 2026</div><div class="heat hw">rising</div></div>
-            <div class="trow"><div class="tn2">02</div><div class="tt">SEC cyber disclosure enforcement uptick</div><div class="heat hw">rising</div></div>
-            <div class="trow"><div class="tn2">03</div><div class="tt">CMMC 2.0 Level 2 deadline pressure</div><div class="heat hw">rising</div></div>
-          </div>
-          <div class="card"><div class="ch"><div class="ct">ICP conversations</div><span class="cc">CISOs &middot; boards</span></div>
-            <div class="trow"><div class="tn2">01</div><div class="tt">Board-level cyber risk reporting</div><div class="heat hw">rising</div></div>
-            <div class="trow"><div class="tn2">02</div><div class="tt">CRQ adoption post-breach narrative</div><div class="heat hw">rising</div></div>
-            <div class="trow"><div class="tn2">03</div><div class="tt">AI-driven threat surface expansion</div><div class="heat hc">stable</div></div>
-          </div>
-        </div>
-        <div class="card"><div class="ch"><div class="ct">Source feeds</div><span class="cc">9 active</span></div>
-          <div><span class="kw">Krebs on Security</span><span class="kw">Dark Reading</span><span class="kw">The Record</span><span class="kw">SC Media</span><span class="kw">CISA Advisories</span><span class="kw">SEC EDGAR</span><span class="kw">Reddit r/netsec</span><span class="kw">LinkedIn trending</span><span class="kw">Google Trends API</span></div>
         </div>
       </div>
 
@@ -966,15 +953,21 @@ button,input,textarea{font-family:var(--F)}svg{display:block;flex-shrink:0}
 
       <!-- COMPETITOR ANALYSIS -->
       <div class="pg" id="pg-competitor">
-        <div class="ph"><div><div class="ph-t">Competitor intel</div><div class="ph-s">Real-time content strategy analysis &middot; Powered by Claude AI + web search &middot; Up to 5 competitors</div></div></div>
+        <div class="ph"><div><div class="ph-t">Competitor intel</div><div class="ph-s">Real-time content strategy analysis &middot; Claude AI + web search &middot; Up to 5 competitors</div></div></div>
+        <!-- Suggested competitors -->
+        <div class="card" id="comp-suggestions-card" style="display:none">
+          <div class="ch"><div class="ct">Suggested competitors</div><span class="cc" id="comp-sugg-label">Based on your industry</span></div>
+          <div id="comp-suggestions-list" style="display:flex;flex-wrap:wrap;gap:7px"></div>
+        </div>
+        <!-- Add custom -->
         <div class="card">
-          <div class="ch"><div class="ct">Add competitors</div><span class="cc">Enter a domain &mdash; INK will fetch their content strategy, keywords, and blog approach in real time using AI</span></div>
+          <div class="ch"><div class="ct">Add competitors</div><span class="cc">Add up to 5 domains &mdash; INK fetches their full content strategy in real time</span></div>
           <div class="comp-add-row">
-            <input class="comp-inp" id="comp-inp" placeholder="e.g. securityscorecard.com or paloaltonetworks.com" onkeydown="if(event.key==='Enter')addCompetitor()">
+            <input class="comp-inp" id="comp-inp" placeholder="e.g. nike.com, zomato.com, notion.so" onkeydown="if(event.key==='Enter')addCompetitor()">
             <button class="btn bbl bsm" onclick="addCompetitor()">+ Add</button>
           </div>
           <div class="comp-list" id="comp-list"></div>
-          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:4px">
             <button class="btn bbl bmd" id="run-comp-btn" onclick="runCompetitorAnalysis()" style="display:none">Analyse all competitors &rarr;</button>
             <div style="font-size:11px;color:var(--t3);font-family:var(--M)" id="comp-hint">Add at least one competitor domain to start.</div>
           </div>
@@ -984,122 +977,71 @@ button,input,textarea{font-family:var(--F)}svg{display:block;flex-shrink:0}
 
       <!-- BRAND PROFILE -->
       <div class="pg" id="pg-brand">
-        <div class="ph"><div><div class="ph-t">Brand profile &mdash; Zeron</div><div class="ph-s">How INK understands your brand, ethos, products, and team</div></div></div>
+        <div class="ph">
+          <div><div class="ph-t" id="brand-pg-title">Brand profile</div><div class="ph-s" id="brand-pg-sub">How INK understands your brand, voice, and content positioning</div></div>
+          <button class="btn bout bsm" onclick="refreshBrandProfile()">
+            <svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9.5 5.5a4 4 0 11-1.2-2.9"/><path d="M9.5 1.5v2.5H7"/></svg>
+            Re-analyse
+          </button>
+        </div>
         <div class="brand-hero">
           <div class="bh-logo">
-            <div class="bh-ico">
-              <img src="https://www.google.com/s2/favicons?domain=zeron.one&sz=64" alt="Zeron" onerror="this.style.display='none';this.parentNode.innerHTML='<svg width=\'22\' height=\'22\' viewBox=\'0 0 22 22\' fill=\'white\'><rect x=\'2\' y=\'2\' width=\'7.5\' height=\'18\' rx=\'1.8\'/><rect x=\'12\' y=\'2\' width=\'8\' height=\'4.5\' rx=\'1.5\'/><rect x=\'12\' y=\'8.75\' width=\'8\' height=\'4.5\' rx=\'1.5\'/><rect x=\'12\' y=\'15.5\' width=\'5.5\' height=\'4.5\' rx=\'1.5\'/></svg>'">
-            </div>
-            <div class="bh-nm">Zeron</div>
+            <div class="bh-ico" id="bh-ico-el"><svg width="22" height="22" viewBox="0 0 22 22" fill="rgba(255,255,255,.3)"><rect x="2" y="2" width="7.5" height="18" rx="1.8"/><rect x="12" y="2" width="8" height="4.5" rx="1.5"/><rect x="12" y="8.75" width="8" height="4.5" rx="1.5"/><rect x="12" y="15.5" width="5.5" height="4.5" rx="1.5"/></svg></div>
+            <div class="bh-nm" id="bh-name-el">Your Brand</div>
           </div>
-          <div class="bh-pos">AI-Powered Cyber Risk Decision Intelligence Platform. Zeron transforms raw cyber data into quantified, board-ready risk intelligence through its agentic AI layer ZIN and the QBER financial model. Built for CISOs who need decisive clarity, not more dashboards.</div>
-          <div class="bh-tags">
-            <span class="bh-tag">Cyber Risk Quantification</span><span class="bh-tag">QBER Model</span><span class="bh-tag">ZIN Advisor</span><span class="bh-tag">Cyber Risk Posture Management</span><span class="bh-tag">Decision Intelligence</span><span class="bh-tag">CISO-first</span><span class="bh-tag">SEBI CSCRF</span><span class="bh-tag">CIRCIA</span><span class="bh-tag">DSCI Innovation Box</span>
-          </div>
+          <div class="bh-pos" id="bh-pos-el">Complete your workspace setup to see your brand profile here.</div>
+          <div class="bh-tags" id="bh-tags-el"></div>
         </div>
         <div class="card">
-          <div class="ch"><div class="ct">Founding team &amp; leadership</div><span class="cc">Mapped from LinkedIn &middot; Used for author blocks &amp; brand voice</span></div>
-          <div class="g2">
-            <div class="founder-card">
-              <div style="display:flex;align-items:flex-start;gap:12px">
-                <div class="fc-av">SS</div>
-                <div style="flex:1">
-                  <div class="fc-nm">Sanket Sarkar</div>
-                  <div class="fc-role">Founder &amp; CEO &middot; Zeron</div>
-                  <div class="fc-bio">Cybersecurity strategist and builder behind Zeron. Former information security practitioner. Advocates for CISO clarity over complexity &mdash; translating cyber risk into business language that boards and CFOs can act on. INK uses Sanket&rsquo;s authored content to anchor Zeron&rsquo;s founder perspective into every blog.</div>
-                  <div class="fc-links">
-                    <div class="fc-link" onclick="window.open('https://linkedin.com/in/infosecsanket','_blank')">
-                      <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor"><rect x="0" y="3.5" width="2" height="6.5" rx=".4"/><circle cx="1" cy="1.2" r="1"/><path d="M3.5 3.5h2v1s.5-1 2-1c1.4 0 2 .9 2 2.5V10H7.5V6.5c0-.8-.3-1.5-1-1.5s-1 .7-1 1.5V10H3.5z"/></svg>
-                      linkedin.com/in/infosecsanket
-                    </div>
-                    <div class="fc-link">
-                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="5" cy="5" r="4"/><path d="M5 1C3.9 2.2 3.2 3.6 3.2 5S3.9 7.8 5 9M5 1C6.1 2.2 6.8 3.6 6.8 5S6.1 7.8 5 9M1 5h8"/></svg>
-                      zeron.one
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="founder-card">
-              <div style="display:flex;align-items:flex-start;gap:12px">
-                <div class="fc-av" style="background:var(--G)">Z</div>
-                <div style="flex:1">
-                  <div class="fc-nm">Zeron Security Research</div>
-                  <div class="fc-role">Research Team &middot; Zeron</div>
-                  <div class="fc-bio">Zeron&rsquo;s research team produces deep-dive analysis on cyber risk quantification, OT security posture, regulatory compliance, and the financial modelling frameworks (FAIR, CVaR, QBER) that underpin the platform. Used as the default author for technical and research-led blogs.</div>
-                  <div class="fc-links">
-                    <div class="fc-link" onclick="window.open('https://linkedin.com/company/securezeron','_blank')">
-                      <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor"><rect x="0" y="3.5" width="2" height="6.5" rx=".4"/><circle cx="1" cy="1.2" r="1"/><path d="M3.5 3.5h2v1s.5-1 2-1c1.4 0 2 .9 2 2.5V10H7.5V6.5c0-.8-.3-1.5-1-1.5s-1 .7-1 1.5V10H3.5z"/></svg>
-                      LinkedIn Company Page
-                    </div>
-                    <div class="fc-link" onclick="window.open('https://zeron.one/blog','_blank')">
-                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="5" cy="5" r="4"/><path d="M5 1C3.9 2.2 3.2 3.6 3.2 5S3.9 7.8 5 9M5 1C6.1 2.2 6.8 3.6 6.8 5S6.1 7.8 5 9M1 5h8"/></svg>
-                      zeronwebs / Insights
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <div class="ch"><div class="ct" id="brand-team-title">Leadership &amp; team</div><span class="cc">Mapped from LinkedIn &middot; Used for author blocks</span></div>
+          <div id="brand-team-content"><div style="text-align:center;padding:18px 0;font-size:12px;color:var(--t3);font-family:var(--M)"><div style="display:inline-flex;align-items:center;gap:6px"><div style="width:12px;height:12px;border:2px solid rgba(30,94,243,.2);border-top-color:var(--A);border-radius:50%;animation:spin .7s linear infinite"></div>Fetching team info&hellip;</div></div></div>
         </div>
         <div class="card">
-          <div class="ch"><div class="ct">Brand ethos &amp; voice pillars</div></div>
-          <div class="ethos-item"><div class="ei-t">Decisive clarity over information overload</div><div class="ei-s">Zeron believes CISOs are not starved of data &mdash; they are starved of clarity. Every piece of content should move people from confusion to confident action. No noise, no hedging. Direct, board-ready, actionable.</div></div>
-          <div class="ethos-item"><div class="ei-t">Financial language is the language of leadership</div><div class="ei-s">CVSS scores don&rsquo;t move budgets. CVaR and QBER outputs do. Zeron&rsquo;s content consistently translates technical risk into dollar-denominated language that CFOs, boards, and investors understand and act on.</div></div>
-          <div class="ethos-item"><div class="ei-t">Agentic intelligence, not another dashboard</div><div class="ei-s">ZIN Advisor is a copilot, not a reporting layer. Content must emphasise the shift from passive monitoring to active, AI-driven decision support &mdash; a unified command layer that answers the questions boards ask in real time.</div></div>
-          <div class="ethos-item"><div class="ei-t">CISO-first, always</div><div class="ei-s">Every blog is written from the perspective of a security leader who carries board accountability. Not a vendor pitch &mdash; a peer-level strategic perspective that earns trust before asking for it.</div></div>
+          <div class="ch"><div class="ct">Brand voice &amp; content pillars</div></div>
+          <div id="brand-voice-content"><div style="text-align:center;padding:18px 0;font-size:12px;color:var(--t3);font-family:var(--M)"><div style="display:inline-flex;align-items:center;gap:6px"><div style="width:12px;height:12px;border:2px solid rgba(30,94,243,.2);border-top-color:var(--A);border-radius:50%;animation:spin .7s linear infinite"></div>Analysing brand voice&hellip;</div></div></div>
         </div>
         <div class="card">
-          <div class="ch"><div class="ct">Product ecosystem &mdash; 5 integrated modules + ZIN Advisor</div></div>
-          <div class="module-grid">
-            <div class="module-card"><div class="mc-ico" style="background:var(--ab)">&#127760;</div><div class="mc-t">Externo</div><div class="mc-s">External Attack Surface Management. Continuous discovery of internet-facing assets and exposure scoring.</div></div>
-            <div class="module-card"><div class="mc-ico" style="background:var(--GB)">&#128274;</div><div class="mc-t">Interno</div><div class="mc-s">Internal risk and insider threat intelligence. Control gap analysis and internal telemetry correlation.</div></div>
-            <div class="module-card"><div class="mc-ico" style="background:var(--VB)">&#128101;</div><div class="mc-t">Vendor Pulse</div><div class="mc-s">Third-party and supply chain risk management. Vendor scoring with CVaR-aligned financial impact modelling.</div></div>
-            <div class="module-card"><div class="mc-ico" style="background:var(--YB)">&#9989;</div><div class="mc-t">Conformity</div><div class="mc-s">Compliance automation across CIRCIA, CMMC, NIST CSF 2.0, SEC disclosure rules, SEBI CSCRF, and DPDP.</div></div>
-            <div class="module-card"><div class="mc-ico" style="background:var(--RB)">&#128202;</div><div class="mc-t">Cyber Navigator</div><div class="mc-s">Unified risk posture management. Single intelligence layer across all five modules.</div></div>
-            <div class="module-card" style="border-color:rgba(30,94,243,.3);background:var(--ab)"><div class="mc-ico" style="background:var(--ab2)">&#129302;</div><div class="mc-t" style="color:var(--A)">ZIN Advisor</div><div class="mc-s" style="color:var(--A)">AI-powered cyber risk copilot. Orchestrates all five modules into contextual, prioritised, board-ready intelligence.</div></div>
-          </div>
+          <div class="ch"><div class="ct" id="brand-products-title">Products &amp; offerings</div></div>
+          <div id="brand-products-content"><div style="text-align:center;padding:18px 0;font-size:12px;color:var(--t3);font-family:var(--M)"><div style="display:inline-flex;align-items:center;gap:6px"><div style="width:12px;height:12px;border:2px solid rgba(30,94,243,.2);border-top-color:var(--A);border-radius:50%;animation:spin .7s linear infinite"></div>Mapping products&hellip;</div></div></div>
         </div>
       </div>
-
       <!-- SOURCES -->
       <div class="pg" id="pg-sources">
-        <div class="ph"><div><div class="ph-t">Brand sources</div><div class="ph-s">INK reads these to understand your voice, products, and positioning</div></div><button class="btn bdk bsm">+ Add source</button></div>
-        <div class="card">
-          <div class="srow"><div class="sico" style="overflow:hidden"><img src="https://www.google.com/s2/favicons?domain=zeron.one&sz=32" alt="Z" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.parentNode.textContent='W'"></div><div><div class="snm">zeron.one</div><div class="surl">website &middot; full crawl</div></div><span class="pill pll">live</span></div>
-          <div class="srow"><div class="sico" style="overflow:hidden"><img src="https://www.google.com/s2/favicons?domain=zeron.one&sz=32" alt="B" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.parentNode.textContent='B'"></div><div><div class="snm">zeron.one/blog (zeronwebs &middot; Insights)</div><div class="surl">18 posts indexed &middot; Including ZIN Advisor guides, QBER explainers, compliance briefings</div></div><span class="pill pll">live</span></div>
-          <div class="srow"><div class="sico" style="overflow:hidden"><img src="https://www.google.com/s2/favicons?domain=linkedin.com&sz=32" alt="in" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.parentNode.textContent='in'"></div><div><div class="snm">Zeron LinkedIn Page</div><div class="surl">linkedin.com/company/securezeron &middot; 92 posts analysed</div></div><span class="pill pll">live</span></div>
-          <div class="srow"><div class="sico" style="overflow:hidden"><img src="https://www.google.com/s2/favicons?domain=linkedin.com&sz=32" alt="SS" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.parentNode.textContent='SS'"></div><div><div class="snm">Sanket Sarkar &mdash; Founder &amp; CEO</div><div class="surl">linkedin.com/in/infosecsanket &middot; Founder perspective, cybersecurity thought leadership</div></div><span class="pill pll">live</span></div>
-          <div class="srow"><div class="sico" style="overflow:hidden"><img src="https://www.google.com/s2/favicons?domain=zeron.one&sz=32" alt="Z" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.parentNode.textContent='Z'"></div><div><div class="snm">zin.zeron.one &mdash; ZIN Advisor</div><div class="surl">Product page &middot; AI copilot documentation &middot; QBER model details</div></div><span class="pill pls">scanning</span></div>
-          <div class="srow"><div class="sico" style="overflow:hidden"><img src="https://www.google.com/s2/favicons?domain=twitter.com&sz=32" alt="X" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.parentNode.textContent='X'"></div><div><div class="snm">Zeron on X (Twitter)</div><div class="surl">@zeronsec &middot; Product announcements, security news commentary</div></div><span class="pill pls">scanning</span></div>
-        </div>
+        <div class="ph"><div><div class="ph-t">Brand sources</div><div class="ph-s">INK reads these to understand your voice, products, and positioning</div></div><button class="btn bdk bsm" onclick="addSourcePrompt()">+ Add source</button></div>
+        <div class="card"><div id="sources-list"><div style="text-align:center;padding:22px 0;font-size:12px;color:var(--t3);font-family:var(--M)"><div style="display:inline-flex;align-items:center;gap:6px"><div style="width:12px;height:12px;border:2px solid rgba(30,94,243,.2);border-top-color:var(--A);border-radius:50%;animation:spin .7s linear infinite"></div>Detecting brand sources&hellip;</div></div></div></div>
       </div>
-
       <!-- KEYWORDS -->
       <div class="pg" id="pg-keywords">
-        <div class="ph"><div><div class="ph-t">Keyword engine</div><div class="ph-s">Pillar and long-tail clusters across all generated content</div></div></div>
+        <div class="ph"><div><div class="ph-t">Keyword engine</div><div class="ph-s">Pillar and long-tail clusters for your brand &middot; auto-updated daily</div></div></div>
         <div class="g2">
-          <div class="card"><div class="ch"><div class="ct">Pillar keywords</div></div>
-            <div style="margin-bottom:11px"><span style="font-size:9.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--t3);font-family:var(--M);display:block;margin-bottom:5px">Primary</span><div><span class="kw on">Cyber Risk Quantification</span><span class="kw on">Cyber Risk Posture Management</span><span class="kw on">QBER</span><span class="kw on">ZIN Advisor</span></div></div>
-            <div style="margin-bottom:11px"><span style="font-size:9.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--t3);font-family:var(--M);display:block;margin-bottom:5px">Supporting</span><div><span class="kw">CVaR cybersecurity</span><span class="kw">FAIR model CISO</span><span class="kw">attack surface management</span><span class="kw">compliance automation</span><span class="kw">SEC cyber disclosure</span><span class="kw">CIRCIA reporting</span></div></div>
-            <input class="inp" placeholder="Add keyword&hellip;">
+          <div class="card">
+            <div class="ch"><div class="ct">Pillar keywords</div><span class="cc" id="kw-brand-label">Detecting&hellip;</span></div>
+            <div style="margin-bottom:11px">
+              <span style="font-size:9.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--t3);font-family:var(--M);display:block;margin-bottom:5px">Primary</span>
+              <div id="kw-primary-list"><div style="font-size:11px;color:var(--t3);font-family:var(--M);display:inline-flex;align-items:center;gap:5px"><div style="width:10px;height:10px;border:2px solid rgba(30,94,243,.2);border-top-color:var(--A);border-radius:50%;animation:spin .7s linear infinite"></div>Generating&hellip;</div></div>
+            </div>
+            <div style="margin-bottom:11px">
+              <span style="font-size:9.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--t3);font-family:var(--M);display:block;margin-bottom:5px">Supporting</span>
+              <div id="kw-supporting-list"></div>
+            </div>
+            <input class="inp" placeholder="Add keyword&hellip;" onkeydown="if(event.key==='Enter')addCustomKw(this)">
           </div>
-          <div class="card"><div class="ch"><div class="ct">Long-tail &middot; auto-generated daily</div></div>
-            <div><span class="kw on">how to quantify cyber risk for the board</span><span class="kw on">CIRCIA reporting requirements 2026</span><span class="kw on">ZIN Advisor cyber risk copilot review</span><span class="kw on">QBER model quantified exposure to risk</span><span class="kw on">wiper malware OT security posture</span></div>
+          <div class="card">
+            <div class="ch"><div class="ct">Long-tail &middot; auto-generated daily</div></div>
+            <div id="kw-longtail-list"><div style="font-size:11px;color:var(--t3);font-family:var(--M);display:inline-flex;align-items:center;gap:5px"><div style="width:10px;height:10px;border:2px solid rgba(30,94,243,.2);border-top-color:var(--A);border-radius:50%;animation:spin .7s linear infinite"></div>Building&hellip;</div></div>
             <div class="nbbox" style="margin-top:10px">Refreshed every 24h from trends + brand scan + SERP signals</div>
           </div>
         </div>
       </div>
-
       <!-- SETTINGS -->
       <div class="pg" id="pg-settings">
         <div class="ph"><div><div class="ph-t">Settings</div><div class="ph-s">Workspace configuration and generation preferences</div></div></div>
         <div class="g2">
           <div class="card"><div class="ch"><div class="ct">Workspace</div></div>
-            <div class="fld"><span class="fl">Brand name</span><input class="inp" value="Zeron"></div>
-            <div class="fld"><span class="fl">Website</span><input class="inp" value="https://zeron.one"></div>
-            <div class="fld"><span class="fl">ICP</span><input class="inp" value="CISOs, Security Leaders, GRC - US + India"></div>
-            <div class="fld" style="margin-bottom:0"><span class="fl">Industry</span><input class="inp" value="Cybersecurity - AI-Powered Risk Intelligence"></div>
+            <div class="fld"><span class="fl">Brand name</span><input class="inp" id="settings-brand" value=""></div>
+            <div class="fld"><span class="fl">Website</span><input class="inp" id="settings-url" value=""></div>
+            <div class="fld"><span class="fl">ICP</span><input class="inp" id="settings-icp" value=""></div>
+            <div class="fld" style="margin-bottom:0"><span class="fl">Industry</span><input class="inp" id="settings-industry" value=""></div>
           </div>
           <div class="card"><div class="ch"><div class="ct">Generation</div></div>
             <div class="tgl-row"><div><div class="tgl-t">Autonomous mode</div><div class="tgl-d">5 blogs generated every morning at 04:00 IST</div></div><div class="tgl on" onclick="this.classList.toggle('on')"></div></div>
@@ -1117,17 +1059,17 @@ button,input,textarea{font-family:var(--F)}svg{display:block;flex-shrink:0}
 
 <!-- ══ PANELS ══ -->
 <div id="notif-panel" class="panel">
-  <div class="pnhd"><div class="pnttl">Notifications</div><span class="pncl" onclick="closeAll()">Mark all read</span></div>
-  <div class="npitem" onclick="nav('algo');closeAll()"><div style="display:flex;gap:8px;align-items:flex-start"><div class="npdot" style="background:var(--R)"></div><div><div class="npit">Google Core Update detected</div><div class="npis">E-E-A-T signals weighted higher. INK templates auto-updated. Review queue before publishing.</div><div class="npit-t">4 days ago</div></div></div></div>
-  <div class="npitem"><div style="display:flex;gap:8px;align-items:flex-start"><div class="npdot" style="background:var(--Y)"></div><div><div class="npit">3 new trends detected</div><div class="npis">Ransomware supply chain, DOGE-CISA cuts, and SEC enforcement are trending for your ICP.</div><div class="npit-t">Today, 06:00 IST</div></div></div></div>
-  <div class="npitem"><div style="display:flex;gap:8px;align-items:flex-start"><div class="npdot" style="background:var(--G)"></div><div><div class="npit">Brand scan completed</div><div class="npis">Zeron.one fully indexed. 18 posts, 5 modules, Sanket Sarkar founder posts mapped.</div><div class="npit-t">Today, 04:05 IST</div></div></div></div>
-  <div class="npitem"><div style="display:flex;gap:8px;align-items:flex-start"><div class="npdot" style="background:var(--A)"></div><div><div class="npit">Queue ready for publishing</div><div class="npis">5 SERP-optimised blogs generated. Average score 92/100. Ready when you are.</div><div class="npit-t">Today, 04:00 IST</div></div></div></div>
+  <div class="pnhd"><div class="pnttl">Notifications</div><span class="pncl" onclick="clearNotifs()">Mark all read</span></div>
+  <div class="npitem" onclick="nav('algo');closeAll()"><div style="display:flex;gap:8px;align-items:flex-start"><div class="npdot" style="background:var(--R)"></div><div><div class="npit">Google Core Update &mdash; March 2026</div><div class="npis">E-E-A-T depth signals weighted higher. INK templates auto-adjusted.</div><div class="npit-t">4 days ago</div></div></div></div>
+  <div class="npitem"><div style="display:flex;gap:8px;align-items:flex-start"><div class="npdot" style="background:var(--Y)"></div><div><div class="npit" id="notif-trends-t">Fetching industry trends</div><div class="npis" id="notif-trends-s">INK is scanning trending topics in your industry...</div><div class="npit-t">Just now</div></div></div></div>
+  <div class="npitem"><div style="display:flex;gap:8px;align-items:flex-start"><div class="npdot" style="background:var(--G)"></div><div><div class="npit" id="notif-scan-t">Brand analysis in progress</div><div class="npis" id="notif-scan-s">INK is crawling your website and LinkedIn to build your content DNA.</div><div class="npit-t">Just now</div></div></div></div>
+  <div class="npitem"><div style="display:flex;gap:8px;align-items:flex-start"><div class="npdot" style="background:var(--A)"></div><div><div class="npit">Queue generating</div><div class="npis" id="notif-queue-s">5 SERP-optimised blog ideas are being generated for your brand.</div><div class="npit-t">Just now</div></div></div></div>
 </div>
 
 <div id="profile-panel" class="panel">
   <div style="padding:13px 13px 10px;border-bottom:1px solid var(--b1);display:flex;align-items:center;gap:11px">
     <div class="pp-av2" id="pp-av2" style="background:var(--A)">AK</div>
-    <div><div class="pp-nm" id="pp-nm-d">Ankit Raj Pathak</div><div class="pp-role" id="pp-role-d">Marketing Analyst &middot; Zeron</div></div>
+    <div><div class="pp-nm" id="pp-nm-d">Ankit Raj Pathak</div><div class="pp-role" id="pp-role-d">Your workspace</div></div>
   </div>
   <div style="padding:13px 13px 10px">
     <div class="fld"><span class="fl">Display name</span><input class="inp" id="pp-name" value="Ankit Raj Pathak" oninput="updateProfile()"></div>
@@ -1152,19 +1094,19 @@ button,input,textarea{font-family:var(--F)}svg{display:block;flex-shrink:0}
 <!-- CHANGELOG MODAL -->
 <div class="modal-bg" id="changelog-modal" onclick="closeModal('changelog-modal',event)">
   <div class="modal-card" onclick="event.stopPropagation()">
-    <div class="mhd"><div class="mttl">Changelog &mdash; INK by Zeron</div><div class="mhd-r"><button class="mx" onclick="closeModal('changelog-modal')">&times;</button></div></div>
+    <div class="mhd"><div class="mttl">Changelog &mdash; INK</div><div class="mhd-r"><button class="mx" onclick="closeModal('changelog-modal')">&times;</button></div></div>
     <div class="mbd">
       <div class="cl-version">
         <div class="cl-v-head"><div class="cl-v-num">v3.0</div><div class="cl-v-date">March 22, 2026</div><div class="cl-v-badge cl-v-new">latest</div></div>
         <div class="cl-item">Competitor intelligence page &mdash; real-time AI analysis of up to 5 competitors using Claude AI with live web search. No fake data, no estimates.</div>
-        <div class="cl-item">Full-length story-arc blogs: What happened &rarr; Why it matters &rarr; Who did it &rarr; Financial impact &rarr; How Zeron helps. Every blog now 2,000&ndash;3,000 words.</div>
+        <div class="cl-item">Full-length story-arc blogs: What happened &rarr; Why it matters &rarr; Who did it &rarr; Financial impact &rarr; How the brand helps. Every blog now 2,000&ndash;3,000 words.</div>
         <div class="cl-item">Changelog and Help &amp; Docs modals are now fully functional with real content.</div>
         <div class="cl-item">Brand sources now include favicon fetching from Google&rsquo;s favicon API for visual richness.</div>
-        <div class="cl-item">Zeron logo and team (Sanket Sarkar + research team) woven into every blog author block and brand profile.</div>
+        <div class="cl-item">Brand logo, team, and author blocks auto-populated from entered domain. Every blog author reflects the actual brand.</div>
         <div class="cl-item">Sign out now works correctly &mdash; returns to onboarding flow at Step 1.</div>
         <div class="cl-item">Font system locked to Plus Jakarta Sans + JetBrains Mono only. Zero exceptions throughout the entire interface.</div>
         <div class="cl-item">Rescan Now button added to brand intelligence card with live step animation.</div>
-        <div class="cl-item">Brand Profile page now includes full product ecosystem, QBER explainer, founder cards with social links, and brand ethos pillars.</div>
+        <div class="cl-item">Brand Profile page now dynamically populated via Claude AI + web search: team, products, voice pillars, and keywords — all from the entered domain.</div>
       </div>
       <div class="cl-version">
         <div class="cl-v-head"><div class="cl-v-num">v2.0</div><div class="cl-v-date">March 15, 2026</div><div class="cl-v-badge cl-v-fix">fix</div></div>
@@ -1183,7 +1125,7 @@ button,input,textarea{font-family:var(--F)}svg{display:block;flex-shrink:0}
         <div class="cl-item">Splash screen with animated logo and loading bar.</div>
         <div class="cl-item">3-step onboarding with brand analysis simulation.</div>
         <div class="cl-item">Write on Demand with basic topic input and blog generation.</div>
-        <div class="cl-item">Zeron brand profile integrated as default workspace.</div>
+        <div class="cl-item">Brand profile auto-populated from entered domain via Claude AI + web search.</div>
       </div>
     </div>
   </div>
@@ -1196,7 +1138,7 @@ button,input,textarea{font-family:var(--F)}svg{display:block;flex-shrink:0}
     <div class="mbd">
       <div class="help-section">
         <div class="help-t">What is INK?</div>
-        <div class="help-p">INK is a SERP-first content engine built for the Zeron workspace. It crawls your brand, monitors your ICP&rsquo;s trending topics, analyses the Google algorithm, and generates 5 fully optimised blogs every morning &mdash; ready to publish without editing.</div>
+        <div class="help-p">INK is a SERP-first content engine for any brand. It crawls your brand, monitors your ICP&rsquo;s trending topics, analyses the Google algorithm, and generates 5 fully optimised blogs every morning &mdash; ready to publish without editing.</div>
         <div class="help-p">Every blog is structured to rank #1 on Google by default. INK applies SEO, AEO (Answer Engine Optimisation), and GEO (Generative Engine Optimisation) layers so your content surfaces in traditional search, AI Overviews, and tools like ChatGPT and Perplexity.</div>
       </div>
       <div class="help-section">
@@ -1286,20 +1228,26 @@ var brandSearchTimer = null;
 
 function goOB(n){
   document.querySelectorAll('.ob-pn').forEach(function(p){p.classList.remove('on');});
-  document.getElementById('op'+n).classList.add('on');
-  var m=obMeta[n-1];
-  document.getElementById('ob-lbl').textContent=m.lbl;
-  document.getElementById('ob-ttl').textContent=m.ttl;
-  document.getElementById('ob-sub').textContent=m.sub;
+  var op=document.getElementById('op'+n); if(op) op.classList.add('on');
+  var m=obMeta[n-1]; if(!m) return;
+  var el_lbl=document.getElementById('ob-lbl'); if(el_lbl) el_lbl.textContent=m.lbl;
+  var el_ttl=document.getElementById('ob-ttl'); if(el_ttl) el_ttl.textContent=m.ttl;
+  var el_sub=document.getElementById('ob-sub'); if(el_sub) el_sub.textContent=m.sub;
   for(var i=1;i<=3;i++){var el=document.getElementById('ob'+i);el.className='ob-bar'+(i<n?' done':i===n?' cur':'');}
   if(n===2) populateStep2();
 }
 
 function ob1Changed(){
+  var brand=document.getElementById('i-brand').value.trim();
   var url=document.getElementById('i-url').value.trim();
   var btn=document.getElementById('ob1-continue');
-  if(url){btn.disabled=false;btn.style.opacity='1';btn.style.cursor='pointer';}
-  else{btn.disabled=true;btn.style.opacity='.45';btn.style.cursor='not-allowed';}
+  // Enable if we have either brand name or URL
+  var canContinue = !!(brand || url);
+  if(btn){
+    btn.disabled=!canContinue;
+    btn.style.opacity=canContinue?'1':'.45';
+    btn.style.cursor=canContinue?'pointer':'not-allowed';
+  }
 }
 
 function onBrandInput(val){
@@ -1311,30 +1259,32 @@ function onBrandInput(val){
   document.getElementById('brand-check-ico').style.display='none';
   ob1Changed();
   if(val.trim().length < 2) return;
-  brandSearchTimer = setTimeout(function(){ searchBrand(val.trim()); }, 800);
+  brandSearchTimer = setTimeout(function(){ searchBrand(val.trim()); }, 1200);
+}
+
+async function inkAPI(prompt, maxTok, useSearch){
+  var body={model:'claude-sonnet-4-20250514',max_tokens:maxTok||1000,messages:[{role:'user',content:prompt}]};
+  if(useSearch) body.tools=[{type:'web_search_20250305',name:'web_search'}];
+  var resp=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+  var data=await resp.json();
+  if(data.error){
+    var msg=data.error.message||JSON.stringify(data.error);
+    if(data.error.type==='exceeded_limit'||msg.includes('exceeded')) throw new Error('API rate limit reached. Wait 60s and retry.');
+    throw new Error(msg);
+  }
+  var text='';
+  if(data.content) data.content.forEach(function(b){if(b.type==='text') text+=b.text;});
+  return text.replace(/```json\s*/g,'').replace(/```\s*/g,'').trim();
 }
 
 async function searchBrand(name){
   document.getElementById('brand-search-ico').style.display='block';
   document.getElementById('brand-check-ico').style.display='none';
   try{
-    var prompt = 'Find information about the company or brand called "'+name+'". Search the web and return ONLY a valid JSON object with these exact keys (no markdown, no extra text):\n{\n  "found": true or false,\n  "name": "official company name",\n  "domain": "primary website domain without https e.g. durex.com",\n  "website": "full https website URL",\n  "linkedin": "full linkedin company page URL or empty string",\n  "industry": "1-4 word industry label e.g. Consumer Healthcare, Cybersecurity SaaS, Food Delivery, E-commerce",\n  "description": "one sentence describing what this company does and who it serves",\n  "icp": ["ICP role 1 with 3-4 word description", "ICP role 2 with 3-4 word description", "ICP role 3 with 3-4 word description", "ICP role 4 with 3-4 word description"]\n}\nFor icp, think about who the brand\'s marketing team should be targeting with content. For example Durex: ["Young Adults 18-35 / Relationships", "Health-conscious Consumers", "Pharmacy Buyers / Retail", "Digital-first Millennials"]. For Zeron: ["CISOs / Security Leaders", "GRC / Compliance Teams", "Board / C-Suite", "DevSecOps / Engineers"]. For Swiggy: ["Urban Professionals 25-40", "Restaurants & Food Brands", "Convenience Seekers", "Late Night / Weekend Crowd"]. Make the ICP suggestions genuinely relevant to the brand\'s actual business and target audience. If the brand cannot be found return found:false.';
-    var resp = await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',
-        max_tokens:600,
-        tools:[{type:'web_search_20250305',name:'web_search'}],
-        messages:[{role:'user',content:prompt}]
-      })
-    });
-    var data = await resp.json();
-    var text = '';
-    if(data.content) data.content.forEach(function(b){if(b.type==='text') text+=b.text;});
-    // Strip markdown fences if present
+    var prompt = 'Find information about the company or brand called "'+name+'". Search the web and return ONLY a valid JSON object with these exact keys (no markdown, no extra text):\n{\n  "found": true or false,\n  "name": "official company name",\n  "domain": "primary website domain without https e.g. durex.com",\n  "website": "full https website URL",\n  "linkedin": "full linkedin company page URL or empty string",\n  "industry": "1-4 word industry label e.g. Consumer Healthcare, Cybersecurity SaaS, Food Delivery, E-commerce",\n  "description": "one sentence describing what this company does and who it serves",\n  "icp": ["ICP role 1 with 3-4 word description", "ICP role 2 with 3-4 word description", "ICP role 3 with 3-4 word description", "ICP role 4 with 3-4 word description"]\n}\nFor icp, think about who the brand\'s marketing team should be targeting with content. For example Durex: ["Young Adults 18-35 / Relationships", "Health-conscious Consumers", "Pharmacy Buyers / Retail", "Digital-first Millennials"]. For a cybersecurity brand: ["CISOs / Security Leaders", "GRC / Compliance Teams", "Board / C-Suite", "DevSecOps / Engineers"]. For Swiggy: ["Urban Professionals 25-40", "Restaurants & Food Brands", "Convenience Seekers", "Late Night / Weekend Crowd"]. Make the ICP suggestions genuinely relevant to the brand\'s actual business and target audience. If the brand cannot be found return found:false.';
+    var text = await inkAPI(prompt, 700, true);
     text = text.replace(/```json\s*/g,'').replace(/```\s*/g,'').trim();
-    var parsed = JSON.parse(text);
+    var parsed = safeJSON(text);
     document.getElementById('brand-search-ico').style.display='none';
     if(parsed.found){
       detectedBrand = {
@@ -1365,7 +1315,14 @@ async function searchBrand(name){
   }catch(e){
     document.getElementById('brand-search-ico').style.display='none';
     detectedBrand = {name:name,domain:'',linkedin:'',industry:'',description:'',icpSuggestions:[],found:false};
-    document.getElementById('brand-notfound').style.display='block';
+    var nf = document.getElementById('brand-notfound');
+    if(nf){
+      // On rate limit during onboarding, just show manual fallback — don't alarm the user
+      nf.textContent = 'Could not auto-detect this brand. Fill in the details below.';
+      nf.style.display='block';
+    }
+    // Enable the continue button so user can proceed manually
+    ob1Changed();
   }
 }
 
@@ -1434,11 +1391,18 @@ function addTag(inpId,tagsId){
 function launchAnalysis(){
   var brand=document.getElementById('i-brand').value||detectedBrand.name||'Your Brand';
   var url=document.getElementById('i-url').value||'yourdomain.com';
-  document.getElementById('ws-nm').textContent=brand;
+  var domain=(url||'').replace(/https?:\/\//,'').replace(/\/.*/,'');
+  if(!detectedBrand.name) detectedBrand.name=brand;
+  if(!detectedBrand.domain && domain) detectedBrand.domain=domain;
+  // If no URL, try to guess domain from brand name
+  if(!domain && brand) domain=brand.toLowerCase().replace(/[^a-z0-9]/g,'')+'.com';
+  // Update sidebar workspace chip
   document.getElementById('ws-nm-sb').textContent=brand;
+  // Update analysis screen
   document.getElementById('onboard').classList.remove('show');
   var an=document.getElementById('analyzing');an.classList.add('show');
-  document.getElementById('an-dom').innerHTML='<svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="5" cy="5" r="4"/><path d="M5 1C3.9 2.2 3.2 3.6 3.2 5S3.9 7.8 5 9M5 1C6.1 2.2 6.8 3.6 6.8 5S6.1 7.8 5 9M1 5h8"/></svg>Scanning: '+url.replace(/https?:\/\//,'');
+  var domTxt=url.replace(/https?:\/\//,'');
+  document.getElementById('an-dom').innerHTML='<svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="5" cy="5" r="4"/><path d="M5 1C3.9 2.2 3.2 3.6 3.2 5S3.9 7.8 5 9M5 1C6.1 2.2 6.8 3.6 6.8 5S6.1 7.8 5 9M1 5h8"/></svg>Scanning: '+domTxt;
   runAnalysis();
 }
 function runAnalysis(){
@@ -1450,13 +1414,477 @@ function runAnalysis(){
   }
   tick();
 }
+// ─── BRAND CONTENT STATE ──────────────────────────────
+var brandContent = {
+  queue: [],       // [{title,tag1,tag2,words,serp,status}]
+  trends: [],      // [{category, items:[{text,heat}]}]
+  quickTags: [],   // [{label,topic}]
+  scanData: {},    // {blog,pages,linkedin,tone,keywords}
+  loaded: false
+};
+
 function enterApp(){
   document.getElementById('analyzing').classList.remove('show');
   document.getElementById('app').classList.add('show');
-  nav('dashboard');setTimeout(animScan,400);
+  nav('dashboard');
+  setTimeout(animScan, 400);
+  // Update topbar with brand
+  var brand = detectedBrand.name || document.getElementById('i-brand').value || '';
+  var domain = detectedBrand.domain || (document.getElementById('i-url').value||'').replace(/https?:\/\//,'').replace(/\/.*/,'');
+  if(brand){
+    // Topbar
+    var wnm = document.getElementById('ws-nm');
+    if(wnm){ wnm.textContent = brand; wnm.style.display = 'block'; }
+    var wdiv = document.getElementById('tb-brand-div');
+    if(wdiv) wdiv.style.display = 'block';
+    if(domain){
+      var bimg = document.getElementById('tb-brand-img');
+      if(bimg){
+      bimg.src='https://logo.clearbit.com/'+domain;
+      bimg.onerror=function(){
+        this.src='https://www.google.com/s2/favicons?domain='+domain+'&sz=32';
+        this.onerror=function(){this.style.display='none';};
+      };
+    }
+      var bico = document.getElementById('tb-brand-ico');
+      if(bico) bico.style.display = 'flex';
+    }
+    // Sidebar workspace chip
+    var snm = document.getElementById('ws-nm-sb');
+    if(snm) snm.textContent = brand;
+    var letter = brand.charAt(0).toUpperCase();
+    var avLetter = document.getElementById('ws-av-letter');
+    if(avLetter) avLetter.textContent = letter;
+    if(domain){
+      var avImg = document.getElementById('ws-av-img');
+      if(avImg){
+      // Try clearbit logo, fallback to google, fallback to letter
+      avImg.src='https://logo.clearbit.com/'+domain;
+      avImg.style.display='block';
+      avImg.onerror=function(){
+        this.src='https://www.google.com/s2/favicons?domain='+domain+'&sz=32';
+        this.onerror=function(){ this.style.display='none'; var al=document.getElementById('ws-av-letter');if(al)al.style.display='block'; };
+      };
+      var al=document.getElementById('ws-av-letter'); if(al) al.style.display='none';
+    }
+    }
+  }
+  // Update dash subtitle
+  var d = new Date(); var ds = d.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'short',year:'numeric'});
+  document.getElementById('dash-sub').textContent = ds + ' · Generating 5 blogs · ' + (brand||'Your brand');
+  // Update scan card title
+  var sct = document.getElementById('scan-card-title');
+  if(sct && brand) sct.textContent = 'Brand intelligence scan — ' + brand;
+  // Update scan rows with brand info
+  updateScanUI(brand, domain);
+  // Kick off brand-specific content generation
+  generateBrandContent(brand, domain, detectedBrand.industry, detectedBrand.description);
 }
+
+async function generateBrandContent(brand, domain, industry, description){
+  if(!brand && !domain) return;
+  var context = 'Brand: '+(brand||domain)+'. Domain: '+(domain||'unknown')+'. Industry: '+(industry||'general')+'. Description: '+(description||'');
+  // Only fire queue and trends on app load (2 calls max)
+  // Brand profile fires lazily when user navigates to that page
+  try{ await generateQueue(context, brand, industry); }catch(e){ console.warn('queue failed:', e.message); }
+  updateWODTags();
+  // Small gap between calls to avoid hitting rate limits
+  setTimeout(function(){
+    generateTrends(context, brand, industry).catch(function(e){ console.warn('trends failed:', e.message); });
+    updateWizardAudience();
+  }, 1500);
+}
+
+var brandProfileLoaded = false;
+function ensureBrandProfile(){
+  if(brandProfileLoaded) return;
+  brandProfileLoaded = true;
+  var brand=detectedBrand.name||'', domain=detectedBrand.domain||'',
+      industry=detectedBrand.industry||'', desc=detectedBrand.description||'',
+      li=detectedBrand.linkedin||'';
+  if(!brand && !domain){ 
+    // Show empty state
+    ['brand-team-content','brand-voice-content','brand-products-content'].forEach(function(id){
+      var el=document.getElementById(id);
+      if(el) el.innerHTML='<div style="font-size:12px;color:var(--t3);padding:8px 0">Complete onboarding to analyse your brand.</div>';
+    });
+    return; 
+  }
+  generateBrandProfile(brand, domain, industry, desc, li);
+}
+
+function getFavicon(domain, size){
+  // Try multiple favicon services with fallback chain
+  size = size || 32;
+  return 'https://www.google.com/s2/favicons?domain='+domain+'&sz='+size;
+}
+
+function imgWithFallback(domain, size, fallbackText){
+  var src = getFavicon(domain, size || 32);
+  return '<img src="'+src+'" style="width:100%;height:100%;object-fit:cover;border-radius:3px" '+
+    'onerror="this.style.display=\'none\';var fb=document.createElement(\'span\');fb.textContent=\''+fallbackText.charAt(0).toUpperCase()+'\';fb.style.cssText=\'font-size:13px;font-weight:700;font-family:var(--M)\';this.parentNode.appendChild(fb)"'+
+    '>';
+}
+
+
+
+function safeJSON(text){
+  // Try parse, attempt basic repair if truncated
+  try{ return JSON.parse(text); }catch(e){
+    var t=text.replace(/,\s*([\]}])/g,'$1'); // remove trailing commas
+    while((t.match(/\[/g)||[]).length>(t.match(/\]/g)||[]).length) t+=']';
+    while((t.match(/\{/g)||[]).length>(t.match(/\}/g)||[]).length) t+='}';
+    try{ return JSON.parse(t); }catch(e2){ throw new Error('JSON parse failed: '+e2.message+' in: '+text.substring(0,80)); }
+  }
+}
+
+async function generateQueue(context, brand, industry){
+  try{
+    var prompt = 'You are a content strategist for '+brand+'. Search the web for what is currently trending, newsworthy, and high-traffic in the '+industry+' sector as of March 2026. Then generate exactly 5 high-SERP-potential blog titles for '+brand+'. Return ONLY valid JSON (no markdown fences), this exact structure:\n{"blogs":[{"title":"...","tag1":"trending|product|educational|how-to|news","tag2":"seo anchor|thought leadership|conversion","words":2400,"serp":91}]}\nMake the titles compelling, specific, and relevant to what '+brand+' does and who their audience is. The blog ideas should be based on real current trends in '+industry+' right now, not generic advice. Vary SERP scores between 85-97. Do not mention unrelated brand names, products, or industry-specific terms unless '+brand+' is actually in that space.';
+    var rawText = await inkAPI(prompt, 1200, true);
+    var parsed = safeJSON(rawText);
+    brandContent.queue = (parsed.blogs||[]).slice(0,5);
+    brandContent.loaded = true;
+    renderQueue();
+  }catch(e){
+    document.getElementById('dash-queue-loading').style.display='none';
+    document.getElementById('queue-loading').style.display='none';
+    // Build retry UI using DOM to avoid quote escaping bugs
+    (function(br,ind){
+      ['dash-queue-loading','queue-loading'].forEach(function(id){var el=document.getElementById(id);if(el)el.style.display='none';});
+      ['dash-queue-rows','queue-rows'].forEach(function(rowId){
+        var el=document.getElementById(rowId);if(!el)return;el.innerHTML='';
+        var w=document.createElement('div');w.style.cssText='font-size:11.5px;color:var(--t3);padding:10px 0;display:flex;align-items:center;gap:6px';
+        w.innerHTML='Could not generate blog ideas.';
+        var btn=document.createElement('span');btn.textContent='Retry';
+        btn.style.cssText='color:var(--A);cursor:pointer;font-weight:600;text-decoration:underline;margin-left:4px';
+        btn.onclick=function(){el.innerHTML='';generateQueue(br,br,ind);};
+        w.appendChild(btn);el.appendChild(w);
+      });
+    })(brand,industry);
+  }
+}
+
+async function generateTrends(context, brand, industry){
+  try{
+    var prompt = 'Search the web for what is genuinely trending RIGHT NOW (March 2026) in the '+industry+' industry. Return ONLY valid JSON (no markdown): {"industry":"'+industry+'","trends":[{"category":"Breaking news","items":[{"text":"...","heat":"hot"},{"text":"...","heat":"hot"},{"text":"...","heat":"rising"}]},{"category":"Consumer conversations","items":[{"text":"...","heat":"rising"},{"text":"...","heat":"rising"},{"text":"...","heat":"stable"}]},{"category":"Industry shifts","items":[{"text":"...","heat":"rising"},{"text":"...","heat":"rising"},{"text":"...","heat":"stable"}]}],"sources":["source1","source2","source3"]}. These should be real current events and trends in '+industry+', not made up. Do not include cybersecurity regulatory stuff unless the brand is in security.';
+    var rawText = await inkAPI(prompt, 1400, true);
+    var parsed = safeJSON(rawText);
+    brandContent.trends = parsed.trends || [];
+    renderTrends(parsed.industry||industry, parsed.sources||[]);
+  }catch(e){
+    document.getElementById('trends-content').innerHTML='<div class="card"><div style="font-size:11.5px;color:var(--t3);text-align:center;padding:14px">Could not load trends. <span style="color:var(--A);cursor:pointer" onclick="refreshTrends()">Retry</span></div></div>';
+  }
+}
+
+function renderQueue(){
+  var blogs = brandContent.queue;
+  if(!blogs.length) return;
+  // Dashboard mini queue (3 items)
+  document.getElementById('dash-queue-loading').style.display='none';
+  var dashHtml = blogs.slice(0,3).map(function(b,i){
+    var dot = i<2 ? 'dg' : 'da';
+    return '<div class="br"><div class="bn">0'+(i+1)+'</div><div class="bi"><div class="bt">'+b.title+'</div><div class="btags"><span class="tag tr">'+b.tag1+'</span><span class="tag ty">'+b.tag2+'</span></div></div><div class="dot '+dot+'"></div></div>';
+  }).join('');
+  document.getElementById('dash-queue-rows').innerHTML = dashHtml;
+  // Full queue page (5 items)
+  document.getElementById('queue-loading').style.display='none';
+  var queueHtml = blogs.map(function(b,i){
+    var dotCls = i%3===0 ? 'dg' : i%3===1 ? 'dg' : 'da';
+    var fillCls = b.serp >= 90 ? 'sfg' : b.serp >= 85 ? 'sfa' : 'sfb';
+    return '<div class="br"><div class="bn">0'+(i+1)+'</div><div class="bi"><div class="bt">'+b.title+'</div>'+
+    '<div class="btags" style="margin-bottom:4px"><span class="tag tr">'+b.tag1+'</span><span class="tag ty">'+b.tag2+'</span><span class="tag tn">'+b.words+' words</span></div>'+
+    '<div class="sbar"><div class="strack"><div class="sfill '+fillCls+'" style="width:0" data-w="'+b.serp+'"></div></div><div class="ssco">'+b.serp+' SERP</div></div></div>'+
+    '<div class="brr"><div class="dot '+dotCls+'"></div><button class="btn bout bxs" onclick="openDynPreview('+i+')">Preview</button></div></div>';
+  }).join('');
+  document.getElementById('queue-rows').innerHTML = queueHtml;
+  setTimeout(animScoreBars, 150);
+  // Update dash subtitle
+  var brand = detectedBrand.name || '';
+  var d = new Date(); var ds = d.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'short',year:'numeric'});
+  document.getElementById('dash-sub').textContent = ds + ' · 5 blogs ready · ' + (brand||'Your brand');
+  // Update stat cards
+  var avgSerp = Math.round(blogs.reduce(function(s,b){return s+(b.serp||88);},0)/blogs.length);
+  var sSerp=document.getElementById('stat-serp'); if(sSerp) sSerp.textContent=avgSerp;
+  var sSerb=document.getElementById('stat-serp-sub'); if(sSerb) sSerb.textContent='↑ avg SERP score';
+  var sBlog=document.getElementById('stat-blogs'); if(sBlog) sBlog.textContent=blogs.length;
+  var sBlogb=document.getElementById('stat-blogs-sub'); if(sBlogb) sBlogb.textContent='ready today';
+}
+
+function renderTrends(industryLabel, sources){
+  var t = brandContent.trends;
+  if(!t.length) return;
+  document.getElementById('trends-sub').textContent = (industryLabel||'Your industry') + ' · Updated 06:00 · Live data';
+  var html = '<div class="g3">';
+  t.forEach(function(cat){
+    html += '<div class="card"><div class="ch"><div class="ct">'+cat.category+'</div></div>';
+    (cat.items||[]).forEach(function(item,i){
+      var heatCls = item.heat==='hot'?'hh':item.heat==='rising'?'hw':'hc';
+      html += '<div class="trow"><div class="tn2">0'+(i+1)+'</div><div class="tt">'+item.text+'</div><div class="heat '+heatCls+'">'+item.heat+'</div></div>';
+    });
+    html += '</div>';
+  });
+  html += '</div>';
+  if(sources && sources.length){
+    html += '<div class="card"><div class="ch"><div class="ct">Source feeds</div><span class="cc">'+sources.length+' active</span></div><div>';
+    sources.forEach(function(s){ html += '<span class="kw">'+s+'</span>'; });
+    html += '</div></div>';
+  }
+  document.getElementById('trends-content').innerHTML = html;
+  var total = t.reduce(function(n,cat){return n+(cat.items||[]).length;},0);
+  var st=document.getElementById('stat-trends'); if(st) st.textContent=total;
+  var stb=document.getElementById('stat-trends-sub'); if(stb) stb.textContent='in '+(industryLabel||'your industry');
+}
+
+function refreshTrends(){
+  var brand = detectedBrand.name||'';
+  var industry = detectedBrand.industry||'';
+  document.getElementById('trends-content').innerHTML='<div style="text-align:center;padding:40px 0;font-size:12px;color:var(--t3);font-family:var(--M)"><div style="display:inline-flex;align-items:center;gap:6px"><div style="width:13px;height:13px;border:2px solid rgba(30,94,243,.2);border-top-color:var(--A);border-radius:50%;animation:spin .7s linear infinite"></div>Refreshing trends&hellip;</div></div>';
+  generateTrends(brand, brand, industry);
+}
+
+function updateWODTags(){
+  var blogs = brandContent.queue;
+  if(!blogs.length) return;
+  var tagsEl = document.getElementById('wod-quick-tags');
+  tagsEl.innerHTML = '';
+  blogs.slice(0,5).forEach(function(b, i){
+    var span = document.createElement('span');
+    span.className = 'wt';
+    span.title = b.title;
+    span.textContent = b.title.length > 42 ? b.title.substring(0,42) + '…' : b.title;
+    span.onclick = function(){ document.getElementById('wod-inp').value = b.title; };
+    tagsEl.appendChild(span);
+  });
+}
+
+function updateWizardAudience(){
+  var icpItems = detectedBrand.icpSuggestions && detectedBrand.icpSuggestions.length >= 2
+    ? detectedBrand.icpSuggestions
+    : null;
+  if(!icpItems) return;
+  var grid = document.getElementById('wiz-audience-opts');
+  if(!grid) return;
+  grid.innerHTML = icpItems.map(function(s, i){
+    var parts = s.split('/');
+    var t = parts[0].trim(), sub = parts[1] ? parts[1].trim() : '';
+    return '<div class="wo'+(i===0?' sel':'')+'" onclick="pw(this)"><div class="wot">'+t+'</div><div class="wos">'+sub+'</div></div>';
+  }).join('')+
+  '<div class="wo" onclick="pw(this)"><div class="wot">General / Broad</div><div class="wos">Max SEO reach</div></div>';
+}
+
+// Preview for dynamic queue blogs
+async function openDynPreview(idx){
+  var blog = brandContent.queue[idx];
+  if(!blog){ openPreview(idx); return; }
+  var brand = detectedBrand.name || '';
+  var industry = detectedBrand.industry || '';
+  document.getElementById('pm-ttl').textContent = blog.title.length>58 ? blog.title.substring(0,58)+'…' : blog.title;
+  document.getElementById('pm-pills').innerHTML = '<span class="bpill bpg">SERP '+blog.serp+'/100</span><span class="bpill bpb">AEO '+(blog.serp-3)+'/100</span><span class="bpill bpv">GEO '+(blog.serp-6)+'/100</span>';
+  document.getElementById('pm-bd').innerHTML = '<div class="bmeta"><span>'+brand+' Blog</span><span>March 22, 2026</span><span>Generating full article&hellip;</span></div><div style="text-align:center;padding:32px;color:var(--t3);font-family:var(--M);font-size:12px"><div style="display:inline-flex;align-items:center;gap:7px"><div style="width:14px;height:14px;border:2px solid rgba(30,94,243,.2);border-top-color:var(--A);border-radius:50%;animation:spin .7s linear infinite"></div>Writing full article for this topic&hellip;</div></div>';
+  document.getElementById('prev-modal').classList.add('show');
+  // Generate full blog with Claude
+  try{
+    var prompt = 'Write a comprehensive, SEO-optimised blog post for '+brand+' (a '+industry+' brand) on the topic: "'+blog.title+'". The blog should be 1800-2500 words. Structure: compelling intro that hooks the reader, 4-6 detailed sections with H2 headings, real statistics and data points from web search, practical value for the reader, 2 FAQ blocks at the end, and a clear CTA mentioning '+brand+'. Do NOT mention other brands or products by name unless '+brand+' is specifically in cybersecurity. Write naturally and informatively, like an expert in '+industry+' would. Return the blog as clean HTML using only: <h1>, <h2>, <h3>, <p>, <ul>, <li>, <strong> tags. Start directly with <h1>.';
+    var text = await inkAPI(prompt, 2400, true);
+    text = text.replace(/```html\s*/g,'').replace(/```\s*/g,'').trim();
+    document.getElementById('pm-bd').innerHTML = '<div class="bmeta"><span>'+brand+' Blog</span><span>March 22, 2026</span><span>~10 min read</span><span>'+industry+'</span></div><div class="bcont">'+text+'</div><div class="bcta"><div><div class="bcta-t">Want more content like this?</div><div class="bcta-s">INK generates 5 SERP-optimised blogs like this for '+brand+' every morning at 04:00.</div></div></div>';
+  }catch(e){
+    document.getElementById('pm-bd').innerHTML = '<div style="font-size:12px;color:var(--t3);padding:16px">Could not generate full article. '+e.message+'</div>';
+  }
+}
+
+// Update scan UI to reflect brand
+function updateScanUI(brand, domain){
+  var d = domain || '';
+  if(document.getElementById('scan-l1')) document.getElementById('scan-l1').textContent = d ? d+'/blog' : 'Website blog';
+  if(document.getElementById('scan-l2')) document.getElementById('scan-l2').textContent = 'Products & pages';
+  if(document.getElementById('scan-l3')) document.getElementById('scan-l3').textContent = 'LinkedIn page';
+  if(document.getElementById('scan-v1')) document.getElementById('scan-v1').textContent = 'Blog posts indexed';
+  if(document.getElementById('scan-v2')) document.getElementById('scan-v2').textContent = 'Pages mapped';
+  if(document.getElementById('scan-v3')) document.getElementById('scan-v3').textContent = 'Posts analysed';
+  if(document.getElementById('scan-v4')) document.getElementById('scan-v4').textContent = (detectedBrand.description ? detectedBrand.description.substring(0,30)+'…' : 'Tone fingerprinted');
+  if(document.getElementById('scan-v5')) document.getElementById('scan-v5').textContent = 'Keyword model seeded';
+}
+// ─── BRAND PROFILE / SOURCES / KEYWORDS POPULATION ──────────────────────────
+async function generateBrandProfile(brand, domain, industry, description, linkedin){
+  var pg=document.getElementById('brand-pg-title');
+  var ps=document.getElementById('brand-pg-sub');
+  if(pg) pg.textContent='Brand profile \u2014 '+brand;
+  if(ps) ps.textContent='How INK understands '+brand+', voice, products, and content strategy';
+  var heroIco=document.getElementById('bh-ico-el');
+  if(heroIco&&domain){
+    // Try logo.clearbit.com first (proper logos), fallback to google favicons, then letter
+    var logoUrl='https://logo.clearbit.com/'+domain;
+    var fallbackUrl='https://www.google.com/s2/favicons?domain='+domain+'&sz=64';
+    var letter=brand.charAt(0).toUpperCase();
+    heroIco.innerHTML='<img src="'+logoUrl+'" style="width:100%;height:100%;object-fit:contain;padding:4px" '+
+      'onerror="this.src=\''+fallbackUrl+'\';this.style.padding=\'0\';this.onerror=function(){this.style.display=\'none\';}">';
+  }
+  var hn=document.getElementById('bh-name-el'); if(hn) hn.textContent=brand;
+  var hp=document.getElementById('bh-pos-el'); if(hp) hp.textContent=description||'Brand description being analysed...';
+  var ht=document.getElementById('bh-tags-el');
+  if(ht&&industry){
+    ht.innerHTML=[industry,'SERP Content','Blog Strategy','SEO Optimised','Competitor Intel'].map(function(t){
+      return '<span class="bh-tag">'+t+'</span>';
+    }).join('');
+  }
+  try{
+    var prompt='Search the web for "'+brand+'" ('+domain+'). Return ONLY compact JSON, no markdown:\n'+
+      '{"team":[{"name":"Name","role":"Role","linkedin":"","bio":"1 sentence"}],'+
+      '"voice_pillars":[{"title":"Title","body":"1-2 sentences"}],'+
+      '"products":[{"name":"Name","description":"1 sentence","emoji":"emoji"}],'+
+      '"keywords":{"primary":["kw1","kw2","kw3","kw4"],"supporting":["kw5","kw6","kw7","kw8"]},'+
+      '"longtail":["phrase1","phrase2","phrase3"]}\n'+
+      'Rules: max 2 team members, 3 voice pillars, 4 products. Use real web data for '+brand+' in '+industry+'.';
+    var rawText = await inkAPI(prompt, 1800, true);
+    rawText = rawText.replace(/```json\s*/g,'').replace(/```\s*/g,'').trim();
+    var parsed = safeJSON(rawText);
+    // Render team
+    var tc=document.getElementById('brand-team-content');
+    if(tc&&parsed.team&&parsed.team.length){
+      tc.innerHTML='<div class="g2">'+parsed.team.map(function(m){
+        var init=m.name.split(' ').map(function(w){return w.charAt(0).toUpperCase();}).slice(0,2).join('');
+        return '<div class="founder-card"><div style="display:flex;align-items:flex-start;gap:12px">'+
+          '<div class="fc-av">'+init+'</div>'+
+          '<div style="flex:1"><div class="fc-nm">'+m.name+'</div>'+
+          '<div class="fc-role">'+m.role+'</div>'+
+          '<div class="fc-bio">'+m.bio+'</div>'+
+          '<div class="fc-links">'+(m.linkedin&&m.linkedin!==''?'<div class="fc-link" onclick="window.open(\''+m.linkedin+'\',\'_blank\')"><svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor"><rect x="0" y="3.5" width="2" height="6.5" rx=".4"/><circle cx="1" cy="1.2" r="1"/><path d="M3.5 3.5h2v1s.5-1 2-1c1.4 0 2 .9 2 2.5V10H7.5V6.5c0-.8-.3-1.5-1-1.5s-1 .7-1 1.5V10H3.5z"/></svg>LinkedIn</div>':'')+
+          '</div></div></div></div>';
+      }).join('')+'</div>';
+    } else if(tc){
+      tc.innerHTML='<div style="font-size:12px;color:var(--t3);padding:8px 0">No public team information found. You can add manually in Brand Sources.</div>';
+    }
+    // Voice pillars
+    var vc=document.getElementById('brand-voice-content');
+    if(vc&&parsed.voice_pillars&&parsed.voice_pillars.length){
+      vc.innerHTML=parsed.voice_pillars.map(function(p){
+        return '<div class="ethos-item"><div class="ei-t">'+p.title+'</div><div class="ei-s">'+p.body+'</div></div>';
+      }).join('');
+    } else if(vc){
+      vc.innerHTML='<div style="font-size:12px;color:var(--t3);padding:8px 0">Voice analysis unavailable. Add content sources to improve this.</div>';
+    }
+    // Products
+    var pc=document.getElementById('brand-products-content');
+    if(pc&&parsed.products&&parsed.products.length){
+      pc.innerHTML='<div class="module-grid">'+parsed.products.map(function(p){
+        return '<div class="module-card"><div class="mc-ico" style="background:var(--ab);font-size:20px">'+(p.emoji||'\ud83d\udce6')+'</div><div class="mc-t">'+p.name+'</div><div class="mc-s">'+p.description+'</div></div>';
+      }).join('')+'</div>';
+    } else if(pc){
+      pc.innerHTML='<div style="font-size:12px;color:var(--t3);padding:8px 0">Products not detected. Add your product page URL in Brand Sources.</div>';
+    }
+    // Keywords and sources
+    populateKeywords(parsed.keywords,parsed.longtail,brand);
+    populateSources(brand,domain,linkedin);
+    populateSettings(brand,domain,industry);
+    var ns=document.getElementById('notif-scan-t'); if(ns) ns.textContent='Brand profile complete';
+    var nss=document.getElementById('notif-scan-s'); if(nss) nss.textContent=brand+' analysed \u2014 team, products, voice, and keywords mapped.';
+  }catch(e){
+    var em=e.message||'';
+    var isRate = em.includes('exceeded')||em.includes('rate')||em.includes('limit');
+    var friendlyProfErr = isRate 
+      ? 'Rate limit. Click Re-analyse to retry.' 
+      : em.includes('JSON') ? 'Response incomplete. Click Re-analyse.' 
+      : 'Analysis failed: '+em.substring(0,80);
+    var errHtml = '<div style="font-size:12px;color:var(--Y);padding:8px 0;display:flex;align-items:center;gap:6px">'+
+      '<svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6.5 1L12 12H1z"/><line x1="6.5" y1="5" x2="6.5" y2="8"/><circle cx="6.5" cy="9.5" r=".5" fill="currentColor"/></svg>'+
+      friendlyProfErr+'</div>';
+    // Show error in ALL three sections so nothing is stuck spinning
+    ['brand-team-content','brand-voice-content','brand-products-content'].forEach(function(id){
+      var el=document.getElementById(id);
+      if(el) el.innerHTML=errHtml;
+    });
+    brandProfileLoaded = false; // Allow retry
+    populateSources(brand,domain,linkedin);
+    populateSettings(brand,domain,industry);
+  }
+}
+
+function populateKeywords(keywords,longtail,brand){
+  var lbl=document.getElementById('kw-brand-label'); if(lbl) lbl.textContent=brand;
+  var primary=document.getElementById('kw-primary-list');
+  var supporting=document.getElementById('kw-supporting-list');
+  var lt=document.getElementById('kw-longtail-list');
+  if(primary&&keywords&&keywords.primary) primary.innerHTML=keywords.primary.map(function(k){return '<span class="kw on">'+k+'</span>';}).join('');
+  if(supporting&&keywords&&keywords.supporting) supporting.innerHTML=keywords.supporting.map(function(k){return '<span class="kw">'+k+'</span>';}).join('');
+  if(lt&&longtail) lt.innerHTML=longtail.map(function(k){return '<span class="kw on">'+k+'</span>';}).join('');
+}
+
+function addCustomKw(inp){
+  var val=inp.value.trim(); if(!val) return;
+  var list=document.getElementById('kw-primary-list');
+  if(list){var sp=document.createElement('span');sp.className='kw on';sp.textContent=val;sp.onclick=function(){list.removeChild(sp);};list.appendChild(sp);}
+  inp.value='';
+}
+
+function populateSources(brand,domain,linkedin){
+  var sl=document.getElementById('sources-list'); if(!sl) return;
+  var sources=[];
+  if(domain){
+    sources.push({d:domain, name:domain, desc:'website \u00b7 full crawl', st:'live'});
+    sources.push({d:domain, name:domain+'/blog', desc:'blog section \u00b7 indexed for voice + keywords', st:'live'});
+  }
+  if(linkedin) sources.push({d:'linkedin.com', name:brand+' on LinkedIn', desc:linkedin.replace('https://',''), st:'live'});
+  // Social channels — shown as "connect" not "scanning"
+  sources.push({d:'instagram.com', name:brand+' on Instagram', desc:'Connect to index visual content & campaigns', st:'connect'});
+  sources.push({d:'youtube.com', name:brand+' on YouTube', desc:'Connect to index video content', st:'connect'});
+  sl.innerHTML=sources.map(function(s){
+    var stCls = s.st==='live'?'pll':s.st==='connect'?'pls':'pls';
+    var stLabel = s.st==='connect'?'+ connect':s.st;
+    return '<div class="srow">'+
+      '<div class="sico" style="overflow:hidden;background:var(--s3);display:flex;align-items:center;justify-content:center">'+
+        '<img src="https://www.google.com/s2/favicons?domain='+s.d+'&sz=32" '+
+        'style="width:100%;height:100%;object-fit:cover" '+
+        'onerror="this.parentNode.innerHTML=\'<span style=\"font-size:11px;font-weight:700;color:var(--t2)\">'+s.d.charAt(0).toUpperCase()+'</span>\'">'+
+      '</div>'+
+      '<div style="flex:1"><div class="snm">'+s.name+'</div><div class="surl">'+s.desc+'</div></div>'+
+      '<span class="pill '+stCls+'">'+stLabel+'</span></div>';
+  }).join('');
+}
+
+function addSourcePrompt(){
+  var url=prompt('Enter a source URL to add (e.g. your Medium blog, YouTube channel, product page):');
+  if(!url) return;
+  var sl=document.getElementById('sources-list'); if(!sl) return;
+  var domain=url.replace(/https?:\/\//,'').replace(/\/.*/,'');
+  var row=document.createElement('div'); row.className='srow';
+  row.innerHTML='<div class="sico" style="overflow:hidden"><img src="https://www.google.com/s2/favicons?domain='+domain+'&sz=32" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display=\'none\';this.parentNode.textContent=\'S\'"></div>'+
+    '<div style="flex:1"><div class="snm">'+url+'</div><div class="surl">custom source \u00b7 queued for indexing</div></div>'+
+    '<span class="pill pls">queued</span>';
+  sl.appendChild(row);
+}
+
+function populateSettings(brand,domain,industry){
+  var sb=document.getElementById('settings-brand'); if(sb) sb.value=brand;
+  var su=document.getElementById('settings-url'); if(su) su.value=domain?'https://'+domain:'';
+  var si=document.getElementById('settings-icp'); if(si) si.value=(detectedBrand.icpSuggestions||[]).slice(0,2).join(', ')||'Primary audience';
+  var sind=document.getElementById('settings-industry'); if(sind) sind.value=industry;
+}
+
+function refreshBrandProfile(){
+  brandProfileLoaded = false;
+  var brand=detectedBrand.name||'',domain=detectedBrand.domain||'',industry=detectedBrand.industry||'',desc=detectedBrand.description||'',li=detectedBrand.linkedin||'';
+  var spinner = '<div style="text-align:center;padding:18px 0;font-size:12px;color:var(--t3);font-family:var(--M)">'+
+    '<div style="display:inline-flex;align-items:center;gap:6px">'+
+    '<div style="width:12px;height:12px;border:2px solid rgba(30,94,243,.2);border-top-color:var(--A);border-radius:50%;animation:spin .7s linear infinite"></div>'+
+    'Analysing...</div></div>';
+  ['brand-team-content','brand-voice-content','brand-products-content'].forEach(function(id){
+    var el=document.getElementById(id); if(el) el.innerHTML=spinner;
+  });
+  ensureBrandProfile();
+}
+
+function clearNotifs(){
+  var ndot=document.getElementById('ndot'); if(ndot) ndot.style.display='none';
+  closeAll();
+}
+
 function signOut(){
   closeAll();
+  brandProfileLoaded = false;
+  brandContent = {queue:[], trends:[], quickTags:[], scanData:{}, loaded:false};
+  detectedBrand = {name:'', domain:'', linkedin:'', industry:'', description:'', icpSuggestions:[], found:false};
   document.getElementById('app').classList.remove('show');
   document.getElementById('onboard').classList.add('show');
   goOB(1);
@@ -1476,8 +1904,14 @@ function nav(pg){
   var p=document.getElementById('pg-'+pg);if(p)p.classList.add('on');
   var n=document.getElementById('ni-'+pg);if(n)n.classList.add('on');
   document.getElementById('main').scrollTop=0;
-  if(pg==='dashboard')setTimeout(animScan,120);
-  if(pg==='queue')setTimeout(animScoreBars,120);
+  if(pg==='dashboard') setTimeout(animScan,120);
+  if(pg==='queue') setTimeout(animScoreBars,120);
+  if(pg==='brand') setTimeout(ensureBrandProfile,100);
+  if(pg==='competitor'){
+    setTimeout(loadCompetitorSuggestions,200);
+    var ci=document.getElementById('comp-inp');
+    if(ci&&detectedBrand.domain) ci.placeholder='e.g. a '+( detectedBrand.industry||'competitor')+' domain';
+  }
 }
 function animScan(){
   document.querySelectorAll('.scb[data-w]').forEach(function(el){el.style.width='0%';setTimeout(function(){el.style.width=el.dataset.w+'%';},60);});
@@ -1518,7 +1952,7 @@ function updateProfile(){
   var nm=document.getElementById('pp-name').value;
   var role=document.getElementById('pp-role-inp').value;
   document.getElementById('pp-nm-d').textContent=nm;
-  document.getElementById('pp-role-d').textContent=role+' \u00b7 Zeron';
+  document.getElementById('pp-role-d').textContent=role+' \u00b7 '+(detectedBrand.name||'INK');
   var init=nm.split(' ').map(function(w){return w.charAt(0).toUpperCase();}).slice(0,2).join('');
   document.getElementById('pp-av2').textContent=init;
   document.getElementById('av-btn').textContent=init;
@@ -1541,189 +1975,11 @@ function closeModal(id,e){
 }
 
 // ─── PREVIEW MODAL ────────────────────────────────────
-var queueData=[
-  {title:'How the Stryker Wiper Attack Exposed Gaps in OT Security Posture',serp:94,aeo:90,geo:87,type:'ot'},
-  {title:'CIRCIA Final Rule: What CISOs Must Report in 2026',serp:91,aeo:88,geo:85,type:'circia'},
-  {title:'How CISOs Get Instant Answers to Cyber Risk Questions Using ZIN Advisor',serp:88,aeo:85,geo:83,type:'zin'},
-  {title:'FAIR Model Explained: Translating Cyber Risk into Dollar Impact for the Board',serp:96,aeo:93,geo:90,type:'fair'},
-  {title:'Hidden Cost of Vendor Risk: How Supply Chain Attacks Quantify into CVaR',serp:90,aeo:87,geo:84,type:'vendor'}
-];
+// openPreview now uses dynamic queue from brandContent
 function openPreview(idx){
-  var d=queueData[idx];
-  document.getElementById('pm-ttl').textContent=d.title.length>58?d.title.substring(0,58)+'\u2026':d.title;
-  document.getElementById('pm-pills').innerHTML='<span class="bpill bpg">SERP '+d.serp+'/100</span><span class="bpill bpb">AEO '+d.aeo+'/100</span><span class="bpill bpv">GEO '+d.geo+'/100</span>';
-  document.getElementById('pm-bd').innerHTML=getBlogContent(d.type,d.title);
-  document.getElementById('prev-modal').classList.add('show');
+  openDynPreview(idx);
 }
 
-// ─── FULL BLOG CONTENT ────────────────────────────────
-function getBlogContent(type,title){
-  var fns={ot:otBlog,circia:circiaBlog,zin:zinBlog,fair:fairBlog,vendor:vendorBlog};
-  return (fns[type]||fairBlog)(title);
-}
-
-function otBlog(title){
-  return'<div class="bmeta"><span>Zeron Security Research</span><span>March 22, 2026</span><span>13 min read</span><span>OT Security &middot; Threat Intelligence</span></div>'+
-  '<h1>'+title+'</h1>'+
-  '<h2>The incident: what happened and who was behind it</h2>'+
-  '<p>On the morning of March 14, 2026, cybersecurity researchers monitoring ICS/OT threat activity flagged a coordinated destructive attack against a healthcare device manufacturer in the United States. The threat actor &mdash; identified as the Handala group, a hacktivist collective with documented ties to geopolitical disruption campaigns &mdash; deployed a custom wiper payload later named "Stryker" by incident responders. Unlike ransomware, Stryker had a single purpose: destroy. There was no ransom demand, no decryption key, no negotiation channel. The goal was irreversible operational disruption.</p>'+
-  '<p>Handala is not a new actor. The group has previously targeted Israeli critical infrastructure and has escalated its operations globally as geopolitical tensions have intensified through 2025 and into 2026. What made the Stryker deployment notable was its deliberate targeting of the operational technology layer &mdash; the industrial control systems, PLCs, and SCADA interfaces that govern physical manufacturing and device production processes &mdash; not the corporate IT network.</p>'+
-  '<p>The distinction matters enormously. When IT systems are wiped, the damage is significant but recoverable. When OT systems are destroyed, the impact cascades into the physical world: production lines halt, supply chains freeze, safety systems may fail, and the recovery timeline is measured in weeks or months, not days.</p>'+
-  '<h2>What the attack revealed about OT security posture</h2>'+
-  '<p>The Stryker attack was not a product of exceptional sophistication on the attacker&rsquo;s side. It exploited conditions that security researchers have been documenting for years: the persistent, systemic gap in OT security posture that most organisations have failed to close.</p>'+
-  '<p>Post-incident analysis revealed four critical failures, each of which compounds the others:</p>'+
-  '<ul>'+
-  '<li><strong>Incomplete asset visibility.</strong> The organisation had no comprehensive inventory of OT devices reachable from the corporate network. Several legacy PLCs running firmware from 2017 had never been flagged in any risk register. Attackers used these as footholds to pivot deeper into the OT environment.</li>'+
-  '<li><strong>Flat network architecture.</strong> IT and OT networks had been partially segmented following a compliance audit in 2024, but the segmentation was incomplete. A compromised engineering workstation provided a bridge. Standard IT incident response tools could not operate in the OT environment without risking further disruption.</li>'+
-  '<li><strong>No financial quantification of OT risk.</strong> The organisation&rsquo;s most recent board risk presentation rated their OT risk as "High" on a red-amber-green scale. When the board asked the CISO after the incident what the exposure was worth in financial terms, there was no answer. There had been no CVaR modelling, no FAIR analysis, no attempt to translate OT vulnerability into a dollar figure that could have driven pre-emptive investment.</li>'+
-  '<li><strong>CIRCIA reporting delayed by posture opacity.</strong> The organisation took 94 hours to file their CIRCIA report &mdash; missing the 72-hour window. The delay was not negligence; it was the result of not knowing the scope of the incident because they had no continuous posture management system to query.</li>'+
-  '</ul>'+
-  '<h2>The financial reality: what a wiper attack actually costs</h2>'+
-  '<p>The instinct after an OT breach is to focus on operational recovery. The harder conversation &mdash; and the one boards and CFOs are increasingly demanding &mdash; is the financial impact quantification. What did this cost us, in total, across all dimensions?</p>'+
-  '<p>Based on publicly disclosed information and sector benchmarks, a wiper attack of this scale against an OT environment in the healthcare manufacturing sector typically produces losses across five categories:</p>'+
-  '<ul>'+
-  '<li><strong>Production downtime and revenue loss</strong> &mdash; typically $1.2M&ndash;$4.8M per week for a mid-size manufacturer during complete OT system recovery</li>'+
-  '<li><strong>Physical hardware replacement</strong> &mdash; destroyed firmware on PLCs and SCADA controllers requires component replacement, often from constrained supply chains: $800K&ndash;$2.2M</li>'+
-  '<li><strong>Incident response and forensics</strong> &mdash; specialised OT incident response firms command premium rates: $400K&ndash;$1.8M for a six-week engagement</li>'+
-  '<li><strong>Regulatory penalties</strong> &mdash; CIRCIA late filing plus SEC disclosure violations (if the organisation is publicly listed): $500K&ndash;$5M depending on materiality determination</li>'+
-  '<li><strong>Cyber insurance impact</strong> &mdash; premiums typically increase 25&ndash;60% post-incident for organisations with demonstrated OT posture gaps</li>'+
-  '</ul>'+
-  '<p>Total expected financial exposure for this class of incident: <strong>$3.9M&ndash;$14.6M</strong> at 95th percentile confidence. That is a CVaR figure. And that figure, had it been available to the CISO before the incident, would have justified a very different level of pre-emptive investment in OT security posture management.</p>'+
-  '<h2>How Zeron addresses OT security posture gaps</h2>'+
-  '<p>Zeron&rsquo;s Cyber Risk Posture Management platform approaches OT security from the dimension that traditional tools miss: financial quantification. The platform does not replace OT-specific security tools. It provides the intelligence layer above them that translates what those tools detect into business-aligned risk language that CISOs can take to boards and CFOs can act on.</p>'+
-  '<p><strong>Externo</strong> provides continuous external attack surface discovery that maps every internet-facing asset, including OT interfaces, exposed HMIs (Human-Machine Interfaces), and remote access services that are the primary entry vectors for groups like Handala. It does not just identify these assets &mdash; it scores them by financial exposure using the QBER model.</p>'+
-  '<p><strong>ZIN Advisor</strong>, Zeron&rsquo;s AI-powered cyber risk copilot, continuously correlates Externo&rsquo;s external signals with internal telemetry from Interno, compliance posture from Conformity, and third-party vendor risk from Vendor Pulse. When an anomaly emerges that resembles a pre-wiper reconnaissance pattern, ZIN Advisor surfaces it as a prioritised, board-ready risk answer &mdash; not an alert that requires an analyst to investigate for three hours before it becomes actionable.</p>'+
-  '<p>The <strong>QBER (Quantified Exposure to Risk)</strong> model translates every detected exposure into a financial range using FAIR-aligned probabilistic modelling. Instead of "High severity OT exposure," the CISO receives "Expected financial loss from current OT posture: $4.2M at 95th percentile confidence over the next 90 days." That is the number that moves budget decisions.</p>'+
-  '<div class="bfaq"><div class="bfaq-q">What is the difference between a wiper attack and ransomware in OT environments?</div><div class="bfaq-a">Ransomware encrypts systems and demands payment for decryption. A wiper attack permanently destroys data and firmware with no recovery path other than physical hardware replacement and OS reinstallation. In OT environments, wiper attacks are significantly more damaging because they can affect physical control systems, and recovery timelines are 3&ndash;5x longer than ransomware recovery due to hardware dependencies.</div></div>'+
-  '<div class="bfaq"><div class="bfaq-q">Does CIRCIA require reporting OT security incidents?</div><div class="bfaq-a">Yes. CIRCIA applies to covered entities operating critical infrastructure across 16 sectors, including healthcare, manufacturing, and energy &mdash; all of which operate OT environments. A destructive attack against OT systems that disrupts operational continuity would typically qualify as a covered cyber incident requiring 72-hour reporting to CISA.</div></div>'+
-  '<h2>Conclusion: posture management is the pre-requisite for everything else</h2>'+
-  '<p>The Stryker wiper attack will not be the last of its kind. Handala has already signalled continuation of its operational disruption campaign. Other threat actors are observing the results and adapting their own TTPs.</p>'+
-  '<p>The organisations that will weather the next wave are not those with the most security tools. They are the ones who have built a continuous, financially-quantified picture of their OT risk posture &mdash; one that can answer the board&rsquo;s question before the incident, not after it.</p>'+
-  '<div class="bcta"><div><div class="bcta-t">How exposed is your OT environment right now?</div><div class="bcta-s">See how Zeron&rsquo;s QBER model quantifies your OT risk exposure in financial terms &mdash; in under 30 minutes.</div></div><button class="btn bbl bsm">Book a demo &rarr;</button></div>'+
-  '<div class="bauth"><div class="bav">SS</div><div><div class="banm">Sanket Sarkar &mdash; Founder &amp; CEO, Zeron</div><div class="barl">linkedin.com/in/infosecsanket &middot; Zeron &mdash; AI-Powered Cyber Risk Decision Intelligence</div></div></div>';
-}
-
-function zinBlog(title){
-  return'<div class="bmeta"><span>zeronwebs</span><span>Insights</span><span>March 2, 2026</span><span>12 min read</span><span>ZIN Advisor &middot; AI Copilot</span></div>'+
-  '<h1>'+title+'</h1>'+
-  '<h2>The question every CISO is now being asked</h2>'+
-  '<p>Security leaders are no longer asked, "Are we secure?" They are asked:</p>'+
-  '<ul><li>What is our financial exposure?</li><li>Which risks demand immediate action?</li><li>How does cyber impact business continuity?</li><li>What would it cost us if our largest vendor was breached today?</li><li>Are we compliant with CIRCIA? When did we last verify it?</li></ul>'+
-  '<p>These are not questions that a SIEM dashboard answers. They are not questions that a weekly vulnerability report addresses. They are questions that require a CISO to have a single, unified source of intelligence that speaks in business language &mdash; instantly, contextually, and with financial precision.</p>'+
-  '<p>That is precisely where ZIN Advisor steps in.</p>'+
-  '<h2>What is ZIN Advisor?</h2>'+
-  '<p>ZIN Advisor is an AI-powered cyber risk copilot built on <strong>Zeron Intelligence (ZIN)</strong>. It combines agentic AI with the QBER financial risk model to transform raw cyber data into quantified, decision-ready intelligence. Instead of functioning as another dashboard that adds to the noise, ZIN Advisor acts as a unified command layer that translates complex security signals into business-aligned risk insights &mdash; in the format that boards, CFOs, and CISOs need to act on.</p>'+
-  '<p>The distinction between a dashboard and a copilot is not semantic. A dashboard shows you data. A copilot reasons about that data, correlates it with context you have not explicitly connected, and delivers prioritised answers to the questions that matter most. ZIN Advisor is built to do the latter.</p>'+
-  '<h2>How ZIN Advisor turns raw data into instant risk answers</h2>'+
-  '<p>ZIN Advisor ingests structured and unstructured security data across the organisation, correlates signals in real time, and applies financial risk modelling through QBER. The system transforms technical telemetry into contextual, role-specific intelligence. Within seconds, CISOs receive prioritised, actionable insights instead of fragmented dashboards.</p>'+
-  '<p>Consider a scenario: a new critical CVE is published affecting a widely deployed VPN appliance. Within the ZIN Advisor interface, the CISO can ask: "What is our financial exposure from the new VPN CVE if exploited?" ZIN Advisor queries Externo (external attack surface), cross-references internal asset data from Interno, checks vendor exposure via Vendor Pulse, and delivers: "Estimated CVaR impact: $2.8M at 95th percentile. 3 of your critical vendors use this appliance. Conformity posture: CIRCIA reporting would be triggered. Recommended action: prioritise patching for these 7 internet-facing instances within 48 hours."</p>'+
-  '<p>That answer &mdash; from question to board-ready intelligence &mdash; takes seconds. Without ZIN Advisor, it requires an analyst to spend 3 hours stitching together five different tool outputs.</p>'+
-  '<h2>The five data streams that power ZIN Advisor</h2>'+
-  '<p>ZIN Advisor ingests and correlates five core data domains:</p>'+
-  '<ul>'+
-  '<li><strong>External Attack Surface Data via Externo</strong> &mdash; continuous discovery of internet-facing assets, exposed services, misconfigured cloud resources, and digital risk signals</li>'+
-  '<li><strong>Internal Risk Signals via Interno</strong> &mdash; control gaps, privilege escalation patterns, insider risk indicators, and lateral movement telemetry</li>'+
-  '<li><strong>Third-Party and Vendor Data via Vendor Pulse</strong> &mdash; real-time vendor security posture, breach signals, and supply chain risk with CVaR-linked financial exposure</li>'+
-  '<li><strong>Compliance and Audit Logs via Conformity</strong> &mdash; regulatory posture across CIRCIA, CMMC 2.0, NIST CSF 2.0, SEC disclosure rules, SEBI CSCRF, and DPDP Act</li>'+
-  '<li><strong>Threat Intelligence Feeds</strong> &mdash; curated IOC and TTP intelligence contextualised against your specific attack surface and asset profile</li>'+
-  '</ul>'+
-  '<p>By correlating these five domains simultaneously, ZIN Advisor builds a unified risk picture that no single-domain tool can replicate. The result is not a comprehensive report &mdash; it is a specific, contextual answer to a specific question, updated continuously as the threat landscape evolves.</p>'+
-  '<h2>How the QBER model makes ZIN Advisor&rsquo;s answers financially precise</h2>'+
-  '<p>ZIN Advisor&rsquo;s answers are not qualitative. They are not "high risk" or "critical severity." They are financial. This precision comes from the <strong>QBER (Quantified Exposure to Risk)</strong> model, which applies FAIR-aligned probabilistic financial modelling to every risk signal ZIN processes.</p>'+
-  '<p>Where traditional tools say "CVSS score: 9.2, Critical," QBER says "Expected financial loss in a compromise scenario: $4.2M at 95th percentile confidence over 90 days." That is a CVaR figure &mdash; Conditional Value at Risk &mdash; expressed in the language that finance, boards, and insurers understand.</p>'+
-  '<p>This financial precision is what allows ZIN Advisor to answer the questions that matter most in board meetings and budget conversations: not "how severe is this?" but "what does it cost us if we do nothing?" and "what does it save us if we invest $1.5M in this control?"</p>'+
-  '<div class="bfaq"><div class="bfaq-q">What makes ZIN Advisor different from a traditional SIEM?</div><div class="bfaq-a">SIEMs aggregate events and generate alerts. ZIN Advisor reasons, correlates across five data domains, and delivers prioritised, financially-quantified answers to business questions. A SIEM tells you an anomaly occurred. ZIN Advisor tells you what it means for your financial exposure, your compliance posture, and what your next action should be.</div></div>'+
-  '<div class="bfaq"><div class="bfaq-q">Is ZIN Advisor a standalone product or part of the Zeron platform?</div><div class="bfaq-a">ZIN Advisor is the intelligence layer that orchestrates all five Zeron modules: Externo, Interno, Vendor Pulse, Conformity, and Cyber Navigator. It can surface insights from each module independently, but its full power comes from correlating signals across all five simultaneously to answer complex, cross-domain risk questions.</div></div>'+
-  '<h2>Conclusion: from reactive oversight to informed strategic leadership</h2>'+
-  '<p>Modern cybersecurity leadership is no longer about monitoring metrics. It is about commanding clarity in moments that matter. When every board question demands precision and every decision carries business impact, CISOs need more than visibility. They need intelligence that is unified, contextual, and instantly actionable.</p>'+
-  '<p>That is where ZIN Advisor elevates cybersecurity from reactive oversight to informed strategic leadership.</p>'+
-  '<div class="bcta"><div><div class="bcta-t">Ready to experience ZIN Advisor?</div><div class="bcta-s">See how Zeron translates your cyber exposure into decision-ready intelligence in under 30 minutes.</div></div><button class="btn bbl bsm">Book a demo &rarr;</button></div>'+
-  '<div class="bauth"><div class="bav">SS</div><div><div class="banm">Sanket Sarkar &mdash; Founder &amp; CEO, Zeron</div><div class="barl">linkedin.com/in/infosecsanket &middot; AI-Powered Cyber Risk Decision Intelligence &middot; ZIN Advisor &middot; QBER Model</div></div></div>';
-}
-
-function circiaBlog(title){
-  return'<div class="bmeta"><span>Zeron Security Research</span><span>March 22, 2026</span><span>11 min read</span><span>Regulatory Compliance &middot; CIRCIA</span></div>'+
-  '<h1>'+title+'</h1>'+
-  '<h2>What changed in 2026: CIRCIA moves from rulemaking to enforcement</h2>'+
-  '<p>For two years after the Cyber Incident Reporting for Critical Infrastructure Act was signed into law in 2022, organisations watched the rulemaking process unfold from a comfortable distance. The deadlines felt distant. The final rule was still being written. Then, in late 2025, CISA published the final rule, and 2026 became the year that compliance stopped being a preparation exercise and became a live enforcement reality.</p>'+
-  '<p>The organisations that treated CIRCIA as a future concern are now operating under active compliance obligations with material consequences for non-compliance. The question for CISOs in 2026 is no longer "what does CIRCIA require?" It is "can my organisation meet those requirements without manual scrambling &mdash; and can I prove that to a board and a regulator?"</p>'+
-  '<h2>The core CIRCIA obligations every CISO must understand</h2>'+
-  '<p>CIRCIA creates four distinct reporting obligations for covered entities:</p>'+
-  '<ul>'+
-  '<li><strong>72-hour cyber incident reports to CISA</strong> &mdash; triggered upon "reasonable belief" that a covered cyber incident has occurred. The clock starts from awareness, not containment. This is the obligation most organisations will violate first, because 72 hours is not enough time to achieve certainty in most breach scenarios. CIRCIA deliberately uses a lower threshold: reasonable belief.</li>'+
-  '<li><strong>24-hour ransomware payment reports</strong> &mdash; from the moment a ransomware payment is made or instructed. This obligation exists independently of whether a cyber incident report has been filed.</li>'+
-  '<li><strong>Supplemental reports within 72 hours of the initial submission</strong> &mdash; with additional known information about the incident as understanding develops.</li>'+
-  '<li><strong>Data preservation obligations</strong> &mdash; covered entities must preserve relevant data for CISA review upon request. The duration and scope of preservation are defined in the final rule.</li>'+
-  '</ul>'+
-  '<h2>Who is a covered entity?</h2>'+
-  '<p>CIRCIA applies to covered entities operating within 16 critical infrastructure sectors: chemical, commercial facilities, communications, critical manufacturing, dams, defence industrial base, emergency services, energy, financial services, food and agriculture, government facilities, healthcare and public health, information technology, nuclear reactors, transportation systems, and water and wastewater systems.</p>'+
-  '<p>Within these sectors, covered entity status is further defined by size thresholds that vary by sector. CISA&rsquo;s final rule provides sector-specific guidance, but the default presumption for any organisation operating in these sectors at scale is that CIRCIA applies.</p>'+
-  '<h2>Where CISOs will fail without continuous posture management</h2>'+
-  '<p>The 72-hour window sounds manageable until you examine what it actually demands. At the moment a cyber incident occurs &mdash; or at the moment you have reasonable belief that one has occurred &mdash; you need to be able to answer: Which systems were affected? What data was potentially accessed? Is this a covered cyber incident under CIRCIA? Has any ransomware payment been made or authorised?</p>'+
-  '<p>Without a continuous posture management system, answering these questions requires manually stitching together outputs from SIEM, endpoint detection, cloud security tools, and ticketing systems. In a real incident, under time pressure, with potentially degraded visibility, this process takes days. The 72-hour clock does not pause while your team assembles the picture.</p>'+
-  '<h2>How Zeron&rsquo;s Conformity module automates CIRCIA compliance</h2>'+
-  '<p>Zeron&rsquo;s <strong>Conformity</strong> module is built around the premise that regulatory compliance should be a continuous posture, not an incident-triggered response. It maps your control environment against CIRCIA requirements in real time, maintains audit-ready documentation continuously (not just before audits), and provides the organisational awareness that the 72-hour window requires.</p>'+
-  '<p>When an incident is detected, <strong>ZIN Advisor</strong> integrates with Conformity to answer the CIRCIA threshold question directly: "Does the observed incident cross the covered cyber incident threshold under CIRCIA?" If yes, it pre-populates the CISA reporting template with known incident data, flags which data preservation obligations apply, and tracks the 72-hour countdown in the CISO dashboard.</p>'+
-  '<div class="bfaq"><div class="bfaq-q">What constitutes a covered cyber incident under CIRCIA?</div><div class="bfaq-a">CIRCIA defines a covered cyber incident as a substantial cyber incident that results in: significant loss of confidentiality, integrity, or availability; serious impact on safety and resiliency of operational systems; disruption to business or industrial operations; or unauthorised access facilitated through a third-party provider. Ransomware attacks, regardless of whether data was exfiltrated, are explicitly covered.</div></div>'+
-  '<div class="bfaq"><div class="bfaq-q">What are the consequences of missing the 72-hour CIRCIA filing window?</div><div class="bfaq-a">CISA can issue subpoenas to compel reporting from entities that fail to meet their obligations. For persistent non-compliance, CISA can refer matters to the Department of Justice. While the initial enforcement posture is expected to be compliance-focused rather than punitive, organisations with documented CIRCIA violations face heightened scrutiny in subsequent regulatory interactions and potential civil liability exposure.</div></div>'+
-  '<h2>Conclusion: compliance posture is not a checkbox, it is a capability</h2>'+
-  '<p>CIRCIA enforcement in 2026 separates organisations that built compliance as a continuous capability from those that treated it as an audit exercise. The difference will be visible within the first 72 hours of the next significant incident.</p>'+
-  '<div class="bcta"><div><div class="bcta-t">Is your organisation CIRCIA-ready today?</div><div class="bcta-s">Zeron&rsquo;s Conformity module gives you continuous CIRCIA posture visibility so the 72-hour clock does not catch you off guard.</div></div><button class="btn bbl bsm">Book a demo &rarr;</button></div>'+
-  '<div class="bauth"><div class="bav">SS</div><div><div class="banm">Sanket Sarkar &mdash; Founder &amp; CEO, Zeron</div><div class="barl">linkedin.com/in/infosecsanket &middot; Zeron &mdash; AI-Powered Cyber Risk Decision Intelligence</div></div></div>';
-}
-
-function fairBlog(title){
-  return'<div class="bmeta"><span>Zeron Security Research</span><span>March 22, 2026</span><span>10 min read</span><span>Cyber Risk Quantification &middot; FAIR Model</span></div>'+
-  '<h1>'+title+'</h1>'+
-  '<h2>The problem with "High, Medium, Low"</h2>'+
-  '<p>Walk into any board meeting and present a risk matrix with red, amber, and green ratings, and the board will nod and move on. They have seen it dozens of times. They do not have the context to act on it, no basis to compare this cyber risk against capital expenditure decisions, insurance renewal considerations, or M&A due diligence. The qualitative risk language that the security industry has been using for three decades does not translate into the language of business decisions.</p>'+
-  '<p>The FAIR (Factor Analysis of Information Risk) framework exists to solve this problem. It provides a structured methodology for translating cyber risk into financial terms &mdash; specifically, into probabilistic loss estimates that speak the same language as enterprise risk management, insurance underwriting, and board-level strategy. But understanding what FAIR is and operationalising it at scale for real-time board reporting are two very different challenges.</p>'+
-  '<h2>How FAIR works: the core model</h2>'+
-  '<p>FAIR decomposes cyber risk into two primary components that, when combined, produce a financial risk estimate:</p>'+
-  '<ul>'+
-  '<li><strong>Loss Event Frequency (LEF)</strong> &mdash; how often is a threat agent likely to act against a specific asset, and of those actions, how many will be successful? LEF combines Threat Event Frequency (how often a threat agent contacts an asset) with Vulnerability (the probability that the action succeeds given the controls in place).</li>'+
-  '<li><strong>Loss Magnitude (LM)</strong> &mdash; when a loss event does occur, how much will it cost? FAIR breaks this into six loss form categories: productivity, response, replacement, fines and judgments, competitive advantage, and reputation.</li>'+
-  '</ul>'+
-  '<p>The combination of LEF and LM, modelled probabilistically using Monte Carlo simulation, produces a range of financial outcomes. The output is not a single number. It is a distribution: "Most likely loss: $1.2M. 90th percentile loss: $4.8M. 95th percentile loss: $7.2M." The 95th percentile figure is your CVaR &mdash; the number that most closely approximates the worst-case scenario you should be planning for.</p>'+
-  '<h2>From FAIR to CVaR: the board conversation CISO have been missing</h2>'+
-  '<p>CVaR (Conditional Value at Risk) is a financial risk metric borrowed from quantitative finance, where it has been used for decades to model portfolio risk. In the context of cyber risk, CVaR answers the question: "What is the expected loss, in dollar terms, in the worst X% of scenarios?"</p>'+
-  '<p>When a CISO can tell the board "Our CVaR for our OT environment over the next 12 months is $6.4M at 95% confidence," several things happen that do not happen with a qualitative risk rating:</p>'+
-  '<ul>'+
-  '<li>The board can compare this against the cost of the proposed security investments that would reduce this exposure</li>'+
-  '<li>The CFO can make an informed decision about cyber insurance coverage levels</li>'+
-  '<li>The CEO can contextualise this against M&A targets in due diligence processes</li>'+
-  '<li>The audit committee can assess whether the organisation&rsquo;s SEC material risk disclosures are accurate</li>'+
-  '</ul>'+
-  '<h2>How Zeron&rsquo;s QBER model operationalises FAIR at scale</h2>'+
-  '<p>Zeron&rsquo;s <strong>QBER (Quantified Exposure to Risk)</strong> model implements FAIR-aligned financial quantification at the speed and scale that manual FAIR analysis cannot achieve. Rather than requiring security analysts to manually populate FAIR ontology spreadsheets for each threat scenario, QBER ingests telemetry from all five Zeron platform modules and applies Monte Carlo simulation against historical breach cost data and threat intelligence to produce continuously updated CVaR outputs.</p>'+
-  '<p>The result is a living financial risk picture. When a new vulnerability is disclosed, QBER automatically recalculates your CVaR exposure based on whether you have that asset, what controls are in place, and how the historical exploitation pattern for that vulnerability class matches your specific threat profile.</p>'+
-  '<div class="bfaq"><div class="bfaq-q">Is FAIR the same as CVSS?</div><div class="bfaq-a">No. CVSS (Common Vulnerability Scoring System) scores the technical severity of individual vulnerabilities on a scale of 0&ndash;10. FAIR is a methodology for quantifying risk in financial terms across a threat scenario, incorporating threat agent behaviour, control effectiveness, and loss magnitude. FAIR uses CVSS data as one input among many. The outputs are fundamentally different: CVSS produces a severity number, FAIR produces a financial loss distribution.</div></div>'+
-  '<div class="bfaq"><div class="bfaq-q">How does Zeron&rsquo;s QBER model differ from manually running FAIR?</div><div class="bfaq-a">Manual FAIR analysis is time-consuming, requires specialist expertise, and produces a point-in-time estimate that becomes stale as the threat landscape evolves. QBER automates the data ingestion, correlation, and simulation components, producing continuously updated CVaR outputs that reflect the current state of your attack surface, your controls, and the active threat intelligence relevant to your sector and asset profile.</div></div>'+
-  '<div class="bcta"><div><div class="bcta-t">See QBER translate your risk into CVaR</div><div class="bcta-s">Watch Zeron map your real attack surface data to board-ready financial risk outputs in under 30 minutes.</div></div><button class="btn bbl bsm">Book a demo &rarr;</button></div>'+
-  '<div class="bauth"><div class="bav">SS</div><div><div class="banm">Sanket Sarkar &mdash; Founder &amp; CEO, Zeron</div><div class="barl">linkedin.com/in/infosecsanket &middot; Zeron &mdash; AI-Powered Cyber Risk Decision Intelligence</div></div></div>';
-}
-
-function vendorBlog(title){
-  return'<div class="bmeta"><span>Zeron Security Research</span><span>March 22, 2026</span><span>10 min read</span><span>Vendor Risk &middot; Supply Chain Security</span></div>'+
-  '<h1>'+title+'</h1>'+
-  '<h2>Supply chain attacks: the threat that bypasses your perimeter entirely</h2>'+
-  '<p>Every major supply chain attack of the past five years follows the same pattern: attackers identify that a target organisation has invested heavily in hardening its own perimeter. Rather than attempting a direct breach against hardened defences, they find a trusted vendor &mdash; a software provider, a managed service provider, a cloud infrastructure partner &mdash; whose access to the target&rsquo;s systems is implicit and often poorly monitored. The vendor becomes the entry point.</p>'+
-  '<p>The 2020 SolarWinds attack compromised approximately 18,000 organisations through a single software update mechanism. The 2021 Kaseya attack affected over 1,500 businesses through a single MSP platform. In Q1 2026 alone, threat intelligence firms have documented 23 confirmed supply chain compromise events affecting organisations across the financial services, healthcare, and critical infrastructure sectors.</p>'+
-  '<p>The common denominator is not a failure of the attacked organisation&rsquo;s own controls. It is the absence of a quantified, continuously monitored picture of vendor-introduced risk.</p>'+
-  '<h2>Why vendor scorecards fail the board test</h2>'+
-  '<p>Most organisations with a formal vendor risk programme can tell you which vendors have completed their annual security questionnaire and what score they received. Vendor A: 72/100. Vendor B: 61/100. Vendor C: 84/100. These numbers exist in spreadsheets, in GRC platforms, in audit reports.</p>'+
-  '<p>What they cannot tell you is: "If Vendor B is compromised tomorrow, what is our expected financial exposure?" That question &mdash; which is the question every CFO and board member now asks in the post-SolarWinds world &mdash; requires a different analytical framework entirely.</p>'+
-  '<p>A questionnaire score of 61/100 tells you something about Vendor B&rsquo;s control maturity. It tells you nothing about the blast radius of a Vendor B compromise on your specific environment, the data and systems they have access to, the historical frequency of breaches in their sector, or the financial loss distribution you face if they are successfully attacked.</p>'+
-  '<h2>CVaR-based vendor risk: what it looks like in practice</h2>'+
-  '<p>CVaR-based vendor risk quantification translates the vendor risk question into financial terms. For each vendor, the analysis models: breach probability (how likely is this vendor to experience a compromise in the next 12 months, given their sector, size, and control profile), propagation likelihood (if they are compromised, what is the probability that the compromise reaches your environment), and impact magnitude (given propagation, what is your expected financial loss across productivity, response, data loss, and regulatory exposure).</p>'+
-  '<p>The output for a Tier 1 cloud infrastructure vendor might be: "CVaR: $8.4M at 95% confidence if this vendor is compromised within the next 12 months." That number &mdash; not a scorecard rating &mdash; is the basis for prioritised remediation investment, contract renegotiation, and cyber insurance positioning.</p>'+
-  '<h2>How Zeron Vendor Pulse delivers continuous vendor risk intelligence</h2>'+
-  '<p>Zeron&rsquo;s <strong>Vendor Pulse</strong> module moves vendor risk management from periodic questionnaire cycles to continuous posture monitoring. It maps your vendor ecosystem, continuously monitors external signals of vendor compromise (including dark web signals, breach disclosures, and threat intelligence feeds specific to your vendors&rsquo; sectors), and feeds that intelligence into the QBER model to produce CVaR-denominated exposure estimates per vendor and per vendor tier.</p>'+
-  '<p>When a breach signal emerges for a vendor in your ecosystem, <strong>ZIN Advisor</strong> immediately surfaces the financial exposure impact: "Your Tier 1 cloud provider has an active breach indicator. Estimated CVaR impact to your organisation: $6.8M. Recommended actions: activate contractual incident notification provisions, assess data residency exposure, review access privileges."</p>'+
-  '<div class="bfaq"><div class="bfaq-q">How does Vendor Pulse differ from traditional VRM platforms?</div><div class="bfaq-a">Traditional VRM platforms manage questionnaire workflows, store responses, and generate compliance reports. Vendor Pulse provides continuous external monitoring of vendor security posture, real-time breach signal detection, and CVaR-based financial exposure quantification. It is the difference between knowing a vendor&rsquo;s self-reported security posture and knowing their actual risk contribution to your financial exposure in real time.</div></div>'+
-  '<div class="bcta"><div><div class="bcta-t">Quantify your vendor risk in CVaR terms</div><div class="bcta-s">See how Zeron maps your full vendor ecosystem to financial exposure estimates &mdash; identifying which vendors demand immediate action.</div></div><button class="btn bbl bsm">Book a demo &rarr;</button></div>'+
-  '<div class="bauth"><div class="bav">SS</div><div><div class="banm">Sanket Sarkar &mdash; Founder &amp; CEO, Zeron</div><div class="barl">linkedin.com/in/infosecsanket &middot; Zeron &mdash; AI-Powered Cyber Risk Decision Intelligence</div></div></div>';
-}
 
 // ─── WOD ──────────────────────────────────────────────
 var wizN=1,wodTopic='';
@@ -1764,16 +2020,24 @@ function wm(d){wizN=Math.max(1,Math.min(4,wizN+d));updateWiz();}
 function pw(el){el.parentElement.querySelectorAll('.wo').forEach(function(o){o.classList.remove('sel');});el.classList.add('sel');}
 
 function getTD(topic){
-  var c=/cyber|ciso|risk|security|ransomware|wiper|ot |ics|attack|circia|cmmc|stryker|vendor|fair|cvss|cvar|qber|breach|zeron|zin/i.test(topic);
-  if(c) return{
-    tr:['cyber risk quantification 2026','OT security posture management','CIRCIA compliance deadline','ransomware supply chain 2026','CISO board reporting 2026','ZIN Advisor cyber copilot','QBER risk quantification model','wiper malware OT defence','CMMC 2.0 deadline','vendor risk CVaR modelling'],
-    qs:['What should CISOs do after a wiper malware attack?','How do you quantify OT cyber risk in financial terms?','What does CIRCIA require for 72-hour incident reporting?','How is CVaR different from CVSS for board reports?','How does ZIN Advisor help CISOs make faster decisions?','What is QBER and how does it work?','How to communicate cyber risk in dollar terms to the board?'],
-    lt:['cyber risk quantification for the board 2026','ZIN Advisor cyber risk copilot for CISOs','QBER model quantified exposure to risk explained','OT ICS security posture management framework guide','CIRCIA 72-hour reporting requirement CISO checklist','CVaR calculation operational technology breach cost'],
-    kws:[{k:'cyber risk quantification',v:'8,100/mo',d:'Medium',kd:'52',c:'$14.20'},{k:'ZIN Advisor cyber copilot',v:'1,200/mo',d:'Easy',kd:'18',c:'$22.80'},{k:'QBER risk model',v:'900/mo',d:'Easy',kd:'14',c:'$28.40'},{k:'CIRCIA reporting 2026',v:'3,200/mo',d:'Easy',kd:'31',c:'$9.80'},{k:'CVaR cybersecurity board',v:'1,600/mo',d:'Easy',kd:'22',c:'$22.40'},{k:'OT security posture management',v:'2,400/mo',d:'Easy',kd:'28',c:'$18.50'}],
-    paa:['What is ZIN Advisor by Zeron?','How does QBER quantify cyber risk?','What is OT cybersecurity posture management?','How do CISOs measure cyber risk in financial terms?','What are CIRCIA reporting deadlines in 2026?'],
-    sc:{serp:91,seo:93,aeo:88,geo:85,kd:27}
+  // Generic SERP data scaffold - real data would come from DataForSEO / Google Suggest
+  var brand=detectedBrand.name||'';
+  var industry=detectedBrand.industry||'';
+  return{
+    tr:[topic+' 2026',topic+' guide',topic+' best practices',brand+' '+topic,industry+' '+topic+' trends'],
+    qs:['What is '+topic+'?','How does '+topic+' work in '+industry+'?','Why does '+topic+' matter for '+brand+'?','How to get started with '+topic+'?','What are the best '+topic+' examples in 2026?'],
+    lt:[topic+' complete guide 2026',topic+' for '+industry+' brands',topic+' step by step tutorial',brand+' approach to '+topic,'best '+topic+' strategies 2026'],
+    kws:[
+      {k:topic,v:'4,200/mo',d:'Medium',kd:'42',c:'$3.80'},
+      {k:topic+' guide',v:'1,800/mo',d:'Easy',kd:'28',c:'$2.40'},
+      {k:topic+' 2026',v:'2,100/mo',d:'Easy',kd:'24',c:'$3.10'},
+      {k:'best '+topic,v:'3,400/mo',d:'Medium',kd:'45',c:'$4.20'},
+      {k:topic+' for '+industry,v:'900/mo',d:'Easy',kd:'18',c:'$5.50'},
+      {k:brand+' '+topic,v:'600/mo',d:'Easy',kd:'12',c:'$6.80'}
+    ],
+    paa:['What is '+topic+'?','How does '+topic+' help '+industry+' brands?','What are the top '+topic+' strategies?','How to measure '+topic+' success?','What does '+brand+' say about '+topic+'?'],
+    sc:{serp:Math.floor(78+Math.random()*18),seo:Math.floor(80+Math.random()*15),aeo:Math.floor(75+Math.random()*18),geo:Math.floor(70+Math.random()*20),kd:Math.floor(22+Math.random()*28)}
   };
-  return{tr:[topic+' 2026',topic+' guide'],qs:['What is '+topic+'?','How does '+topic+' work?'],lt:[topic+' guide 2026'],kws:[{k:topic,v:'2,400/mo',d:'Medium',kd:'45',c:'$8.40'}],paa:['What is '+topic+'?'],sc:{serp:78,seo:80,aeo:75,geo:70,kd:36}};
 }
 function runGen(){
   document.getElementById('wiz-card').style.display='none';
@@ -1851,6 +2115,43 @@ function removeComp(idx){
   if(competitors.length===0)document.getElementById('comp-output').innerHTML='';
 }
 
+async function loadCompetitorSuggestions(){
+  var brand = detectedBrand.name||'';
+  var industry = detectedBrand.industry||'';
+  if(!brand || !industry) return;
+  var card = document.getElementById('comp-suggestions-card');
+  var list = document.getElementById('comp-suggestions-list');
+  var lbl = document.getElementById('comp-sugg-label');
+  if(!card||!list) return;
+  card.style.display='block';
+  if(lbl) lbl.textContent='Based on '+industry+' — click to add';
+  list.innerHTML='<div style="font-size:11px;color:var(--t3);font-family:var(--M);display:flex;align-items:center;gap:6px"><div style="width:10px;height:10px;border:2px solid rgba(30,94,243,.2);border-top-color:var(--A);border-radius:50%;animation:spin .7s linear infinite"></div>Finding competitors in '+industry+'...</div>';
+  try{
+    var prompt='Name exactly 6 direct competitors of '+brand+' in the '+industry+' industry. Return ONLY JSON: {"competitors":[{"domain":"example.com","name":"Company Name"}]}. These must be real companies that directly compete with '+brand+' in '+industry+'. Do NOT include '+brand+' itself. Return only domains, no https, no paths.';
+    var text = await inkAPI(prompt, 400, true);
+    var parsed = safeJSON(text);
+    var comps = parsed.competitors||[];
+    if(!comps.length){ card.style.display='none'; return; }
+    list.innerHTML='';
+    comps.forEach(function(comp){
+      var btn=document.createElement('div');
+      btn.style.cssText='display:flex;align-items:center;gap:7px;padding:7px 11px;border:1.5px solid var(--b2);border-radius:var(--r6);cursor:pointer;background:var(--s2);transition:all .12s;font-size:12px;font-weight:600';
+      btn.innerHTML='<div style="width:18px;height:18px;border-radius:4px;overflow:hidden;background:var(--s3);flex-shrink:0"><img src="https://www.google.com/s2/favicons?domain='+comp.domain+'&sz=32" style="width:100%;height:100%;object-fit:cover" onerror="this.parentNode.innerHTML=\'<span style=font-size:11px;font-weight:700>'+comp.name.charAt(0)+'</span>\'"></div>'+comp.name+'<span style="margin-left:auto;font-size:10px;font-family:var(--M);color:var(--t3)">+ Add</span>';
+      btn.onmouseenter=function(){this.style.borderColor='var(--A)';this.style.background='var(--ab)';};
+      btn.onmouseleave=function(){this.style.borderColor='var(--b2)';this.style.background='var(--s2)';};
+      btn.onclick=function(){
+        document.getElementById('comp-inp').value=comp.domain;
+        addCompetitor();
+        btn.style.opacity='0.4';
+        btn.onclick=null;
+      };
+      list.appendChild(btn);
+    });
+  }catch(e){
+    card.style.display='none';
+  }
+}
+
 async function runCompetitorAnalysis(){
   if(competitors.length===0)return;
   var btn=document.getElementById('run-comp-btn');
@@ -1873,31 +2174,24 @@ async function analyseCompetitor(domain){
   '</div></div>'+
   '<div class="comp-status"><div class="loading-spinner-inline"></div>&nbsp;Fetching live data for '+domain+'&hellip;</div>';
   try{
-    var prompt='You are a content strategy analyst. Analyse the website '+domain+' and provide a detailed competitive intelligence report for a cybersecurity company (Zeron) that focuses on Cyber Risk Quantification, AI-powered risk intelligence, and the FAIR/CVaR financial risk model.\n\nSearch the web for current information about '+domain+' and provide:\n\n1. COMPANY OVERVIEW: What does this company do? What is their core product/service and positioning? (2-3 sentences)\n\n2. CONTENT STRATEGY: How often do they publish content? What topics and keywords do they focus on? What content formats do they use (blog, whitepapers, webinars, etc.)?\n\n3. TARGET AUDIENCE: Who are they targeting? CISOs? Security analysts? GRC? C-suite?\n\n4. KEY DIFFERENTIATORS: What do they claim makes them unique? What is their core value proposition?\n\n5. COMPETITIVE GAPS vs ZERON: What topics or capabilities does Zeron cover (CVaR, QBER, FAIR model, financial risk quantification, ZIN Advisor AI copilot, OT risk, CIRCIA compliance) that this competitor does NOT appear to address strongly?\n\n6. CONTENT OPPORTUNITIES: What specific blog topics or angles could Zeron write about to outrank or outposition this competitor?\n\nBe specific, factual, and based on actual web data. If you cannot find sufficient data about this domain, say so explicitly. Do not fabricate statistics or capabilities.';
-    var response=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',
-        max_tokens:1000,
-        tools:[{type:'web_search_20250305',name:'web_search'}],
-        messages:[{role:'user',content:prompt}]
-      })
-    });
-    var data=await response.json();
-    var text='';
-    if(data.content){
-      data.content.forEach(function(block){if(block.type==='text')text+=block.text;});
-    }
-    if(!text&&data.error){text='Error: '+data.error.message;}
+    var myBrand=detectedBrand.name||'our brand';
+    var myIndustry=detectedBrand.industry||'our industry';
+    var myDesc=detectedBrand.description||'';
+    var prompt='Analyse the website '+domain+' and compare it as a competitor to '+myBrand+' ('+myIndustry+'). Search the web for current information about '+domain+'. Provide:\n\n1. COMPANY OVERVIEW: What does '+domain+' do? Core product/positioning in 2-3 sentences.\n\n2. CONTENT STRATEGY: Publishing frequency, main topics, formats (blog, video, podcasts etc.)\n\n3. TARGET AUDIENCE: Who are their customers? What segment do they serve?\n\n4. KEY DIFFERENTIATORS: What makes them unique vs '+myBrand+'?\n\n5. GAPS vs '+myBrand+': What topics or content angles is '+myBrand+' doing better, or that '+domain+' is missing?\n\n6. CONTENT OPPORTUNITIES: Specific blog titles or topics '+myBrand+' could write to outrank '+domain+'\n\nBe factual and based on real web data only. No fabrication.';
+    var text = await inkAPI(prompt, 1400, true);
     card.innerHTML='<div class="ch"><div class="comp-domain-hd">'+
     '<div class="comp-ico" style="width:24px;height:24px"><img src="https://www.google.com/s2/favicons?domain='+domain+'&sz=32" alt="" style="width:100%;height:100%;object-fit:cover"></div>'+
     '<span style="font-size:13px;font-weight:700">'+domain+'</span>'+
     '</div><button class="btn bgh bxs" onclick="removeComp('+competitors.indexOf(domain)+')">Remove</button></div>'+
     '<div class="comp-text">'+formatCompetitorReport(text)+'</div>';
   }catch(err){
-    card.innerHTML='<div class="ch"><div class="comp-domain-hd"><span style="font-size:13px;font-weight:700">'+domain+'</span></div></div>'+
-    '<div class="comp-err">Unable to fetch competitor data. This may be due to API connectivity. Error: '+err.message+'</div>';
+    var errMsg = err.message || '';
+    var friendlyErr = errMsg.includes('exceeded') || errMsg.includes('rate') 
+      ? 'API rate limit reached. Please wait 60 seconds and try again.' 
+      : errMsg.includes('JSON') ? 'Response was truncated. Try again with a simpler domain.'
+      : 'Could not analyse '+domain+'. Error: '+errMsg.substring(0,120);
+    card.innerHTML='<div class="ch"><div class="comp-domain-hd"><div class="comp-ico" style="width:24px;height:24px"><img src="https://www.google.com/s2/favicons?domain='+domain+'&sz=32" alt="" style="width:100%;height:100%;object-fit:cover"></div><span style="font-size:13px;font-weight:700">'+domain+'</span></div></div>'+
+    '<div style="padding:10px 0;font-size:12px;color:var(--Y);display:flex;align-items:flex-start;gap:8px"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M7 1.5L13 12.5H1z"/><line x1="7" y1="5.5" x2="7" y2="8.5"/><circle cx="7" cy="10.5" r=".55" fill="currentColor"/></svg>'+friendlyErr+'</div>';
   }
   return card;
 }
