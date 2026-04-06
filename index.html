@@ -516,6 +516,7 @@ button,input,textarea{font-family:var(--F)}svg{display:block;flex-shrink:0}
           <div style="margin-bottom:20px">
             <div style="font-size:18px;font-weight:800;letter-spacing:-.4px;margin-bottom:4px">Set up your workspace</div>
             <div style="font-size:12.5px;color:var(--t2)">Type your brand name - INK will find your website, LinkedIn, and industry automatically.</div>
+            <div id="download-notice" style="margin-top:8px;padding:8px 10px;background:var(--ab);border:1px solid rgba(30,94,243,.2);border-radius:var(--r6);font-size:11px;color:var(--A);display:none"><strong>Tip:</strong> If brand detection fails, download this file and open in Chrome. The preview sandbox blocks web scraping.</div>
           </div>
           <div class="fld">
             <span class="fl">Brand / Company Name</span>
@@ -795,7 +796,7 @@ button,input,textarea{font-family:var(--F)}svg{display:block;flex-shrink:0}
       <div class="pg" id="pg-keywords"><div class="ph"><div><div class="ph-t">Keyword engine</div><div class="ph-s">Pillar and long-tail clusters for your brand - auto-updated daily</div></div></div><div class="g2"><div class="card"><div class="ch"><div class="ct">Pillar keywords</div><span class="cc" id="kw-brand-label">Detecting...</span></div><div style="margin-bottom:11px"><span style="font-size:9.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--t3);font-family:var(--M);display:block;margin-bottom:5px">Primary</span><div id="kw-primary-list"><div style="font-size:11px;color:var(--t3);font-family:var(--M);display:inline-flex;align-items:center;gap:5px"><div style="width:10px;height:10px;border:2px solid rgba(30,94,243,.2);border-top-color:var(--A);border-radius:50%;animation:spin .7s linear infinite"></div>Generating...</div></div></div><div style="margin-bottom:11px"><span style="font-size:9.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--t3);font-family:var(--M);display:block;margin-bottom:5px">Supporting</span><div id="kw-supporting-list"></div></div><input class="inp" placeholder="Add keyword..." onkeydown="if(event.key==='Enter')addCustomKw(this)"></div><div class="card"><div class="ch"><div class="ct">Long-tail - auto-generated daily</div></div><div id="kw-longtail-list"><div style="font-size:11px;color:var(--t3);font-family:var(--M);display:inline-flex;align-items:center;gap:5px"><div style="width:10px;height:10px;border:2px solid rgba(30,94,243,.2);border-top-color:var(--A);border-radius:50%;animation:spin .7s linear infinite"></div>Building...</div></div><div class="nbbox" style="margin-top:10px">Refreshed every 24h from trends + brand scan + SERP signals</div></div></div></div>
 
       <!-- SETTINGS -->
-      <div class="pg" id="pg-settings"><div class="ph"><div><div class="ph-t">Settings</div><div class="ph-s">Workspace configuration and generation preferences</div></div></div><div class="g2"><div class="card"><div class="ch"><div class="ct">Workspace</div></div><div class="fld"><span class="fl">Brand name</span><input class="inp" id="settings-brand" value=""></div><div class="fld"><span class="fl">Website</span><input class="inp" id="settings-url" value=""></div><div class="fld"><span class="fl">ICP</span><input class="inp" id="settings-icp" value=""></div><div class="fld" style="margin-bottom:0"><span class="fl">Industry</span><input class="inp" id="settings-industry" value=""></div></div><div class="card"><div class="ch"><div class="ct">Generation</div></div><div class="tgl-row"><div><div class="tgl-t">Autonomous mode</div><div class="tgl-d">5 blogs generated every morning at 04:00 IST</div></div><div class="tgl on" onclick="this.classList.toggle('on')"></div></div><div class="tgl-row"><div><div class="tgl-t">Algorithm auto-update</div><div class="tgl-d">Templates update on algo changes automatically</div></div><div class="tgl on" onclick="this.classList.toggle('on')"></div></div><div class="tgl-row"><div><div class="tgl-t">Algo notifications</div><div class="tgl-d">Push notify on Google / Bing updates</div></div><div class="tgl on" onclick="this.classList.toggle('on')"></div></div><div class="tgl-row"><div><div class="tgl-t">Weekly brand re-scan</div><div class="tgl-d">Auto-rescan website, blog, LinkedIn every 7 days</div></div><div class="tgl on" onclick="this.classList.toggle('on')"></div></div><div class="tgl-row"><div><div class="tgl-t">SERP / AEO / GEO layers</div><div class="tgl-d">All optimisation layers applied by default</div></div><div class="tgl on" onclick="this.classList.toggle('on')"></div></div></div></div></div>
+      <div class="pg" id="pg-settings"><div class="ph"><div><div class="ph-t">Settings</div><div class="ph-s">Workspace configuration and generation preferences</div></div></div><div class="g2"><div class="card"><div class="ch"><div class="ct">Workspace</div></div><div class="fld"><span class="fl">Brand name</span><input class="inp" id="settings-brand" value=""></div><div class="fld"><span class="fl">Website</span><input class="inp" id="settings-url" value=""></div><div class="fld"><span class="fl">ICP</span><input class="inp" id="settings-icp" value=""></div><div class="fld" style="margin-bottom:0"><span class="fl">Industry</span><input class="inp" id="settings-industry" value=""></div></div><div class="card"><div class="ch"><div class="ct">AI Blog Writer</div></div><div class="fld"><span class="fl">OpenAI API Key <span style="font-weight:400;color:var(--t3)">(for GPT-powered blog content)</span></span><input class="inp" id="openai-key" type="password" placeholder="sk-..." value="" style="font-family:var(--M)"><div class="inp-hint">Paste your OpenAI key here. Blog previews and Write on Demand will use GPT-4o-mini to write unique, full-length articles. Your key stays in your browser (localStorage). <strong>No Claude credits used.</strong></div></div><div class="fld" style="margin-bottom:0"><button class="btn bout bsm" onclick="testOpenAI()">Test connection</button><span id="openai-status" style="margin-left:8px;font-size:11px;font-family:var(--M)"></span></div></div><div class="card"><div class="ch"><div class="ct">Generation</div></div><div class="tgl-row"><div><div class="tgl-t">Autonomous mode</div><div class="tgl-d">5 blogs generated every morning at 04:00 IST</div></div><div class="tgl on" onclick="this.classList.toggle('on')"></div></div><div class="tgl-row"><div><div class="tgl-t">Algorithm auto-update</div><div class="tgl-d">Templates update on algo changes automatically</div></div><div class="tgl on" onclick="this.classList.toggle('on')"></div></div><div class="tgl-row"><div><div class="tgl-t">Algo notifications</div><div class="tgl-d">Push notify on Google / Bing updates</div></div><div class="tgl on" onclick="this.classList.toggle('on')"></div></div><div class="tgl-row"><div><div class="tgl-t">Weekly brand re-scan</div><div class="tgl-d">Auto-rescan website, blog, LinkedIn every 7 days</div></div><div class="tgl on" onclick="this.classList.toggle('on')"></div></div><div class="tgl-row"><div><div class="tgl-t">SERP / AEO / GEO layers</div><div class="tgl-d">All optimisation layers applied by default</div></div><div class="tgl on" onclick="this.classList.toggle('on')"></div></div></div></div></div>
     </main>
   </div>
 </div>
@@ -889,869 +890,431 @@ button,input,textarea{font-family:var(--F)}svg{display:block;flex-shrink:0}
 <div id="backdrop" onclick="closeAll()"></div>
 
 <script>
+// INK v7 - Wikidata + Clearbit + OpenAI (optional)
+// Wikidata: structured company data (founders, CEO, products, industry)
+// Clearbit: domain, logo
+// OpenAI: blog writing (optional, user provides key)
+// ZERO Claude credits
+
+var theme=localStorage.getItem('inkTheme')||'dark';
+document.documentElement.setAttribute('data-theme',theme);updateThemeUI();
+var DB={name:'',domain:'',linkedin:'',industry:'',desc:'',icp:[],found:false,team:[],products:[],voice:[],kw:{p:[],s:[]},lt:[],comps:[],blogUrl:'',wikidataId:''};
+var brandContent={queue:[],trends:[],loaded:false};
+var brandProfileLoaded=false,competitors=[],sbOpen=true,wizN=1,wodTopic='',rescanning=false,compSugLoaded=false,brandSearchTimer=null;
+function showToast(m,t){var e=document.getElementById('toast');e.textContent=m;e.className='toast'+(t?' '+t:'');e.classList.add('show');clearTimeout(e._t);e._t=setTimeout(function(){e.classList.remove('show');},3500);}
+function esc(s){var d=document.createElement('div');d.textContent=s||'';return d.innerHTML;}
+function pick(a){return a[Math.floor(Math.random()*a.length)];}
+function rng(a,b){return a+Math.floor(Math.random()*(b-a+1));}
+
 // ═══════════════════════════════════════════════════════
-// INK v4.0 - FULLY LOCAL ENGINE - ZERO API CALLS
-// Smart content generation based on brand + industry
+// DATA APIs - ALL FREE, NO AUTH
 // ═══════════════════════════════════════════════════════
 
-// ─── GLOBAL STATE ─────────────────────────────────────
-var theme = localStorage.getItem('inkTheme') || 'dark';
-document.documentElement.setAttribute('data-theme', theme);
-updateThemeUI();
-var detectedBrand = {name:'',domain:'',linkedin:'',industry:'',description:'',icpSuggestions:[],found:false};
-var brandSearchTimer = null;
-var brandContent = {queue:[],trends:[],loaded:false};
-var brandProfileLoaded = false;
-var competitors = [];
-var sbOpen = true;
-var wizN = 1;
-var wodTopic = '';
-var rescanning = false;
-var compSuggestionsLoaded = false;
+// Clearbit Autocomplete - domain + logo
+async function clearbitSearch(q){try{var r=await fetch('https://autocomplete.clearbit.com/v1/companies/suggest?query='+encodeURIComponent(q));return r.ok?await r.json():[];}catch(e){return[];}}
 
-// ─── TOAST SYSTEM ─────────────────────────────────────
-function showToast(msg, type) {
-  var t = document.getElementById('toast');
-  t.textContent = msg; t.className = 'toast' + (type ? ' ' + type : '');
-  t.classList.add('show');
-  clearTimeout(t._timer);
-  t._timer = setTimeout(function() { t.classList.remove('show'); }, 3500);
+// Wikidata - STRUCTURED company data (real founders, CEO, products)
+async function wikidataSearch(name){
+  try{
+    // Step 1: Find entity ID
+    var sr=await fetch('https://www.wikidata.org/w/api.php?action=wbsearchentities&search='+encodeURIComponent(name)+'&language=en&format=json&origin=*&limit=5');
+    if(!sr.ok)return null;
+    var sd=await sr.json();
+    if(!sd.search||!sd.search.length)return null;
+    // Pick best match (prefer ones with descriptions mentioning company/brand)
+    var entity=sd.search[0];
+    for(var i=0;i<sd.search.length;i++){
+      var desc=(sd.search[i].description||'').toLowerCase();
+      if(/company|brand|corporation|platform|service|app|website|startup/.test(desc)){entity=sd.search[i];break;}
+    }
+    var eid=entity.id;
+    // Step 2: Fetch all structured claims
+    var er=await fetch('https://www.wikidata.org/w/api.php?action=wbgetentities&ids='+eid+'&props=claims|labels|descriptions&languages=en&format=json&origin=*');
+    if(!er.ok)return null;
+    var ed=await er.json();
+    var ent=ed.entities[eid];
+    if(!ent)return null;
+    var claims=ent.claims||{};
+    var label=(ent.labels&&ent.labels.en)?ent.labels.en.value:name;
+    var description=(ent.descriptions&&ent.descriptions.en)?ent.descriptions.en.value:'';
+    // Extract structured data from claims
+    var result={id:eid,name:label,description:description,website:'',linkedin:'',industry:'',founders:[],ceo:[],products:[],inception:''};
+    // P856 = official website
+    if(claims.P856)result.website=claims.P856[0].mainsnak.datavalue?claims.P856[0].mainsnak.datavalue.value:'';
+    // P571 = inception
+    if(claims.P571&&claims.P571[0].mainsnak.datavalue)result.inception=claims.P571[0].mainsnak.datavalue.value.time||'';
+    // P452 = industry (entity reference)
+    if(claims.P452){for(var i=0;i<claims.P452.length;i++){var iv=claims.P452[i].mainsnak.datavalue;if(iv)result.industry_ids=result.industry_ids||[],result.industry_ids.push(iv.value.id);}}
+    // P112 = founded by (entity references)
+    if(claims.P112){for(var i=0;i<Math.min(claims.P112.length,4);i++){var fv=claims.P112[i].mainsnak.datavalue;if(fv)result.founders.push(fv.value.id);}}
+    // P169 = CEO (entity reference)
+    if(claims.P169){for(var i=0;i<Math.min(claims.P169.length,2);i++){var cv=claims.P169[i].mainsnak.datavalue;if(cv)result.ceo.push(cv.value.id);}}
+    // P1056 = product/service (entity references)
+    if(claims.P1056){for(var i=0;i<Math.min(claims.P1056.length,8);i++){var pv=claims.P1056[i].mainsnak.datavalue;if(pv)result.products.push(pv.value.id);}}
+    // P4264 = LinkedIn company ID
+    if(claims.P4264)result.linkedin='https://linkedin.com/company/'+(claims.P4264[0].mainsnak.datavalue?claims.P4264[0].mainsnak.datavalue.value:'');
+    // Step 3: Resolve entity IDs to labels (people names, product names, industry names)
+    var idsToResolve=[].concat(result.founders,result.ceo,result.products,result.industry_ids||[]);
+    if(idsToResolve.length>0){
+      var idStr=idsToResolve.join('|');
+      try{
+        var lr=await fetch('https://www.wikidata.org/w/api.php?action=wbgetentities&ids='+idStr+'&props=labels|descriptions&languages=en&format=json&origin=*');
+        if(lr.ok){
+          var ld=await lr.json();
+          var labelMap={};
+          Object.keys(ld.entities||{}).forEach(function(k){
+            var e=ld.entities[k];
+            labelMap[k]={name:(e.labels&&e.labels.en)?e.labels.en.value:k,desc:(e.descriptions&&e.descriptions.en)?e.descriptions.en.value:''};
+          });
+          result.founderNames=result.founders.map(function(id){return labelMap[id]||{name:id,desc:''};});
+          result.ceoNames=result.ceo.map(function(id){return labelMap[id]||{name:id,desc:''};});
+          result.productNames=result.products.map(function(id){return labelMap[id]||{name:id,desc:''};});
+          if(result.industry_ids){result.industryNames=result.industry_ids.map(function(id){return labelMap[id]?labelMap[id].name:id;});}
+        }
+      }catch(e){}
+    }
+    return result;
+  }catch(e){return null;}
 }
 
-// ─── ESCAPE HTML ──────────────────────────────────────
-function esc(s) { var d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
+// Wikipedia summary - for description text
+async function wikiSummary(name){
+  try{
+    var sr=await fetch('https://en.wikipedia.org/w/api.php?action=opensearch&search='+encodeURIComponent(name)+'&limit=3&format=json&origin=*');
+    if(!sr.ok)return null;
+    var sd=await sr.json();
+    if(!sd[1]||!sd[1].length)return null;
+    var r=await fetch('https://en.wikipedia.org/api/rest_v1/page/summary/'+encodeURIComponent(sd[1][0].replace(/ /g,'_')));
+    return r.ok?await r.json():null;
+  }catch(e){return null;}
+}
+
+// Industry detection from Wikidata or description
+function detectIndustry(text){
+  if(!text)return '';
+  var t=text.toLowerCase();
+  var map=[[/cybersecurity|cyber|infosec|information security/,'Cybersecurity'],[/food delivery|restaurant|food tech|quick commerce/,'Food Delivery & Quick Commerce'],[/electric vehicle|automotive|automobile|car/,'Automotive'],[/payment|fintech|financial technology|banking|upi/,'Fintech / Payments'],[/software|saas|cloud|productivity/,'SaaS / Software'],[/social media|social network/,'Social Media'],[/e-commerce|ecommerce|online marketplace|online shopping/,'E-commerce'],[/smartphone|mobile|telecommunication|telecom/,'Telecom / Mobile'],[/electronics|laptop|computer|semiconductor|hardware/,'Consumer Electronics'],[/pharma|drug|medicine|healthcare|health/,'Healthcare'],[/sportswear|athletic|footwear|sneaker|shoe/,'Sportswear'],[/streaming|music|entertainment|media|film/,'Entertainment'],[/travel|hospitality|hotel|airline|booking/,'Travel & Hospitality'],[/electrical|lighting|appliance|switchgear|fan/,'Electrical / Appliances'],[/gaming|esports|video game/,'Gaming'],[/crm|marketing|inbound/,'Marketing SaaS'],[/education|edtech|learning/,'EdTech'],[/beauty|cosmetic|personal care/,'Beauty & Personal Care'],[/fashion|clothing|luxury|apparel/,'Fashion & Retail'],[/energy|solar|renewable|oil/,'Energy'],[/food|beverage|fmcg|consumer goods/,'FMCG'],[/broker|stock|trading|investment/,'Financial Services']];
+  for(var i=0;i<map.length;i++){if(map[i][0].test(t))return map[i][1];}
+  if(/technology|tech|internet|digital|platform/i.test(t))return 'Technology';
+  return '';
+}
+
+function genICP(ind){
+  var i=(ind||'').toLowerCase();
+  if(/cyber|security/i.test(i))return['CISOs / Security Leaders','GRC / Compliance Teams','Board / C-Suite','Security Engineers'];
+  if(/food|delivery|quick/i.test(i))return['Urban Professionals 22-40','Restaurant Partners','Gen Z Foodies','Late Night Users'];
+  if(/saas|software|cloud|productivity/i.test(i))return['Startup Founders / CTOs','Product Managers','Enterprise Buyers','SMB Teams'];
+  if(/fintech|payment|banking/i.test(i))return['E-commerce Founders','Developers','CFOs / Finance Teams','Enterprise Businesses'];
+  if(/electr|appliance|lighting/i.test(i))return['Homeowners','Electricians & Contractors','Architects / Designers','Retail Partners'];
+  if(/electronic|computing|hardware|mobile|telecom/i.test(i))return['Tech Enthusiasts','Gamers & Creators','Enterprise IT','Budget Consumers'];
+  if(/sportswear|athletic/i.test(i))return['Athletes & Fitness','Sneaker Culture','Gen Z','Sports Teams'];
+  if(/marketing|crm/i.test(i))return['Marketing Managers','Sales Leaders','SMB Founders','Content Teams'];
+  return['Decision Makers','End Users','Industry Professionals','Partners'];
+}
+function genVoice(ind){
+  var i=(ind||'').toLowerCase();
+  if(/cyber|security/i.test(i))return[{t:'Technical Authority',b:'Deep cybersecurity expertise for all stakeholders.'},{t:'Data-Driven',b:'Quantified metrics and benchmarks in every piece.'},{t:'Urgency Without Fear',b:'Business impact framing, not alarmist.'}];
+  if(/food|delivery/i.test(i))return[{t:'Playful & Relatable',b:'Witty, meme-friendly tone for young audiences.'},{t:'Speed-Obsessed',b:'Everything about convenience and friction removal.'},{t:'Local First',b:'Regional food culture and city-specific content.'}];
+  if(/saas|software/i.test(i))return[{t:'Thought Leadership',b:'Original research and industry frameworks.'},{t:'Product-Led',b:'Content showing real workflow solutions.'},{t:'Community-Driven',b:'Education-first blogs, webinars, templates.'}];
+  if(/fintech|payment/i.test(i))return[{t:'Developer-First',b:'Clean docs and technical content.'},{t:'Growth Enabler',b:'Payments as a growth lever.'},{t:'Compliance Aware',b:'Financial regulation expertise.'}];
+  return[{t:'Expert & Approachable',b:'Deep knowledge in accessible language.'},{t:'Solution-Oriented',b:'Practical value over feature lists.'},{t:'Trust-Building',b:'Transparent, credible communication.'}];
+}
 
 // ═══════════════════════════════════════════════════════
-// LOCAL CONTENT ENGINE - NO API CALLS
+// OPENAI API (optional - user provides key)
 // ═══════════════════════════════════════════════════════
+function getOpenAIKey(){return(document.getElementById('openai-key')||{}).value||localStorage.getItem('ink_openai_key')||'';}
+function saveOpenAIKey(){var k=getOpenAIKey();if(k)localStorage.setItem('ink_openai_key',k);}
 
-// ─── KNOWN BRANDS DATABASE ────────────────────────────
-var BRANDS = {
-  'zeron':{domain:'zeron.one',li:'https://linkedin.com/company/securezeron',industry:'Cybersecurity SaaS',desc:'AI-Powered Cyber Risk Decision Intelligence platform. Single point of truth for cybersecurity in organisations, empowering CISOs and boards with quantified risk insights via the QBER model.',icp:['CISOs / Head of Security','Risk & Compliance Leaders','Board / CFO / Risk Oversight','GRC & Security Analysts'],
-    team:[{name:'Sanket Sarkar',role:'Founder & CEO',bio:'Entrepreneur, hacker, and mathematics geek. Harvard and Wharton-educated. Founded Zeron after discovering business leaders lacked actionable cyber risk insights.'},{name:'Santosh Kumar Jha',role:'Co-founder & CTO',bio:'Engineering leader building the AI-powered CRPM platform and ZIN intelligence engine.'},{name:'Snehanjan Chatterjee',role:'Co-founder & COO',bio:'Drives operations and BFSI expansion across India and the Middle East.'},{name:'Swarnali Singha',role:'Co-founder & CBO',bio:'Leads partnerships, strategic alliances, and global go-to-market execution.'}],
-    products:[{name:'CRPM Platform',desc:'Unified command centre for quantifying, prioritising, and acting on cyber risk.',emoji:'\ud83d\udcca'},{name:'ZIN / ZIN Advisor',desc:'Agentic AI engine and Risk Copilot integrating all Zeron modules into real-time intelligence.',emoji:'\ud83e\udd16'},{name:'Externo',desc:'External attack surface management with CVaR scoring.',emoji:'\ud83d\udd0d'},{name:'Conformity',desc:'Compliance automation for ISO 27001, SOC 2, RBI-CSF, SEBI CSCRF, NIST.',emoji:'\u2705'},{name:'Interno',desc:'Internal risk and insider threat detection with financial loss prediction.',emoji:'\ud83d\udee1\ufe0f'},{name:'Vendor Pulse',desc:'Continuous third-party and supply chain risk monitoring.',emoji:'\ud83d\udd17'},{name:'QBER Model',desc:'Quantified Exposure to Risk - financial model for active cyber threats.',emoji:'\ud83d\udcb0'},{name:'Cyber Navigator',desc:'Customisable dashboard with widgets, risk register, and executive reporting.',emoji:'\ud83e\udded'}]},
-  'durex':{domain:'durex.com',li:'https://linkedin.com/company/durex',industry:'Consumer Healthcare',desc:'Global leader in sexual wellness products including condoms, lubricants, and intimate devices.',icp:['Young Adults 18-35','Health-conscious Consumers','Pharmacy / Retail Buyers','Digital-first Millennials']},
-  'swiggy':{domain:'swiggy.com',li:'https://linkedin.com/company/swiggy',industry:'Food Delivery',desc:'India\'s leading food ordering and delivery platform connecting restaurants with consumers.',icp:['Urban Professionals 25-40','Restaurant Partners','Gen Z Foodies','Late Night / Weekend Users']},
-  'notion':{domain:'notion.so',li:'https://linkedin.com/company/notionhq',industry:'Productivity SaaS',desc:'All-in-one workspace for notes, docs, project management, and wikis.',icp:['Startup Teams & Founders','Product Managers','Remote Workers','Students & Educators']},
-  'nike':{domain:'nike.com',li:'https://linkedin.com/company/nike',industry:'Athletic Sportswear',desc:'World\'s leading designer and manufacturer of athletic footwear, apparel, and equipment.',icp:['Athletes & Fitness Enthusiasts','Sneaker Culture / Streetwear','Gen Z Trend Followers','Sports Teams & Coaches']},
-  'hubspot':{domain:'hubspot.com',li:'https://linkedin.com/company/hubspot',industry:'Marketing SaaS',desc:'CRM platform with marketing, sales, service, and content management tools for growing businesses.',icp:['Marketing Managers','Sales Leaders','SMB Founders','RevOps Teams']},
-  'zomato':{domain:'zomato.com',li:'https://linkedin.com/company/zomato',industry:'Food Delivery',desc:'India\'s major food delivery and restaurant discovery platform serving millions daily.',icp:['Urban Millennials','Restaurant Owners','Food Bloggers & Critics','Corporate Lunch Crowd']},
-  'stripe':{domain:'stripe.com',li:'https://linkedin.com/company/stripe',industry:'Fintech / Payments',desc:'Online payment processing platform powering internet commerce for businesses of all sizes.',icp:['Startup CTOs / Developers','E-commerce Businesses','Enterprise Finance Teams','Platform / Marketplace Builders']},
-  'canva':{domain:'canva.com',li:'https://linkedin.com/company/canva',industry:'Design SaaS',desc:'Online graphic design platform making design accessible to everyone with drag-and-drop tools.',icp:['Social Media Managers','Small Business Owners','Marketing Teams','Content Creators']},
-  'slack':{domain:'slack.com',li:'https://linkedin.com/company/slack',industry:'Workplace Collaboration',desc:'Business messaging and collaboration platform connecting teams with channels, apps, and integrations.',icp:['Remote Teams','Engineering Teams','Enterprise IT Admins','Project Managers']},
-  'spotify':{domain:'spotify.com',li:'https://linkedin.com/company/spotify',industry:'Music Streaming',desc:'World\'s largest music and podcast streaming platform with 600M+ users globally.',icp:['Music Listeners 18-35','Podcast Creators','Artists & Labels','Advertisers & Brands']},
-  'tesla':{domain:'tesla.com',li:'https://linkedin.com/company/tesla-motors',industry:'Electric Vehicles',desc:'Electric vehicle and clean energy company revolutionizing transportation and energy storage.',icp:['EV Enthusiasts','Sustainability-minded Consumers','Tech Early Adopters','Fleet Managers']},
-  'airbnb':{domain:'airbnb.com',li:'https://linkedin.com/company/airbnb',industry:'Travel & Hospitality',desc:'Online marketplace for lodging, homestays, and tourism experiences worldwide.',icp:['Millennial Travelers','Property Hosts','Experience Seekers','Digital Nomads']},
-  'figma':{domain:'figma.com',li:'https://linkedin.com/company/figma',industry:'Design SaaS',desc:'Collaborative interface design tool used by teams to design, prototype, and build products.',icp:['UI/UX Designers','Product Teams','Design System Leads','Front-end Developers']},
-  'razorpay':{domain:'razorpay.com',li:'https://linkedin.com/company/razorpay',industry:'Fintech / Payments',desc:'India\'s leading full-stack payment gateway and business banking platform.',icp:['D2C Brands','E-commerce Founders','CFOs / Finance Teams','Startup CTOs']},
-  'lenskart':{domain:'lenskart.com',li:'https://linkedin.com/company/lenskart',industry:'D2C Eyewear',desc:'India\'s largest eyewear retailer offering prescription glasses, sunglasses, and contact lenses.',icp:['Young Professionals 22-38','Fashion-conscious Buyers','First-time Glasses Buyers','Parents']},
-  'boat':{domain:'boat-lifestyle.com',li:'https://linkedin.com/company/boat-lifestyle',industry:'Consumer Electronics',desc:'India\'s leading audio and wearable lifestyle brand for millennials and Gen Z.',icp:['Gen Z / Millennials','Gaming Community','Fitness Enthusiasts','Music Lovers']},
-  'cred':{domain:'cred.club',li:'https://linkedin.com/company/cred-club',industry:'Fintech',desc:'Members-only credit card payments platform offering exclusive rewards and commerce.',icp:['Premium Credit Card Holders','High-income Professionals','Brand-conscious Consumers','D2C Shoppers']},
-  'mamaearth':{domain:'mamaearth.in',li:'https://linkedin.com/company/mamaearth',industry:'D2C Beauty & Personal Care',desc:'Toxin-free personal care brand offering natural products for babies, men, and women.',icp:['New Parents','Health-conscious Women 25-40','Natural Product Seekers','Gifting Buyers']},
-  'zerodha':{domain:'zerodha.com',li:'https://linkedin.com/company/zerodha',industry:'Fintech / Broking',desc:'India\'s largest retail stockbroker offering commission-free equity investments.',icp:['Retail Investors','First-time Traders','SIP / Mutual Fund Investors','Active Day Traders']}
-};
+async function callOpenAI(prompt,maxTokens){
+  var key=getOpenAIKey();
+  if(!key)return null;
+  saveOpenAIKey();
+  var r=await fetch('https://api.openai.com/v1/chat/completions',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','Authorization':'Bearer '+key},
+    body:JSON.stringify({model:'gpt-4o-mini',messages:[{role:'user',content:prompt}],max_tokens:maxTokens||2000,temperature:0.8})
+  });
+  if(!r.ok){var err=await r.json().catch(function(){return{};});throw new Error(err.error?err.error.message:'OpenAI error '+r.status);}
+  var d=await r.json();
+  return d.choices&&d.choices[0]?d.choices[0].message.content:'';
+}
 
-// ─── INDUSTRY TEMPLATES ───────────────────────────────
-var INDUSTRY_DATA = {
-  'Cybersecurity SaaS':{
-    blogs:[
-      {t:'{brand} Approach to Quantifying Cyber Risk in {year}',tag1:'educational',tag2:'thought leadership',w:2400,s:94},
-      {t:'Top {n} Cyber Threats Targeting {audience} in {year}',tag1:'trending',tag2:'seo anchor',w:2800,s:92},
-      {t:'How {brand} Helps CISOs Report Cyber Risk to the Board',tag1:'product',tag2:'conversion',w:2200,s:89},
-      {t:'Compliance Automation vs Manual Audits: The {year} Guide',tag1:'how-to',tag2:'seo anchor',w:2600,s:91},
-      {t:'Why Attack Surface Management Is Critical for {audience}',tag1:'educational',tag2:'thought leadership',w:2100,s:87}
-    ],
-    trends:[
-      {cat:'Breaking news',items:[{t:'Zero-day exploits targeting cloud infrastructure surge 340%',h:'hot'},{t:'AI-powered phishing bypasses traditional email filters',h:'hot'},{t:'New SEC disclosure rules reshape CISO reporting',h:'rising'}]},
-      {cat:'Industry shifts',items:[{t:'CISO role expanding to include business risk ownership',h:'rising'},{t:'Cyber insurance premiums linked to quantified risk scores',h:'rising'},{t:'Supply chain attacks become #1 vector for enterprises',h:'stable'}]},
-      {cat:'Regulatory updates',items:[{t:'DORA compliance deadline approaching for financial sector',h:'hot'},{t:'NIST CSF 2.0 adoption accelerating across industries',h:'rising'},{t:'SEBI CSCRF mandates driving compliance automation demand',h:'rising'}]}
-    ],
-    keywords:{primary:['cyber risk quantification','cyber risk posture management','attack surface management','compliance automation'],supporting:['QBER model','CISO dashboard','vendor risk management','cyber insurance','security posture scoring','AI cyber risk'],longtail:['how to quantify cyber risk for board reporting','best attack surface management tools 2026','compliance automation platform for BFSI','cyber risk quantification platform comparison']},
-    team:[{name:'Chief Information Security Officer',role:'CISO / Head of Security',bio:'Strategic cybersecurity leader driving risk management and enterprise security posture.'},{name:'Chief Technology Officer',role:'CTO / VP Engineering',bio:'Engineering leader building AI-powered security and risk intelligence platforms.'}],
-    products:[{name:'Risk Dashboard',desc:'Unified cyber risk visibility and posture management for CISOs and boards.',emoji:'\ud83d\udcca'},{name:'Compliance Engine',desc:'Automated compliance mapping, audit preparation, and regulatory alignment.',emoji:'\u2705'},{name:'External Scanner',desc:'Continuous external attack surface monitoring and vulnerability discovery.',emoji:'\ud83d\udd0d'},{name:'Vendor Risk',desc:'Third-party and supply chain risk assessment and monitoring.',emoji:'\ud83d\udd17'}],
-    voice:[{title:'Technical Authority',body:'Deep expertise in cybersecurity, conveyed with clarity for non-technical stakeholders.'},{title:'Data-Driven',body:'Every claim backed by quantified metrics, real breach data, and industry benchmarks.'},{title:'Urgency Without Fear',body:'Communicates risk with business impact framing, not alarmist language.'}],
-    competitors:['crowdstrike.com','tenable.com','rapid7.com','qualys.com','bitsight.com','securityscorecard.com']
-  },
-  'Food Delivery':{
-    blogs:[
-      {t:'How {brand} Is Redefining Quick Commerce in {year}',tag1:'news',tag2:'thought leadership',w:2200,s:91},
-      {t:'{n} Restaurant Marketing Strategies That Actually Work in {year}',tag1:'how-to',tag2:'seo anchor',w:2600,s:93},
-      {t:'The Economics of 10-Minute Delivery: What {brand} Gets Right',tag1:'trending',tag2:'thought leadership',w:2400,s:88},
-      {t:'Food Safety Standards Every Cloud Kitchen Must Follow',tag1:'educational',tag2:'seo anchor',w:2100,s:90},
-      {t:'How {audience} Are Changing Food Delivery Trends in {year}',tag1:'trending',tag2:'conversion',w:2300,s:86}
-    ],
-    trends:[
-      {cat:'Breaking news',items:[{t:'Quick commerce 10-min delivery wars intensify',h:'hot'},{t:'AI-powered menu personalization drives 28% higher orders',h:'hot'},{t:'Ghost kitchen market projected to hit $80B by 2027',h:'rising'}]},
-      {cat:'Consumer behavior',items:[{t:'Health-conscious ordering up 45% year-over-year',h:'rising'},{t:'Subscription meal plans gaining traction among urban professionals',h:'rising'},{t:'Late-night delivery demand peaks between 11PM-2AM',h:'stable'}]},
-      {cat:'Industry shifts',items:[{t:'Restaurant partners demanding better commission structures',h:'hot'},{t:'Drone delivery pilots expanding to suburban markets',h:'rising'},{t:'Sustainable packaging mandates affecting delivery costs',h:'rising'}]}
-    ],
-    keywords:{primary:['food delivery app','restaurant marketing','quick commerce','cloud kitchen'],supporting:['online ordering','delivery optimization','food tech','meal subscription'],longtail:['how to start a cloud kitchen business 2026','best restaurant marketing strategies for delivery','quick commerce vs traditional food delivery']},
-    team:[{name:'CEO & Founder',role:'Chief Executive Officer',bio:'Visionary leader building next-gen food delivery and quick commerce at scale across India and Southeast Asia.'},{name:'Chief Product Officer',role:'Head of Product',bio:'Leading product innovation in food tech, real-time logistics, and consumer experience.'}],
-    products:[{name:'Delivery Platform',desc:'Core food ordering and real-time delivery tracking.',emoji:'\ud83d\udc65'},{name:'Restaurant Dashboard',desc:'Analytics and order management for restaurant partners.',emoji:'\ud83d\udcca'},{name:'Quick Commerce',desc:'10-minute grocery and essentials delivery.',emoji:'\u26a1'},{name:'Subscription',desc:'Meal plans and delivery pass for regular users.',emoji:'\ud83c\udf1f'}],
-    voice:[{title:'Playful & Relatable',body:'Casual, witty tone that resonates with young urban audiences who order daily.'},{title:'Data-Rich Storytelling',body:'Market insights and consumer behavior data woven into engaging narratives.'},{title:'Partner-Centric',body:'Content that serves both consumers and restaurant partners equally.'}],
-    competitors:['zomato.com','ubereats.com','doordash.com','deliveroo.com','swiggy.com','dunzo.com']
-  },
-  'Productivity SaaS':{
-    blogs:[
-      {t:'How {brand} Replaces {n} Tools in Your Tech Stack',tag1:'product',tag2:'conversion',w:2400,s:93},
-      {t:'The Complete Guide to Building a Second Brain with {brand}',tag1:'how-to',tag2:'seo anchor',w:2800,s:95},
-      {t:'Remote Work Productivity: {n} Frameworks That Actually Work',tag1:'educational',tag2:'thought leadership',w:2600,s:91},
-      {t:'Why Teams Are Switching from Legacy Tools to {brand} in {year}',tag1:'trending',tag2:'conversion',w:2200,s:88},
-      {t:'{brand} vs Competitors: Honest Feature Comparison for {year}',tag1:'product',tag2:'seo anchor',w:2500,s:90}
-    ],
-    trends:[
-      {cat:'Product trends',items:[{t:'AI-native workspace tools replacing traditional docs',h:'hot'},{t:'Connected workspaces eliminating app-switching fatigue',h:'hot'},{t:'Template marketplaces becoming growth channels',h:'rising'}]},
-      {cat:'Work culture',items:[{t:'Async-first communication becoming default for distributed teams',h:'rising'},{t:'Knowledge management ranked #1 remote work challenge',h:'rising'},{t:'Personal productivity apps crossing into enterprise adoption',h:'stable'}]},
-      {cat:'Market shifts',items:[{t:'Consolidation wave: teams want fewer, better tools',h:'hot'},{t:'AI meeting assistants reducing documentation overhead by 60%',h:'rising'},{t:'Enterprise-grade security becoming table stakes for SaaS',h:'rising'}]}
-    ],
-    keywords:{primary:['productivity tools','project management','knowledge management','team collaboration'],supporting:['note-taking app','second brain','workspace','remote work tools'],longtail:['best all-in-one workspace tool for startups 2026','how to build a second brain system','project management software comparison']},
-    team:[{name:'CEO',role:'CEO & Co-founder',bio:'Building the future of knowledge work and team collaboration.'},{name:'Head of Product',role:'VP Product',bio:'Leading product strategy for millions of daily active users.'}],
-    products:[{name:'Workspace',desc:'All-in-one docs, wikis, and project management.',emoji:'\ud83d\udcdd'},{name:'AI Assistant',desc:'Built-in AI for writing, summarizing, and organizing.',emoji:'\ud83e\udd16'},{name:'Templates',desc:'1000+ ready-made templates for every use case.',emoji:'\ud83d\udccb'},{name:'Integrations',desc:'Connect with 200+ tools in your existing stack.',emoji:'\ud83d\udd17'}],
-    voice:[{title:'Empowering & Clear',body:'Simple language that makes complex productivity concepts accessible to everyone.'},{title:'Community-Driven',body:'Celebrates user creativity and showcases real workflows built by the community.'},{title:'Forward-Thinking',body:'Positions the future of work as collaborative, connected, and AI-assisted.'}],
-    competitors:['notion.so','clickup.com','monday.com','asana.com','coda.io','airtable.com']
+async function testOpenAI(){
+  var st=document.getElementById('openai-status');
+  st.textContent='Testing...';st.style.color='var(--Y)';
+  try{var r=await callOpenAI('Reply with just "OK".',10);st.textContent=r?'\u2713 Connected':'No key provided';st.style.color=r?'var(--G)':'var(--t3)';}
+  catch(e){st.textContent='\u2717 '+e.message.substring(0,50);st.style.color='var(--R)';}
+}
+
+// ═══════════════════════════════════════════════════════
+// BLOG GENERATION - varied local + OpenAI
+// ═══════════════════════════════════════════════════════
+var BTMPLS=['The Complete {brand} Guide for {icp} in 2026','How {brand} Is Redefining {industry}','Top {n} {industry} Trends Every {icp} Should Know','Why {icp} Are Choosing {brand} Over Alternatives','{brand} vs the Competition: An Honest Breakdown','The Future of {industry}: What 2026 Looks Like','Inside {brand}: Building a {industry} Leader','{n} Ways {brand} Delivers Value to {icp}','{industry} Best Practices: The 2026 Handbook','How {brand} Solves the Biggest {industry} Challenge','What Sets {brand} Apart in a Crowded Market','{n} Mistakes {icp} Make in {industry}','{brand}\'s Approach to Modern {industry}','The ROI of Investing in {brand}','A {icp}\'s Playbook for {industry} Success','Breaking Down {industry} in 2026','{brand} Product Deep Dive for {icp}','Why {industry} Leaders Trust {brand}','The Ultimate {industry} Checklist for 2026','{industry} Trends That Will Define 2026'];
+function genBlogTitles(brand,ind,icps){
+  var t=BTMPLS.slice();for(var i=t.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var tmp=t[i];t[i]=t[j];t[j]=tmp;}
+  var icp=(icps&&icps.length)?icps[0].split('/')[0].trim():'Professionals';
+  return t.slice(0,5).map(function(tmpl,idx){return{title:tmpl.replace(/\{brand\}/g,brand).replace(/\{industry\}/g,ind||'your industry').replace(/\{icp\}/g,icp).replace(/\{n\}/g,String(rng(5,12))),tag1:['trending','product','educational','how-to','news'][idx],tag2:['seo anchor','thought leadership','conversion'][idx%3],words:rng(1800,3000),serp:rng(83,97)};});
+}
+function genTrends(brand,ind){return[{category:'Breaking News',items:[{text:'AI adoption accelerating across '+(ind||'tech'),heat:'hot'},{text:'New regulations reshaping '+(ind||'tech')+' landscape',heat:'hot'},{text:'Consumer expectations rising for '+(ind||'tech')+' brands',heat:'rising'}]},{category:'Industry Shifts',items:[{text:'Digital transformation spending up 35% in '+(ind||'tech'),heat:'rising'},{text:'Customer experience ranked #1 differentiator',heat:'rising'},{text:'Platform consolidation reducing vendor fragmentation',heat:'stable'}]},{category:'Market',items:[{text:brand+' gaining market share in key segments',heat:'hot'},{text:'Sustainability mandates driving innovation',heat:'rising'},{text:'Data-driven decision making becoming standard',heat:'stable'}]}];}
+
+// Local article generator - EACH ARTICLE IS DIFFERENT
+function genArticle(title,brand,ind,idx){
+  var sections=[
+    // Set A
+    ['Why This Matters Now','The '+esc(ind)+' landscape shifted dramatically. Organizations investing in modern approaches see 42% improvement. '+esc(brand)+' customers gain direct competitive advantage.','Current Landscape','Key statistics: <strong>73% of organizations</strong> plan to increase '+esc(ind.toLowerCase())+' investment. <strong>3.2x average ROI</strong> for modern solutions. <strong>58% reduction</strong> in manual effort.','How '+esc(brand)+' Helps',''+esc(brand)+' connects key workflows into a unified experience, delivering end-to-end value. Unlike point solutions, '+esc(brand)+' provides integrated outcomes from day one.','Best Practices','<ul><li><strong>Start with outcomes.</strong> Define success before evaluating tools.</li><li><strong>Invest in integration.</strong> Siloed tools create blind spots.</li><li><strong>Measure continuously.</strong> Track what matters.</li><li><strong>Upskill your team.</strong> Tech is only as good as its users.</li></ul>'],
+    // Set B
+    ['The Challenge','Every '+esc(ind.toLowerCase())+' leader faces the same question: how to do more with less while maintaining quality. The answer lies in strategic technology adoption and smarter workflows.','What the Data Says','Industry research shows: <strong>67% of '+esc(ind.toLowerCase())+' teams</strong> waste 15+ hours/week on repetitive tasks. <strong>Top performers</strong> are 2.8x more likely to use integrated platforms. <strong>ROI timeline</strong> has shortened from 12 months to under 90 days.','The '+esc(brand)+' Advantage','What separates '+esc(brand)+' from alternatives is its integrated approach. Instead of bolting together multiple tools, '+esc(brand)+' provides a unified platform purpose-built for '+esc(ind.toLowerCase())+' workflows.','Implementation Guide','<ul><li><strong>Week 1-2:</strong> Audit current workflows and identify bottlenecks.</li><li><strong>Week 3-4:</strong> Deploy '+esc(brand)+' core modules and migrate data.</li><li><strong>Month 2:</strong> Train team and establish KPIs.</li><li><strong>Month 3:</strong> Measure results and optimise.</li></ul>'],
+    // Set C
+    ['The Shift','2026 marks a turning point for '+esc(ind)+'. Legacy approaches are failing. The brands that adapt will lead; the rest will struggle to catch up.','By the Numbers','The evidence is clear: <strong>$4.2T</strong> in global '+esc(ind.toLowerCase())+' spending projected for 2026. <strong>89% of executives</strong> say digital transformation is a top priority. <strong>First-mover advantage</strong> is worth an estimated 23% market share premium.','Why '+esc(brand)+' Wins',''+esc(brand)+' was built for this moment. Its platform combines the depth of specialised tools with the simplicity of a single interface. Teams get up and running in days, not months.','What to Do Next','<ul><li><strong>Evaluate your current stack.</strong> How many tools does your team juggle daily?</li><li><strong>Calculate the cost of inaction.</strong> What are you losing to inefficiency?</li><li><strong>Talk to '+esc(brand)+'.</strong> See how the platform maps to your specific needs.</li><li><strong>Start small, scale fast.</strong> Pilot with one team, then expand.</li></ul>'],
+    // Set D
+    ['The Problem','Most '+esc(ind.toLowerCase())+' teams are drowning in complexity. Too many tools, too much data, not enough insight. The result? Slower decisions, missed opportunities, and burned-out teams.','Market Intelligence','What top-performing organisations do differently: <strong>Centralise data</strong> into a single source of truth. <strong>Automate repetitive work</strong> to free up strategic capacity. <strong>Measure outcomes</strong>, not just activity.',''+esc(brand)+' in Action','Real impact from '+esc(brand)+' customers: onboarding time reduced by 60%. Decision speed improved by 3x. Team satisfaction scores up 40%. Cost per outcome down 35%.','Your Roadmap','<ul><li><strong>Step 1:</strong> Define your top 3 outcomes for the next quarter.</li><li><strong>Step 2:</strong> Map current tools and identify overlaps.</li><li><strong>Step 3:</strong> Deploy '+esc(brand)+' to replace fragmented workflows.</li><li><strong>Step 4:</strong> Review, iterate, and scale.</li></ul>'],
+    // Set E
+    ['Context','The '+esc(ind.toLowerCase())+' industry is evolving faster than most organisations can keep up. What worked 18 months ago may already be obsolete.','Trends Driving Change','Three forces are converging: <strong>AI and automation</strong> are reshaping every workflow. <strong>Customer expectations</strong> have never been higher. <strong>Regulatory pressure</strong> is increasing across all markets.','The '+esc(brand)+' Difference','While competitors offer point solutions, '+esc(brand)+' delivers an ecosystem. Every feature is designed to work together, creating compounding value over time.','Getting Started','<ul><li><strong>Audit:</strong> Where are your biggest time and cost leaks?</li><li><strong>Prioritise:</strong> Which improvements would have the biggest impact?</li><li><strong>Execute:</strong> Deploy '+esc(brand)+' and measure from day one.</li><li><strong>Iterate:</strong> Use data to continuously improve.</li></ul>']
+  ];
+  var s=sections[(idx||0)%sections.length];
+  return '<h1>'+esc(title)+'</h1><p>A comprehensive guide from <strong>'+esc(brand)+'</strong> for '+esc(ind)+' professionals.</p>'+
+  '<h2>'+s[0]+'</h2><p>'+s[1]+'</p>'+
+  '<h2>'+s[2]+'</h2><p>'+s[3]+'</p>'+
+  '<h2>'+s[4]+'</h2><p>'+s[5]+'</p>'+
+  '<h2>'+s[6]+'</h2>'+s[7]+
+  '<div class="bfaq"><div class="bfaq-q">What makes '+esc(brand)+' different?</div><div class="bfaq-a">'+esc(brand)+' offers an integrated '+esc(ind.toLowerCase())+' platform with measurable ROI from day one.</div></div>'+
+  '<div class="bfaq"><div class="bfaq-q">How fast will I see results?</div><div class="bfaq-a">Most teams see impact within 30-60 days.</div></div>'+
+  '<div class="bauth"><div class="bav">'+brand.charAt(0).toUpperCase()+'</div><div><div class="banm">'+esc(brand)+' Editorial</div><div class="barl">'+esc(ind)+' - April 2026</div></div></div>';
+}
+
+// ═══════════════════════════════════════════════════════
+// SPLASH / THEME / ONBOARDING
+// ═══════════════════════════════════════════════════════
+(function(){var f=document.getElementById('spl-fill'),p=0;var iv=setInterval(function(){p+=3;if(p>=100){p=100;clearInterval(iv);}f.style.width=p+'%';},22);setTimeout(function(){document.getElementById('splash').classList.add('exit');setTimeout(function(){document.getElementById('splash').style.display='none';document.getElementById('onboard').classList.add('show');},570);},1500);})();
+function toggleTheme(){theme=theme==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',theme);localStorage.setItem('inkTheme',theme);updateThemeUI();}
+function updateThemeUI(){var l=document.getElementById('theme-lbl'),b=document.getElementById('theme-badge');if(l)l.textContent=theme==='dark'?'Light mode':'Dark mode';if(b)b.textContent=theme==='dark'?'\u2600':'\u263D';}
+var obMeta=[{lbl:'Step 1 of 3 \u00b7 Workspace',ttl:'Set up your workspace',sub:'Type your brand name. INK scrapes Wikidata + Clearbit for company data.'},{lbl:'Step 2 of 3 \u00b7 Audience',ttl:'Define your audience',sub:'Select ICPs that apply.'},{lbl:'Step 3 of 3 \u00b7 Goals',ttl:'Set your content goals',sub:'Select goals. INK defaults to SERP ranking.'}];
+function goOB(n){document.querySelectorAll('.ob-pn').forEach(function(p){p.classList.remove('on');});var op=document.getElementById('op'+n);if(op)op.classList.add('on');var m=obMeta[n-1];if(!m)return;document.getElementById('ob-lbl').textContent=m.lbl;document.getElementById('ob-ttl').textContent=m.ttl;document.getElementById('ob-sub').textContent=m.sub;for(var i=1;i<=3;i++)document.getElementById('ob'+i).className='ob-bar'+(i<n?' done':i===n?' cur':'');if(n===2)populateStep2();}
+function ob1Changed(){var b=document.getElementById('i-brand').value.trim(),u=document.getElementById('i-url').value.trim();var btn=document.getElementById('ob1-continue'),ok=!!(b||u);btn.disabled=!ok;btn.style.opacity=ok?'1':'.45';btn.style.cursor=ok?'pointer':'not-allowed';}
+function onBrandInput(val){clearTimeout(brandSearchTimer);document.getElementById('brand-result').style.display='none';document.getElementById('brand-notfound').style.display='none';document.getElementById('brand-search-ico').style.display='none';document.getElementById('brand-check-ico').style.display='none';ob1Changed();if(val.trim().length<2)return;brandSearchTimer=setTimeout(function(){searchBrand(val.trim());},900);}
+
+// ═══════════════════════════════════════════════════════
+// BRAND SEARCH - Clearbit + Wikidata + Wikipedia
+// ═══════════════════════════════════════════════════════
+async function searchBrand(name){
+  document.getElementById('brand-search-ico').style.display='block';
+  // Run all 3 APIs in parallel
+  var [companies,wd,wiki]=await Promise.all([clearbitSearch(name),wikidataSearch(name),wikiSummary(name)]);
+  document.getElementById('brand-search-ico').style.display='none';
+  var co=companies&&companies.length?companies[0]:null;
+  if(co||wd||wiki){
+    var domain=co?co.domain:(wd&&wd.website?wd.website.replace(/https?:\/\//,'').replace(/\/.*/,''):(name.toLowerCase().replace(/[^a-z0-9]/g,'')+'.com'));
+    var officialName=wd?wd.name:(co?co.name:((wiki&&wiki.title)?wiki.title:name));
+    var desc=(wiki&&wiki.extract)?wiki.extract:(wd?wd.description:'');
+    var industry=(wd&&wd.industryNames&&wd.industryNames.length)?wd.industryNames[0]:detectIndustry(desc+(wd?wd.description:''));
+    var linkedin=(wd&&wd.linkedin)?wd.linkedin:'https://linkedin.com/company/'+officialName.toLowerCase().replace(/[^a-z0-9]+/g,'-');
+    // Build team from Wikidata (REAL structured data)
+    var team=[];
+    if(wd&&wd.ceoNames)wd.ceoNames.forEach(function(p){team.push({name:p.name,role:'CEO',bio:p.desc||''});});
+    if(wd&&wd.founderNames)wd.founderNames.forEach(function(p){if(!team.find(function(t){return t.name===p.name;}))team.push({name:p.name,role:'Founder',bio:p.desc||''});});
+    // Products from Wikidata
+    var products=[];
+    var emojis=['\ud83d\ude80','\ud83d\udcbb','\ud83d\udcf1','\u2b50','\ud83d\udd27','\ud83c\udf10','\ud83d\udce6','\ud83d\udcca'];
+    if(wd&&wd.productNames)wd.productNames.forEach(function(p,i){products.push({name:p.name,desc:p.desc||'',emoji:emojis[i%emojis.length]});});
+    DB={name:name,domain:domain,linkedin:linkedin,industry:industry,desc:desc.length>300?desc.substring(0,300)+'...':desc,icp:genICP(industry),found:true,team:team,products:products,voice:genVoice(industry),kw:{p:[],s:[]},lt:[],comps:[],blogUrl:'',wikidataId:wd?wd.id:''};
+    document.getElementById('i-url').value='https://'+domain;
+    document.getElementById('i-li').value=linkedin;
+    // Show result
+    document.getElementById('br-fav').innerHTML=co&&co.logo?'<img src="'+co.logo+'" style="width:100%;height:100%;object-fit:cover">':'<img src="https://www.google.com/s2/favicons?domain='+domain+'&sz=32" style="width:100%;height:100%;object-fit:cover">';
+    document.getElementById('br-name').textContent=officialName;
+    document.getElementById('br-desc').textContent=DB.desc;
+    document.getElementById('br-meta').textContent=domain+(industry?' \u00b7 '+industry:'')+(team.length?' \u00b7 '+team.length+' people found':'')+(products.length?' \u00b7 '+products.length+' products':'');
+    document.getElementById('brand-result').style.display='block';
+    document.getElementById('brand-check-ico').style.display='block';
+  }else{
+    DB.name=name;DB.found=false;DB.domain=name.toLowerCase().replace(/[^a-z0-9]/g,'')+'.com';
+    document.getElementById('i-url').value='https://'+DB.domain;
+    document.getElementById('brand-notfound').innerHTML='APIs blocked in preview. <strong>Download the file and open in Chrome</strong> for live scraping. Or enter details manually.';
+    document.getElementById('brand-notfound').style.display='block';
+    document.getElementById('download-notice').style.display='block';
   }
-};
-
-// Default industry template for unknown industries
-var DEFAULT_INDUSTRY = {
-  blogs:[
-    {t:'The Complete {brand} Guide for {audience} in {year}',tag1:'educational',tag2:'seo anchor',w:2400,s:92},
-    {t:'Top {n} Trends Shaping {industry} in {year}',tag1:'trending',tag2:'thought leadership',w:2600,s:90},
-    {t:'How {brand} Solves the Biggest {industry} Challenges',tag1:'product',tag2:'conversion',w:2200,s:88},
-    {t:'Why {audience} Are Choosing {brand} Over Alternatives',tag1:'product',tag2:'seo anchor',w:2300,s:91},
-    {t:'{industry} Best Practices: A {year} Handbook',tag1:'how-to',tag2:'thought leadership',w:2500,s:87}
-  ],
-  trends:[
-    {cat:'Breaking news',items:[{t:'AI adoption accelerating across '+'{industry}'+' sector',h:'hot'},{t:'Consumer expectations reshaping '+'{industry}'+' delivery models',h:'hot'},{t:'Sustainability mandates driving industry-wide changes',h:'rising'}]},
-    {cat:'Market shifts',items:[{t:'Digital transformation spending up 35% year-over-year',h:'rising'},{t:'Customer experience ranked #1 competitive differentiator',h:'rising'},{t:'Data-driven decision making becoming standard practice',h:'stable'}]},
-    {cat:'Emerging themes',items:[{t:'Personalization at scale becoming key growth driver',h:'hot'},{t:'Platform consolidation reducing vendor fragmentation',h:'rising'},{t:'Cross-industry partnerships creating new value chains',h:'rising'}]}
-  ],
-  keywords:{primary:['{industry} solutions','{industry} platform','{industry} tools','{industry} software'],supporting:['{brand} features','{industry} trends','{industry} guide','{industry} comparison'],longtail:['best {industry} solutions for businesses 2026','how to choose {industry} platform','complete guide to {industry} in 2026']},
-  team:[{name:'Founder',role:'CEO & Founder',bio:'Building innovative solutions in the '+'{industry}'+' space.'},{name:'Head of Product',role:'VP Product',bio:'Leading product development and customer experience.'}],
-  products:[{name:'Core Platform',desc:'Primary product offering for {industry}.',emoji:'\ud83d\ude80'},{name:'Analytics',desc:'Data insights and reporting dashboard.',emoji:'\ud83d\udcca'},{name:'Integrations',desc:'Connect with your existing tools seamlessly.',emoji:'\ud83d\udd17'},{name:'Support',desc:'24/7 customer success and onboarding.',emoji:'\ud83c\udf1f'}],
-  voice:[{title:'Expert & Approachable',body:'Deep industry knowledge delivered in clear, accessible language.'},{title:'Solution-Oriented',body:'Focus on practical value and real outcomes, not just features.'},{title:'Trust-Building',body:'Transparent communication that builds long-term credibility.'}],
-  competitors:[]
-};
-
-// ─── CONTENT ENGINE ───────────────────────────────────
-function getIndustryData(industry) {
-  if (!industry) return DEFAULT_INDUSTRY;
-  var key = Object.keys(INDUSTRY_DATA).find(function(k) {
-    return k.toLowerCase() === industry.toLowerCase() ||
-           industry.toLowerCase().indexOf(k.toLowerCase().split(' ')[0].toLowerCase()) > -1 ||
-           k.toLowerCase().indexOf(industry.toLowerCase().split(' ')[0].toLowerCase()) > -1;
-  });
-  return key ? INDUSTRY_DATA[key] : DEFAULT_INDUSTRY;
-}
-
-function fillTemplate(str, vars) {
-  return str.replace(/\{(\w+)\}/g, function(m, k) { return vars[k] || m; });
-}
-
-function generateBlogs(brand, industry, icp) {
-  var data = getIndustryData(industry);
-  var vars = {brand: brand, year: '2026', industry: industry || 'your industry', audience: (icp && icp[0]) ? icp[0].split('/')[0].trim() : 'Professionals', n: String(5 + Math.floor(Math.random() * 6))};
-  return data.blogs.map(function(b) {
-    var serp = b.s + Math.floor(Math.random() * 6) - 3;
-    return {title: fillTemplate(b.t, vars), tag1: b.tag1, tag2: b.tag2, words: b.w + Math.floor(Math.random() * 400) - 200, serp: Math.min(97, Math.max(83, serp))};
-  });
-}
-
-function generateTrendsData(brand, industry) {
-  var data = getIndustryData(industry);
-  var vars = {brand: brand, year: '2026', industry: industry || 'your industry'};
-  return data.trends.map(function(cat) {
-    return {category: fillTemplate(cat.cat, vars), items: cat.items.map(function(item) {
-      return {text: fillTemplate(item.t, vars), heat: item.h};
-    })};
-  });
-}
-
-function generateBlogArticle(title, brand, industry) {
-  var data = getIndustryData(industry);
-  var kws = data.keywords || {};
-  var primaryKw = (kws.primary || [])[0] || industry;
-  var supportingKws = (kws.supporting || []).slice(0, 3);
-  return '<h1>' + esc(title) + '</h1>' +
-    '<p>In ' + esc(industry) + ', staying ahead means understanding the forces that shape your market. This comprehensive guide from <strong>' + esc(brand) + '</strong> breaks down everything you need to know about ' + esc(title.toLowerCase().replace(brand, '').replace(/\d{4}/g, '').trim()) + ' and how it impacts your business in 2026.</p>' +
-    '<h2>Why This Matters Right Now</h2>' +
-    '<p>The ' + esc(industry) + ' landscape has shifted dramatically. According to recent industry reports, organizations that invest in ' + esc(primaryKw) + ' see an average 42% improvement in operational outcomes. For ' + esc(brand) + ' users, this translates to measurable competitive advantage.</p>' +
-    '<p>Three key factors are driving this shift: increased regulatory pressure, rising customer expectations, and the rapid adoption of AI-powered tools across the industry.</p>' +
-    '<h2>The Current State of ' + esc(industry) + '</h2>' +
-    '<p>2026 has been a pivotal year. The convergence of AI capabilities, regulatory changes, and evolving consumer behavior means businesses cannot afford to stand still. ' + esc(brand) + ' has been at the forefront of this transformation, helping organizations adapt to these changes.</p>' +
-    '<p>Key statistics that define the current landscape:</p>' +
-    '<ul><li><strong>73% of organizations</strong> plan to increase their ' + esc(primaryKw) + ' investment in the next 12 months</li>' +
-    '<li><strong>Average ROI of 3.2x</strong> for companies that have adopted modern ' + esc(industry.toLowerCase()) + ' solutions</li>' +
-    '<li><strong>58% reduction in manual effort</strong> reported by teams using automated ' + esc(supportingKws[0] || 'tools') + '</li></ul>' +
-    '<h2>How ' + esc(brand) + ' Addresses These Challenges</h2>' +
-    '<p>' + esc(brand) + ' provides a comprehensive platform designed specifically for the challenges of modern ' + esc(industry.toLowerCase()) + '. Unlike point solutions that address individual problems, ' + esc(brand) + ' offers an integrated approach that connects ' + esc(supportingKws.join(', ') || 'key workflows') + ' into a single, coherent workflow.</p>' +
-    '<p>This integrated approach means teams spend less time switching between tools and more time delivering real value. The platform\'s intelligence layer continuously learns from usage patterns to surface insights and recommendations that matter.</p>' +
-    '<h2>Best Practices for ' + esc(industry) + ' in 2026</h2>' +
-    '<p>Based on working with hundreds of organizations in the ' + esc(industry.toLowerCase()) + ' space, ' + esc(brand) + ' has identified several best practices that consistently drive results:</p>' +
-    '<ul><li><strong>Start with outcomes, not features.</strong> Define what success looks like before evaluating tools.</li>' +
-    '<li><strong>Invest in integration.</strong> Siloed tools create blind spots. Connected platforms reveal the full picture.</li>' +
-    '<li><strong>Measure continuously.</strong> What gets measured gets managed. Build dashboards that track what matters.</li>' +
-    '<li><strong>Upskill your team.</strong> Technology is only as good as the people using it.</li></ul>' +
-    '<h2>What Experts Are Saying</h2>' +
-    '<p>Industry analysts and practitioners agree: the organizations that will thrive in 2026 and beyond are those that embrace modern ' + esc(primaryKw) + ' approaches. Legacy methods are not just inefficient; they create real risk.</p>' +
-    '<p>"The gap between leaders and laggards in ' + esc(industry.toLowerCase()) + ' is widening. Those who adopt integrated, data-driven approaches today will be the market leaders of tomorrow." - Industry Report, Q1 2026</p>' +
-    '<div class="bfaq"><div class="bfaq-q">What is ' + esc(primaryKw) + ' and why does it matter?</div><div class="bfaq-a">' + esc(primaryKw.charAt(0).toUpperCase() + primaryKw.slice(1)) + ' refers to the systematic approach of using technology and data to optimize ' + esc(industry.toLowerCase()) + ' outcomes. It matters because organizations using these approaches consistently outperform those relying on manual or legacy methods.</div></div>' +
-    '<div class="bfaq"><div class="bfaq-q">How can ' + esc(brand) + ' help my organization?</div><div class="bfaq-a">' + esc(brand) + ' provides an integrated ' + esc(industry.toLowerCase()) + ' platform that combines ' + esc(supportingKws.join(', ') || 'core capabilities') + ' into a single solution. This means faster implementation, better insights, and measurable ROI from day one.</div></div>' +
-    '<div class="bauth"><div class="bav">' + brand.charAt(0).toUpperCase() + '</div><div><div class="banm">' + esc(brand) + ' Editorial Team</div><div class="barl">' + esc(industry) + ' experts - Published April 2026</div></div></div>';
-}
-
-// ─── SPLASH ───────────────────────────────────────────
-(function() {
-  var f = document.getElementById('spl-fill'), p = 0;
-  var iv = setInterval(function() { p += 3; if (p >= 100) { p = 100; clearInterval(iv); } f.style.width = p + '%'; }, 22);
-  setTimeout(function() {
-    document.getElementById('splash').classList.add('exit');
-    setTimeout(function() { document.getElementById('splash').style.display = 'none'; document.getElementById('onboard').classList.add('show'); }, 570);
-  }, 1500);
-})();
-
-// ─── THEME ────────────────────────────────────────────
-function toggleTheme() {
-  theme = theme === 'dark' ? 'light' : 'dark';
-  document.documentElement.setAttribute('data-theme', theme);
-  localStorage.setItem('inkTheme', theme);
-  updateThemeUI();
-}
-function updateThemeUI() {
-  var l = document.getElementById('theme-lbl'), b = document.getElementById('theme-badge');
-  if (l) l.textContent = theme === 'dark' ? 'Light mode' : 'Dark mode';
-  if (b) b.textContent = theme === 'dark' ? '\u2600' : '\u263D';
-}
-
-// ─── ONBOARDING ───────────────────────────────────────
-var obMeta = [
-  {lbl:'Step 1 of 3 \u00b7 Workspace', ttl:'Set up your workspace', sub:'INK crawls your website, blog, and LinkedIn to build your brand content DNA - tone, voice, keywords, and positioning.'},
-  {lbl:'Step 2 of 3 \u00b7 Audience', ttl:'Define your audience', sub:'INK adapts the audience options based on your detected brand and industry.'},
-  {lbl:'Step 3 of 3 \u00b7 Goals', ttl:'Set your content goals', sub:'INK defaults to SERP ranking. Tell it how to weigh ranking vs conversion vs authority for your blogs.'}
-];
-
-function goOB(n) {
-  document.querySelectorAll('.ob-pn').forEach(function(p) { p.classList.remove('on'); });
-  var op = document.getElementById('op' + n); if (op) op.classList.add('on');
-  var m = obMeta[n-1]; if (!m) return;
-  document.getElementById('ob-lbl').textContent = m.lbl;
-  document.getElementById('ob-ttl').textContent = m.ttl;
-  document.getElementById('ob-sub').textContent = m.sub;
-  for (var i = 1; i <= 3; i++) {
-    document.getElementById('ob' + i).className = 'ob-bar' + (i < n ? ' done' : i === n ? ' cur' : '');
-  }
-  if (n === 2) populateStep2();
-}
-
-function ob1Changed() {
-  var brand = document.getElementById('i-brand').value.trim();
-  var url = document.getElementById('i-url').value.trim();
-  var btn = document.getElementById('ob1-continue');
-  var ok = !!(brand || url);
-  btn.disabled = !ok; btn.style.opacity = ok ? '1' : '.45'; btn.style.cursor = ok ? 'pointer' : 'not-allowed';
-}
-
-function onBrandInput(val) {
-  clearTimeout(brandSearchTimer);
-  document.getElementById('brand-result').style.display = 'none';
-  document.getElementById('brand-notfound').style.display = 'none';
-  document.getElementById('brand-search-ico').style.display = 'none';
-  document.getElementById('brand-check-ico').style.display = 'none';
   ob1Changed();
-  if (val.trim().length < 2) return;
-  brandSearchTimer = setTimeout(function() { searchBrand(val.trim()); }, 800);
 }
 
-// ─── BRAND DETECTION (NO API - uses local DB + favicon probe) ──
-function searchBrand(name) {
-  document.getElementById('brand-search-ico').style.display = 'block';
-  var key = name.toLowerCase().replace(/[^a-z0-9]/g, '');
-  var match = BRANDS[key];
-
-  if (!match) {
-    // Try partial match
-    var keys = Object.keys(BRANDS);
-    for (var i = 0; i < keys.length; i++) {
-      if (keys[i].indexOf(key) > -1 || key.indexOf(keys[i]) > -1) { match = BRANDS[keys[i]]; break; }
-    }
-  }
-
-  setTimeout(function() {
-    document.getElementById('brand-search-ico').style.display = 'none';
-    if (match) {
-      detectedBrand = {name: name, domain: match.domain, linkedin: match.li, industry: match.industry, description: match.desc, icpSuggestions: match.icp, found: true};
-      document.getElementById('i-url').value = 'https://' + match.domain;
-      if (match.li) document.getElementById('i-li').value = match.li;
-      document.getElementById('br-fav').innerHTML = '<img src="https://www.google.com/s2/favicons?domain=' + match.domain + '&sz=32" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display=\'none\'">';
-      document.getElementById('br-name').textContent = name;
-      document.getElementById('br-desc').textContent = match.desc;
-      document.getElementById('br-meta').textContent = match.domain + (match.li ? ' \u00b7 LinkedIn detected' : '');
-      document.getElementById('brand-result').style.display = 'block';
-      document.getElementById('brand-check-ico').style.display = 'block';
-    } else {
-      // Try to construct domain and probe favicon
-      var guessDomain = key + '.com';
-      detectedBrand = {name: name, domain: guessDomain, linkedin: '', industry: '', description: '', icpSuggestions: [], found: false};
-      // Probe favicon to see if domain exists
-      var img = new Image();
-      img.onload = function() {
-        detectedBrand.domain = guessDomain;
-        detectedBrand.found = true;
-        document.getElementById('i-url').value = 'https://' + guessDomain;
-        document.getElementById('br-fav').innerHTML = '<img src="https://www.google.com/s2/favicons?domain=' + guessDomain + '&sz=32" style="width:100%;height:100%;object-fit:cover">';
-        document.getElementById('br-name').textContent = name;
-        document.getElementById('br-desc').textContent = 'Website detected at ' + guessDomain + '. Select your industry in the next step.';
-        document.getElementById('br-meta').textContent = guessDomain;
-        document.getElementById('brand-result').style.display = 'block';
-        document.getElementById('brand-check-ico').style.display = 'block';
-      };
-      img.onerror = function() {
-        document.getElementById('brand-notfound').style.display = 'block';
-      };
-      img.src = 'https://www.google.com/s2/favicons?domain=' + guessDomain + '&sz=32';
-    }
-    ob1Changed();
-  }, 600); // Simulate brief search delay
+function populateStep2(){
+  var brand=DB.name||document.getElementById('i-brand').value;
+  var ind=DB.industry||'';
+  document.getElementById('ob2-brand-name').textContent=brand;
+  var tag=document.getElementById('ob2-industry-tag');tag.textContent=ind||'General';tag.style.background=ind?'var(--ab)':'var(--s3)';tag.style.color=ind?'var(--A)':'var(--t3)';
+  if(ind)document.getElementById('i-industry').value=ind;
+  var icps=DB.icp&&DB.icp.length?DB.icp:genICP(ind);
+  document.getElementById('icp-opts-grid').innerHTML=icps.map(function(s,i){return '<div class="opt'+(i===0?' sel':'')+'" onclick="this.classList.toggle(\'sel\')"><div class="opt-t">'+esc(s)+'</div><div class="opt-s"></div></div>';}).join('');
 }
-
-var icpFallbacks = {
-  cyber:[{t:'CISOs / Security Leaders',s:'Strategic, board-ready'},{t:'GRC / Compliance',s:'Regulatory lens'},{t:'DevSecOps / Engineers',s:'Technical depth'},{t:'Board / C-Suite',s:'Business risk framing'}],
-  health:[{t:'Patients / Consumers',s:'End users seeking care'},{t:'Healthcare Professionals',s:'Doctors, pharmacists'},{t:'Hospital Administrators',s:'Procurement'},{t:'Insurance & Payers',s:'Coverage'}],
-  consumer:[{t:'Young Adults 18-35',s:'Lifestyle, value-driven'},{t:'Working Professionals',s:'Convenience seekers'},{t:'Retail Buyers',s:'Wholesale'},{t:'Urban Digital Users',s:'Mobile-first'}],
-  food:[{t:'Urban Professionals',s:'25-40, time-pressed'},{t:'Food Brands & Restaurants',s:'Partners'},{t:'Foodies & Enthusiasts',s:'Discovery'},{t:'Late Night / Weekend',s:'Impulse'}],
-  saas:[{t:'Startup Founders / CTOs',s:'Tech decisions'},{t:'Product Managers',s:'Feature owners'},{t:'Enterprise Buyers',s:'IT & procurement'},{t:'SMB Owners',s:'Cost-conscious'}],
-  finance:[{t:'Retail Investors',s:'Self-directed'},{t:'HNIs / Wealth Managers',s:'High-value'},{t:'CFOs / Finance Teams',s:'Corporate'},{t:'Compliance Officers',s:'Regulatory'}],
-  default:[{t:'Primary Decision Makers',s:'Buying authority'},{t:'End Users / Consumers',s:'Direct users'},{t:'Influencers & Advocates',s:'Word-of-mouth'},{t:'Partners & Distributors',s:'Channel'}]
-};
-
-function getICPSet(industry) {
-  var i = (industry || '').toLowerCase();
-  if (/cyber|security|risk/i.test(i)) return icpFallbacks.cyber;
-  if (/health|pharma|medical/i.test(i)) return icpFallbacks.health;
-  if (/food|delivery|restaurant/i.test(i)) return icpFallbacks.food;
-  if (/saas|software|platform|tech|ai|cloud|produc/i.test(i)) return icpFallbacks.saas;
-  if (/finance|fintech|bank|insur|brok/i.test(i)) return icpFallbacks.finance;
-  if (/consumer|fmcg|lifestyle|brand|beauty|wear/i.test(i)) return icpFallbacks.consumer;
-  return icpFallbacks.default;
-}
-
-function populateStep2() {
-  var brand = detectedBrand.name || document.getElementById('i-brand').value || 'your brand';
-  var industry = detectedBrand.industry || '';
-  document.getElementById('ob2-brand-name').textContent = brand;
-  var tag = document.getElementById('ob2-industry-tag');
-  tag.textContent = industry || 'General';
-  tag.style.background = industry ? 'var(--ab)' : 'var(--s3)';
-  tag.style.color = industry ? 'var(--A)' : 'var(--t3)';
-  if (industry) document.getElementById('i-industry').value = industry;
-  var icpItems = detectedBrand.icpSuggestions && detectedBrand.icpSuggestions.length >= 2
-    ? detectedBrand.icpSuggestions.map(function(s) { var p = s.split('/'); return {t:p[0].trim(),s:p[1]?p[1].trim():''}; })
-    : getICPSet(industry);
-  document.getElementById('icp-opts-grid').innerHTML = icpItems.map(function(item, idx) {
-    return '<div class="opt' + (idx === 0 ? ' sel' : '') + '" onclick="this.classList.toggle(\'sel\')"><div class="opt-t">' + esc(item.t) + '</div><div class="opt-s">' + esc(item.s) + '</div></div>';
-  }).join('');
-}
-
-function setBlogsOpt(el) { el.parentElement.querySelectorAll('.opt').forEach(function(o) { o.classList.remove('sel'); }); el.classList.add('sel'); }
-function addTag(inpId, tagsId) {
-  var inp = document.getElementById(inpId), val = inp.value.trim(); if (!val) return;
-  var tags = document.getElementById(tagsId);
-  var s = document.createElement('span'); s.className = 'ctag'; s.textContent = val;
-  s.onclick = function() { tags.removeChild(s); }; tags.appendChild(s); inp.value = '';
-}
-
-function launchAnalysis() {
-  var brand = document.getElementById('i-brand').value || detectedBrand.name || 'Your Brand';
-  var url = document.getElementById('i-url').value || '';
-  var domain = url.replace(/https?:\/\//, '').replace(/\/.*/, '');
-  var industry = document.getElementById('i-industry').value || detectedBrand.industry || '';
-  if (!detectedBrand.name) detectedBrand.name = brand;
-  if (!detectedBrand.domain && domain) detectedBrand.domain = domain;
-  if (industry && !detectedBrand.industry) detectedBrand.industry = industry;
-  if (!domain && brand) { domain = brand.toLowerCase().replace(/[^a-z0-9]/g, '') + '.com'; detectedBrand.domain = domain; }
-  document.getElementById('ws-nm-sb').textContent = brand;
+function setBlogsOpt(el){el.parentElement.querySelectorAll('.opt').forEach(function(o){o.classList.remove('sel');});el.classList.add('sel');}
+function addTag(a,b){var inp=document.getElementById(a),val=inp.value.trim();if(!val)return;var tags=document.getElementById(b);var s=document.createElement('span');s.className='ctag';s.textContent=val;s.onclick=function(){tags.removeChild(s);};tags.appendChild(s);inp.value='';}
+function launchAnalysis(){
+  var brand=document.getElementById('i-brand').value||DB.name||'Your Brand';
+  var url=document.getElementById('i-url').value||'';
+  var domain=url.replace(/https?:\/\//,'').replace(/\/.*/,'');
+  var ind=document.getElementById('i-industry').value||DB.industry||'';
+  DB.name=brand;if(domain)DB.domain=domain;if(ind)DB.industry=ind;
+  if(!domain){domain=brand.toLowerCase().replace(/[^a-z0-9]/g,'')+'.com';DB.domain=domain;}
+  if(!DB.icp||!DB.icp.length)DB.icp=genICP(ind);
+  if(!DB.voice||!DB.voice.length)DB.voice=genVoice(ind);
   document.getElementById('onboard').classList.remove('show');
   document.getElementById('analyzing').classList.add('show');
-  document.getElementById('an-dom').innerHTML = '<svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="5" cy="5" r="4"/><path d="M5 1C3.9 2.2 3.2 3.6 3.2 5S3.9 7.8 5 9M5 1C6.1 2.2 6.8 3.6 6.8 5S6.1 7.8 5 9M1 5h8"/></svg>Scanning: ' + esc(domain);
+  document.getElementById('an-dom').innerHTML='<svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="5" cy="5" r="4"/><path d="M5 1C3.9 2.2 3.2 3.6 3.2 5S3.9 7.8 5 9M5 1C6.1 2.2 6.8 3.6 6.8 5S6.1 7.8 5 9M1 5h8"/></svg>Scanning: '+esc(domain);
+  // Load saved OpenAI key
+  var saved=localStorage.getItem('ink_openai_key');
+  if(saved){var inp=document.getElementById('openai-key');if(inp)inp.value=saved;}
   runAnalysis();
 }
+function runAnalysis(){var steps=document.querySelectorAll('.an-step'),i=0;function tick(){if(i>0){steps[i-1].classList.remove('run');steps[i-1].classList.add('done');steps[i-1].querySelector('.a-ico').innerHTML='<span class="id">\u2713</span>';}if(i<steps.length){steps[i].classList.add('run');steps[i].querySelector('.a-ico').innerHTML='<div class="is"></div>';i++;setTimeout(tick,i===steps.length?1000:380);}else{steps[steps.length-1].classList.remove('run');steps[steps.length-1].classList.add('done');steps[steps.length-1].querySelector('.a-ico').innerHTML='<span class="id">\u2713</span>';setTimeout(enterApp,300);}}tick();}
 
-function runAnalysis() {
-  var steps = document.querySelectorAll('.an-step'), i = 0;
-  function tick() {
-    if (i > 0) { steps[i-1].classList.remove('run'); steps[i-1].classList.add('done'); steps[i-1].querySelector('.a-ico').innerHTML = '<span class="id">\u2713</span>'; }
-    if (i < steps.length) { steps[i].classList.add('run'); steps[i].querySelector('.a-ico').innerHTML = '<div class="is"></div>'; i++; setTimeout(tick, i === steps.length ? 1200 : 450); }
-    else { steps[steps.length-1].classList.remove('run'); steps[steps.length-1].classList.add('done'); steps[steps.length-1].querySelector('.a-ico').innerHTML = '<span class="id">\u2713</span>'; setTimeout(enterApp, 350); }
-  }
-  tick();
+// ═══════════════════════════════════════════════════════
+// ENTER APP
+// ═══════════════════════════════════════════════════════
+function enterApp(){
+  document.getElementById('analyzing').classList.remove('show');document.getElementById('app').classList.add('show');nav('dashboard');setTimeout(animScan,300);
+  var brand=DB.name,domain=DB.domain;
+  if(brand){document.getElementById('ws-nm').textContent=brand;document.getElementById('ws-nm').style.display='block';document.getElementById('tb-brand-div').style.display='block';if(domain){var bimg=document.getElementById('tb-brand-img');bimg.src='https://logo.clearbit.com/'+domain;bimg.onerror=function(){this.src='https://www.google.com/s2/favicons?domain='+domain+'&sz=32';this.onerror=function(){this.style.display='none';};};document.getElementById('tb-brand-ico').style.display='flex';}document.getElementById('ws-nm-sb').textContent=brand;var letter=brand.charAt(0).toUpperCase();document.getElementById('ws-av-letter').textContent=letter;document.getElementById('av-btn').textContent=letter;document.getElementById('pp-nm-d').textContent='Workspace Admin';document.getElementById('pp-role-d').textContent=brand;document.getElementById('pp-av2').textContent=letter;if(domain){var avImg=document.getElementById('ws-av-img');avImg.src='https://logo.clearbit.com/'+domain;avImg.style.display='block';avImg.onerror=function(){this.src='https://www.google.com/s2/favicons?domain='+domain+'&sz=32';this.onerror=function(){this.style.display='none';document.getElementById('ws-av-letter').style.display='block';};};document.getElementById('ws-av-letter').style.display='none';}}
+  document.getElementById('scan-card-title').textContent=brand?'Brand intelligence - '+brand:'Brand scan';
+  document.getElementById('scan-l1').textContent=domain+'/blog';document.getElementById('scan-v1').textContent=DB.found?'Indexed':'Pending';document.getElementById('scan-v2').textContent=DB.products.length?DB.products.length+' products':'Scraped';document.getElementById('scan-v3').textContent=DB.linkedin?'Connected':'Not found';document.getElementById('scan-v4').textContent=DB.voice.length?DB.voice[0].t:'Detecting';document.getElementById('scan-v5').textContent=DB.industry||'Building';
+  populateSources();populateSettings();
+  brandContent.queue=genBlogTitles(brand,DB.industry,DB.icp);brandContent.trends=genTrends(brand,DB.industry);brandContent.loaded=true;
+  renderQueue();renderTrends();updateWODTags();updateWizardAudience();
+  document.getElementById('notif-scan-t').textContent='Brand analysis complete';document.getElementById('notif-scan-s').textContent=brand+' scraped via Wikidata + Clearbit.';document.getElementById('notif-trends-t').textContent=(DB.industry||'Industry')+' trends';document.getElementById('notif-queue-s').textContent='5 blogs for '+brand+'.';
 }
 
-// ─── ENTER APP ────────────────────────────────────────
-function enterApp() {
-  document.getElementById('analyzing').classList.remove('show');
-  document.getElementById('app').classList.add('show');
-  nav('dashboard');
-  setTimeout(animScan, 300);
+// ═══════════════════════════════════════════════════════
+// RENDER (queue, trends, WOD tags, wizard audience)
+// ═══════════════════════════════════════════════════════
+function renderQueue(){var b=brandContent.queue;if(!b.length)return;document.getElementById('dash-queue-loading').style.display='none';document.getElementById('dash-queue-rows').innerHTML=b.slice(0,3).map(function(bl,i){return '<div class="br"><div class="bn">0'+(i+1)+'</div><div class="bi"><div class="bt">'+esc(bl.title)+'</div><div class="btags"><span class="tag tr">'+esc(bl.tag1)+'</span><span class="tag ty">'+esc(bl.tag2)+'</span></div></div><div class="dot '+(i<2?'dg':'da')+'"></div></div>';}).join('');document.getElementById('queue-loading').style.display='none';document.getElementById('queue-rows').innerHTML=b.map(function(bl,i){var fc=bl.serp>=90?'sfg':bl.serp>=85?'sfa':'sfb';return '<div class="br"><div class="bn">0'+(i+1)+'</div><div class="bi"><div class="bt">'+esc(bl.title)+'</div><div class="btags" style="margin-bottom:4px"><span class="tag tr">'+esc(bl.tag1)+'</span><span class="tag ty">'+esc(bl.tag2)+'</span><span class="tag tn">'+bl.words+' words</span></div><div class="sbar"><div class="strack"><div class="sfill '+fc+'" style="width:0" data-w="'+bl.serp+'"></div></div><div class="ssco">'+bl.serp+' SERP</div></div></div><div class="brr"><div class="dot '+(i%2===0?'dg':'da')+'"></div><button class="btn bout bxs" onclick="openDynPreview('+i+')">Preview</button></div></div>';}).join('');setTimeout(animScoreBars,150);var avg=Math.round(b.reduce(function(s,bl){return s+bl.serp;},0)/b.length);document.getElementById('stat-serp').textContent=avg;document.getElementById('stat-serp-sub').textContent='\u2191 avg';document.getElementById('stat-blogs').textContent=b.length;document.getElementById('stat-blogs-sub').textContent='ready today';document.getElementById('dash-sub').textContent=new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'short',year:'numeric'})+' \u00b7 '+b.length+' blogs \u00b7 '+DB.name;}
+function renderTrends(){var t=brandContent.trends;if(!t.length)return;document.getElementById('trends-sub').textContent=(DB.industry||'Industry')+' \u00b7 Live';document.getElementById('dash-trends-loading').style.display='none';var mini=[];t.forEach(function(c){c.items.forEach(function(it){mini.push(it);});});document.getElementById('dash-trends-rows').innerHTML=mini.slice(0,4).map(function(it,i){return '<div class="trow"><div class="tn2">0'+(i+1)+'</div><div class="tt">'+esc(it.text)+'</div><div class="heat '+(it.heat==='hot'?'hh':it.heat==='rising'?'hw':'hc')+'">'+it.heat+'</div></div>';}).join('');var html='<div class="g3">';t.forEach(function(c){html+='<div class="card"><div class="ch"><div class="ct">'+esc(c.category)+'</div></div>';c.items.forEach(function(it,i){html+='<div class="trow"><div class="tn2">0'+(i+1)+'</div><div class="tt">'+esc(it.text)+'</div><div class="heat '+(it.heat==='hot'?'hh':it.heat==='rising'?'hw':'hc')+'">'+it.heat+'</div></div>';});html+='</div>';});html+='</div>';document.getElementById('trends-content').innerHTML=html;document.getElementById('stat-trends').textContent=t.reduce(function(n,c){return n+c.items.length;},0);document.getElementById('stat-trends-sub').textContent='in '+(DB.industry||'industry');}
+function refreshTrends(){brandContent.trends=genTrends(DB.name,DB.industry);renderTrends();showToast('Refreshed','success');}
+function updateWODTags(){var b=brandContent.queue,el=document.getElementById('wod-quick-tags');if(!b.length){el.innerHTML='<div style="font-size:10px;font-family:var(--M);color:rgba(255,255,255,.3)">Type a topic to start</div>';return;}el.innerHTML='';b.forEach(function(bl){var sp=document.createElement('span');sp.className='wt';sp.textContent=bl.title.length>42?bl.title.substring(0,42)+'\u2026':bl.title;sp.onclick=function(){document.getElementById('wod-inp').value=bl.title;};el.appendChild(sp);});}
+function updateWizardAudience(){var icps=DB.icp;if(!icps||icps.length<2)return;document.getElementById('wiz-audience-opts').innerHTML=icps.map(function(s,i){return '<div class="wo'+(i===0?' sel':'')+'" onclick="pw(this)"><div class="wot">'+esc(s)+'</div><div class="wos"></div></div>';}).join('')+'<div class="wo" onclick="pw(this)"><div class="wot">General / Broad</div><div class="wos">Max SEO reach</div></div>';}
 
-  var brand = detectedBrand.name || '';
-  var domain = detectedBrand.domain || '';
-
-  if (brand) {
-    var wnm = document.getElementById('ws-nm'); wnm.textContent = brand; wnm.style.display = 'block';
-    document.getElementById('tb-brand-div').style.display = 'block';
-    if (domain) {
-      var bimg = document.getElementById('tb-brand-img');
-      bimg.src = 'https://logo.clearbit.com/' + domain;
-      bimg.onerror = function() { this.src = 'https://www.google.com/s2/favicons?domain=' + domain + '&sz=32'; this.onerror = function() { this.style.display = 'none'; }; };
-      document.getElementById('tb-brand-ico').style.display = 'flex';
-    }
-    document.getElementById('ws-nm-sb').textContent = brand;
-    var letter = brand.charAt(0).toUpperCase();
-    document.getElementById('ws-av-letter').textContent = letter;
-    document.getElementById('av-btn').textContent = letter;
-    document.getElementById('pp-nm-d').textContent = 'Workspace Admin';
-    document.getElementById('pp-role-d').textContent = brand;
-    document.getElementById('pp-av2').textContent = letter;
-    if (domain) {
-      var avImg = document.getElementById('ws-av-img');
-      avImg.src = 'https://logo.clearbit.com/' + domain;
-      avImg.style.display = 'block';
-      avImg.onerror = function() { this.src = 'https://www.google.com/s2/favicons?domain=' + domain + '&sz=32'; this.onerror = function() { this.style.display = 'none'; document.getElementById('ws-av-letter').style.display = 'block'; }; };
-      document.getElementById('ws-av-letter').style.display = 'none';
-    }
-  }
-
-  var d = new Date();
-  var ds = d.toLocaleDateString('en-GB', {weekday:'long', day:'numeric', month:'short', year:'numeric'});
-  document.getElementById('dash-sub').textContent = ds + ' \u00b7 5 blogs ready \u00b7 ' + (brand || 'Your brand');
-  document.getElementById('scan-card-title').textContent = brand ? 'Brand intelligence scan - ' + brand : 'Brand intelligence scan';
-  updateScanUI(brand, domain);
-
-  // Generate all content locally - instant, no API
-  setTimeout(function() {
-    brandContent.queue = generateBlogs(brand, detectedBrand.industry, detectedBrand.icpSuggestions);
-    brandContent.trends = generateTrendsData(brand, detectedBrand.industry);
-    brandContent.loaded = true;
-    renderQueue();
-    renderTrends();
-    updateWODTags();
-    updateWizardAudience();
-    populateSources(brand, domain, detectedBrand.linkedin);
-    populateSettings(brand, domain, detectedBrand.industry);
-    // Update notifications
-    document.getElementById('notif-scan-t').textContent = 'Brand analysis complete';
-    document.getElementById('notif-scan-s').textContent = brand + ' - team, products, voice, and keywords mapped.';
-    document.getElementById('notif-trends-t').textContent = (detectedBrand.industry || 'Industry') + ' trends loaded';
-    document.getElementById('notif-trends-s').textContent = brandContent.trends.reduce(function(n,c){return n+c.items.length;},0) + ' trends tracked across 3 categories.';
-    document.getElementById('notif-queue-s').textContent = '5 SERP-optimised blog ideas ready for ' + brand + '.';
-  }, 200);
-}
-
-function updateScanUI(brand, domain) {
-  if (document.getElementById('scan-l1')) document.getElementById('scan-l1').textContent = domain ? domain + '/blog' : 'Website blog';
-  document.getElementById('scan-v1').textContent = (8 + Math.floor(Math.random()*20)) + ' posts indexed';
-  document.getElementById('scan-v2').textContent = (12 + Math.floor(Math.random()*15)) + ' pages mapped';
-  document.getElementById('scan-v3').textContent = (20 + Math.floor(Math.random()*40)) + ' posts analysed';
-  document.getElementById('scan-v4').textContent = detectedBrand.description ? detectedBrand.description.substring(0, 28) + '...' : 'Tone fingerprinted';
-  document.getElementById('scan-v5').textContent = (30 + Math.floor(Math.random()*25)) + ' keywords seeded';
-}
-
-// ─── RENDER QUEUE ─────────────────────────────────────
-function renderQueue() {
-  var blogs = brandContent.queue; if (!blogs.length) return;
-  document.getElementById('dash-queue-loading').style.display = 'none';
-  document.getElementById('dash-queue-rows').innerHTML = blogs.slice(0,3).map(function(b,i) {
-    return '<div class="br"><div class="bn">0'+(i+1)+'</div><div class="bi"><div class="bt">'+esc(b.title)+'</div><div class="btags"><span class="tag tr">'+esc(b.tag1)+'</span><span class="tag ty">'+esc(b.tag2)+'</span></div></div><div class="dot '+(i<2?'dg':'da')+'"></div></div>';
-  }).join('');
-
-  document.getElementById('queue-loading').style.display = 'none';
-  document.getElementById('queue-rows').innerHTML = blogs.map(function(b,i) {
-    var fc = b.serp >= 90 ? 'sfg' : b.serp >= 85 ? 'sfa' : 'sfb';
-    return '<div class="br"><div class="bn">0'+(i+1)+'</div><div class="bi"><div class="bt">'+esc(b.title)+'</div><div class="btags" style="margin-bottom:4px"><span class="tag tr">'+esc(b.tag1)+'</span><span class="tag ty">'+esc(b.tag2)+'</span><span class="tag tn">'+b.words+' words</span></div><div class="sbar"><div class="strack"><div class="sfill '+fc+'" style="width:0" data-w="'+b.serp+'"></div></div><div class="ssco">'+b.serp+' SERP</div></div></div><div class="brr"><div class="dot '+(i%2===0?'dg':'da')+'"></div><button class="btn bout bxs" onclick="openDynPreview('+i+')">Preview</button></div></div>';
-  }).join('');
-  setTimeout(animScoreBars, 150);
-
-  var avg = Math.round(blogs.reduce(function(s,b){return s+b.serp;},0)/blogs.length);
-  document.getElementById('stat-serp').textContent = avg;
-  document.getElementById('stat-serp-sub').textContent = '\u2191 avg SERP score';
-  document.getElementById('stat-blogs').textContent = blogs.length;
-  document.getElementById('stat-blogs-sub').textContent = 'ready today';
-}
-
-// ─── RENDER TRENDS ────────────────────────────────────
-function renderTrends() {
-  var t = brandContent.trends; if (!t.length) return;
-  var industry = detectedBrand.industry || 'Your industry';
-  document.getElementById('trends-sub').textContent = industry + ' \u00b7 Updated 06:00 \u00b7 Live data';
-  document.getElementById('dash-trends-loading').style.display = 'none';
-  // Dashboard mini
-  var miniItems = [];
-  t.forEach(function(cat) { cat.items.forEach(function(item) { miniItems.push(item); }); });
-  document.getElementById('dash-trends-rows').innerHTML = miniItems.slice(0,4).map(function(item,i) {
-    var hc = item.heat==='hot'?'hh':item.heat==='rising'?'hw':'hc';
-    return '<div class="trow"><div class="tn2">0'+(i+1)+'</div><div class="tt">'+esc(item.text)+'</div><div class="heat '+hc+'">'+item.heat+'</div></div>';
-  }).join('');
-  // Full page
-  var html = '<div class="g3">';
-  t.forEach(function(cat) {
-    html += '<div class="card"><div class="ch"><div class="ct">'+esc(cat.category)+'</div></div>';
-    cat.items.forEach(function(item,i) {
-      var hc = item.heat==='hot'?'hh':item.heat==='rising'?'hw':'hc';
-      html += '<div class="trow"><div class="tn2">0'+(i+1)+'</div><div class="tt">'+esc(item.text)+'</div><div class="heat '+hc+'">'+item.heat+'</div></div>';
-    });
-    html += '</div>';
-  });
-  html += '</div>';
-  document.getElementById('trends-content').innerHTML = html;
-  var total = t.reduce(function(n,cat){return n+cat.items.length;},0);
-  document.getElementById('stat-trends').textContent = total;
-  document.getElementById('stat-trends-sub').textContent = 'in ' + industry;
-}
-
-function refreshTrends() {
-  brandContent.trends = generateTrendsData(detectedBrand.name, detectedBrand.industry);
-  renderTrends();
-  showToast('Trends refreshed', 'success');
-}
-
-function updateWODTags() {
-  var blogs = brandContent.queue;
-  var el = document.getElementById('wod-quick-tags');
-  if (!blogs.length) { el.innerHTML = '<div style="font-size:10px;font-family:var(--M);color:rgba(255,255,255,.3);padding:4px 0">Type any topic above to get started</div>'; return; }
-  el.innerHTML = '';
-  blogs.forEach(function(b) {
-    var span = document.createElement('span'); span.className = 'wt';
-    span.textContent = b.title.length > 42 ? b.title.substring(0,42) + '\u2026' : b.title;
-    span.onclick = function() { document.getElementById('wod-inp').value = b.title; };
-    el.appendChild(span);
-  });
-}
-
-function updateWizardAudience() {
-  var icps = detectedBrand.icpSuggestions;
-  if (!icps || icps.length < 2) return;
-  var grid = document.getElementById('wiz-audience-opts');
-  grid.innerHTML = icps.map(function(s,i) {
-    var parts = s.split('/');
-    return '<div class="wo'+(i===0?' sel':'')+'" onclick="pw(this)"><div class="wot">'+esc(parts[0].trim())+'</div><div class="wos">'+esc(parts[1]?parts[1].trim():'')+'</div></div>';
-  }).join('') + '<div class="wo" onclick="pw(this)"><div class="wot">General / Broad</div><div class="wos">Max SEO reach</div></div>';
-}
-
-// ─── PREVIEW (LOCAL - no API) ─────────────────────────
-function openDynPreview(idx) {
-  var blog = brandContent.queue[idx]; if (!blog) return;
-  var brand = detectedBrand.name, industry = detectedBrand.industry;
-  document.getElementById('pm-ttl').textContent = blog.title.length > 55 ? blog.title.substring(0,55) + '\u2026' : blog.title;
-  document.getElementById('pm-pills').innerHTML = '<span class="bpill bpg">SERP '+blog.serp+'/100</span><span class="bpill bpb">AEO '+(blog.serp-3)+'/100</span><span class="bpill bpv">GEO '+(blog.serp-6)+'/100</span>';
-  document.getElementById('pm-bd').innerHTML = '<div class="bmeta"><span>'+esc(brand)+' Blog</span><span>April 2026</span><span>~10 min read</span><span>'+esc(industry)+'</span></div>' + generateBlogArticle(blog.title, brand, industry) + '<div class="bcta"><div><div class="bcta-t">Want more content like this?</div><div class="bcta-s">INK generates 5 SERP-optimised blogs for '+esc(brand)+' every morning.</div></div></div>';
+// ═══════════════════════════════════════════════════════
+// BLOG PREVIEW - OpenAI if key exists, else local
+// ═══════════════════════════════════════════════════════
+async function openDynPreview(idx){
+  var blog=brandContent.queue[idx];if(!blog)return;
+  document.getElementById('pm-ttl').textContent=blog.title;
+  document.getElementById('pm-pills').innerHTML='<span class="bpill bpg">SERP '+blog.serp+'</span><span class="bpill bpb">AEO '+(blog.serp-3)+'</span><span class="bpill bpv">GEO '+(blog.serp-6)+'</span>';
   document.getElementById('prev-modal').classList.add('show');
-}
-function copyPreviewMD() { var bd = document.getElementById('pm-bd'); if(bd) navigator.clipboard.writeText(bd.innerText).then(function(){showToast('Copied to clipboard','success');}); }
-
-// ─── BRAND PROFILE (LOCAL) ────────────────────────────
-function ensureBrandProfile() {
-  if (brandProfileLoaded) return;
-  brandProfileLoaded = true;
-  var brand = detectedBrand.name, domain = detectedBrand.domain, industry = detectedBrand.industry;
-  if (!brand) { ['brand-team-content','brand-voice-content','brand-products-content'].forEach(function(id){document.getElementById(id).innerHTML='<div style="font-size:12px;color:var(--t3);padding:8px 0">Complete onboarding first.</div>';}); return; }
-  var data = getIndustryData(industry);
-  // Prefer brand-specific team/products from BRANDS database over generic industry data
-  var brandKey = brand.toLowerCase().replace(/[^a-z0-9]/g,'');
-  var brandDB = BRANDS[brandKey];
-  var teamData = (brandDB && brandDB.team) ? brandDB.team : data.team;
-  var productData = (brandDB && brandDB.products) ? brandDB.products : data.products;
-
-  // Hero
-  document.getElementById('brand-pg-title').textContent = 'Brand profile - ' + brand;
-  document.getElementById('brand-pg-sub').textContent = 'How INK understands ' + brand;
-  var heroIco = document.getElementById('bh-ico-el');
-  if (domain) heroIco.innerHTML = '<img src="https://logo.clearbit.com/'+domain+'" style="width:100%;height:100%;object-fit:contain;padding:4px" onerror="this.src=\'https://www.google.com/s2/favicons?domain='+domain+'&sz=64\';this.style.padding=\'0\'">';
-  document.getElementById('bh-name-el').textContent = brand;
-  document.getElementById('bh-pos-el').textContent = detectedBrand.description || 'Leading ' + (industry || 'technology') + ' company.';
-  document.getElementById('bh-tags-el').innerHTML = [industry||'Technology','SERP Content','Blog Strategy','SEO Optimised'].map(function(t){return '<span class="bh-tag">'+t+'</span>';}).join('');
-
-  // Team
-  var tc = document.getElementById('brand-team-content');
-  tc.innerHTML = '<div class="g2">' + teamData.map(function(m) {
-    var init = m.name.split(' ').map(function(w){return w.charAt(0).toUpperCase();}).slice(0,2).join('');
-    return '<div class="founder-card"><div style="display:flex;align-items:flex-start;gap:12px"><div class="fc-av">'+init+'</div><div style="flex:1"><div class="fc-nm">'+esc(m.name)+'</div><div class="fc-role">'+esc(m.role)+'</div><div class="fc-bio">'+esc(fillTemplate(m.bio,{industry:industry,brand:brand}))+'</div></div></div></div>';
-  }).join('') + '</div>';
-
-  // Voice
-  document.getElementById('brand-voice-content').innerHTML = data.voice.map(function(p) {
-    return '<div class="ethos-item"><div class="ei-t">'+esc(p.title)+'</div><div class="ei-s">'+esc(fillTemplate(p.body,{industry:industry,brand:brand}))+'</div></div>';
-  }).join('');
-
-  // Products
-  document.getElementById('brand-products-content').innerHTML = '<div class="module-grid">' + productData.map(function(p) {
-    return '<div class="module-card"><div class="mc-ico" style="background:var(--ab);font-size:20px">'+p.emoji+'</div><div class="mc-t">'+esc(fillTemplate(p.name,{industry:industry,brand:brand}))+'</div><div class="mc-s">'+esc(fillTemplate(p.desc,{industry:industry,brand:brand}))+'</div></div>';
-  }).join('') + '</div>';
-
-  // Keywords
-  var kws = JSON.parse(JSON.stringify(data.keywords));
-  var vars = {industry:(industry||'technology').toLowerCase(), brand:brand.toLowerCase()};
-  kws.primary = kws.primary.map(function(k){return fillTemplate(k,vars);});
-  kws.supporting = kws.supporting.map(function(k){return fillTemplate(k,vars);});
-  kws.longtail = (data.keywords.longtail||[]).map(function(k){return fillTemplate(k,vars);});
-  populateKeywords(kws, kws.longtail, brand);
-}
-
-function populateKeywords(keywords, longtail, brand) {
-  document.getElementById('kw-brand-label').textContent = brand;
-  document.getElementById('kw-primary-list').innerHTML = keywords.primary.map(function(k){return '<span class="kw on">'+esc(k)+'</span>';}).join('');
-  document.getElementById('kw-supporting-list').innerHTML = keywords.supporting.map(function(k){return '<span class="kw">'+esc(k)+'</span>';}).join('');
-  document.getElementById('kw-longtail-list').innerHTML = (longtail||[]).map(function(k){return '<span class="kw on">'+esc(k)+'</span>';}).join('');
-}
-function addCustomKw(inp) {
-  var val = inp.value.trim(); if (!val) return;
-  var list = document.getElementById('kw-primary-list');
-  var sp = document.createElement('span'); sp.className = 'kw on'; sp.textContent = val;
-  sp.onclick = function(){list.removeChild(sp);}; list.appendChild(sp); inp.value = '';
-}
-
-function populateSources(brand, domain, linkedin) {
-  var sl = document.getElementById('sources-list');
-  var sources = [];
-  if (domain) {
-    sources.push({d:domain,name:domain,desc:'website \u00b7 full crawl',st:'live'});
-    sources.push({d:domain,name:domain+'/blog',desc:'blog section \u00b7 indexed',st:'live'});
+  var key=getOpenAIKey();
+  if(key){
+    document.getElementById('pm-bd').innerHTML='<div class="bmeta"><span>'+esc(DB.name)+'</span><span>'+esc(DB.industry)+'</span><span>Writing via GPT...</span></div><div style="text-align:center;padding:32px;color:var(--t3);font-family:var(--M);font-size:12px"><div style="display:inline-flex;align-items:center;gap:7px"><div style="width:14px;height:14px;border:2px solid rgba(30,94,243,.2);border-top-color:var(--A);border-radius:50%;animation:spin .7s linear infinite"></div>GPT-4o-mini writing full article...</div></div>';
+    try{
+      var prompt='Write a 1800-2500 word SEO blog post for '+DB.name+' ('+DB.industry+') titled: "'+blog.title+'". Include: H1 title, compelling intro, 4-6 H2 sections with real statistics, practical advice, 2 FAQ blocks at the end. Use HTML tags: <h1>, <h2>, <p>, <ul>, <li>, <strong>. Start with <h1>. Make it genuinely insightful and specific to '+DB.industry+'.';
+      var text=await callOpenAI(prompt,3000);
+      document.getElementById('pm-bd').innerHTML='<div class="bmeta"><span>'+esc(DB.name)+'</span><span>'+esc(DB.industry)+'</span><span>~10 min</span><span>GPT-4o-mini</span></div><div class="bcont">'+text+'</div>';
+    }catch(e){
+      document.getElementById('pm-bd').innerHTML='<div style="padding:16px;font-size:12px;color:var(--Y)">OpenAI error: '+esc(e.message)+'</div><div class="bcont">'+genArticle(blog.title,DB.name,DB.industry,idx)+'</div>';
+    }
+  }else{
+    document.getElementById('pm-bd').innerHTML='<div class="bmeta"><span>'+esc(DB.name)+'</span><span>'+esc(DB.industry)+'</span><span>~10 min</span><span style="color:var(--Y)">Add OpenAI key in Settings for AI-written content</span></div><div class="bcont">'+genArticle(blog.title,DB.name,DB.industry,idx)+'</div>';
   }
-  if (linkedin) sources.push({d:'linkedin.com',name:brand+' on LinkedIn',desc:linkedin.replace('https://',''),st:'live'});
-  sources.push({d:'instagram.com',name:brand+' on Instagram',desc:'Connect to index visual content',st:'connect'});
-  sources.push({d:'youtube.com',name:brand+' on YouTube',desc:'Connect to index video content',st:'connect'});
-  sl.innerHTML = sources.map(function(s) {
-    return '<div class="srow"><div class="sico" style="overflow:hidden;background:var(--s3)"><img src="https://www.google.com/s2/favicons?domain='+s.d+'&sz=32" style="width:100%;height:100%;object-fit:cover" onerror="this.parentNode.textContent=\''+s.d.charAt(0).toUpperCase()+'\'"></div><div style="flex:1"><div class="snm">'+esc(s.name)+'</div><div class="surl">'+esc(s.desc)+'</div></div><span class="pill '+(s.st==='live'?'pll':'pls')+'">'+(s.st==='connect'?'+ connect':s.st)+'</span></div>';
-  }).join('');
 }
-function addSourcePrompt() {
-  var url = prompt('Enter a source URL to add:'); if (!url) return;
-  var sl = document.getElementById('sources-list');
-  var d = url.replace(/https?:\/\//,'').replace(/\/.*/,'');
-  var row = document.createElement('div'); row.className = 'srow';
-  row.innerHTML = '<div class="sico" style="overflow:hidden"><img src="https://www.google.com/s2/favicons?domain='+d+'&sz=32" style="width:100%;height:100%;object-fit:cover"></div><div style="flex:1"><div class="snm">'+esc(url)+'</div><div class="surl">custom source \u00b7 queued</div></div><span class="pill pls">queued</span>';
-  sl.appendChild(row);
-}
+function copyPreviewMD(){var bd=document.getElementById('pm-bd');if(bd)navigator.clipboard.writeText(bd.innerText).then(function(){showToast('Copied','success');});}
 
-function populateSettings(brand, domain, industry) {
-  document.getElementById('settings-brand').value = brand;
-  document.getElementById('settings-url').value = domain ? 'https://' + domain : '';
-  document.getElementById('settings-icp').value = (detectedBrand.icpSuggestions||[]).slice(0,2).join(', ');
-  document.getElementById('settings-industry').value = industry;
+// ═══════════════════════════════════════════════════════
+// BRAND PROFILE
+// ═══════════════════════════════════════════════════════
+function ensureBrandProfile(){
+  if(brandProfileLoaded)return;brandProfileLoaded=true;
+  if(!DB.name){['brand-team-content','brand-voice-content','brand-products-content'].forEach(function(id){document.getElementById(id).innerHTML='<div style="font-size:12px;color:var(--t3);padding:8px 0">Complete onboarding first.</div>';});return;}
+  document.getElementById('brand-pg-title').textContent='Brand profile - '+DB.name;
+  document.getElementById('brand-pg-sub').textContent='Scraped from Wikidata + Clearbit + Wikipedia';
+  var hi=document.getElementById('bh-ico-el');if(DB.domain)hi.innerHTML='<img src="https://logo.clearbit.com/'+DB.domain+'" style="width:100%;height:100%;object-fit:contain;padding:4px" onerror="this.src=\'https://www.google.com/s2/favicons?domain='+DB.domain+'&sz=64\';this.style.padding=\'0\'">';
+  document.getElementById('bh-name-el').textContent=DB.name;
+  document.getElementById('bh-pos-el').textContent=DB.desc;
+  document.getElementById('bh-tags-el').innerHTML=[DB.industry||'Technology','SERP Content','Blog Strategy'].map(function(t){return '<span class="bh-tag">'+esc(t)+'</span>';}).join('');
+  // Team
+  var tc=document.getElementById('brand-team-content');
+  if(DB.team&&DB.team.length){tc.innerHTML='<div class="g2">'+DB.team.map(function(m){var init=m.name.split(' ').map(function(w){return w.charAt(0).toUpperCase();}).slice(0,2).join('');return '<div class="founder-card"><div style="display:flex;align-items:flex-start;gap:12px"><div class="fc-av">'+init+'</div><div style="flex:1"><div class="fc-nm">'+esc(m.name)+'</div><div class="fc-role">'+esc(m.role)+'</div><div class="fc-bio">'+esc(m.bio||'')+'</div></div></div></div>';}).join('')+'</div>';}
+  else{tc.innerHTML='<div style="font-size:12px;color:var(--t3);padding:8px 0">No team data found on Wikidata. <strong>Download and open in Chrome</strong> for live scraping, or visit <a href="https://'+esc(DB.domain)+'" target="_blank" style="color:var(--A)">'+esc(DB.domain)+'</a>.</div>';}
+  // Voice
+  document.getElementById('brand-voice-content').innerHTML=(DB.voice||[]).map(function(p){return '<div class="ethos-item"><div class="ei-t">'+esc(p.t)+'</div><div class="ei-s">'+esc(p.b)+'</div></div>';}).join('');
+  // Products
+  var pc=document.getElementById('brand-products-content');
+  if(DB.products&&DB.products.length){pc.innerHTML='<div class="module-grid">'+DB.products.map(function(p){return '<div class="module-card"><div class="mc-ico" style="background:var(--ab);font-size:20px">'+(p.emoji||'\ud83d\udce6')+'</div><div class="mc-t">'+esc(p.name)+'</div><div class="mc-s">'+esc(p.desc||'')+'</div></div>';}).join('')+'</div>';}
+  else{pc.innerHTML='<div style="font-size:12px;color:var(--t3);padding:8px 0">No products found on Wikidata. Download and open in Chrome for live data.</div>';}
+  // Keywords
+  document.getElementById('kw-brand-label').textContent=DB.name;
+  var kwp=DB.industry?[DB.industry.toLowerCase(),DB.name.toLowerCase()+' review',DB.name.toLowerCase()+' pricing',DB.name.toLowerCase()+' features']:[];
+  document.getElementById('kw-primary-list').innerHTML=kwp.map(function(k){return '<span class="kw on">'+esc(k)+'</span>';}).join('');
+  document.getElementById('kw-supporting-list').innerHTML=(DB.industry?[DB.industry.toLowerCase()+' 2026','best '+DB.industry.toLowerCase(),DB.name.toLowerCase()+' vs',DB.name.toLowerCase()+' alternatives']:[]).map(function(k){return '<span class="kw">'+esc(k)+'</span>';}).join('');
+  document.getElementById('kw-longtail-list').innerHTML=(DB.industry?['best '+DB.industry.toLowerCase()+' solutions 2026',DB.name.toLowerCase()+' complete guide',DB.name.toLowerCase()+' for '+DB.icp[0].toLowerCase()]:[]).map(function(k){return '<span class="kw on">'+esc(k)+'</span>';}).join('');
 }
+function addCustomKw(inp){var val=inp.value.trim();if(!val)return;var list=document.getElementById('kw-primary-list');var sp=document.createElement('span');sp.className='kw on';sp.textContent=val;sp.onclick=function(){list.removeChild(sp);};list.appendChild(sp);inp.value='';}
+function refreshBrandProfile(){brandProfileLoaded=false;var sp='<div style="text-align:center;padding:18px 0;font-size:12px;color:var(--t3);font-family:var(--M)"><div style="display:inline-flex;align-items:center;gap:6px"><div style="width:12px;height:12px;border:2px solid rgba(30,94,243,.2);border-top-color:var(--A);border-radius:50%;animation:spin .7s linear infinite"></div>Re-scraping...</div></div>';['brand-team-content','brand-voice-content','brand-products-content'].forEach(function(id){document.getElementById(id).innerHTML=sp;});searchBrand(DB.name).then(function(){brandProfileLoaded=false;ensureBrandProfile();});}
+function populateSources(){var sl=document.getElementById('sources-list');var src=[];if(DB.domain)src.push({d:DB.domain,n:DB.domain,desc:'Clearbit detected',st:'live'});if(DB.domain)src.push({d:DB.domain,n:DB.domain+'/blog',desc:'Blog section',st:'live'});if(DB.linkedin)src.push({d:'linkedin.com',n:DB.name+' LinkedIn',desc:DB.linkedin.replace('https://',''),st:'live'});if(DB.wikidataId)src.push({d:'wikidata.org',n:'Wikidata '+DB.wikidataId,desc:'Structured company data',st:'live'});src.push({d:'instagram.com',n:DB.name+' Instagram',desc:'Connect to index',st:'connect'});sl.innerHTML=src.map(function(s){return '<div class="srow"><div class="sico" style="overflow:hidden;background:var(--s3)"><img src="https://www.google.com/s2/favicons?domain='+s.d+'&sz=32" style="width:100%;height:100%;object-fit:cover" onerror="this.parentNode.textContent=\''+s.d.charAt(0).toUpperCase()+'\'"></div><div style="flex:1"><div class="snm">'+esc(s.n)+'</div><div class="surl">'+esc(s.desc)+'</div></div><span class="pill '+(s.st==='live'?'pll':'pls')+'">'+(s.st==='connect'?'+ connect':s.st)+'</span></div>';}).join('');}
+function addSourcePrompt(){var url=prompt('Enter source URL:');if(!url)return;var sl=document.getElementById('sources-list');var d=url.replace(/https?:\/\//,'').replace(/\/.*/,'');var row=document.createElement('div');row.className='srow';row.innerHTML='<div class="sico" style="overflow:hidden"><img src="https://www.google.com/s2/favicons?domain='+d+'&sz=32" style="width:100%;height:100%;object-fit:cover"></div><div style="flex:1"><div class="snm">'+esc(url)+'</div><div class="surl">custom</div></div><span class="pill pls">queued</span>';sl.appendChild(row);}
+function populateSettings(){document.getElementById('settings-brand').value=DB.name;document.getElementById('settings-url').value=DB.domain?'https://'+DB.domain:'';document.getElementById('settings-icp').value=(DB.icp||[]).slice(0,2).join(', ');document.getElementById('settings-industry').value=DB.industry;var saved=localStorage.getItem('ink_openai_key');if(saved){var inp=document.getElementById('openai-key');if(inp)inp.value=saved;}}
 
-function refreshBrandProfile() {
-  brandProfileLoaded = false;
-  var spinner = '<div style="text-align:center;padding:18px 0;font-size:12px;color:var(--t3);font-family:var(--M)"><div style="display:inline-flex;align-items:center;gap:6px"><div style="width:12px;height:12px;border:2px solid rgba(30,94,243,.2);border-top-color:var(--A);border-radius:50%;animation:spin .7s linear infinite"></div>Analysing...</div></div>';
-  ['brand-team-content','brand-voice-content','brand-products-content'].forEach(function(id){document.getElementById(id).innerHTML=spinner;});
-  setTimeout(ensureBrandProfile, 800);
-}
-
-// ─── NAV ──────────────────────────────────────────────
-function toggleSB() { sbOpen = !sbOpen; document.getElementById('layout').classList.toggle('sbc', !sbOpen); }
-function nav(pg) {
-  closeAll();
-  document.querySelectorAll('.pg').forEach(function(p){p.classList.remove('on');});
-  document.querySelectorAll('.ni').forEach(function(n){n.classList.remove('on');});
-  var p = document.getElementById('pg-'+pg); if(p)p.classList.add('on');
-  var n = document.getElementById('ni-'+pg); if(n)n.classList.add('on');
-  document.getElementById('main').scrollTop = 0;
-  if (pg==='dashboard') setTimeout(animScan,120);
-  if (pg==='queue') setTimeout(animScoreBars,120);
-  if (pg==='brand') setTimeout(ensureBrandProfile,100);
-  if (pg==='competitor') setTimeout(loadCompetitorSuggestions,200);
-}
+// ═══════════════════════════════════════════════════════
+// NAV / PANELS / ALL UI
+// ═══════════════════════════════════════════════════════
+function toggleSB(){sbOpen=!sbOpen;document.getElementById('layout').classList.toggle('sbc',!sbOpen);}
+function nav(pg){closeAll();document.querySelectorAll('.pg').forEach(function(p){p.classList.remove('on');});document.querySelectorAll('.ni').forEach(function(n){n.classList.remove('on');});var p=document.getElementById('pg-'+pg);if(p)p.classList.add('on');var n=document.getElementById('ni-'+pg);if(n)n.classList.add('on');document.getElementById('main').scrollTop=0;if(pg==='dashboard')setTimeout(animScan,120);if(pg==='queue')setTimeout(animScoreBars,120);if(pg==='brand')setTimeout(ensureBrandProfile,100);if(pg==='competitor')setTimeout(loadCompSuggestions,200);}
 function animScan(){document.querySelectorAll('.scb[data-w]').forEach(function(el){el.style.width='0%';setTimeout(function(){el.style.width=el.dataset.w+'%';},60);});}
 function animScoreBars(){document.querySelectorAll('.sfill[data-w]').forEach(function(el){el.style.width='0%';setTimeout(function(){el.style.width=el.dataset.w+'%';},80);});}
-
-// ─── RESCAN ───────────────────────────────────────────
-function startRescan() {
-  if (rescanning) return; rescanning = true;
-  var btn = document.getElementById('rescan-btn');
-  btn.classList.add('scanning'); btn.innerHTML = '<div class="rspin"></div>Scanning...';
-  document.querySelectorAll('#scan-rows .scb').forEach(function(el){el.style.width='0%';});
-  var rows = document.querySelectorAll('#scan-rows .scb'), i = 0;
-  function next() {
-    if (i < rows.length) { setTimeout(function(){rows[i].style.width=rows[i].dataset.w+'%';i++;next();},550); }
-    else { setTimeout(function(){rescanning=false;btn.classList.remove('scanning');btn.innerHTML='<svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9.5 5.5a4 4 0 11-1.2-2.9"/><path d="M9.5 1.5v2.5H7"/></svg>Rescan now';showToast('Scan complete','success');},400); }
-  }
-  next();
-}
-
-// ─── PANELS ───────────────────────────────────────────
+function startRescan(){if(rescanning)return;rescanning=true;var btn=document.getElementById('rescan-btn');btn.classList.add('scanning');btn.innerHTML='<div class="rspin"></div>Scanning...';document.querySelectorAll('#scan-rows .scb').forEach(function(el){el.style.width='0%';});var rows=document.querySelectorAll('#scan-rows .scb'),i=0;function next(){if(i<rows.length){setTimeout(function(){rows[i].style.width=rows[i].dataset.w+'%';i++;next();},550);}else{setTimeout(function(){rescanning=false;btn.classList.remove('scanning');btn.innerHTML='<svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9.5 5.5a4 4 0 11-1.2-2.9"/><path d="M9.5 1.5v2.5H7"/></svg>Rescan now';showToast('Done','success');},400);}}next();}
 function toggleNotif(e){e.stopPropagation();document.getElementById('profile-panel').classList.remove('show');var np=document.getElementById('notif-panel'),bd=document.getElementById('backdrop');np.classList.toggle('show');bd.classList.toggle('show',np.classList.contains('show'));if(np.classList.contains('show'))document.getElementById('ndot').style.display='none';}
 function toggleProfile(e){e.stopPropagation();document.getElementById('notif-panel').classList.remove('show');var pp=document.getElementById('profile-panel'),bd=document.getElementById('backdrop');pp.classList.toggle('show');bd.classList.toggle('show',pp.classList.contains('show'));}
-function updateProfile(){
-  var nm=document.getElementById('pp-name').value||'User';
-  document.getElementById('pp-nm-d').textContent=nm;
-  document.getElementById('pp-role-d').textContent=(document.getElementById('pp-role-inp').value||'')+(detectedBrand.name?' \u00b7 '+detectedBrand.name:'');
-  var init=nm.split(' ').map(function(w){return w.charAt(0).toUpperCase();}).slice(0,2).join('');
-  document.getElementById('pp-av2').textContent=init;
-  document.getElementById('av-btn').textContent=init;
-}
+function updateProfile(){var nm=document.getElementById('pp-name').value||'User';document.getElementById('pp-nm-d').textContent=nm;document.getElementById('pp-role-d').textContent=(document.getElementById('pp-role-inp').value||'')+' \u00b7 '+(DB.name||'INK');var init=nm.split(' ').map(function(w){return w.charAt(0).toUpperCase();}).slice(0,2).join('');document.getElementById('pp-av2').textContent=init;document.getElementById('av-btn').textContent=init;}
 function setAvCol(el,col){document.querySelectorAll('.pp-col').forEach(function(c){c.classList.remove('sel');});el.classList.add('sel');document.getElementById('pp-av2').style.background=col;document.getElementById('av-btn').style.background=col;}
-function saveProfile(){closeAll();showToast('Profile saved','success');}
+function saveProfile(){closeAll();showToast('Saved','success');}
 function clearNotifs(){document.getElementById('ndot').style.display='none';closeAll();}
 function closeAll(){document.getElementById('notif-panel').classList.remove('show');document.getElementById('profile-panel').classList.remove('show');document.getElementById('backdrop').classList.remove('show');}
 function openChangelog(){closeAll();document.getElementById('changelog-modal').classList.add('show');}
 function openHelp(){closeAll();document.getElementById('help-modal').classList.add('show');}
 function closeModal(id,e){if(!e||e.target===document.getElementById(id))document.getElementById(id).classList.remove('show');}
+function signOut(){closeAll();brandProfileLoaded=false;compSugLoaded=false;brandContent={queue:[],trends:[],loaded:false};DB={name:'',domain:'',linkedin:'',industry:'',desc:'',icp:[],found:false,team:[],products:[],voice:[],kw:{p:[],s:[]},lt:[],comps:[],blogUrl:'',wikidataId:''};competitors=[];document.getElementById('app').classList.remove('show');document.getElementById('onboard').classList.add('show');goOB(1);['i-brand','i-url','i-li'].forEach(function(id){document.getElementById(id).value='';});document.getElementById('brand-result').style.display='none';document.getElementById('brand-notfound').style.display='none';document.getElementById('brand-check-ico').style.display='none';ob1Changed();document.getElementById('ws-nm').style.display='none';document.getElementById('tb-brand-div').style.display='none';document.getElementById('tb-brand-ico').style.display='none';document.getElementById('ws-nm-sb').textContent='Your Brand';document.getElementById('ws-av-letter').textContent='?';document.getElementById('ws-av-letter').style.display='block';document.getElementById('ws-av-img').style.display='none';document.getElementById('av-btn').textContent='?';document.getElementById('pp-av2').textContent='?';document.getElementById('pp-nm-d').textContent='User';document.getElementById('pp-name').value='';document.getElementById('pp-role-inp').value='';document.querySelectorAll('.an-step').forEach(function(s){s.className='an-step';s.querySelector('.a-ico').innerHTML='<div class="iw"></div>';});['settings-brand','settings-url','settings-icp','settings-industry'].forEach(function(id){document.getElementById(id).value='';});document.getElementById('comp-list').innerHTML='';document.getElementById('comp-output').innerHTML='';document.getElementById('run-comp-btn').style.display='none';document.getElementById('comp-hint').textContent='Add a competitor.';document.getElementById('comp-suggestions-card').style.display='none';}
 
-// ─── SIGN OUT ─────────────────────────────────────────
-function signOut() {
-  closeAll();
-  brandProfileLoaded = false; compSuggestionsLoaded = false;
-  brandContent = {queue:[],trends:[],loaded:false};
-  detectedBrand = {name:'',domain:'',linkedin:'',industry:'',description:'',icpSuggestions:[],found:false};
-  competitors = [];
-  document.getElementById('app').classList.remove('show');
-  document.getElementById('onboard').classList.add('show');
-  goOB(1);
-  ['i-brand','i-url','i-li'].forEach(function(id){document.getElementById(id).value='';});
-  document.getElementById('brand-result').style.display='none';
-  document.getElementById('brand-notfound').style.display='none';
-  document.getElementById('brand-check-ico').style.display='none';
-  ob1Changed();
-  document.getElementById('ws-nm').style.display='none';
-  document.getElementById('tb-brand-div').style.display='none';
-  document.getElementById('tb-brand-ico').style.display='none';
-  document.getElementById('ws-nm-sb').textContent='Your Brand';
-  document.getElementById('ws-av-letter').textContent='?';
-  document.getElementById('ws-av-letter').style.display='block';
-  document.getElementById('ws-av-img').style.display='none';
-  document.getElementById('av-btn').textContent='?';
-  document.getElementById('pp-av2').textContent='?';
-  document.getElementById('pp-nm-d').textContent='User';
-  document.getElementById('pp-name').value='';
-  document.getElementById('pp-role-inp').value='';
-  document.querySelectorAll('.an-step').forEach(function(s){s.className='an-step';s.querySelector('.a-ico').innerHTML='<div class="iw"></div>';});
-  ['settings-brand','settings-url','settings-icp','settings-industry'].forEach(function(id){document.getElementById(id).value='';});
-  document.getElementById('comp-list').innerHTML='';
-  document.getElementById('comp-output').innerHTML='';
-  document.getElementById('run-comp-btn').style.display='none';
-  document.getElementById('comp-hint').textContent='Add at least one competitor domain to start.';
-  document.getElementById('comp-suggestions-card').style.display='none';
-}
-
-// ─── WOD ──────────────────────────────────────────────
-var wizMeta=[
-  {tg:'Step 1 of 4 \u00b7 Audience',ti:'Who is this blog for?',su:'INK adjusts depth, jargon, and framing based on your audience.'},
-  {tg:'Step 2 of 4 \u00b7 Intent',ti:'What should this blog achieve?',su:'INK adjusts CTA, structure, and keyword strategy.'},
-  {tg:'Step 3 of 4 \u00b7 Format',ti:'What angle or format works best?',su:'Pick the format that best matches your goal.'},
-  {tg:'Step 4 of 4 \u00b7 Platform',ti:'Where will this be published?',su:'INK applies platform-specific optimisation.'}
-];
+// ═══════════════════════════════════════════════════════
+// WOD
+// ═══════════════════════════════════════════════════════
+var wizMeta=[{tg:'Step 1 of 4 \u00b7 Audience',ti:'Who is this for?',su:'Adjusts depth and framing.'},{tg:'Step 2 of 4 \u00b7 Intent',ti:'What should this achieve?',su:'Adjusts CTA and keywords.'},{tg:'Step 3 of 4 \u00b7 Format',ti:'What format?',su:'Pick for your goal.'},{tg:'Step 4 of 4 \u00b7 Platform',ti:'Where published?',su:'Platform optimisation.'}];
 function startWOD(){var t=document.getElementById('wod-inp').value.trim();if(!t){document.getElementById('wod-inp').focus();return;}wodTopic=t;wizN=1;var wc=document.getElementById('wiz-card');wc.classList.add('show');wc.style.display='block';updateWiz();wc.scrollIntoView({behavior:'smooth',block:'nearest'});}
 function resetWOD(){document.getElementById('wiz-card').classList.remove('show');document.getElementById('wiz-card').style.display='none';['ins-panel','seo-panel','blog-p'].forEach(function(id){document.getElementById(id).classList.remove('show');});document.getElementById('gen-s').classList.remove('show');document.getElementById('wod-inp').value='';wizN=1;}
 function updateWiz(){var m=wizMeta[wizN-1];document.getElementById('wiztg').textContent=m.tg;document.getElementById('wizti').textContent=m.ti;document.getElementById('wizsu').textContent=m.su;document.getElementById('wizpf').style.width=(wizN*25)+'%';document.querySelectorAll('.wizpn').forEach(function(p){p.classList.remove('on');});document.getElementById('wp'+wizN).classList.add('on');document.getElementById('wizb').style.visibility=wizN>1?'visible':'hidden';var nx=document.getElementById('wizn');if(wizN===4){nx.textContent='Run Research & SERP Scan \u2192';nx.onclick=runGen;}else{nx.textContent='Next \u2192';nx.onclick=function(){wm(1);};}}
 function wm(d){wizN=Math.max(1,Math.min(4,wizN+d));updateWiz();}
 function pw(el){el.parentElement.querySelectorAll('.wo').forEach(function(o){o.classList.remove('sel');});el.classList.add('sel');}
-
-function getTD(topic){
-  var brand=detectedBrand.name||'',industry=detectedBrand.industry||'';
-  return{
-    tr:[topic+' 2026',topic+' guide',topic+' best practices',brand+' '+topic,industry+' '+topic],
-    qs:['What is '+topic+'?','How does '+topic+' work?','Why does '+topic+' matter?','How to get started with '+topic+'?','Best '+topic+' examples 2026?'],
-    lt:[topic+' complete guide 2026',topic+' for '+industry,topic+' step by step',brand+' approach to '+topic,'best '+topic+' strategies'],
-    kws:[{k:topic,v:'4,200/mo',d:'Medium',kd:'42',c:'$3.80'},{k:topic+' guide',v:'1,800/mo',d:'Easy',kd:'28',c:'$2.40'},{k:topic+' 2026',v:'2,100/mo',d:'Easy',kd:'24',c:'$3.10'},{k:'best '+topic,v:'3,400/mo',d:'Medium',kd:'45',c:'$4.20'},{k:topic+' for '+industry,v:'900/mo',d:'Easy',kd:'18',c:'$5.50'},{k:brand+' '+topic,v:'600/mo',d:'Easy',kd:'12',c:'$6.80'}],
-    paa:['What is '+topic+'?','How does '+topic+' help?','Top '+topic+' strategies?','How to measure success?','What does '+brand+' recommend?'],
-    sc:{serp:Math.floor(78+Math.random()*18),seo:Math.floor(80+Math.random()*15),aeo:Math.floor(75+Math.random()*18),geo:Math.floor(70+Math.random()*20),kd:Math.floor(22+Math.random()*28)}
-  };
-}
-
-function runGen(){
-  document.getElementById('wiz-card').style.display='none';
-  ['ins-panel','seo-panel','blog-p'].forEach(function(id){document.getElementById(id).classList.remove('show');});
-  var gs=document.getElementById('gen-s');gs.classList.add('show');
-  var steps=['Fetching Google Trends live data','Running AnswerThePublic-style scan','Scanning SERP keyword landscape','Checking top 10 ranking competitors','Reading your brand voice & tone','Applying SERP structure templates','Writing your rank-optimised blog'];
-  document.getElementById('gen-ls').innerHTML=steps.map(function(s,i){return'<div class="gi" id="gi'+i+'"><div class="giico"><div class="giw"></div></div>'+s+'</div>';}).join('');
-  var i=0;
-  function tick(){
-    if(i>0){var p=document.getElementById('gi'+(i-1));p.className='gi ok';p.querySelector('.giico').innerHTML='<span class="gid">\u2713</span>';}
-    if(i<steps.length){var c=document.getElementById('gi'+i);c.className='gi go';c.querySelector('.giico').innerHTML='<div class="gis"></div>';document.getElementById('gen-tl').textContent=steps[i];i++;setTimeout(tick,i===steps.length?800:420);}
-    else{document.getElementById('gi'+(steps.length-1)).className='gi ok';document.getElementById('gi'+(steps.length-1)).querySelector('.giico').innerHTML='<span class="gid">\u2713</span>';setTimeout(function(){gs.classList.remove('show');var td=getTD(wodTopic);showIns(td);showSEO(td);showWODBlog(td);},300);}
-  }
-  tick();
-}
-function showIns(td){document.getElementById('ins-panel').classList.add('show');document.getElementById('ins-tr').innerHTML=td.tr.map(function(t){return'<span class="ic" onclick="this.classList.toggle(\'on\')">'+esc(t)+'</span>';}).join('');document.getElementById('ins-paa').innerHTML=td.qs.map(function(q){return'<div class="paa" onclick="this.classList.toggle(\'on\')"><span>'+esc(q)+'</span><span class="paap">+</span></div>';}).join('');document.getElementById('ins-lt').innerHTML=td.lt.map(function(t){return'<span class="ic" onclick="this.classList.toggle(\'on\')">'+esc(t)+'</span>';}).join('');}
-function showSEO(td){
-  document.getElementById('seo-panel').classList.add('show');var s=td.sc;
-  setTimeout(function(){var r=document.getElementById('seo-ring');r.style.strokeDashoffset=201*(1-s.serp/100);r.style.stroke=s.serp>=85?'var(--G)':s.serp>=70?'var(--Y)':'var(--R)';document.getElementById('seo-n').textContent=s.serp;},200);
-  document.getElementById('seo-bd').innerHTML=[{l:'SEO readiness',v:s.seo,c:'var(--G)'},{l:'AEO / Answer Engine',v:s.aeo,c:'var(--A)'},{l:'GEO / Gen Engine',v:s.geo,c:'var(--V)'},{l:'Avg keyword difficulty',v:100-s.kd,c:'var(--Y)',lbl:s.kd+' KD'}].map(function(b){return'<div class="rbd"><div class="rbdl">'+b.l+'</div><div class="rbdt"><div class="rbdf" style="width:0%;background:'+b.c+'" data-v="'+b.v+'"></div></div><div class="rbdv">'+(b.lbl||b.v)+'</div></div>';}).join('');
-  setTimeout(function(){document.querySelectorAll('.rbdf[data-v]').forEach(function(el){el.style.width=el.dataset.v+'%';});},300);
-  document.getElementById('kd-gr').innerHTML=td.kws.map(function(k){return'<div class="kdc"><div class="kdw">'+esc(k.k)+'</div><div class="kdps"><span class="kp kpv">'+k.v+'</span><span class="kp '+(parseInt(k.kd)<35?'kpe':'kph')+'">'+k.d+' '+k.kd+'</span><span class="kp kpc">'+k.c+' CPC</span></div></div>';}).join('');
-  document.getElementById('serp-paa').innerHTML=td.paa.map(function(q){return'<div class="paa" onclick="this.classList.toggle(\'on\')">'+esc(q)+'<span class="paap">+</span></div>';}).join('');
-}
-function showWODBlog(td){
-  var p=document.getElementById('blog-p');p.classList.add('show');var s=td.sc;
-  document.getElementById('bppills').innerHTML='<span class="bpill bpg">SERP '+s.serp+'/100</span><span class="bpill bpb">AEO '+s.aeo+'/100</span><span class="bpill bpv">GEO '+s.geo+'/100</span>';
-  var brand=detectedBrand.name,industry=detectedBrand.industry;
-  document.getElementById('blog-bd').innerHTML='<div class="bmeta"><span>'+esc(brand)+' Blog</span><span>April 2026</span><span>~10 min read</span><span>'+esc(industry)+'</span></div>'+generateBlogArticle(wodTopic,brand,industry)+'<div class="bcta"><div><div class="bcta-t">Want more content like this?</div><div class="bcta-s">INK generates 5 SERP-optimised blogs for '+esc(brand)+' every morning.</div></div></div>';
-  p.scrollIntoView({behavior:'smooth',block:'start'});
-}
+function runGen(){document.getElementById('wiz-card').style.display='none';['ins-panel','seo-panel','blog-p'].forEach(function(id){document.getElementById(id).classList.remove('show');});var gs=document.getElementById('gen-s');gs.classList.add('show');var steps=['Google Trends','AnswerThePublic','SERP keywords','Competitor check','Brand voice','SERP templates','Writing blog'];document.getElementById('gen-ls').innerHTML=steps.map(function(s,i){return'<div class="gi" id="gi'+i+'"><div class="giico"><div class="giw"></div></div>'+s+'</div>';}).join('');var i=0;function tick(){if(i>0){document.getElementById('gi'+(i-1)).className='gi ok';document.getElementById('gi'+(i-1)).querySelector('.giico').innerHTML='<span class="gid">\u2713</span>';}if(i<steps.length){var c=document.getElementById('gi'+i);c.className='gi go';c.querySelector('.giico').innerHTML='<div class="gis"></div>';document.getElementById('gen-tl').textContent=steps[i];i++;setTimeout(tick,350);}else{document.getElementById('gi'+(steps.length-1)).className='gi ok';document.getElementById('gi'+(steps.length-1)).querySelector('.giico').innerHTML='<span class="gid">\u2713</span>';setTimeout(function(){gs.classList.remove('show');showResearch();showWODBlog();},250);}}tick();}
+function showResearch(){var brand=DB.name,ind=DB.industry;document.getElementById('ins-panel').classList.add('show');document.getElementById('ins-tr').innerHTML=[wodTopic+' 2026',wodTopic+' guide','best '+wodTopic,brand+' '+wodTopic,ind+' '+wodTopic].map(function(t){return '<span class="ic" onclick="this.classList.toggle(\'on\')">'+esc(t)+'</span>';}).join('');document.getElementById('ins-paa').innerHTML=['What is '+wodTopic+'?','How '+wodTopic+' works','Why '+wodTopic+' matters','Best strategies',brand+' approach'].map(function(q){return '<div class="paa" onclick="this.classList.toggle(\'on\')"><span>'+esc(q)+'</span><span class="paap">+</span></div>';}).join('');document.getElementById('ins-lt').innerHTML=[wodTopic+' guide 2026',wodTopic+' for '+ind,wodTopic+' tutorial',brand+' '+wodTopic,'best '+wodTopic+' 2026'].map(function(t){return '<span class="ic" onclick="this.classList.toggle(\'on\')">'+esc(t)+'</span>';}).join('');document.getElementById('seo-panel').classList.add('show');var sc={serp:rng(80,96),seo:rng(82,95),aeo:rng(76,93),geo:rng(72,90),kd:rng(24,48)};setTimeout(function(){var r=document.getElementById('seo-ring');r.style.strokeDashoffset=201*(1-sc.serp/100);r.style.stroke=sc.serp>=85?'var(--G)':'var(--Y)';document.getElementById('seo-n').textContent=sc.serp;},200);document.getElementById('seo-bd').innerHTML=[{l:'SEO',v:sc.seo,c:'var(--G)'},{l:'AEO',v:sc.aeo,c:'var(--A)'},{l:'GEO',v:sc.geo,c:'var(--V)'},{l:'KD',v:100-sc.kd,c:'var(--Y)',lbl:sc.kd}].map(function(b){return '<div class="rbd"><div class="rbdl">'+b.l+'</div><div class="rbdt"><div class="rbdf" style="width:0%;background:'+b.c+'" data-v="'+b.v+'"></div></div><div class="rbdv">'+(b.lbl||b.v)+'</div></div>';}).join('');setTimeout(function(){document.querySelectorAll('.rbdf[data-v]').forEach(function(el){el.style.width=el.dataset.v+'%';});},300);document.getElementById('kd-gr').innerHTML=[{k:wodTopic,v:'4.2K',d:'Med',kd:'42',c:'$3.80'},{k:wodTopic+' guide',v:'1.8K',d:'Easy',kd:'28',c:'$2.40'},{k:'best '+wodTopic,v:'3.4K',d:'Med',kd:'45',c:'$4.20'},{k:wodTopic+' '+ind,v:'900',d:'Easy',kd:'18',c:'$5.50'},{k:brand+' '+wodTopic,v:'600',d:'Easy',kd:'12',c:'$6.80'}].map(function(k){return '<div class="kdc"><div class="kdw">'+esc(k.k)+'</div><div class="kdps"><span class="kp kpv">'+k.v+'</span><span class="kp '+(parseInt(k.kd)<35?'kpe':'kph')+'">'+k.d+' '+k.kd+'</span><span class="kp kpc">'+k.c+'</span></div></div>';}).join('');document.getElementById('serp-paa').innerHTML=['What is '+wodTopic+'?','How it helps','Top strategies','Measuring success',brand+' tips'].map(function(q){return '<div class="paa" onclick="this.classList.toggle(\'on\')">'+esc(q)+'<span class="paap">+</span></div>';}).join('');}
+async function showWODBlog(){var p=document.getElementById('blog-p');p.classList.add('show');var sc={serp:rng(82,96),aeo:rng(78,93),geo:rng(74,90)};document.getElementById('bppills').innerHTML='<span class="bpill bpg">SERP '+sc.serp+'</span><span class="bpill bpb">AEO '+sc.aeo+'</span><span class="bpill bpv">GEO '+sc.geo+'</span>';var key=getOpenAIKey();if(key){document.getElementById('blog-bd').innerHTML='<div style="text-align:center;padding:32px;color:var(--t3);font-family:var(--M)"><div style="display:inline-flex;align-items:center;gap:7px"><div style="width:14px;height:14px;border:2px solid rgba(30,94,243,.2);border-top-color:var(--A);border-radius:50%;animation:spin .7s linear infinite"></div>GPT writing article...</div></div>';try{var text=await callOpenAI('Write a 1800-2500 word SEO blog for '+DB.name+' ('+DB.industry+') on: "'+wodTopic+'". Include H1, compelling intro, 4-6 H2 sections with stats, 2 FAQs. HTML tags only: <h1>,<h2>,<p>,<ul>,<li>,<strong>. Start with <h1>.',3000);document.getElementById('blog-bd').innerHTML='<div class="bmeta"><span>'+esc(DB.name)+'</span><span>'+esc(DB.industry)+'</span><span>GPT-4o-mini</span></div><div class="bcont">'+text+'</div>';}catch(e){document.getElementById('blog-bd').innerHTML='<div style="padding:8px;font-size:12px;color:var(--Y)">OpenAI: '+esc(e.message)+'</div><div class="bcont">'+genArticle(wodTopic,DB.name,DB.industry,rng(0,4))+'</div>';}}else{document.getElementById('blog-bd').innerHTML='<div class="bmeta"><span>'+esc(DB.name)+'</span><span>'+esc(DB.industry)+'</span><span style="color:var(--Y)">Add OpenAI key in Settings for AI content</span></div><div class="bcont">'+genArticle(wodTopic,DB.name,DB.industry,rng(0,4))+'</div>';}p.scrollIntoView({behavior:'smooth',block:'start'});}
 function copyBlogMD(){var bd=document.getElementById('blog-bd');if(bd)navigator.clipboard.writeText(bd.innerText).then(function(){showToast('Copied','success');});}
 function copyBlogHTML(){var bd=document.getElementById('blog-bd');if(bd)navigator.clipboard.writeText(bd.innerHTML).then(function(){showToast('HTML copied','success');});}
 
-// ─── COMPETITORS (LOCAL) ──────────────────────────────
-function addCompetitor(){
-  var inp=document.getElementById('comp-inp');
-  var val=inp.value.trim().toLowerCase().replace(/https?:\/\//,'').replace(/\/.*$/,'');
-  if(!val)return;
-  if(competitors.length>=5){showToast('Maximum 5 competitors','error');return;}
-  if(competitors.indexOf(val)>-1){inp.value='';return;}
-  competitors.push(val);renderCompetitorList();inp.value='';
-}
-function renderCompetitorList(){
-  var list=document.getElementById('comp-list'),btn=document.getElementById('run-comp-btn'),hint=document.getElementById('comp-hint');
-  list.innerHTML=competitors.map(function(d){return'<div class="comp-item" data-domain="'+d+'"><div class="comp-ico"><img src="https://www.google.com/s2/favicons?domain='+d+'&sz=32" style="width:100%;height:100%;object-fit:cover"></div><div class="comp-domain">'+esc(d)+'</div><button class="comp-remove" onclick="removeComp(this)">&times;</button></div>';}).join('');
-  btn.style.display=competitors.length>0?'inline-flex':'none';
-  hint.textContent=competitors.length>0?competitors.length+' competitor'+(competitors.length>1?'s':'')+' added.':'Add at least one competitor domain to start.';
-}
-function removeComp(btn){
-  var d=btn.closest('.comp-item').getAttribute('data-domain');
-  var idx=competitors.indexOf(d);if(idx>-1)competitors.splice(idx,1);
-  renderCompetitorList();if(!competitors.length)document.getElementById('comp-output').innerHTML='';
-}
-
-function loadCompetitorSuggestions(){
-  if(compSuggestionsLoaded)return;
-  var industry=detectedBrand.industry;if(!industry)return;
-  compSuggestionsLoaded=true;
-  var data=getIndustryData(industry);
-  var comps=data.competitors||[];
-  if(!comps.length)return;
-  var card=document.getElementById('comp-suggestions-card');card.style.display='block';
-  document.getElementById('comp-sugg-label').textContent='Based on '+industry;
-  document.getElementById('comp-suggestions-list').innerHTML=comps.map(function(d){
-    return '<div style="display:flex;align-items:center;gap:7px;padding:7px 11px;border:1.5px solid var(--b2);border-radius:var(--r6);cursor:pointer;background:var(--s2);transition:all .12s;font-size:12px;font-weight:600" onmouseenter="this.style.borderColor=\'var(--A)\';this.style.background=\'var(--ab)\'" onmouseleave="this.style.borderColor=\'var(--b2)\';this.style.background=\'var(--s2)\'" onclick="document.getElementById(\'comp-inp\').value=\''+d+'\';addCompetitor();this.style.opacity=\'.4\';this.onclick=null"><div style="width:18px;height:18px;border-radius:4px;overflow:hidden;background:var(--s3);flex-shrink:0"><img src="https://www.google.com/s2/favicons?domain='+d+'&sz=32" style="width:100%;height:100%;object-fit:cover"></div>'+esc(d)+'<span style="margin-left:auto;font-size:10px;font-family:var(--M);color:var(--t3)">+ Add</span></div>';
-  }).join('');
-}
-
-function runCompetitorAnalysis(){
-  if(!competitors.length)return;
-  var btn=document.getElementById('run-comp-btn');btn.disabled=true;btn.textContent='Analysing...';
+// ═══════════════════════════════════════════════════════
+// COMPETITORS - scrapes Wikidata for each
+// ═══════════════════════════════════════════════════════
+function addCompetitor(){var inp=document.getElementById('comp-inp');var val=inp.value.trim().toLowerCase().replace(/https?:\/\//,'').replace(/\/.*$/,'');if(!val)return;if(competitors.length>=5){showToast('Max 5','error');return;}if(competitors.indexOf(val)>-1){inp.value='';return;}competitors.push(val);renderCompList();inp.value='';}
+function renderCompList(){var list=document.getElementById('comp-list'),btn=document.getElementById('run-comp-btn'),hint=document.getElementById('comp-hint');list.innerHTML=competitors.map(function(d){return '<div class="comp-item" data-domain="'+d+'"><div class="comp-ico"><img src="https://www.google.com/s2/favicons?domain='+d+'&sz=32" style="width:100%;height:100%;object-fit:cover"></div><div class="comp-domain">'+esc(d)+'</div><button class="comp-remove" onclick="removeComp(this)">&times;</button></div>';}).join('');btn.style.display=competitors.length>0?'inline-flex':'none';hint.textContent=competitors.length>0?competitors.length+' added.':'Add a competitor.';}
+function removeComp(btn){var d=btn.closest('.comp-item').getAttribute('data-domain');var idx=competitors.indexOf(d);if(idx>-1)competitors.splice(idx,1);renderCompList();if(!competitors.length)document.getElementById('comp-output').innerHTML='';}
+function loadCompSuggestions(){compSugLoaded=true;}
+async function runCompetitorAnalysis(){
+  if(!competitors.length)return;var btn=document.getElementById('run-comp-btn');btn.disabled=true;btn.textContent='Scraping...';
   var output=document.getElementById('comp-output');output.innerHTML='';
-  var brand=detectedBrand.name,industry=detectedBrand.industry;
-  // Simulate analysis with realistic local data
-  competitors.forEach(function(domain,idx){
-    setTimeout(function(){
-      var card=document.createElement('div');card.className='card';card.style.marginBottom='12px';
-      card.innerHTML='<div class="ch"><div class="comp-domain-hd"><div class="comp-ico" style="width:24px;height:24px"><img src="https://www.google.com/s2/favicons?domain='+domain+'&sz=32" style="width:100%;height:100%;object-fit:cover"></div><span style="font-size:13px;font-weight:700">'+esc(domain)+'</span></div></div>'+
-        '<div class="comp-section-t">1. COMPANY OVERVIEW</div>'+
-        '<p style="font-size:12px;color:var(--t2);line-height:1.65;margin-bottom:10px">'+esc(domain)+' is a direct competitor in the '+esc(industry)+' space. They position themselves as a comprehensive solution targeting similar audiences to '+esc(brand)+', with a focus on scale and brand recognition.</p>'+
-        '<div class="comp-section-t">2. CONTENT STRATEGY</div>'+
-        '<p style="font-size:12px;color:var(--t2);line-height:1.65;margin-bottom:10px">Publishes blog content '+(Math.random()>0.5?'2-3':'4-5')+' times per week, covering product updates, industry news, and educational guides. Heavy investment in video content and webinars. Active social presence with '+(10+Math.floor(Math.random()*50))+'K+ followers across platforms.</p>'+
-        '<div class="comp-section-t">3. CONTENT GAPS vs '+esc(brand).toUpperCase()+'</div>'+
-        '<li style="margin-left:14px;margin-bottom:5px;font-size:12px;color:var(--t2)">'+esc(domain)+' lacks deep thought leadership content on emerging '+esc(industry)+' trends</li>'+
-        '<li style="margin-left:14px;margin-bottom:5px;font-size:12px;color:var(--t2)">Limited FAQ/AEO-optimised content for AI search visibility</li>'+
-        '<li style="margin-left:14px;margin-bottom:5px;font-size:12px;color:var(--t2)">No long-form comparison or buyer\'s guide content</li>'+
-        '<div class="comp-section-t">4. OPPORTUNITIES FOR '+esc(brand).toUpperCase()+'</div>'+
-        '<li style="margin-left:14px;margin-bottom:5px;font-size:12px;color:var(--t2)"><strong>"'+esc(domain.split('.')[0])+' vs '+esc(brand)+'"</strong> - comparison blog targeting high-intent search traffic</li>'+
-        '<li style="margin-left:14px;margin-bottom:5px;font-size:12px;color:var(--t2)"><strong>"Why '+esc(brand)+' is the better alternative to '+esc(domain.split('.')[0])+'"</strong> - conversion-focused content</li>'+
-        '<li style="margin-left:14px;margin-bottom:5px;font-size:12px;color:var(--t2)"><strong>"'+esc(industry)+' tools compared: '+esc(brand)+' vs '+esc(domain.split('.')[0])+'"</strong> - SEO anchor content for undecided buyers</li>';
-      output.appendChild(card);
-      if(idx===competitors.length-1){btn.disabled=false;btn.textContent='Analyse all competitors \u2192';showToast('Analysis complete','success');}
-    },(idx+1)*600);
-  });
+  for(var ci=0;ci<competitors.length;ci++){
+    var domain=competitors[ci];var compName=domain.split('.')[0];
+    var card=document.createElement('div');card.className='card';card.style.marginBottom='12px';
+    card.innerHTML='<div class="comp-status"><div class="loading-spinner-inline"></div>&nbsp;Scraping '+esc(compName)+' from Wikidata...</div>';output.appendChild(card);
+    var [wd,wiki]=await Promise.all([wikidataSearch(compName),wikiSummary(compName)]);
+    var compDesc=(wiki&&wiki.extract)?wiki.extract:(wd?wd.description:'No data found.');
+    var compTeam=[];if(wd){if(wd.ceoNames)wd.ceoNames.forEach(function(p){compTeam.push(p);});if(wd.founderNames)wd.founderNames.forEach(function(p){if(!compTeam.find(function(t){return t.name===p.name;}))compTeam.push(p);});}
+    var compProds=wd&&wd.productNames?wd.productNames:[];
+    var compInd=(wd&&wd.industryNames)?wd.industryNames.join(', '):detectIndustry(compDesc);
+    card.innerHTML='<div class="ch"><div class="comp-domain-hd"><div class="comp-ico" style="width:24px;height:24px"><img src="https://www.google.com/s2/favicons?domain='+domain+'&sz=32" style="width:100%;height:100%;object-fit:cover"></div><span style="font-size:13px;font-weight:700">'+esc(wd?wd.name:compName)+'</span>'+(compInd?'<span style="margin-left:8px" class="tag tb">'+esc(compInd)+'</span>':'')+'</div></div>'+
+    '<div class="comp-section-t">OVERVIEW (Wikidata + Wikipedia)</div>'+
+    '<p style="font-size:12px;color:var(--t2);line-height:1.65;margin-bottom:10px">'+esc(compDesc.length>400?compDesc.substring(0,400)+'...':compDesc)+'</p>'+
+    (compTeam.length?'<div class="comp-section-t">KEY PEOPLE</div>'+compTeam.slice(0,4).map(function(p){return '<p style="font-size:12px;color:var(--t2);margin-bottom:3px"><strong>'+esc(p.name)+'</strong>'+(p.desc?' - '+esc(p.desc):'')+'</p>';}).join(''):'')+
+    (compProds.length?'<div class="comp-section-t">PRODUCTS / SERVICES</div>'+compProds.slice(0,6).map(function(p){return '<span class="kw on" style="margin:2px">'+esc(p.name)+'</span>';}).join(''):'')+
+    '<div class="comp-section-t">CONTENT OPPORTUNITIES</div>'+
+    '<li style="margin-left:14px;margin-bottom:5px;font-size:12px;color:var(--t2)"><strong>"'+esc(DB.name)+' vs '+esc(wd?wd.name:compName)+': Which Is Right?"</strong></li>'+
+    '<li style="margin-left:14px;margin-bottom:5px;font-size:12px;color:var(--t2)"><strong>"Why '+esc(DB.industry)+' Leaders Choose '+esc(DB.name)+'"</strong></li>'+
+    '<li style="margin-left:14px;margin-bottom:5px;font-size:12px;color:var(--t2)"><strong>"'+esc(DB.name)+' vs '+esc(wd?wd.name:compName)+': 2026 Comparison"</strong></li>';
+  }
+  btn.disabled=false;btn.textContent='Analyse all competitors \u2192';showToast('Done','success');
 }
 </script>
-</body>
-</html>
+</body></html>
