@@ -1,5 +1,8 @@
 INK — SERP Content Engine
+
 [![Launch Site](https://img.shields.io/badge/🚀_Visit_Site-ankitrajpathak.github.io-7EB8F7?style=for-the-badge&labelColor=060810)](https://ankitrajpathak.github.io/ink/)
+
+
 Autonomous content engine. Type a brand. Get 5 rank-ready blogs every morning. One file. No frameworks. Just HTML, CSS, JS, and Google.
 What's inside
 
