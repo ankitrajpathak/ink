@@ -1,20 +1,15 @@
-INK - Autonomous SERP Content Engine: https://ankitrajpathak.github.io/ink/
+INK — SERP Content Engine
+[![Launch Site](https://img.shields.io/badge/🚀_Visit_Site-ankitrajpathak.github.io-7EB8F7?style=for-the-badge&labelColor=060810)](https://ankitrajpathak.github.io/ink/)
+Autonomous content engine. Type a brand. Get 5 rank-ready blogs every morning. One file. No frameworks. Just HTML, CSS, JS, and Google.
+What's inside
 
-5 blogs. Every morning. Ranked before they're written.
-
-INK is a SERP-first content engine that crawls any brand, detects its industry, maps its team and products, and generates rank-optimised blog content daily. Built as a single HTML file with zero backend.
-
-What It Does
-Type a brand name. INK searches Google in real time and returns:
-
-Company profile - official name, domain, LinkedIn, industry, description (from the actual website, not Wikipedia)
-Leadership & team - real founder/CEO names with titles and bios scraped from LinkedIn and the company's about page
-Products & offerings - real product names and descriptions from the company's website
-Brand voice analysis - tone, communication style, and content ethos detected from their website and social presence
-5 unique blog titles - each targeting a different SERP angle (trending, product, educational, how-to, news) with word counts and SERP scores
-Industry trends - 9 real current trends across 3 categories (breaking news, industry shifts, market) from live news sources
-Keywords - primary, supporting, and long-tail keyword clusters
-Competitors - 5 real direct competitors with domain names
-ICP detection - 4 target audience segments based on the brand's actual market
-
-All from ONE search call per brand. Cached in memory so it never re-fetches unless you change the URL or LinkedIn.
+Onboarding — type brand name, INK searches Google, auto-detects domain, industry, team, products, voice, keywords, competitors
+Dashboard — SERP scores, blog queue preview, trends radar, algorithm alerts, brand scan status
+Today's Queue — 5 unique blog titles with SERP/AEO/GEO scores, click-to-preview full articles
+Write on Demand — topic input, 4-step wizard (audience → intent → format → platform), live research panels, full blog generation
+Trends Radar — 9 real industry trends across 3 categories (hot / rising / stable)
+Competitor Intel — add up to 5 domains, each analysed with live web search (overview, team, gaps, blog opportunities)
+Brand Profile — real founder names, real products, brand voice pillars, company description from Google
+Keywords — primary, supporting, long-tail clusters auto-generated from brand + industry
+Algorithm Tracker — Google Core Update history, E-E-A-T toggles, auto-adjusted SERP templates
+Settings — workspace config, generation preferences, dark/light mode
