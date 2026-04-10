@@ -1,18 +1,17 @@
-INK — SERP Content Engine
+<p align="center">
+  <img src="https://img.shields.io/badge/INK-SERP_Content_Engine-1E5EF3?style=for-the-badge&labelColor=0F0F0E" alt="INK">
+</p>
+<p align="center">
+  <strong>Type a brand. Get 5 rank-ready blogs. Every morning.</strong><br>
+  One file. No frameworks. Just HTML, CSS, JS, and Google.
+</p>
+<p align="center">
+  <a href="https://ankitrajpathak.github.io/ink/"><img src="https://img.shields.io/badge/Launch_App-ankitrajpathak.github.io/ink-white?style=flat-square&logo=googlechrome&logoColor=white&labelColor=1E5EF3" alt="Launch"></a>&nbsp;&nbsp;
+  <img src="https://img.shields.io/badge/Zero_Dependencies-0F0F0E?style=flat-square" alt="Zero deps">
+  <img src="https://img.shields.io/badge/Single_File-0F0F0E?style=flat-square" alt="Single file">
+  <img src="https://img.shields.io/badge/Dark_%2F_Light-0F0F0E?style=flat-square" alt="Theme">
+</p>
 
-[![Launch Site](https://img.shields.io/badge/🚀_Visit_Site-ankitrajpathak.github.io-7EB8F7?style=for-the-badge&labelColor=060810)](https://ankitrajpathak.github.io/ink/)
-
-
-Autonomous content engine. Type a brand. Get 5 rank-ready blogs every morning. One file. No frameworks. Just HTML, CSS, JS, and Google.
-What's inside
-
-Onboarding — type brand name, INK searches Google, auto-detects domain, industry, team, products, voice, keywords, competitors
-Dashboard — SERP scores, blog queue preview, trends radar, algorithm alerts, brand scan status
-Today's Queue — 5 unique blog titles with SERP/AEO/GEO scores, click-to-preview full articles
-Write on Demand — topic input, 4-step wizard (audience → intent → format → platform), live research panels, full blog generation
-Trends Radar — 9 real industry trends across 3 categories (hot / rising / stable)
-Competitor Intel — add up to 5 domains, each analysed with live web search (overview, team, gaps, blog opportunities)
-Brand Profile — real founder names, real products, brand voice pillars, company description from Google
-Keywords — primary, supporting, long-tail clusters auto-generated from brand + industry
-Algorithm Tracker — Google Core Update history, E-E-A-T toggles, auto-adjusted SERP templates
-Settings — workspace config, generation preferences, dark/light mode
+What it does
+INK searches Google when you type a brand name. One call returns everything — team, products, industry, voice, keywords, competitors, blog titles, and trends. Cached in memory. Zero re-fetches.
+Blog previews and Write on Demand trigger separate calls with live web research. Each article is unique — real stats, structured SEO, not templates.
